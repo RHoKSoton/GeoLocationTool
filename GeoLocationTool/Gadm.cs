@@ -1,7 +1,13 @@
-﻿namespace GeoLocationTool
+﻿// Gadm.cs
+
+namespace GeoLocationTool
 {
-    internal class Gadm
+    /// <summary>
+    /// Holds a record from the Global Administrative Areas data file
+    /// </summary>
+    public class Gadm
     {
+        // todo change the datatypes to mirror the data if safe to do so
         public string PID { get; set; }
         public string ID_0 { get; set; }
         public string ISO { get; set; }
@@ -16,6 +22,5 @@
         public string VARNAME_3 { get; set; }
         public string TYPE_3 { get; set; }
         public string ENGTYPE_3 { get; set; }
-
     }
 }
