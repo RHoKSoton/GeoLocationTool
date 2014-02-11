@@ -40,7 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSaveCsv = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtGadmFileName = new System.Windows.Forms.TextBox();
+            this.txtLocationFileName = new System.Windows.Forms.TextBox();
             this.udProvince = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.lblMunicipality = new System.Windows.Forms.Label();
@@ -173,14 +173,14 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Location Data File:";
             // 
-            // txtGadmFileName
+            // txtLocationFileName
             // 
-            this.txtGadmFileName.Location = new System.Drawing.Point(301, 14);
-            this.txtGadmFileName.Name = "txtGadmFileName";
-            this.txtGadmFileName.ReadOnly = true;
-            this.txtGadmFileName.Size = new System.Drawing.Size(598, 22);
-            this.txtGadmFileName.TabIndex = 12;
-            this.txtGadmFileName.TabStop = false;
+            this.txtLocationFileName.Location = new System.Drawing.Point(301, 14);
+            this.txtLocationFileName.Name = "txtLocationFileName";
+            this.txtLocationFileName.ReadOnly = true;
+            this.txtLocationFileName.Size = new System.Drawing.Size(598, 22);
+            this.txtLocationFileName.TabIndex = 12;
+            this.txtLocationFileName.TabStop = false;
             // 
             // udProvince
             // 
@@ -252,7 +252,7 @@
             this.Controls.Add(this.udMunicipality);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.udProvince);
-            this.Controls.Add(this.txtGadmFileName);
+            this.Controls.Add(this.txtLocationFileName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSaveCsv);
             this.Controls.Add(this.label2);
@@ -292,7 +292,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSaveCsv;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtGadmFileName;
+        private System.Windows.Forms.TextBox txtLocationFileName;
         private System.Windows.Forms.NumericUpDown udProvince;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblMunicipality;

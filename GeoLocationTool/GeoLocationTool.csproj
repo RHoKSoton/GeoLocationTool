@@ -75,6 +75,7 @@
     <Compile Include="GeoLocationData.cs" />
     <Compile Include="InputFile.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="LocationGadmFile.cs" />
     <Compile Include="OutputFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

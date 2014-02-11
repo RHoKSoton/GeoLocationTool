@@ -3,15 +3,11 @@
 namespace GeoLocationTool
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using System.Data.OleDb;
     using System.IO;
-    using System.Linq;
     using System.Windows.Forms;
-    using CsvHelper;
 
-    //using DocumentFormat.OpenXml.Wordprocessing;
     public partial class FormLoadData : Form
     {
         #region Fields
@@ -20,9 +16,8 @@ namespace GeoLocationTool
         private const string MatchedColumn = "Matched";
         private const string MunicipalityCodeColumn = "MunicipalityCode";
         private const string ProvinceCodeColumn = "ProvinceCode";
-     
+
         private DataTable dt;
-        private IEnumerable<Gadm> gadmList = new List<Gadm>();
         private GeoLocationData geoLocationData = new GeoLocationData();
 
         #endregion Fields
@@ -126,11 +121,12 @@ namespace GeoLocationTool
             {
                 //read the input file into the grid and add extra columns for the computed data
                 const string filter = "csv files (*.csv)|*.csv";
-                GetInputFileName(filter);
-                var fileName = txtFileName.Text.Trim();
-                if (!String.IsNullOrWhiteSpace(fileName))
+                txtFileName.Clear();
+                txtFileName.Text = GetFileName(filter);
+                var path = txtFileName.Text.Trim();
+                if (!String.IsNullOrWhiteSpace(path))
                 {
-                    ReadCsvInput(fileName);
+                    ReadCsvInput(path);
                     AddCodeCollumns();
                     AddMatchedColumn();
                 }
@@ -151,15 +147,16 @@ namespace GeoLocationTool
             {
                 //read the input file into the grid and add extra columns for the computed data
                 const string filter = "excel files (*.xls,*.xlsx)|*.xls*";
-                GetInputFileName(filter);
-                var fileName = txtFileName.Text.Trim();
+                txtFileName.Clear();
+                txtFileName.Text = GetFileName(filter);
+                var path = txtFileName.Text.Trim();
 
                 // todo provide the user with a list of worksheet names for the selected file
 
                 string worksheetName = txtWorksheetName.Text;
-                if (!String.IsNullOrWhiteSpace(fileName))
+                if (!String.IsNullOrWhiteSpace(path))
                 {
-                    ReadExcelInput(fileName, worksheetName);
+                    ReadExcelInput(path, worksheetName);
                     AddCodeCollumns();
                     AddMatchedColumn();
                 }
@@ -178,45 +175,21 @@ namespace GeoLocationTool
         {
             try
             {
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
-                openFileDialog1.Filter = "csv files (*.csv)|*.csv";
-                openFileDialog1.InitialDirectory =
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                const string filter = "csv files (*.csv)|*.csv";
+                txtLocationFileName.Clear();
+                txtLocationFileName.Text = GetFileName(filter);
+                var path = txtLocationFileName.Text.Trim();
+                if (!String.IsNullOrWhiteSpace(path))
                 {
-                    string fileName = openFileDialog1.FileName;
-                    txtGadmFileName.Text = fileName;
-                    if (!File.Exists(fileName))
-                    {
-                        MessageBox.Show(
-                            this,
-                            "File does not exist:\r\n" + fileName,
-                            "No File",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Stop);
-                    }
-                    else
-                    {
-                        // open for read only
-                        using (Stream myStream = openFileDialog1.OpenFile())
-                        {
-                            // this data is a known format so we can use a strongly typed reader
-                            using (
-                                var csvReader = new CsvReader(new StreamReader(myStream)))
-                            {
-                                gadmList = csvReader.GetRecords<Gadm>().ToList();
-                                geoLocationData = new GeoLocationData(gadmList);
-                            }
-                        }
-                    }
+                    geoLocationData =
+                        new GeoLocationData(LocationGadmFile.ReadLocationFile(path));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    this,
-                    "There was an error loading the CSV file:\r\n" + ex.Message,
-                    "IO Error",
+                    "Error: Could not read file. Original error: " + ex.Message,
+                    "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -283,12 +256,11 @@ namespace GeoLocationTool
             return excelSheetNames;
         }
 
-        private void GetInputFileName(string filter)
+        private string GetFileName(string filter)
         {
             //ask the user for the input file name
-            txtFileName.Clear();
+            string fileName = string.Empty;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
             openFileDialog1.InitialDirectory =
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog1.Filter = filter;
@@ -299,7 +271,7 @@ namespace GeoLocationTool
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string fileName = openFileDialog1.FileName;
+                fileName = openFileDialog1.FileName;
                 if (!File.Exists(fileName))
                 {
                     MessageBox.Show(
@@ -308,11 +280,8 @@ namespace GeoLocationTool
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Stop);
                 }
-                else
-                {
-                    txtFileName.Text = fileName;
-                }
             }
+            return fileName;
         }
 
         private void ReadCsvInput(string fileName)

@@ -46,12 +46,15 @@ namespace GeoLocationTool
                     path);
 
             string commandText = String.Format("SELECT *  FROM [{0}$]", worksheetName);
-            OleDbDataAdapter adapter = new OleDbDataAdapter(
+
+            using (OleDbDataAdapter adapter = new OleDbDataAdapter(
                 commandText,
-                connectionString);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            return dt;
+                connectionString))
+            {
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
         }
 
         #endregion Methods
