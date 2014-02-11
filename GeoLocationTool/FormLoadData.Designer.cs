@@ -35,7 +35,7 @@
             this.btnGetCodeData = new System.Windows.Forms.Button();
             this.btnMatchData = new System.Windows.Forms.Button();
             this.btnReadCsv = new System.Windows.Forms.Button();
-            this.btnSaveFile = new System.Windows.Forms.Button();
+            this.btnSaveExcel = new System.Windows.Forms.Button();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSaveCsv = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             this.btnReadExcelFile.TabIndex = 3;
             this.btnReadExcelFile.Text = "Read Excel File";
             this.btnReadExcelFile.UseVisualStyleBackColor = true;
-            this.btnReadExcelFile.Click += new System.EventHandler(this.btnReadExcelFile_Click);
+            this.btnReadExcelFile.Click += new System.EventHandler(this.btnReadExcel_Click);
             // 
             // dataGridView1
             // 
@@ -92,7 +92,7 @@
             this.txtWorksheetName.Enabled = false;
             this.txtWorksheetName.Location = new System.Drawing.Point(301, 122);
             this.txtWorksheetName.Name = "txtWorksheetName";
-            this.txtWorksheetName.Size = new System.Drawing.Size(159, 22);
+            this.txtWorksheetName.Size = new System.Drawing.Size(227, 22);
             this.txtWorksheetName.TabIndex = 3;
             // 
             // btnGetCodeData
@@ -103,7 +103,7 @@
             this.btnGetCodeData.TabIndex = 0;
             this.btnGetCodeData.Text = "Read Location Data";
             this.btnGetCodeData.UseVisualStyleBackColor = true;
-            this.btnGetCodeData.Click += new System.EventHandler(this.btnReadGADMData_Click);
+            this.btnGetCodeData.Click += new System.EventHandler(this.btnReadLocation_Click);
             // 
             // btnMatchData
             // 
@@ -125,16 +125,16 @@
             this.btnReadCsv.UseVisualStyleBackColor = true;
             this.btnReadCsv.Click += new System.EventHandler(this.btnReadCsv_Click);
             // 
-            // btnSaveFile
+            // btnSaveExcel
             // 
-            this.btnSaveFile.Enabled = false;
-            this.btnSaveFile.Location = new System.Drawing.Point(210, 280);
-            this.btnSaveFile.Name = "btnSaveFile";
-            this.btnSaveFile.Size = new System.Drawing.Size(157, 33);
-            this.btnSaveFile.TabIndex = 9;
-            this.btnSaveFile.Text = "Save as Excel";
-            this.btnSaveFile.UseVisualStyleBackColor = true;
-            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
+            this.btnSaveExcel.Enabled = false;
+            this.btnSaveExcel.Location = new System.Drawing.Point(210, 280);
+            this.btnSaveExcel.Name = "btnSaveExcel";
+            this.btnSaveExcel.Size = new System.Drawing.Size(157, 33);
+            this.btnSaveExcel.TabIndex = 9;
+            this.btnSaveExcel.Text = "Save as Excel";
+            this.btnSaveExcel.UseVisualStyleBackColor = true;
+            this.btnSaveExcel.Click += new System.EventHandler(this.btnSaveExcel_Click);
             // 
             // txtFileName
             // 
@@ -257,7 +257,7 @@
             this.Controls.Add(this.btnSaveCsv);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFileName);
-            this.Controls.Add(this.btnSaveFile);
+            this.Controls.Add(this.btnSaveExcel);
             this.Controls.Add(this.btnReadCsv);
             this.Controls.Add(this.btnMatchData);
             this.Controls.Add(this.btnGetCodeData);
@@ -268,7 +268,7 @@
             this.Name = "FormLoadData";
             this.Text = "Geo Location Tool - Prototype";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.FormLoadData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udProvince)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMunicipality)).EndInit();
@@ -287,7 +287,7 @@
         private System.Windows.Forms.Button btnGetCodeData;
         private System.Windows.Forms.Button btnMatchData;
         private System.Windows.Forms.Button btnReadCsv;
-        private System.Windows.Forms.Button btnSaveFile;
+        private System.Windows.Forms.Button btnSaveExcel;
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSaveCsv;

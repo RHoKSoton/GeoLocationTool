@@ -60,20 +60,30 @@
     <Compile Include="FormLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLoadData.Designer.cs" />
+    <Compile Include="FormLoadData.Designer.cs">
+      <DependentUpon>FormLoadData.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormManualMatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManualMatch.Designer.cs" />
+    <Compile Include="FormManualMatch.Designer.cs">
+      <DependentUpon>FormManualMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="FuzzyMatch.cs" />
     <Compile Include="FuzzyResult.cs" />
     <Compile Include="Gadm.cs" />
     <Compile Include="GeoLocationData.cs" />
+    <Compile Include="InputFile.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="OutputFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormLoadData.resx" />
-    <EmbeddedResource Include="FormManualMatch.resx" />
+    <EmbeddedResource Include="FormLoadData.resx">
+      <DependentUpon>FormLoadData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManualMatch.resx">
+      <DependentUpon>FormManualMatch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
