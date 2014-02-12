@@ -33,11 +33,11 @@ namespace GeoLocationTool
 
         #region Methods
 
-        private static bool HasValue(DataGridViewRow row, string columnName)
-        {
-            var code = row.Cells[columnName].Value;
-            return ! string.IsNullOrEmpty(code as string);
-        }
+        //private static bool HasValue(DataGridViewRow row, string columnName)
+        //{
+        //    var code = row.Cells[columnName].Value;
+        //    return ! string.IsNullOrEmpty(code as string);
+        //}
 
         private void AddCodeCollumns()
         {
@@ -57,16 +57,16 @@ namespace GeoLocationTool
             }
         }
 
-        private void AddMatchedColumn()
-        {
-            if (!dt.Columns.Contains(MatchedColumn))
-            {
-                DataGridViewCheckBoxColumn matched = new DataGridViewCheckBoxColumn();
-                matched.HeaderText = MatchedColumn;
-                matched.Name = MatchedColumn;
-                dataGridView1.Columns.Add(matched);
-            }
-        }
+        //private void AddMatchedColumn()
+        //{
+        //    if (!dt.Columns.Contains(MatchedColumn))
+        //    {
+        //        DataGridViewCheckBoxColumn matched = new DataGridViewCheckBoxColumn();
+        //        matched.HeaderText = MatchedColumn;
+        //        matched.Name = MatchedColumn;
+        //        dataGridView1.Columns.Add(matched);
+        //    }
+        //}
 
         private void btnFuzzyMatch_Click(object sender, EventArgs e)
         {
@@ -89,30 +89,34 @@ namespace GeoLocationTool
                 return;
             }
 
+            int provinceColumnIndex = (int) udProvince.Value - 1;
+            int municipalityColumnIndex = (int) udMunicipality.Value - 1;
+            int barangayColumnIndex = (int) udBarangay.Value - 1;
             foreach (DataRow dataRow in dt.Rows)
             {
-                //get  input location from the row
+                //get location 
                 Location location = new Location();
                 location.Province =
-                    dataRow.ItemArray[(int) udProvince.Value - 1].ToString();
-                location.Baracay =
-                    dataRow.ItemArray[(int) udBarangay.Value - 1].ToString();
+                    dataRow.ItemArray[provinceColumnIndex].ToString();
+                location.Barangay =
+                    dataRow.ItemArray[barangayColumnIndex].ToString();
                 location.Municipality =
-                    dataRow.ItemArray[(int) udMunicipality.Value - 1].ToString();
+                    dataRow.ItemArray[municipalityColumnIndex].ToString();
 
-                geoLocationData.AddCodesToLocation(location);
+                // get codes
+                geoLocationData.GetLocationCodes(location);
 
                 //display codes
                 dataRow[ProvinceCodeColumn] = location.ProvinceCode;
                 dataRow[MunicipalityCodeColumn] = location.MunicipalityCode;
-                dataRow[BaracayCodeColumn] = location.BaracayCode;
+                dataRow[BaracayCodeColumn] = location.BarangayCode;
                 dataRow.AcceptChanges();
             }
             dt.AcceptChanges();
             dataGridView1.DataSource = dt;
 
             //tell the user which rows are matched
-            UpdateMatchedColumn();
+            //UpdateMatchedColumn();
         }
 
         private void btnReadCsv_Click(object sender, EventArgs e)
@@ -128,7 +132,7 @@ namespace GeoLocationTool
                 {
                     ReadCsvInput(path);
                     AddCodeCollumns();
-                    AddMatchedColumn();
+                    //AddMatchedColumn();
                 }
             }
             catch (Exception ex)
@@ -158,7 +162,7 @@ namespace GeoLocationTool
                 {
                     ReadExcelInput(path, worksheetName);
                     AddCodeCollumns();
-                    AddMatchedColumn();
+                   // AddMatchedColumn();
                 }
             }
             catch (Exception ex)
@@ -310,22 +314,22 @@ namespace GeoLocationTool
             txtWorksheetName.Text = "Sheet1";
         }
 
-        private void UpdateMatchedColumn()
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (HasValue(row, ProvinceCodeColumn) &&
-                    HasValue(row, MunicipalityCodeColumn) &&
-                    HasValue(row, BaracayCodeColumn))
-                {
-                    row.Cells[MatchedColumn].Value = true;
-                }
-                else
-                {
-                    row.Cells[MatchedColumn].Value = false;
-                }
-            }
-        }
+        //private void UpdateMatchedColumn()
+        //{
+        //    foreach (DataGridViewRow row in dataGridView1.Rows)
+        //    {
+        //        if (HasValue(row, ProvinceCodeColumn) &&
+        //            HasValue(row, MunicipalityCodeColumn) &&
+        //            HasValue(row, BaracayCodeColumn))
+        //        {
+        //            row.Cells[MatchedColumn].Value = true;
+        //        }
+        //        else
+        //        {
+        //            row.Cells[MatchedColumn].Value = false;
+        //        }
+        //    }
+        //}
 
         #endregion Methods
     }

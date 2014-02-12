@@ -35,7 +35,7 @@ namespace GeoLocationTool
 
         #region Methods
 
-        public void AddCodesToLocation(Location location)
+        public void GetLocationCodes(Location location)
         {
             Location location1 = location;
             var level1 = Level1Match(location1);
@@ -49,28 +49,28 @@ namespace GeoLocationTool
                     Gadm level3 = Level3Match(location1);
                     if (level3 != null)
                     {
-                        location.BaracayCode = level3.ID_3;
+                        location.BarangayCode = level3.ID_3;
                     }
                 }
             }
         }
 
-        public IEnumerable<string> Level1List()
+        public IList<string> Level1List()
         {
             var levelList = locationList.Select(l => l.NAME_1);
-            return levelList.Distinct();
+            return levelList.Distinct().OrderBy(i=>i).ToList();
         }
 
-        public IEnumerable<string> Level2List()
+        public IList<string> Level2List()
         {
             var levelList = locationList.Select(l => l.NAME_2);
-            return levelList.Distinct();
+            return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
-        public IEnumerable<string> Level3List()
+        public IList<string> Level3List()
         {
             var levelList = locationList.Select(l => l.NAME_3);
-            return levelList.Distinct();
+            return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
         private Gadm Level1Match(Location location)
@@ -122,7 +122,7 @@ namespace GeoLocationTool
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_3,
-                        location.Baracay.Trim(),
+                        location.Barangay.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 

@@ -75,7 +75,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 333);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1121, 378);
+            this.dataGridView1.Size = new System.Drawing.Size(910, 378);
             this.dataGridView1.TabIndex = 1;
             // 
             // label1
@@ -101,7 +101,7 @@
             this.btnGetCodeData.Name = "btnGetCodeData";
             this.btnGetCodeData.Size = new System.Drawing.Size(147, 33);
             this.btnGetCodeData.TabIndex = 0;
-            this.btnGetCodeData.Text = "Read Location Data";
+            this.btnGetCodeData.Text = "Read Location File";
             this.btnGetCodeData.UseVisualStyleBackColor = true;
             this.btnGetCodeData.Click += new System.EventHandler(this.btnReadLocation_Click);
             // 
@@ -111,7 +111,7 @@
             this.btnMatchData.Name = "btnMatchData";
             this.btnMatchData.Size = new System.Drawing.Size(147, 33);
             this.btnMatchData.TabIndex = 7;
-            this.btnMatchData.Text = "Match data";
+            this.btnMatchData.Text = "Auto Match";
             this.btnMatchData.UseVisualStyleBackColor = true;
             this.btnMatchData.Click += new System.EventHandler(this.btnMatchData_Click);
             // 
@@ -236,7 +236,7 @@
             this.btnFuzzyMatch.Name = "btnFuzzyMatch";
             this.btnFuzzyMatch.Size = new System.Drawing.Size(157, 33);
             this.btnFuzzyMatch.TabIndex = 19;
-            this.btnFuzzyMatch.Text = "Fuzzy Match";
+            this.btnFuzzyMatch.Text = "Manual Match";
             this.btnFuzzyMatch.UseVisualStyleBackColor = true;
             this.btnFuzzyMatch.Click += new System.EventHandler(this.btnFuzzyMatch_Click);
             // 
@@ -244,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 723);
+            this.ClientSize = new System.Drawing.Size(958, 723);
             this.Controls.Add(this.btnFuzzyMatch);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.udBarangay);

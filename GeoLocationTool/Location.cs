@@ -7,11 +7,27 @@ namespace GeoLocationTool
     /// </summary>
     public class Location
     {
+        #region Constructors
+
+        public Location(string province, string barangay, string municipality)
+        {
+            Province = province;
+            Barangay = barangay;
+            Municipality = municipality;
+        }
+
+        public Location()
+        {
+
+        }
+
+        #endregion Constructors
+
         #region Properties
 
-        public string Baracay { get; set; }
+        public string Barangay { get; set; }
 
-        public string BaracayCode { get; set; }
+        public string BarangayCode { get; set; }
 
         public string Municipality { get; set; }
 
