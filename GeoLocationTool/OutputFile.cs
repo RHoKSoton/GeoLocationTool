@@ -39,6 +39,8 @@ namespace GeoLocationTool
         internal static void SaveToExcelFile(string fileName, DataTable data)
         {
             XLWorkbook wb = new XLWorkbook();
+            //todo use the table name if it has one
+            data.TableName = "Sheet1";
             wb.Worksheets.Add(data);
             wb.SaveAs(fileName);
         }
