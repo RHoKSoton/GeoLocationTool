@@ -116,6 +116,7 @@
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(240, 24);
             this.cboProvinceSuggestion.TabIndex = 5;
+            this.cboProvinceSuggestion.SelectedIndexChanged += new System.EventHandler(this.cboProvinceSuggestion_SelectedIndexChanged);
             // 
             // cboProvince
             // 
@@ -124,6 +125,7 @@
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(240, 24);
             this.cboProvince.TabIndex = 6;
+            this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
             // cboMunicipalitySuggestion
             // 
@@ -133,6 +135,7 @@
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(315, 24);
             this.cboMunicipalitySuggestion.TabIndex = 7;
+            this.cboMunicipalitySuggestion.SelectedIndexChanged += new System.EventHandler(this.cboMunicipalitySuggestion_SelectedIndexChanged);
             // 
             // cboMunicipality
             // 
@@ -141,6 +144,7 @@
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(315, 24);
             this.cboMunicipality.TabIndex = 8;
+            this.cboMunicipality.SelectedIndexChanged += new System.EventHandler(this.cboMunicipality_SelectedIndexChanged);
             // 
             // cboBarangaySuggestion
             // 

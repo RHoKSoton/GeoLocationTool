@@ -3,13 +3,13 @@
 namespace GeoLocationTool
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Holds the location data to match against 
     /// Provides the location codes where there are exact matches
+    /// Provides lists of locations for a level
     /// </summary>
     public class GeoLocationData
     {
@@ -35,6 +35,10 @@ namespace GeoLocationTool
 
         #region Methods
 
+        /// <summary>
+        /// Gets the location codes for the given location names. Adds them to the given location.
+        /// </summary>
+        /// <param name="location">The location.</param>
         public void GetLocationCodes(Location location)
         {
             Location location1 = location;
@@ -55,21 +59,55 @@ namespace GeoLocationTool
             }
         }
 
-        public IList<string> Level1List()
+        /// <summary>
+        /// Lists the Level 1 location names.
+        /// </summary>
+        /// <returns>List of location names</returns>
+        public IList<string> Level1LocationNames()
         {
             var levelList = locationList.Select(l => l.NAME_1);
-            return levelList.Distinct().OrderBy(i=>i).ToList();
-        }
-
-        public IList<string> Level2List()
-        {
-            var levelList = locationList.Select(l => l.NAME_2);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
-        public IList<string> Level3List()
+        /// <summary>
+        /// Lists the Level 2 location names for the given level 1.
+        /// </summary>
+        /// <param name="level1Name">Name of the level 1 location.</param>
+        /// <returns>List of location names.</returns>
+        public IList<string> Level2LocationNames(string level1Name)
         {
-            var levelList = locationList.Select(l => l.NAME_3);
+            var levelList = locationList
+                .Where(
+                    n =>
+                        String.Equals(
+                            n.NAME_1,
+                            level1Name,
+                            StringComparison.OrdinalIgnoreCase))
+                .Select(l => l.NAME_2);
+
+            return levelList.Distinct().OrderBy(i => i).ToList();
+        }
+
+        /// <summary>
+        /// Lists the Level 3 location names for the given level 1 and 2.
+        /// </summary>
+        /// <param name="level1Name">Name of the level 1 location.</param>
+        /// <param name="level2Name">Name of the level 2 location.</param>
+        /// <returns>List of location names.</returns>
+        public IList<string> Level3LocationNames(string level1Name, string level2Name)
+        {
+            var levelList = locationList
+                .Where(
+                    n =>
+                        String.Equals(
+                            n.NAME_1,
+                            level1Name,
+                            StringComparison.OrdinalIgnoreCase) &&
+                        String.Equals(
+                            n.NAME_2,
+                            level2Name,
+                            StringComparison.OrdinalIgnoreCase))
+                .Select(l => l.NAME_3);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
