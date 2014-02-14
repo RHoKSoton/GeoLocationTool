@@ -53,56 +53,68 @@ namespace GeoLocationTool
 
         private void btnManualMatch_Click(object sender, EventArgs e)
         {
-            int locationColumn1 = (int) udProvince.Value - 1;
-            int locationColumn2 = (int) udMunicipality.Value - 1;
-            int locationColumn3 = (int) udBarangay.Value - 1;
-            FormManualMatch formSuggestions = new FormManualMatch(
-                dt,
-                locationColumn1,
-                locationColumn2,
-                locationColumn3,
-                geoLocationData);
-            formSuggestions.ShowDialog();
+            try
+            {
+                int locationColumn1 = (int)udProvince.Value - 1;
+                int locationColumn2 = (int)udMunicipality.Value - 1;
+                int locationColumn3 = (int)udBarangay.Value - 1;
+                FormManualMatch formSuggestions = new FormManualMatch(
+                    dt,
+                    locationColumn1,
+                    locationColumn2,
+                    locationColumn3,
+                    geoLocationData);
+                formSuggestions.ShowDialog();
+            }
+            catch (Exception ex)
+            {               
+               ErrorHandler.Process("A problem occurred with the Manual Match screen load.", ex);
+            }         
         }
 
         private void btnMatchData_Click(object sender, EventArgs e)
         {
-            if (dt == null)
+            try
             {
-                return;
-            }
+                if (dt == null)
+                {
+                    return;
+                }
 
-            int provinceColumnIndex = (int) udProvince.Value - 1;
-            int municipalityColumnIndex = (int) udMunicipality.Value - 1;
-            int barangayColumnIndex = (int) udBarangay.Value - 1;
-            foreach (DataRow dataRow in dt.Rows)
+                int provinceColumnIndex = (int)udProvince.Value - 1;
+                int municipalityColumnIndex = (int)udMunicipality.Value - 1;
+                int barangayColumnIndex = (int)udBarangay.Value - 1;
+                foreach (DataRow dataRow in dt.Rows)
+                {
+                    //get location
+                    Location location = new Location();
+                    location.Province =
+                        dataRow.ItemArray[provinceColumnIndex].ToString();
+                    location.Barangay =
+                        dataRow.ItemArray[barangayColumnIndex].ToString();
+                    location.Municipality =
+                        dataRow.ItemArray[municipalityColumnIndex].ToString();
+
+                    // get codes
+                    geoLocationData.GetLocationCodes(location);
+
+                    //display codes
+                    dataRow[ProvinceCodeColumn] = location.ProvinceCode;
+                    dataRow[MunicipalityCodeColumn] = location.MunicipalityCode;
+                    dataRow[BaracayCodeColumn] = location.BarangayCode;
+                    dataRow.AcceptChanges();
+                }
+                dt.AcceptChanges();
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception ex)
             {
-                //get location
-                Location location = new Location();
-                location.Province =
-                    dataRow.ItemArray[provinceColumnIndex].ToString();
-                location.Barangay =
-                    dataRow.ItemArray[barangayColumnIndex].ToString();
-                location.Municipality =
-                    dataRow.ItemArray[municipalityColumnIndex].ToString();
-
-                // get codes
-                geoLocationData.GetLocationCodes(location);
-
-                //display codes
-                dataRow[ProvinceCodeColumn] = location.ProvinceCode;
-                dataRow[MunicipalityCodeColumn] = location.MunicipalityCode;
-                dataRow[BaracayCodeColumn] = location.BarangayCode;
-                dataRow.AcceptChanges();
+                ErrorHandler.Process("A problem occurred with the data matching process.", ex);
             }
-            dt.AcceptChanges();
-            dataGridView1.DataSource = dt;
-
-            //tell the user which rows are matched
-            //UpdateMatchedColumn();
+           
         }
 
-        private void btnReadCsv_Click(object sender, EventArgs e)
+        private void btnReadInputFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -117,15 +129,11 @@ namespace GeoLocationTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: Could not read file. Original error: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                ErrorHandler.Process("Could not read file.", ex);
             }
         }
 
-        private void btnReadLocation_Click(object sender, EventArgs e)
+        private void btnReadLocationFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -141,24 +149,28 @@ namespace GeoLocationTool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: Could not read file. Original error: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                ErrorHandler.Process("Could not read file.", ex);              
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (rdoSaveAsCsv.Checked)
+            try
             {
-                SaveAsCsv();
+                if (rdoSaveAsCsv.Checked)
+                {
+                    SaveAsCsv();
+                }
+                else
+                {
+                    SaveAsExcel();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                SaveAsExcel();
+                ErrorHandler.Process("Error saving file.", ex);  
             }
+          
         }
 
         private void FormLoadData_Load(object sender, EventArgs e)

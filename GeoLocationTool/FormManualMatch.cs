@@ -57,77 +57,147 @@ namespace GeoLocationTool
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (selectedRowIndex < (dataGridView1.RowCount - 1))
+            try
             {
-                dataGridView1.Rows[++selectedRowIndex].Selected = true;
+                if (selectedRowIndex < (dataGridView1.RowCount - 1))
+                {
+                    dataGridView1.Rows[++selectedRowIndex].Selected = true;
+                }
             }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Navigation error - Next.", ex);
+            }         
         }
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
-            if (selectedRowIndex > 0)
+            try
             {
-                dataGridView1.Rows[--selectedRowIndex].Selected = true;
+                if (selectedRowIndex > 0)
+                {
+                    dataGridView1.Rows[--selectedRowIndex].Selected = true;
+                }
             }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Navigation error - Prev.", ex);
+            }           
         }
 
         private void btnUseManual_Click(object sender, EventArgs e)
         {
-            string province = cboProvince.SelectedValue.ToString();
-            string municipality = cboMunicipality.SelectedValue.ToString();
-            string barangay = cboBarangay.SelectedValue.ToString();
-            UpdateRow(province, municipality, barangay);
+            try
+            {
+                string province = cboProvince.SelectedValue.ToString();
+                string municipality = cboMunicipality.SelectedValue.ToString();
+                string barangay = cboBarangay.SelectedValue.ToString();
+                UpdateRow(province, municipality, barangay);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error applying manual selection to the data.", ex);
+            }         
         }
 
         private void btnUseOriginal_Click(object sender, EventArgs e)
         {
-            string province = txtProvince.Text;
-            string municipality = txtMunicipality.Text;
-            string barangay = txtBarangay.Text;
-            UpdateRow(province, municipality, barangay);
+            try
+            {
+                string province = txtProvince.Text;
+                string municipality = txtMunicipality.Text;
+                string barangay = txtBarangay.Text;
+                UpdateRow(province, municipality, barangay);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error applying original selection to the data.", ex);
+            }          
         }
 
         private void btnUseSuggestion_Click(object sender, EventArgs e)
         {
-            string province = cboProvinceSuggestion.SelectedValue.ToString();
-            string municipality = cboMunicipalitySuggestion.SelectedValue.ToString();
-            string barangay = cboBarangaySuggestion.SelectedValue.ToString();
-            UpdateRow(province, municipality, barangay);
+            try
+            {
+                string province = cboProvinceSuggestion.SelectedValue.ToString();
+                string municipality = cboMunicipalitySuggestion.SelectedValue.ToString();
+                string barangay = cboBarangaySuggestion.SelectedValue.ToString();
+                UpdateRow(province, municipality, barangay);
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error applying suggested selection to the data.", ex);
+            }           
         }
 
         private void cboMunicipalitySuggestion_SelectedIndexChanged(
             object sender,
             EventArgs e)
         {
-            DisplayBarangaySuggestions();
+            try
+            {
+                DisplayBarangaySuggestions();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error displaying level 3 suggestion list.", ex);
+            }           
         }
 
         private void cboMunicipality_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayBarangayList();
+            try
+            {
+                DisplayBarangayList();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error displaying level 3 manual list.", ex);
+            }
         }
 
         private void cboProvinceSuggestion_SelectedIndexChanged(
             object sender,
             EventArgs e)
         {
-            DisplayMunicipalitySuggestions();
+            try
+            {
+                DisplayMunicipalitySuggestions();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error displaying level 3 suggestion list.", ex);
+            }
         }
 
         private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayMunicipalityList();
+            try
+            {
+                DisplayMunicipalityList();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Error displaying level 2 manual list.", ex);
+            }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-                selectedRowIndex = dataGridView1.SelectedRows[0].Index;
-                txtSelectedIndex.Text = selectedRowIndex.ToString();
-                DisplaySelectedRecord();
-                DisplayProvinceSuggestions();
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    selectedRowIndex = dataGridView1.SelectedRows[0].Index;
+                    txtSelectedIndex.Text = selectedRowIndex.ToString();
+                    DisplaySelectedRecord();
+                    DisplayProvinceSuggestions();
+                }
             }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Grid navigation error.", ex);
+            }          
         }
 
         private void DisplayBarangayList()
@@ -207,10 +277,10 @@ namespace GeoLocationTool
         {
             // only show those records where a location code is null
             EnumerableRowCollection<DataRow> query = from record in dt.AsEnumerable()
-                where record.Field<String>(ProvinceCodeColumn) == null ||
-                      record.Field<string>(MunicipalityCodeColumn) == null ||
-                      record.Field<string>(BaracayCodeColumn) == null
-                select record;
+                                                     where record.Field<String>(ProvinceCodeColumn) == null ||
+                                                           record.Field<string>(MunicipalityCodeColumn) == null ||
+                                                           record.Field<string>(BaracayCodeColumn) == null
+                                                     select record;
 
             DataView unmatched = query.AsDataView();
             dataGridView1.DataSource = unmatched;
@@ -219,21 +289,40 @@ namespace GeoLocationTool
 
         private void FormManualMatch_Shown(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
+            try
             {
-                Cursor = Cursors.WaitCursor;
-                dataGridView1.Rows[0].Selected = true;
-                DisplaySelectedRecord();
-                DisplayProvinceSuggestions();
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    dataGridView1.Rows[0].Selected = true;
+                    DisplaySelectedRecord();
+                    DisplayProvinceSuggestions();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process(
+                    "An error occurred during Manual Match screen show.",
+                    ex);
+            }
+            finally
+            {
                 Cursor = Cursors.Default;
             }
         }
 
         private void FormSuggestions_Load(object sender, EventArgs e)
         {
-            DisplayUnmatchedRecords();
-            DisplayProvinceList();
-            // txtRowCount.DataBindings.Add("Text", dt.Rows, "Count");
+            try
+            {
+                DisplayUnmatchedRecords();
+                DisplayProvinceList();
+                // txtRowCount.DataBindings.Add("Text", dt.Rows, "Count");
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("An error occurred during Manual Match screen load.", ex);
+            }           
         }
 
         private void UpdateRow(string province, string municipality, string barangay)

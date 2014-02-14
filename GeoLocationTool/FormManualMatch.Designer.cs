@@ -72,7 +72,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 405);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 415);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.TabStop = false;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -98,7 +98,7 @@
             // 
             // txtBarangay
             // 
-            this.txtBarangay.Location = new System.Drawing.Point(710, 20);
+            this.txtBarangay.Location = new System.Drawing.Point(704, 20);
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.ReadOnly = true;
             this.txtBarangay.Size = new System.Drawing.Size(260, 22);
@@ -107,7 +107,7 @@
             // 
             // txtMunicipality
             // 
-            this.txtMunicipality.Location = new System.Drawing.Point(430, 20);
+            this.txtMunicipality.Location = new System.Drawing.Point(427, 20);
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.ReadOnly = true;
             this.txtMunicipality.Size = new System.Drawing.Size(260, 22);
@@ -139,7 +139,7 @@
             // 
             this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(430, 96);
+            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(427, 96);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipalitySuggestion.TabIndex = 4;
@@ -148,7 +148,7 @@
             // cboMunicipality
             // 
             this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(430, 58);
+            this.cboMunicipality.Location = new System.Drawing.Point(427, 58);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipality.TabIndex = 1;
@@ -158,7 +158,7 @@
             // 
             this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(710, 96);
+            this.cboBarangaySuggestion.Location = new System.Drawing.Point(704, 96);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboBarangaySuggestion.TabIndex = 5;
@@ -166,7 +166,7 @@
             // cboBarangay
             // 
             this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(710, 58);
+            this.cboBarangay.Location = new System.Drawing.Point(704, 58);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
             this.cboBarangay.TabIndex = 2;
@@ -184,7 +184,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(430, 0);
+            this.label3.Location = new System.Drawing.Point(427, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 17);
             this.label3.TabIndex = 12;
@@ -193,7 +193,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(710, 0);
+            this.label4.Location = new System.Drawing.Point(704, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 17);
             this.label4.TabIndex = 13;
@@ -230,9 +230,9 @@
             // 
             this.btnMainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnMainScreen, 2);
-            this.btnMainScreen.Location = new System.Drawing.Point(1127, 573);
+            this.btnMainScreen.Location = new System.Drawing.Point(1086, 96);
             this.btnMainScreen.Name = "btnMainScreen";
-            this.btnMainScreen.Size = new System.Drawing.Size(115, 32);
+            this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
             this.btnMainScreen.TabIndex = 12;
             this.btnMainScreen.Text = "Main Screen";
             this.btnMainScreen.UseVisualStyleBackColor = true;
@@ -240,7 +240,7 @@
             // 
             // btnUseOriginal
             // 
-            this.btnUseOriginal.Location = new System.Drawing.Point(990, 20);
+            this.btnUseOriginal.Location = new System.Drawing.Point(981, 20);
             this.btnUseOriginal.Name = "btnUseOriginal";
             this.btnUseOriginal.Size = new System.Drawing.Size(75, 32);
             this.btnUseOriginal.TabIndex = 7;
@@ -250,7 +250,7 @@
             // 
             // btnUseManual
             // 
-            this.btnUseManual.Location = new System.Drawing.Point(990, 58);
+            this.btnUseManual.Location = new System.Drawing.Point(981, 58);
             this.btnUseManual.Name = "btnUseManual";
             this.btnUseManual.Size = new System.Drawing.Size(75, 32);
             this.btnUseManual.TabIndex = 8;
@@ -260,7 +260,7 @@
             // 
             // btnUseSuggestion
             // 
-            this.btnUseSuggestion.Location = new System.Drawing.Point(990, 96);
+            this.btnUseSuggestion.Location = new System.Drawing.Point(981, 96);
             this.btnUseSuggestion.Name = "btnUseSuggestion";
             this.btnUseSuggestion.Size = new System.Drawing.Size(75, 32);
             this.btnUseSuggestion.TabIndex = 9;
@@ -270,7 +270,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(1085, 20);
+            this.btnNext.Location = new System.Drawing.Point(1086, 20);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 32);
             this.btnNext.TabIndex = 10;
@@ -280,7 +280,7 @@
             // 
             // btnPrev
             // 
-            this.btnPrev.Location = new System.Drawing.Point(1166, 20);
+            this.btnPrev.Location = new System.Drawing.Point(1167, 20);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(75, 32);
             this.btnPrev.TabIndex = 11;
@@ -308,9 +308,9 @@
             // 
             // txtSelectedIndex
             // 
-            this.txtSelectedIndex.Location = new System.Drawing.Point(1071, 573);
+            this.txtSelectedIndex.Location = new System.Drawing.Point(1075, 583);
             this.txtSelectedIndex.Name = "txtSelectedIndex";
-            this.txtSelectedIndex.Size = new System.Drawing.Size(8, 22);
+            this.txtSelectedIndex.Size = new System.Drawing.Size(5, 22);
             this.txtSelectedIndex.TabIndex = 27;
             this.txtSelectedIndex.Visible = false;
             // 
@@ -355,7 +355,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnPrev, 12, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
