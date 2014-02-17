@@ -1,24 +1,25 @@
 ﻿// FormLoadData.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.UI
 {
     using System;
     using System.Data;
     using System.Data.OleDb;
     using System.IO;
     using System.Windows.Forms;
+    using DataAccess;
+    using Logic;
 
+    /// <summary>
+    /// Initial form: displays options and loads the input data into a grid.
+    /// </summary>
     public partial class FormLoadData : Form
     {
         #region Fields
 
-        private const string BaracayCodeColumn = "BaracayCode";
-        private const string MatchedColumn = "Matched";
-        private const string MunicipalityCodeColumn = "MunicipalityCode";
-        private const string ProvinceCodeColumn = "ProvinceCode";
+        private readonly InputData inputData;
 
-        private DataTable dt;
-        private GeoLocationData geoLocationData = new GeoLocationData();
+        private LocationData locationData;
 
         #endregion Fields
 
@@ -27,27 +28,39 @@ namespace GeoLocationTool
         public FormLoadData()
         {
             InitializeComponent();
+            inputData = new InputData();
+            locationData = new LocationData();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        private void AddCodeCollumns()
+        public void SaveAsCsv()
         {
-            if (!dt.Columns.Contains(ProvinceCodeColumn))
+            using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dt.Columns.Add(ProvinceCodeColumn, typeof (String));
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "csv";
+                dialog.Filter = "CSV(*.csv)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    OutputFile.SaveToCsvFile(dialog.FileName, inputData.dt);
+                }
             }
+        }
 
-            if (!dt.Columns.Contains(MunicipalityCodeColumn))
+        public void SaveAsExcel()
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dt.Columns.Add(MunicipalityCodeColumn, typeof (String));
-            }
-
-            if (!dt.Columns.Contains(BaracayCodeColumn))
-            {
-                dt.Columns.Add(BaracayCodeColumn, typeof (String));
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "xlsx";
+                dialog.Filter = "Excel(*.xlsx)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    OutputFile.SaveToExcelFile(dialog.FileName, inputData.dt);
+                }
             }
         }
 
@@ -55,63 +68,44 @@ namespace GeoLocationTool
         {
             try
             {
-                int locationColumn1 = (int)udProvince.Value - 1;
-                int locationColumn2 = (int)udMunicipality.Value - 1;
-                int locationColumn3 = (int)udBarangay.Value - 1;
-                FormManualMatch formSuggestions = new FormManualMatch(
-                    dt,
-                    locationColumn1,
-                    locationColumn2,
-                    locationColumn3,
-                    geoLocationData);
-                formSuggestions.ShowDialog();
+                inputData.ColumnIndexLoc1 = (int) udProvince.Value - 1;
+                inputData.ColumnIndexLoc2 = (int) udMunicipality.Value - 1;
+                inputData.ColumnIndexLoc3 = (int) udBarangay.Value - 1;
+                FormManualMatch formManualMatch = new FormManualMatch(
+                    inputData,
+                    locationData);
+                formManualMatch.ShowDialog();
             }
             catch (Exception ex)
-            {               
-               ErrorHandler.Process("A problem occurred with the Manual Match screen load.", ex);
-            }         
+            {
+                ErrorHandler.Process(
+                    "A problem occurred with the Manual Match screen load.",
+                    ex);
+            }
         }
 
         private void btnMatchData_Click(object sender, EventArgs e)
         {
             try
             {
-                if (dt == null)
+                if (inputData.dt == null)
                 {
                     return;
                 }
 
-                int provinceColumnIndex = (int)udProvince.Value - 1;
-                int municipalityColumnIndex = (int)udMunicipality.Value - 1;
-                int barangayColumnIndex = (int)udBarangay.Value - 1;
-                foreach (DataRow dataRow in dt.Rows)
-                {
-                    //get location
-                    Location location = new Location();
-                    location.Province =
-                        dataRow.ItemArray[provinceColumnIndex].ToString();
-                    location.Barangay =
-                        dataRow.ItemArray[barangayColumnIndex].ToString();
-                    location.Municipality =
-                        dataRow.ItemArray[municipalityColumnIndex].ToString();
+                inputData.ColumnIndexLoc1 = (int) udProvince.Value - 1;
+                inputData.ColumnIndexLoc2 = (int) udMunicipality.Value - 1;
+                inputData.ColumnIndexLoc3 = (int) udBarangay.Value - 1;
 
-                    // get codes
-                    geoLocationData.GetLocationCodes(location);
-
-                    //display codes
-                    dataRow[ProvinceCodeColumn] = location.ProvinceCode;
-                    dataRow[MunicipalityCodeColumn] = location.MunicipalityCode;
-                    dataRow[BaracayCodeColumn] = location.BarangayCode;
-                    dataRow.AcceptChanges();
-                }
-                dt.AcceptChanges();
-                dataGridView1.DataSource = dt;
+                inputData.AddLocationCodes(locationData);
+                dataGridView1.DataSource = inputData.dt;
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("A problem occurred with the data matching process.", ex);
+                ErrorHandler.Process(
+                    "A problem occurred with the data matching process.",
+                    ex);
             }
-           
         }
 
         private void btnReadInputFile_Click(object sender, EventArgs e)
@@ -143,13 +137,13 @@ namespace GeoLocationTool
                 var path = txtLocationFileName.Text.Trim();
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    geoLocationData =
-                        new GeoLocationData(LocationGadmFile.ReadLocationFile(path));
+                    locationData =
+                        new LocationData(LocationGadmFile.ReadLocationFile(path));
                 }
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("Could not read file.", ex);              
+                ErrorHandler.Process("Could not read file.", ex);
             }
         }
 
@@ -168,9 +162,8 @@ namespace GeoLocationTool
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("Error saving file.", ex);  
+                ErrorHandler.Process("Error saving file.", ex);
             }
-          
         }
 
         private void FormLoadData_Load(object sender, EventArgs e)
@@ -204,9 +197,13 @@ namespace GeoLocationTool
             return excelSheetNames;
         }
 
+        /// <summary>
+        /// Gets the name of the file from the user.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        /// <returns>The file name and path.</returns>
         private string GetFileName(string filter)
         {
-            //ask the user for the input file name
             string fileName = string.Empty;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory =
@@ -232,31 +229,30 @@ namespace GeoLocationTool
             return fileName;
         }
 
+        /// <summary>
+        /// Reads the CSV file into the grid and add extra columns for the computed data
+        /// </summary>
         private void ReadCsvFile()
         {
-            //read the input file into the grid and add extra columns for the computed data
             const string filter = "csv files (*.csv)|*.csv";
             txtFileName.Clear();
             txtFileName.Text = GetFileName(filter);
             var path = txtFileName.Text.Trim();
             if (!String.IsNullOrWhiteSpace(path))
             {
-                ReadCsvInput(path);
-                AddCodeCollumns();
+                inputData.dt = InputFile.ReadCsvFile(path, true);
+                dataGridView1.DataSource = inputData.dt;
+                dataGridView1.AutoSizeColumnsMode =
+                    DataGridViewAutoSizeColumnsMode.Fill;
+                inputData.AddCodeCollumns();
             }
         }
 
-        private void ReadCsvInput(string fileName)
-        {
-            dt = InputFile.ReadCsvFile(fileName, true);
-            dataGridView1.DataSource = dt;
-            dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
+        /// <summary>
+        /// Reads the excel file into the grid and adds extra columns for the computed data
+        /// </summary>
         private void ReadExcelFile()
         {
-            //read the input file into the grid and add extra columns for the computed data
             const string filter = "excel files (*.xls,*.xlsx)|*.xls*";
             txtFileName.Clear();
             txtFileName.Text = GetFileName(filter);
@@ -267,43 +263,10 @@ namespace GeoLocationTool
             string worksheetName = txtWorksheetName.Text;
             if (!String.IsNullOrWhiteSpace(path))
             {
-                ReadExcelInput(path, worksheetName);
-                AddCodeCollumns();
-            }
-        }
-
-        private void ReadExcelInput(string path, string worksheetName)
-        {
-            dt = InputFile.ReadExcelFile(path, worksheetName);
-            dataGridView1.DataSource = dt;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        private void SaveAsCsv()
-        {
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "csv";
-                dialog.Filter = "CSV(*.csv)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    OutputFile.SaveToCsvFile(dialog.FileName, dt);
-                }
-            }
-        }
-
-        private void SaveAsExcel()
-        {
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "xlsx";
-                dialog.Filter = "Excel(*.xlsx)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    OutputFile.SaveToExcelFile(dialog.FileName, dt);
-                }
+                inputData.dt = InputFile.ReadExcelFile(path, worksheetName);
+                dataGridView1.DataSource = inputData.dt;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                inputData.AddCodeCollumns();
             }
         }
 

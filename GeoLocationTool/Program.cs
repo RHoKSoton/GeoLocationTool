@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 namespace GeoLocationTool
 {
+    using UI;
+
     static class Program
     {
         /// <summary>

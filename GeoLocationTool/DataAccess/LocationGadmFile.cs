@@ -1,25 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// LocationGadmFile.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.DataAccess
 {
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using CsvHelper;
+    using Logic;
 
     /// <summary>
     /// Read the location data from file
     /// </summary>
-     internal class LocationGadmFile
+    internal class LocationGadmFile
     {
-         internal static IEnumerable<Gadm> ReadLocationFile(string path)
+        #region Methods
+
+        internal static IEnumerable<Gadm> ReadLocationFile(string path)
         {
             IEnumerable<Gadm> gadmList;
 
-            // open for read only   
-            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            // open for read only
+            using (
+                FileStream fileStream = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read))
             {
                 // this data is a known format so we can use a strongly typed reader
                 using (
@@ -30,5 +35,7 @@ namespace GeoLocationTool
             }
             return gadmList;
         }
+
+        #endregion Methods
     }
 }

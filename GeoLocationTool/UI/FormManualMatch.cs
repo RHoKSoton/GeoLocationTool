@@ -1,10 +1,10 @@
 ﻿// FormManualMatch.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.UI
 {
     using System;
-    using System.Data;
     using System.Windows.Forms;
+    using Logic;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
@@ -13,16 +13,9 @@ namespace GeoLocationTool
     {
         #region Fields
 
-        private const string BaracayCodeColumn = "BaracayCode";
-        private const string MunicipalityCodeColumn = "MunicipalityCode";
-        private const string ProvinceCodeColumn = "ProvinceCode";
-
-        private readonly int columnIndexLevel1;
-        private readonly int columnIndexLevel2;
-        private readonly int columnIndexLevel3;
-        private readonly DataTable dt;
         private readonly FuzzyMatch fuzzyMatch;
-        private readonly GeoLocationData geoLocationData;
+        private readonly InputData inputData;
+        private readonly LocationData locationData;
 
         private int selectedRowIndex;
 
@@ -30,20 +23,12 @@ namespace GeoLocationTool
 
         #region Constructors
 
-        public FormManualMatch(
-            DataTable dt,
-            int columnIndexLevel1,
-            int columnIndexLevel2,
-            int columnIndexLevel3,
-            GeoLocationData geoLocationData)
+        public FormManualMatch(InputData inputData, LocationData locationData)
         {
             InitializeComponent();
-            this.dt = dt;
-            this.columnIndexLevel1 = columnIndexLevel1;
-            this.columnIndexLevel2 = columnIndexLevel2;
-            this.columnIndexLevel3 = columnIndexLevel3;
-            this.geoLocationData = geoLocationData;
-            fuzzyMatch = new FuzzyMatch(geoLocationData);
+            this.inputData = inputData;
+            this.locationData = locationData;
+            fuzzyMatch = new FuzzyMatch(locationData);
         }
 
         #endregion Constructors
@@ -67,7 +52,7 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Navigation error - Next.", ex);
-            }         
+            }
         }
 
         private void btnPrev_Click(object sender, EventArgs e)
@@ -82,7 +67,7 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Navigation error - Prev.", ex);
-            }           
+            }
         }
 
         private void btnUseManual_Click(object sender, EventArgs e)
@@ -97,7 +82,7 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Error applying manual selection to the data.", ex);
-            }         
+            }
         }
 
         private void btnUseOriginal_Click(object sender, EventArgs e)
@@ -112,7 +97,7 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Error applying original selection to the data.", ex);
-            }          
+            }
         }
 
         private void btnUseSuggestion_Click(object sender, EventArgs e)
@@ -126,8 +111,10 @@ namespace GeoLocationTool
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("Error applying suggested selection to the data.", ex);
-            }           
+                ErrorHandler.Process(
+                    "Error applying suggested selection to the data.",
+                    ex);
+            }
         }
 
         private void cboMunicipalitySuggestion_SelectedIndexChanged(
@@ -141,7 +128,7 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Error displaying level 3 suggestion list.", ex);
-            }           
+            }
         }
 
         private void cboMunicipality_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,13 +184,13 @@ namespace GeoLocationTool
             catch (Exception ex)
             {
                 ErrorHandler.Process("Grid navigation error.", ex);
-            }          
+            }
         }
 
         private void DisplayBarangayList()
         {
             // based on selected level 1 and 2
-            cboBarangay.DataSource = geoLocationData.Level3LocationNames(
+            cboBarangay.DataSource = locationData.Level3LocationNames(
                 cboProvince.SelectedValue.ToString(),
                 cboMunicipality.SelectedValue.ToString());
         }
@@ -226,7 +213,7 @@ namespace GeoLocationTool
         private void DisplayMunicipalityList()
         {
             // based on selected level 1
-            cboMunicipality.DataSource = geoLocationData.Level2LocationNames(
+            cboMunicipality.DataSource = locationData.Level2LocationNames(
                 cboProvince.SelectedValue.ToString());
         }
 
@@ -246,7 +233,7 @@ namespace GeoLocationTool
 
         private void DisplayProvinceList()
         {
-            cboProvince.DataSource = geoLocationData.Level1LocationNames();
+            cboProvince.DataSource = locationData.Level1LocationNames();
         }
 
         private void DisplayProvinceSuggestions()
@@ -263,28 +250,39 @@ namespace GeoLocationTool
         private void DisplaySelectedRecord()
         {
             txtProvince.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel1].Value as
+                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc1]
+                    .Value as
                     string;
             txtMunicipality.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel2].Value as
+                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc2]
+                    .Value as
                     string;
             txtBarangay.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel3].Value as
+                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc3]
+                    .Value as
                     string;
         }
 
         private void DisplayUnmatchedRecords()
         {
-            // only show those records where a location code is null
-            EnumerableRowCollection<DataRow> query = from record in dt.AsEnumerable()
-                                                     where record.Field<String>(ProvinceCodeColumn) == null ||
-                                                           record.Field<string>(MunicipalityCodeColumn) == null ||
-                                                           record.Field<string>(BaracayCodeColumn) == null
-                                                     select record;
-
-            DataView unmatched = query.AsDataView();
-            dataGridView1.DataSource = unmatched;
+            dataGridView1.DataSource = inputData.GetUnmatchedRecords();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void FormManualMatch_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                DisplayUnmatchedRecords();
+                DisplayProvinceList();
+                // txtRowCount.DataBindings.Add("Text", dt.Rows, "Count");
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process(
+                    "An error occurred during Manual Match screen load.",
+                    ex);
+            }
         }
 
         private void FormManualMatch_Shown(object sender, EventArgs e)
@@ -311,38 +309,29 @@ namespace GeoLocationTool
             }
         }
 
-        private void FormSuggestions_Load(object sender, EventArgs e)
+        private void UpdateRow(string level1, string level2, string level3)
         {
-            try
-            {
-                DisplayUnmatchedRecords();
-                DisplayProvinceList();
-                // txtRowCount.DataBindings.Add("Text", dt.Rows, "Count");
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("An error occurred during Manual Match screen load.", ex);
-            }           
-        }
+            //display new name values
+            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc1].Value =
+                level1;
+            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc2].Value =
+                level2;
+            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc3].Value =
+                level3;
 
-        private void UpdateRow(string province, string municipality, string barangay)
-        {
-            //display new text
-            dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel1].Value = province;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel2].Value =
-                municipality;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnIndexLevel3].Value = barangay;
-
-            //get codes
-            Location location = new Location(province, barangay, municipality);
-            geoLocationData.GetLocationCodes(location);
+            //get codes using new names
+            Location location = new Location(level1, level3, level2);
+            locationData.GetLocationCodes(location);
 
             //display codes
-            dataGridView1.Rows[selectedRowIndex].Cells[ProvinceCodeColumn].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+                .Value =
                 location.ProvinceCode;
-            dataGridView1.Rows[selectedRowIndex].Cells[MunicipalityCodeColumn].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+                .Value =
                 location.MunicipalityCode;
-            dataGridView1.Rows[selectedRowIndex].Cells[BaracayCodeColumn].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+                .Value =
                 location.BarangayCode;
 
             DisplayUnmatchedRecords();

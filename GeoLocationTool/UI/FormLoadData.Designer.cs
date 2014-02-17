@@ -1,4 +1,4 @@
-﻿namespace GeoLocationTool
+﻿namespace GeoLocationTool.UI
 {
     partial class FormLoadData
     {

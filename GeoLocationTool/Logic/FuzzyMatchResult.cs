@@ -1,12 +1,15 @@
 // FuzzyResult.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.Logic
 {
-    internal class FuzzyResult
+    /// <summary>
+    /// Holds matched location details
+    /// </summary>
+    internal class FuzzyMatchResult
     {
         #region Constructors
 
-        public FuzzyResult(string location, double coefficient)
+        public FuzzyMatchResult(string location, double coefficient)
         {
             Location = location;
             Coefficient = coefficient;

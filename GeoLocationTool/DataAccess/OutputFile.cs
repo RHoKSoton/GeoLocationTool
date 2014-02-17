@@ -1,6 +1,6 @@
 ﻿// OutputFile.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.DataAccess
 {
     using System;
     using System.Collections.Generic;

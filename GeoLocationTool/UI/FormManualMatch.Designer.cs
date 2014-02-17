@@ -1,4 +1,4 @@
-﻿namespace GeoLocationTool
+﻿namespace GeoLocationTool.UI
 {
     partial class FormManualMatch
     {
@@ -380,7 +380,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manual Match";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FormSuggestions_Load);
+            this.Load += new System.EventHandler(this.FormManualMatch_Load);
             this.Shown += new System.EventHandler(this.FormManualMatch_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

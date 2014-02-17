@@ -51,33 +51,34 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorHandler.cs" />
-    <Compile Include="FormLoadData.cs">
+    <Compile Include="UI\ErrorHandler.cs" />
+    <Compile Include="UI\FormLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLoadData.Designer.cs">
+    <Compile Include="UI\FormLoadData.Designer.cs">
       <DependentUpon>FormLoadData.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManualMatch.cs">
+    <Compile Include="UI\FormManualMatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManualMatch.Designer.cs">
+    <Compile Include="UI\FormManualMatch.Designer.cs">
       <DependentUpon>FormManualMatch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FuzzyMatch.cs" />
-    <Compile Include="FuzzyResult.cs" />
-    <Compile Include="Gadm.cs" />
-    <Compile Include="GeoLocationData.cs" />
-    <Compile Include="InputFile.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="LocationGadmFile.cs" />
-    <Compile Include="OutputFile.cs" />
+    <Compile Include="Logic\FuzzyMatch.cs" />
+    <Compile Include="Logic\FuzzyMatchResult.cs" />
+    <Compile Include="Logic\Gadm.cs" />
+    <Compile Include="Logic\LocationData.cs" />
+    <Compile Include="DataAccess\InputFile.cs" />
+    <Compile Include="Logic\Location.cs" />
+    <Compile Include="DataAccess\LocationGadmFile.cs" />
+    <Compile Include="DataAccess\OutputFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormLoadData.resx">
+    <Compile Include="Logic\InputData.cs" />
+    <EmbeddedResource Include="UI\FormLoadData.resx">
       <DependentUpon>FormLoadData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManualMatch.resx">
+    <EmbeddedResource Include="UI\FormManualMatch.resx">
       <DependentUpon>FormManualMatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

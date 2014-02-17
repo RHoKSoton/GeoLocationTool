@@ -1,6 +1,6 @@
 // GeoLocationData.cs
 
-namespace GeoLocationTool
+namespace GeoLocationTool.Logic
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace GeoLocationTool
     /// Provides the location codes where there are exact matches
     /// Provides lists of locations for a level
     /// </summary>
-    public class GeoLocationData
+    public class LocationData
     {
         #region Fields
 
@@ -21,12 +21,12 @@ namespace GeoLocationTool
 
         #region Constructors
 
-        public GeoLocationData(IEnumerable<Gadm> locationList)
+        public LocationData(IEnumerable<Gadm> locationList)
         {
             this.locationList = locationList;
         }
 
-        public GeoLocationData()
+        public LocationData()
         {
             locationList = new List<Gadm>();
         }
