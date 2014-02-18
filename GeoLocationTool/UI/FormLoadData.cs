@@ -5,6 +5,7 @@ namespace GeoLocationTool.UI
     using System;
     using System.Data;
     using System.Data.OleDb;
+    using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
     using DataAccess;
@@ -29,48 +30,41 @@ namespace GeoLocationTool.UI
         {
             InitializeComponent();
             inputData = new InputData();
-            locationData = new LocationData();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public void SaveAsCsv()
-        {
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "csv";
-                dialog.Filter = "CSV(*.csv)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    OutputFile.SaveToCsvFile(dialog.FileName, inputData.dt);
-                }
-            }
-        }
-
-        public void SaveAsExcel()
-        {
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "xlsx";
-                dialog.Filter = "Excel(*.xlsx)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    OutputFile.SaveToExcelFile(dialog.FileName, inputData.dt);
-                }
-            }
-        }
-
         private void btnManualMatch_Click(object sender, EventArgs e)
         {
             try
             {
-                inputData.ColumnIndexLoc1 = (int) udProvince.Value - 1;
-                inputData.ColumnIndexLoc2 = (int) udMunicipality.Value - 1;
-                inputData.ColumnIndexLoc3 = (int) udBarangay.Value - 1;
+                if (locationData == null)
+                {
+                    MessageBox.Show(
+                        "Location data missing, please read in a location file.");
+                    return;
+                }
+
+                if (inputData.dt == null)
+                {
+                    MessageBox.Show("Input data missing, please read in an input file.");
+                    return;
+                }
+
+                inputData.AddAdditionalColumns();
+
+                if (OriginalColumnIndicesHaveChanged())
+                {
+                    SetOriginalColumnIndices();
+                    inputData.InitialiseLocationColumns();
+                }
+                else
+                {
+                    SetOriginalColumnIndices();
+                }
+
                 FormManualMatch formManualMatch = new FormManualMatch(
                     inputData,
                     locationData);
@@ -88,16 +82,32 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (inputData.dt == null)
+                if (locationData == null)
                 {
+                    MessageBox.Show(
+                        "Location data missing, please read in a location file.");
                     return;
                 }
 
-                inputData.ColumnIndexLoc1 = (int) udProvince.Value - 1;
-                inputData.ColumnIndexLoc2 = (int) udMunicipality.Value - 1;
-                inputData.ColumnIndexLoc3 = (int) udBarangay.Value - 1;
+                if (inputData.dt == null)
+                {
+                    MessageBox.Show("Input data missing, please read in an input file.");
+                    return;
+                }
 
-                inputData.AddLocationCodes(locationData);
+                inputData.AddAdditionalColumns();
+
+                if (OriginalColumnIndicesHaveChanged())
+                {
+                    SetOriginalColumnIndices();
+                    inputData.InitialiseLocationColumns();
+                }
+                else
+                {
+                    SetOriginalColumnIndices();
+                }
+
+                inputData.GetLocationCodes(locationData);
                 dataGridView1.DataSource = inputData.dt;
             }
             catch (Exception ex)
@@ -229,6 +239,19 @@ namespace GeoLocationTool.UI
             return fileName;
         }
 
+        private bool OriginalColumnIndicesHaveChanged()
+        {
+            int loc1ColumnIndex = (int) udProvince.Value - 1;
+            int loc2ColumnIndex = (int) udMunicipality.Value - 1;
+            int loc3ColumnIndex = (int) udBarangay.Value - 1;
+            bool isSame =
+                inputData.OriginalLoc1ColumnIndex.Equals(loc1ColumnIndex) &&
+                inputData.OriginalLoc2ColumnIndex.Equals(loc2ColumnIndex) &&
+                inputData.OriginalLoc3ColumnIndex.Equals(loc3ColumnIndex);
+
+            return !isSame;
+        }
+
         /// <summary>
         /// Reads the CSV file into the grid and add extra columns for the computed data
         /// </summary>
@@ -240,11 +263,12 @@ namespace GeoLocationTool.UI
             var path = txtFileName.Text.Trim();
             if (!String.IsNullOrWhiteSpace(path))
             {
-                inputData.dt = InputFile.ReadCsvFile(path, true);
+                const bool isFirstRowHeader = true;
+                inputData.LoadCsvFile(path, isFirstRowHeader);
                 dataGridView1.DataSource = inputData.dt;
                 dataGridView1.AutoSizeColumnsMode =
                     DataGridViewAutoSizeColumnsMode.Fill;
-                inputData.AddCodeCollumns();
+                SetColumnStyle();
             }
         }
 
@@ -263,10 +287,49 @@ namespace GeoLocationTool.UI
             string worksheetName = txtWorksheetName.Text;
             if (!String.IsNullOrWhiteSpace(path))
             {
-                inputData.dt = InputFile.ReadExcelFile(path, worksheetName);
+                inputData.LoadExcelFile(path, worksheetName);
                 dataGridView1.DataSource = inputData.dt;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                inputData.AddCodeCollumns();
+                SetColumnStyle();
+            }
+        }
+
+        private void SaveAsCsv()
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "csv";
+                dialog.Filter = "CSV(*.csv)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    inputData.SaveToCsvFile(dialog.FileName);
+                }
+            }
+        }
+
+        private void SaveAsExcel()
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "xlsx";
+                dialog.Filter = "Excel(*.xlsx)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    inputData.SaveToExcelFile(dialog.FileName);
+                }
+            }
+        }
+
+        private void SetColumnStyle()
+        {
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                if (col.ReadOnly)
+                {
+                    col.DefaultCellStyle.ForeColor = Color.Gray;
+                }
             }
         }
 
@@ -281,6 +344,16 @@ namespace GeoLocationTool.UI
             txtWorksheetName.Text = "Sheet1";
             rdoImportCsv.Checked = true;
             rdoSaveAsCsv.Checked = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = false;
+        }
+
+        private void SetOriginalColumnIndices()
+        {
+            inputData.OriginalLoc1ColumnIndex = (int) udProvince.Value - 1;
+            inputData.OriginalLoc2ColumnIndex = (int) udMunicipality.Value - 1;
+            inputData.OriginalLoc3ColumnIndex = (int) udBarangay.Value - 1;
         }
 
         #endregion Methods

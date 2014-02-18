@@ -250,15 +250,18 @@ namespace GeoLocationTool.UI
         private void DisplaySelectedRecord()
         {
             txtProvince.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc1]
+                dataGridView1.Rows[selectedRowIndex].Cells[
+                    inputData.OriginalLoc1ColumnIndex]
                     .Value as
                     string;
             txtMunicipality.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc2]
+                dataGridView1.Rows[selectedRowIndex].Cells[
+                    inputData.OriginalLoc2ColumnIndex]
                     .Value as
                     string;
             txtBarangay.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc3]
+                dataGridView1.Rows[selectedRowIndex].Cells[
+                    inputData.OriginalLoc3ColumnIndex]
                     .Value as
                     string;
         }
@@ -273,9 +276,9 @@ namespace GeoLocationTool.UI
         {
             try
             {
+                SetGridDefaults();
                 DisplayUnmatchedRecords();
                 DisplayProvinceList();
-                // txtRowCount.DataBindings.Add("Text", dt.Rows, "Count");
             }
             catch (Exception ex)
             {
@@ -309,14 +312,21 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void SetGridDefaults()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = false;
+        }
+
         private void UpdateRow(string level1, string level2, string level3)
         {
             //display new name values
-            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc1].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1ColumnName].Value =
                 level1;
-            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc2].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc2ColumnName].Value =
                 level2;
-            dataGridView1.Rows[selectedRowIndex].Cells[inputData.ColumnIndexLoc3].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc3ColumnName].Value =
                 level3;
 
             //get codes using new names
@@ -324,13 +334,13 @@ namespace GeoLocationTool.UI
             locationData.GetLocationCodes(location);
 
             //display codes
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1CodeColumnName]
                 .Value =
                 location.ProvinceCode;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc2CodeColumnName]
                 .Value =
                 location.MunicipalityCode;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc3CodeColumnName]
                 .Value =
                 location.BarangayCode;
 
