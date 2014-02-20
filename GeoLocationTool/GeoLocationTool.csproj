@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DBHelper.cs" />
+    <Compile Include="DataAccess\INearMatchesProvider.cs" />
+    <Compile Include="DataAccess\NearMatchesProvider.cs" />
+    <Compile Include="Model\NearMatch.cs" />
     <Compile Include="UI\ErrorHandler.cs" />
     <Compile Include="UI\FormLoadData.cs">
       <SubType>Form</SubType>
