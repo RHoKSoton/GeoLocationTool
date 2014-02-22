@@ -76,8 +76,8 @@ namespace GeoLocationTool.DataAccess
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Location2NearMatches (Id, Location1, Location2, NearMatch)
-                                    VALUES (newid(), @location1, @location2, @nearMatch)",
+                SqlConnection.Execute(@"INSERT INTO Location2NearMatches (Id, Location1, Location2, NearMatch, Weight)
+                                    VALUES (newid(), @location1, @location2, @nearMatch, 1)",
                                     new { nearMatch, location1, location2 });
             }
             else
@@ -97,8 +97,8 @@ namespace GeoLocationTool.DataAccess
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Location3NearMatches (Id, Location1, Location2, Location3, NearMatch)
-                                    VALUES (newid(), @location1, @location2, @location3, @nearMatch)",
+                SqlConnection.Execute(@"INSERT INTO Location3NearMatches (Id, Location1, Location2, Location3, NearMatch, Weight)
+                                    VALUES (newid(), @location1, @location2, @location3, @nearMatch, 1)",
                                     new { nearMatch, location1, location2, location3 });
             }
             else

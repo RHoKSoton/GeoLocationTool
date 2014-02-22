@@ -211,6 +211,7 @@ namespace GeoLocationToolTests
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
             Assert.AreEqual("location3", match.Location3);
+            Assert.AreEqual(1, match.Weight);
         }
     }
 }
