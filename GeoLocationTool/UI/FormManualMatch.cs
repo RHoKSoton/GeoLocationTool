@@ -5,6 +5,8 @@ namespace GeoLocationTool.UI
     using System;
     using System.Windows.Forms;
     using Logic;
+    using GeoLocationTool.DataAccess;
+    using System.Data.Common;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
@@ -12,10 +14,12 @@ namespace GeoLocationTool.UI
     public partial class FormManualMatch : Form
     {
         #region Fields
-
         private readonly FuzzyMatch fuzzyMatch;
         private readonly InputData inputData;
         private readonly LocationData locationData;
+        private readonly DbConnection connection;
+        private readonly INearMatchesProvider nearMatches;
+        private const string DB_LOCATION = @"GeoLocationTool.sdf";
 
         private int selectedRowIndex;
 
@@ -29,6 +33,9 @@ namespace GeoLocationTool.UI
             this.inputData = inputData;
             this.locationData = locationData;
             fuzzyMatch = new FuzzyMatch(locationData);
+            connection = DBHelper.GetDbConnection(DB_LOCATION);
+            connection.InitializeDB();
+            nearMatches = new NearMatchesProvider(connection);
         }
 
         #endregion Constructors
@@ -77,6 +84,7 @@ namespace GeoLocationTool.UI
                 string province = cboProvince.SelectedValue.ToString();
                 string municipality = cboMunicipality.SelectedValue.ToString();
                 string barangay = cboBarangay.SelectedValue.ToString();
+                SaveNearMatch(province, municipality, barangay);
                 UpdateRow(province, municipality, barangay);
             }
             catch (Exception ex)
@@ -107,6 +115,7 @@ namespace GeoLocationTool.UI
                 string province = cboProvinceSuggestion.SelectedValue.ToString();
                 string municipality = cboMunicipalitySuggestion.SelectedValue.ToString();
                 string barangay = cboBarangaySuggestion.SelectedValue.ToString();
+                SaveNearMatch(province, municipality, barangay);
                 UpdateRow(province, municipality, barangay);
             }
             catch (Exception ex)
@@ -115,6 +124,13 @@ namespace GeoLocationTool.UI
                     "Error applying suggested selection to the data.",
                     ex);
             }
+        }
+
+        private void SaveNearMatch(string province, string municipality, string barangay)
+        {
+            nearMatches.SaveMatch(txtProvince.Text, province);
+            nearMatches.SaveMatch(txtMunicipality.Text, province, municipality);
+            nearMatches.SaveMatch(txtBarangay.Text, province, municipality, barangay);
         }
 
         private void cboMunicipalitySuggestion_SelectedIndexChanged(
@@ -345,6 +361,20 @@ namespace GeoLocationTool.UI
                 location.BarangayCode;
 
             DisplayUnmatchedRecords();
+        }
+        
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            connection.Close();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         #endregion Methods
