@@ -13,7 +13,7 @@ namespace GeoLocationToolTests
     [TestClass]
     public class DbIntegrationTests
     {
-        private string dbLocation = @"GeoLocationTool.sdf";
+        private string dbLocation = @"GeoLocationToolTest.sdf";
         private DbConnection connection;
         private int maxLength = 255;
 
@@ -39,13 +39,13 @@ namespace GeoLocationToolTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.InsertMatch("near", "actual");
-            provider.InsertMatch("near", "actual2");
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("near", "actual2");
             var matches = provider.GetActualMatches("near");
 
             //Then
             Assert.AreEqual(2, matches.Count());
-            Assert.IsTrue(matches.All(x => x.Near == "near"));
+            Assert.IsTrue(matches.All(x => x.NearMatch == "near"));
         }
 
         [TestMethod]
@@ -57,14 +57,16 @@ namespace GeoLocationToolTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.InsertMatch("near", "actual");
-            provider.InsertMatch("near", "actual");
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("near", "actual");
             var matches = provider.GetActualMatches("near");
 
             //Then
-            Assert.AreEqual(2, matches.Count());
-            Assert.IsTrue(matches.All(x => x.Near == "near"));
-            Assert.IsTrue(matches.All(x => x.Actual == "actual"));
+            Assert.AreEqual(1, matches.Count());
+            var match = matches.Single();
+            Assert.AreEqual("near", match.NearMatch);
+            Assert.AreEqual("actual", match.Location1);
+            Assert.AreEqual(2, match.Weight);
         }
 
         [TestMethod]
@@ -77,13 +79,14 @@ namespace GeoLocationToolTests
             string veryLong = new String('a', maxLength);
             
             //When
-            provider.InsertMatch(veryLong, veryLong);
+            provider.SaveMatch(veryLong, veryLong);
             var matches = provider.GetActualMatches(veryLong);
 
             //Then
             Assert.AreEqual(1, matches.Count());
-            Assert.IsTrue(matches.First().Near == veryLong);
-            Assert.IsTrue(matches.First().Actual == veryLong);
+            var match = matches.Single();
+            Assert.AreEqual(veryLong, match.NearMatch);
+            Assert.AreEqual(veryLong, match.Location1);
         }
 
         [TestMethod]
@@ -97,7 +100,7 @@ namespace GeoLocationToolTests
             string tooLong = new String('a', maxLength + 1);
 
             //When
-            provider.InsertMatch(tooLong, tooLong);
+            provider.SaveMatch(tooLong, tooLong);
     
             var matches = provider.GetActualMatches(tooLong);
 
@@ -115,14 +118,15 @@ namespace GeoLocationToolTests
             int length = specialCharacters.Length;
 
             //When
-            provider.InsertMatch(specialCharacters, specialCharacters);
+            provider.SaveMatch(specialCharacters, specialCharacters);
             var matches = provider.GetActualMatches(specialCharacters);
 
             //Then
             Assert.AreEqual(1, matches.Count());
-            Assert.IsTrue(matches.First().Near.Length == specialCharacters.Length);
-            Assert.IsTrue(matches.First().Near == specialCharacters);
-            Assert.IsTrue(matches.First().Actual == specialCharacters);
+            var match = matches.Single();
+            Assert.AreEqual(specialCharacters.Length, match.NearMatch.Length);
+            Assert.AreEqual(specialCharacters, match.NearMatch);
+            Assert.AreEqual(specialCharacters, match.Location1);
         }
 
         [TestMethod]
@@ -134,8 +138,8 @@ namespace GeoLocationToolTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.InsertMatch("near", "actual");
-            provider.InsertMatch("near", "actual3");
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("near", "actual3");
             connection.Close();
 
             connection = DBHelper.GetDbConnection(dbLocation);
@@ -146,7 +150,7 @@ namespace GeoLocationToolTests
 
             //Then
             Assert.AreEqual(2, matches.Count());
-            Assert.IsTrue(matches.All(x => x.Near == "near"));
+            Assert.IsTrue(matches.All(x => x.NearMatch == "near"));
         }
 
         [TestMethod]
@@ -158,8 +162,8 @@ namespace GeoLocationToolTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.InsertMatch("near", "actual");
-            provider.InsertMatch("near", "actual3");
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("near", "actual3");
             connection.Close();
             File.Delete(dbLocation);
 
@@ -171,6 +175,42 @@ namespace GeoLocationToolTests
 
             //Then
             Assert.AreEqual(0, matches.Count());
+        }
+
+        [TestMethod]
+        public void InsertAndGetLevel2FromFreshDB()
+        {
+            //Given
+            connection = DBHelper.GetDbConnection(dbLocation);
+            connection.InitializeDB();
+            INearMatchesProvider provider = new NearMatchesProvider(connection);
+
+            //When
+            provider.SaveMatch("near", "location1", "location2");
+            var matches = provider.GetActualMatches("near", "location1");
+
+            //Then
+            Assert.AreEqual(1, matches.Count());
+            var match = matches.Single();
+            Assert.AreEqual("location2", match.Location2);
+        }
+
+        [TestMethod]
+        public void InsertAndGetLevel3FromFreshDB()
+        {
+            //Given
+            connection = DBHelper.GetDbConnection(dbLocation);
+            connection.InitializeDB();
+            INearMatchesProvider provider = new NearMatchesProvider(connection);
+
+            //When
+            provider.SaveMatch("near", "location1", "location2", "location3");
+            var matches = provider.GetActualMatches("near", "location1", "location2");
+
+            //Then
+            Assert.AreEqual(1, matches.Count());
+            var match = matches.Single();
+            Assert.AreEqual("location3", match.Location3);
         }
     }
 }
