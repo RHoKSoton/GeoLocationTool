@@ -18,7 +18,7 @@ namespace GeoLocationTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLoadData());
+            Application.Run(new FormLoadLocationData());
         }
     }
 }

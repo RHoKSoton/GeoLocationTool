@@ -66,13 +66,13 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 13);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 162);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 202);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 415);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 375);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.TabStop = false;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -80,7 +80,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 55);
+            this.label1.Location = new System.Drawing.Point(3, 113);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 17);
             this.label1.TabIndex = 1;
@@ -89,7 +89,7 @@
             // txtProvince
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.txtProvince, 2);
-            this.txtProvince.Location = new System.Drawing.Point(150, 20);
+            this.txtProvince.Location = new System.Drawing.Point(150, 40);
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.ReadOnly = true;
             this.txtProvince.Size = new System.Drawing.Size(260, 22);
@@ -98,7 +98,7 @@
             // 
             // txtBarangay
             // 
-            this.txtBarangay.Location = new System.Drawing.Point(704, 20);
+            this.txtBarangay.Location = new System.Drawing.Point(704, 40);
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.ReadOnly = true;
             this.txtBarangay.Size = new System.Drawing.Size(260, 22);
@@ -107,7 +107,7 @@
             // 
             // txtMunicipality
             // 
-            this.txtMunicipality.Location = new System.Drawing.Point(427, 20);
+            this.txtMunicipality.Location = new System.Drawing.Point(427, 40);
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.ReadOnly = true;
             this.txtMunicipality.Size = new System.Drawing.Size(260, 22);
@@ -119,7 +119,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvinceSuggestion, 2);
             this.cboProvinceSuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvinceSuggestion.FormattingEnabled = true;
-            this.cboProvinceSuggestion.Location = new System.Drawing.Point(150, 96);
+            this.cboProvinceSuggestion.Location = new System.Drawing.Point(150, 78);
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboProvinceSuggestion.TabIndex = 3;
@@ -129,7 +129,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvince, 2);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(150, 58);
+            this.cboProvince.Location = new System.Drawing.Point(150, 116);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(260, 24);
             this.cboProvince.TabIndex = 0;
@@ -139,7 +139,7 @@
             // 
             this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(427, 96);
+            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(427, 78);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipalitySuggestion.TabIndex = 4;
@@ -148,7 +148,7 @@
             // cboMunicipality
             // 
             this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(427, 58);
+            this.cboMunicipality.Location = new System.Drawing.Point(427, 116);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipality.TabIndex = 1;
@@ -158,7 +158,7 @@
             // 
             this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(704, 96);
+            this.cboBarangaySuggestion.Location = new System.Drawing.Point(704, 78);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboBarangaySuggestion.TabIndex = 5;
@@ -166,7 +166,7 @@
             // cboBarangay
             // 
             this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(704, 58);
+            this.cboBarangay.Location = new System.Drawing.Point(704, 116);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
             this.cboBarangay.TabIndex = 2;
@@ -175,7 +175,7 @@
             // 
             this.label2.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
-            this.label2.Location = new System.Drawing.Point(150, 0);
+            this.label2.Location = new System.Drawing.Point(150, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 11;
@@ -184,25 +184,25 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(427, 0);
+            this.label3.Location = new System.Drawing.Point(427, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 17);
+            this.label3.Size = new System.Drawing.Size(42, 17);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Municipality";
+            this.label3.Text = "Town";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(704, 0);
+            this.label4.Location = new System.Drawing.Point(704, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.Size = new System.Drawing.Size(50, 17);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Barangay";
+            this.label4.Text = "Village";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 93);
+            this.label5.Location = new System.Drawing.Point(3, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 17);
             this.label5.TabIndex = 14;
@@ -211,7 +211,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 131);
+            this.label6.Location = new System.Drawing.Point(3, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(118, 17);
             this.label6.TabIndex = 15;
@@ -220,7 +220,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 17);
+            this.label7.Location = new System.Drawing.Point(3, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(94, 17);
             this.label7.TabIndex = 16;
@@ -230,7 +230,7 @@
             // 
             this.btnMainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnMainScreen, 2);
-            this.btnMainScreen.Location = new System.Drawing.Point(1086, 96);
+            this.btnMainScreen.Location = new System.Drawing.Point(1086, 116);
             this.btnMainScreen.Name = "btnMainScreen";
             this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
             this.btnMainScreen.TabIndex = 12;
@@ -240,7 +240,7 @@
             // 
             // btnUseOriginal
             // 
-            this.btnUseOriginal.Location = new System.Drawing.Point(981, 20);
+            this.btnUseOriginal.Location = new System.Drawing.Point(981, 40);
             this.btnUseOriginal.Name = "btnUseOriginal";
             this.btnUseOriginal.Size = new System.Drawing.Size(75, 32);
             this.btnUseOriginal.TabIndex = 7;
@@ -250,7 +250,7 @@
             // 
             // btnUseManual
             // 
-            this.btnUseManual.Location = new System.Drawing.Point(981, 58);
+            this.btnUseManual.Location = new System.Drawing.Point(981, 116);
             this.btnUseManual.Name = "btnUseManual";
             this.btnUseManual.Size = new System.Drawing.Size(75, 32);
             this.btnUseManual.TabIndex = 8;
@@ -260,7 +260,7 @@
             // 
             // btnUseSuggestion
             // 
-            this.btnUseSuggestion.Location = new System.Drawing.Point(981, 96);
+            this.btnUseSuggestion.Location = new System.Drawing.Point(981, 78);
             this.btnUseSuggestion.Name = "btnUseSuggestion";
             this.btnUseSuggestion.Size = new System.Drawing.Size(75, 32);
             this.btnUseSuggestion.TabIndex = 9;
@@ -270,7 +270,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(1086, 20);
+            this.btnNext.Location = new System.Drawing.Point(1086, 40);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 32);
             this.btnNext.TabIndex = 10;
@@ -280,7 +280,7 @@
             // 
             // btnPrev
             // 
-            this.btnPrev.Location = new System.Drawing.Point(1167, 20);
+            this.btnPrev.Location = new System.Drawing.Point(1167, 40);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(75, 32);
             this.btnPrev.TabIndex = 11;
@@ -290,7 +290,7 @@
             // 
             // txtRowCount
             // 
-            this.txtRowCount.Location = new System.Drawing.Point(236, 134);
+            this.txtRowCount.Location = new System.Drawing.Point(236, 174);
             this.txtRowCount.Name = "txtRowCount";
             this.txtRowCount.ReadOnly = true;
             this.txtRowCount.Size = new System.Drawing.Size(154, 22);
@@ -300,7 +300,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(150, 131);
+            this.label8.Location = new System.Drawing.Point(150, 171);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 17);
             this.label8.TabIndex = 26;
@@ -330,40 +330,42 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 10, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtProvince, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnUseManual, 8, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cboMunicipalitySuggestion, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboBarangaySuggestion, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboBarangay, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 10, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtProvince, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtMunicipality, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtBarangay, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnNext, 11, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnPrev, 12, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 4);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtMunicipality, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cboMunicipality, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtBarangay, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cboProvince, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboProvinceSuggestion, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.btnNext, 11, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnPrev, 12, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboProvince, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboMunicipality, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboMunicipalitySuggestion, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboBarangay, 6, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboBarangaySuggestion, 6, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnUseManual, 8, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -378,7 +380,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormManualMatch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Manual Match";
+            this.Text = "Geo Location Tool - Manual Match";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormManualMatch_Load);
             this.Shown += new System.EventHandler(this.FormManualMatch_Shown);

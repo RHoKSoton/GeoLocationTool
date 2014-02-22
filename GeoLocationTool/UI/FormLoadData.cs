@@ -6,28 +6,26 @@ namespace GeoLocationTool.UI
     using System.Data;
     using System.Data.OleDb;
     using System.Drawing;
-    using System.IO;
     using System.Windows.Forms;
-    using DataAccess;
     using Logic;
 
     /// <summary>
-    /// Initial form: displays options and loads the input data into a grid.
+    /// Main form: displays options and loads the input data into a grid.
     /// </summary>
     public partial class FormLoadData : Form
     {
         #region Fields
 
         private readonly InputData inputData;
-
-        private LocationData locationData;
+        private readonly LocationData locationData;
 
         #endregion Fields
 
         #region Constructors
 
-        public FormLoadData()
+        public FormLoadData(LocationData locationData)
         {
+            this.locationData = locationData;
             InitializeComponent();
             inputData = new InputData();
         }
@@ -35,6 +33,11 @@ namespace GeoLocationTool.UI
         #endregion Constructors
 
         #region Methods
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
         private void btnManualMatch_Click(object sender, EventArgs e)
         {
@@ -118,7 +121,7 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void btnReadInputFile_Click(object sender, EventArgs e)
+        private void btnLoadInputFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -129,26 +132,6 @@ namespace GeoLocationTool.UI
                 else
                 {
                     ReadExcelFile();
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("Could not read file.", ex);
-            }
-        }
-
-        private void btnReadLocationFile_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                const string filter = "csv files (*.csv)|*.csv";
-                txtLocationFileName.Clear();
-                txtLocationFileName.Text = GetFileName(filter);
-                var path = txtLocationFileName.Text.Trim();
-                if (!String.IsNullOrWhiteSpace(path))
-                {
-                    locationData =
-                        new LocationData(LocationGadmFile.ReadLocationFile(path));
                 }
             }
             catch (Exception ex)
@@ -207,38 +190,6 @@ namespace GeoLocationTool.UI
             return excelSheetNames;
         }
 
-        /// <summary>
-        /// Gets the name of the file from the user.
-        /// </summary>
-        /// <param name="filter">The filter.</param>
-        /// <returns>The file name and path.</returns>
-        private string GetFileName(string filter)
-        {
-            string fileName = string.Empty;
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory =
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog1.Filter = filter;
-
-            // todo check the filter index values
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                fileName = openFileDialog1.FileName;
-                if (!File.Exists(fileName))
-                {
-                    MessageBox.Show(
-                        "File does not exist:\r\n" + fileName,
-                        "No File",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Stop);
-                }
-            }
-            return fileName;
-        }
-
         private bool OriginalColumnIndicesHaveChanged()
         {
             int loc1ColumnIndex = (int) udProvince.Value - 1;
@@ -259,7 +210,7 @@ namespace GeoLocationTool.UI
         {
             const string filter = "csv files (*.csv)|*.csv";
             txtFileName.Clear();
-            txtFileName.Text = GetFileName(filter);
+            txtFileName.Text = UiHelper.GetFileName(filter);
             var path = txtFileName.Text.Trim();
             if (!String.IsNullOrWhiteSpace(path))
             {
@@ -279,7 +230,7 @@ namespace GeoLocationTool.UI
         {
             const string filter = "excel files (*.xls,*.xlsx)|*.xls*";
             txtFileName.Clear();
-            txtFileName.Text = GetFileName(filter);
+            txtFileName.Text = UiHelper.GetFileName(filter);
             var path = txtFileName.Text.Trim();
 
             // todo provide the user with a list of worksheet names for the selected file
