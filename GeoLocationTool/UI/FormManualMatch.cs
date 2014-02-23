@@ -6,7 +6,6 @@ namespace GeoLocationTool.UI
     using System.Windows.Forms;
     using Logic;
     using GeoLocationTool.DataAccess;
-    using System.Data.Common;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
@@ -17,9 +16,7 @@ namespace GeoLocationTool.UI
         private readonly FuzzyMatch fuzzyMatch;
         private readonly InputData inputData;
         private readonly LocationData locationData;
-        private readonly DbConnection connection;
         private readonly INearMatchesProvider nearMatches;
-        private const string DB_LOCATION = @"GeoLocationTool.sdf";
 
         private int selectedRowIndex;
 
@@ -33,9 +30,7 @@ namespace GeoLocationTool.UI
             this.inputData = inputData;
             this.locationData = locationData;
             fuzzyMatch = new FuzzyMatch(locationData);
-            connection = DBHelper.GetDbConnection(DB_LOCATION);
-            connection.InitializeDB();
-            nearMatches = new NearMatchesProvider(connection);
+            nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
         #endregion Constructors
@@ -369,7 +364,6 @@ namespace GeoLocationTool.UI
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            connection.Close();
             if (disposing && (components != null))
             {
                 components.Dispose();
