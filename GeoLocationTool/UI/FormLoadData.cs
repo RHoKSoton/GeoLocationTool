@@ -129,6 +129,10 @@ namespace GeoLocationTool.UI
                 {
                     ReadCsvFile();
                 }
+                else if (rdoImportTabDelim.Checked)
+                {
+                    ReadTabDelimFile();
+                }
                 else
                 {
                     ReadExcelFile();
@@ -216,6 +220,26 @@ namespace GeoLocationTool.UI
             {
                 const bool isFirstRowHeader = true;
                 inputData.LoadCsvFile(path, isFirstRowHeader);
+                dataGridView1.DataSource = inputData.dt;
+                dataGridView1.AutoSizeColumnsMode =
+                    DataGridViewAutoSizeColumnsMode.Fill;
+                SetColumnStyle();
+            }
+        }
+
+        /// <summary>
+        /// Reads the tab delimited file into the grid and add extra columns for the computed data
+        /// </summary>
+        private void ReadTabDelimFile()
+        {
+            const string filter = "tab delimited files (*.csv)|*.csv";
+            txtFileName.Clear();
+            txtFileName.Text = UiHelper.GetFileName(filter);
+            var path = txtFileName.Text.Trim();
+            if (!String.IsNullOrWhiteSpace(path))
+            {
+                const bool isFirstRowHeader = true;
+                inputData.LoadCsvFile(path, isFirstRowHeader, "\t");
                 dataGridView1.DataSource = inputData.dt;
                 dataGridView1.AutoSizeColumnsMode =
                     DataGridViewAutoSizeColumnsMode.Fill;

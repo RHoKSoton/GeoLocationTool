@@ -1,0 +1,116 @@
+﻿using CsvHelper;
+using GeoLocationTool.DataAccess;
+using GeoLocationTool.Logic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlServerCe;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace GeoLocationToolTests
+{
+    [TestClass]
+    public class CsvTests
+    {
+        [TestMethod]
+        public void LoadGadmCSV()
+        {
+            //Given
+            string csv = @"""PID"",""ID_0"",""ISO"",""NAME_0"",""ID_1"",""NAME_1"",""ID_2"",""NAME_2"",""ID_3"",""NAME_3"",""NL_NAME_3"",""VARNAME_3"",""TYPE_3"",""ENGTYPE_3""" + Environment.NewLine
+                       + @"50863,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",172,""San Jose Norte"","""","""",""Barangay"",""Village""" + Environment.NewLine
+                       + @"50864,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",173,""San Jose Sur"","""","""",""Barangay"",""Village""" + Environment.NewLine;
+            
+            using (var sr = new StringReader(csv))
+            {
+                var csvReader = new CsvReader(sr);
+
+                //When
+                var gadmList = csvReader.GetRecords<Gadm>().ToList();
+
+                //Then
+                Assert.AreEqual(2, gadmList.Count);
+                Assert.AreEqual("Abra", gadmList.First().NAME_1);
+                Assert.AreEqual("Abra", gadmList.Last().NAME_1);
+                Assert.AreEqual("Manabo", gadmList.First().NAME_2);
+                Assert.AreEqual("Manabo", gadmList.Last().NAME_2);
+                Assert.AreEqual("San Jose Norte", gadmList.First().NAME_3);
+                Assert.AreEqual("San Jose Sur", gadmList.Last().NAME_3);
+            }
+        }
+        [TestMethod]
+        public void LoadInputCSV()
+        {
+            //Given
+            string path = Path.GetFullPath(@"input.csv");
+
+            //When
+            var dataTable = InputFile.ReadCsvFile(path, true, ",");
+
+            //Then
+            Assert.AreEqual(2, dataTable.Rows.Count);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
+            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
+            Assert.AreEqual("BO,AC", dataTable.Rows[1][1]);
+        }
+
+        [TestMethod]
+        public void LoadInputCSVJet()
+        {
+            //Given
+            string path = Path.GetFullPath(@"input.csv");
+
+            //When
+            var dataTable = InputFile.ReadCsvFileOld(path, true, null);
+
+            //Then
+            Assert.AreEqual(2, dataTable.Rows.Count);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
+            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
+            Assert.AreEqual("BO,AC", dataTable.Rows[1][1]);
+        }
+
+        [TestMethod]
+        public void LoadInputTabDelim()
+        {
+            //Given
+            string path = Path.GetFullPath(@"inputTabs.csv");
+
+            //When
+            var dataTable = InputFile.ReadCsvFile(path, true, "\t");
+
+            //Then
+            Assert.AreEqual(2, dataTable.Rows.Count);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
+            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
+            Assert.AreEqual("BO\tAC", dataTable.Rows[1][1]);
+        }
+
+        [TestMethod]
+        [Ignore]
+        //JET is reading format from registry or ini file and ignoring the specified format in the connection string.
+        //http://social.microsoft.com/Forums/en-US/9f7d2b67-cea5-4840-96ef-2e12011752d7/read-tabdelimited-flat-file-with-jet-engine?forum=Offtopic
+        //http://stackoverflow.com/questions/4063685/using-oledbconnection-to-read-tab-seperated-file
+        public void LoadInputTabDelimJet()
+        {
+            //Given
+            string path = Path.GetFullPath(@"inputTabs.csv");
+
+            //When
+            var dataTable = InputFile.ReadCsvFileOld(path, true, "TabDelimited");
+
+            //Then
+            Assert.AreEqual(2, dataTable.Rows.Count);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
+            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
+            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
+            Assert.AreEqual("BO\tAC", dataTable.Rows[1][1]);
+        }
+    }
+}

@@ -105,9 +105,9 @@ namespace GeoLocationTool.Logic
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="isFirstRowHeader">if set to <c>true</c> [is first row the header].</param>
-        public void LoadCsvFile(string path, bool isFirstRowHeader)
+        public void LoadCsvFile(string path, bool isFirstRowHeader, string delimiter = ",")
         {
-            dt = InputFile.ReadCsvFile(path, isFirstRowHeader);
+            dt = InputFile.ReadCsvFile(path, isFirstRowHeader, delimiter);
             AddCodeColumns();
             AddLocationColumns();
             SetColumnsAsReadOnly();

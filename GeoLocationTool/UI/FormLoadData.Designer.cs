@@ -340,7 +340,7 @@
             // 
             this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportTabDelim.AutoSize = true;
-            this.rdoImportTabDelim.Enabled = false;
+            this.rdoImportTabDelim.Enabled = true;
             this.rdoImportTabDelim.Location = new System.Drawing.Point(334, 29);
             this.rdoImportTabDelim.Name = "rdoImportTabDelim";
             this.rdoImportTabDelim.Size = new System.Drawing.Size(147, 21);
