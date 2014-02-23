@@ -22,10 +22,19 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormLoadLocationData()
+        public FormLoadLocationData(string[] args = null)
         {
             InitializeComponent();
+            if (args != null && args.Length >= 1)
+            {
+                string locationPath = args[0];
+                txtLocationFileName.Text = locationPath;
+                locationDataTable = InputFile.ReadCsvFile(locationPath, true);
+                dataGridView1.DataSource = locationDataTable;
+                FormatGrid();
+            }
         }
+
 
         #endregion Constructors
 
