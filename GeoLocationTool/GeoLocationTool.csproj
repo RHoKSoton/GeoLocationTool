@@ -56,9 +56,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\ColumnsMappingProvider.cs" />
+    <Compile Include="DataAccess\IColumnsMappingProvider.cs" />
     <Compile Include="DataAccess\DBHelper.cs" />
     <Compile Include="DataAccess\INearMatchesProvider.cs" />
     <Compile Include="DataAccess\NearMatchesProvider.cs" />
+    <Compile Include="Model\LocationColumnsMapping.cs" />
     <Compile Include="Model\Location3NearMatch.cs" />
     <Compile Include="Model\Location2NearMatch.cs" />
     <Compile Include="Model\Location1NearMatch.cs" />

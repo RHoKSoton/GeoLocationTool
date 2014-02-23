@@ -29,26 +29,48 @@ namespace GeoLocationTool.DataAccess
 
         public static void InitializeDB(this DbConnection connection)
         {
-            //Probably not the best way to do it!
-            if (connection.Query<int>(@"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES
-                                        WHERE TABLE_NAME = 'Location3NearMatches'").Single() == 0)
+            if (!connection.TableExists("Location1NearMatches"))
             {
-                connection.Execute(@"CREATE TABLE Location1NearMatches (Id uniqueidentifier PRIMARY KEY,
-                                    Location1 nvarchar(255),
-                                    NearMatch nvarchar(255),
-                                    Weight int)");
-                connection.Execute(@"CREATE TABLE Location2NearMatches (Id uniqueidentifier PRIMARY KEY,
-                                    Location1 nvarchar(255),
-                                    Location2 nvarchar(255),
-                                    NearMatch nvarchar(255),
-                                    Weight int)");
-                connection.Execute(@"CREATE TABLE Location3NearMatches (Id uniqueidentifier PRIMARY KEY,
-                                    Location1 nvarchar(255),
-                                    Location2 nvarchar(255),
-                                    Location3 nvarchar(255),
-                                    NearMatch nvarchar(255),
-                                    Weight int)");
+                connection.Execute(@"CREATE TABLE Location1NearMatches (
+                                        Id uniqueidentifier PRIMARY KEY,
+                                        Location1 nvarchar(255),
+                                        NearMatch nvarchar(255),
+                                        Weight int)");
+                connection.Execute(@"CREATE TABLE Location2NearMatches (
+                                        Id uniqueidentifier PRIMARY KEY,
+                                        Location1 nvarchar(255),
+                                        Location2 nvarchar(255),
+                                        NearMatch nvarchar(255),
+                                        Weight int)");
+                connection.Execute(@"CREATE TABLE Location3NearMatches (
+                                        Id uniqueidentifier PRIMARY KEY,
+                                        Location1 nvarchar(255),
+                                        Location2 nvarchar(255),
+                                        Location3 nvarchar(255),
+                                        NearMatch nvarchar(255),
+                                        Weight int)");
             }
+
+            if (!connection.TableExists("LocationColumnsMapping"))
+            {
+                connection.Execute(@"CREATE TABLE LocationColumnsMapping (
+                                        FileName nvarchar(255) PRIMARY KEY,
+                                        Location1Code int,
+                                        Location1Name int,
+                                        Location1AltName int,
+                                        Location2Code int,
+                                        Location2Name int,
+                                        Location2AltName int,
+                                        Location3Code int,
+                                        Location3Name int,
+                                        Location3AltName int)");
+            }
+        }
+
+        public static bool TableExists(this DbConnection connection, string table)
+        {
+            return connection.Query<int>(@"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES
+                                        WHERE TABLE_NAME = '" + table + "'").Single() > 0;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace GeoLocationTool.UI
     using System.Windows.Forms;
     using DataAccess;
     using Logic;
+    using GeoLocationTool.Model;
 
     /// <summary>
     /// Form to display the location data and enable the user to select the relevant columns
@@ -17,6 +18,7 @@ namespace GeoLocationTool.UI
         #region Fields
 
         private DataTable locationDataTable;
+        private readonly IColumnsMappingProvider columnsMapping;
 
         #endregion Fields
 
@@ -25,6 +27,7 @@ namespace GeoLocationTool.UI
         public FormLoadLocationData(string[] args = null)
         {
             InitializeComponent();
+            columnsMapping = new ColumnsMappingProvider(Program.Connection);
             if (args != null && args.Length >= 1)
             {
                 string locationPath = args[0];
@@ -32,6 +35,20 @@ namespace GeoLocationTool.UI
                 locationDataTable = InputFile.ReadCsvFile(locationPath, true);
                 dataGridView1.DataSource = locationDataTable;
                 FormatGrid();
+                
+                var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(locationPath);
+                if (locationColumnMapping != null)
+                {
+                    udCode1.Value = locationColumnMapping.Location1Code + 1;
+                    udName1.Value = locationColumnMapping.Location1Name + 1;
+                    udAltName1.Value = locationColumnMapping.Location1AltName + 1;
+                    udCode2.Value = locationColumnMapping.Location2Code + 1;
+                    udName2.Value = locationColumnMapping.Location2Name + 1;
+                    udAltName2.Value = locationColumnMapping.Location2AltName + 1;
+                    udCode3.Value = locationColumnMapping.Location3Code + 1;
+                    udName3.Value = locationColumnMapping.Location3Name + 1;
+                    udAltName3.Value = locationColumnMapping.Location3AltName + 1;
+                }
             }
         }
 
@@ -83,6 +100,22 @@ namespace GeoLocationTool.UI
                     int loc3Code = (int) udCode3.Value - 1;
                     int loc3Name = (int) udName3.Value - 1;
                     int loc3AltName = (int) udAltName3.Value - 1;
+
+                    columnsMapping.SaveLocationColumnsMapping(
+                        new LocationColumnsMapping
+                        {
+                            FileName = txtLocationFileName.Text,
+                            Location1Code = loc1Code,
+                            Location1Name = loc1Name,
+                            Location1AltName = loc1AltName,
+                            Location2Code = loc2Code,
+                            Location2Name = loc2Name,
+                            Location2AltName = loc2AltName,
+                            Location3Code = loc3Code,
+                            Location3Name = loc3Name,
+                            Location3AltName = loc3AltName,
+                        }
+                    );
 
                     // create a new list of LocationDataRecords
                     List<Gadm> locationCodeList = new List<Gadm>();
