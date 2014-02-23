@@ -19,27 +19,28 @@ namespace GeoLocationToolTests
         [TestMethod]
         public void LoadGadmCSV()
         {
+            List<Gadm> gadmList;
+
             //Given
             string csv = @"""PID"",""ID_0"",""ISO"",""NAME_0"",""ID_1"",""NAME_1"",""ID_2"",""NAME_2"",""ID_3"",""NAME_3"",""NL_NAME_3"",""VARNAME_3"",""TYPE_3"",""ENGTYPE_3""" + Environment.NewLine
                        + @"50863,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",172,""San Jose Norte"","""","""",""Barangay"",""Village""" + Environment.NewLine
                        + @"50864,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",173,""San Jose Sur"","""","""",""Barangay"",""Village""" + Environment.NewLine;
-            
+
+            //When
             using (var sr = new StringReader(csv))
             {
                 var csvReader = new CsvReader(sr);
-
-                //When
-                var gadmList = csvReader.GetRecords<Gadm>().ToList();
-
-                //Then
-                Assert.AreEqual(2, gadmList.Count);
-                Assert.AreEqual("Abra", gadmList.First().NAME_1);
-                Assert.AreEqual("Abra", gadmList.Last().NAME_1);
-                Assert.AreEqual("Manabo", gadmList.First().NAME_2);
-                Assert.AreEqual("Manabo", gadmList.Last().NAME_2);
-                Assert.AreEqual("San Jose Norte", gadmList.First().NAME_3);
-                Assert.AreEqual("San Jose Sur", gadmList.Last().NAME_3);
+                gadmList = csvReader.GetRecords<Gadm>().ToList();
             }
+
+            //Then
+            Assert.AreEqual(2, gadmList.Count);
+            Assert.AreEqual("Abra", gadmList.First().NAME_1);
+            Assert.AreEqual("Abra", gadmList.Last().NAME_1);
+            Assert.AreEqual("Manabo", gadmList.First().NAME_2);
+            Assert.AreEqual("Manabo", gadmList.Last().NAME_2);
+            Assert.AreEqual("San Jose Norte", gadmList.First().NAME_3);
+            Assert.AreEqual("San Jose Sur", gadmList.Last().NAME_3);
         }
         [TestMethod]
         public void LoadInputCSV()

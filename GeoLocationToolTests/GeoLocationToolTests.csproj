@@ -74,6 +74,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FuzzyStringTests.cs" />
     <Compile Include="CsvTests.cs" />
     <Compile Include="DbIntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
