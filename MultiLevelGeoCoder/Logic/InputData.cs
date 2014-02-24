@@ -1,11 +1,10 @@
-// InputData.cs
+﻿// InputData.cs
 
-namespace GeoLocationTool.Logic
+namespace MultiLevelGeoCoder.Logic
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using DataAccess;
 
     /// <summary>
     /// Holds the input data and added codes
@@ -21,35 +20,39 @@ namespace GeoLocationTool.Logic
         public const string Loc3CodeColumnName = "Code 3";
         public const string Loc3ColumnName = "Location 3";
 
-        public DataTable dt;
-
         #endregion Fields
+
+        #region Constructors
+
+        public InputData(DataTable data)
+        {
+            this.data = data;
+            AddAdditionalColumns();
+            SetColumnsAsReadOnly();
+        }
+
+        #endregion Constructors
 
         #region Properties
 
-        public int OriginalLoc1ColumnIndex { get; set; }
+        public DataTable data { get; set; }
 
-        public int OriginalLoc2ColumnIndex { get; set; }
-
-        public int OriginalLoc3ColumnIndex { get; set; }
+        //public int OriginalLoc1ColumnIndex { get; set; }
+        //public int OriginalLoc2ColumnIndex { get; set; }
+        //public int OriginalLoc3ColumnIndex { get; set; }
+        public ColumnHeaderIndices HeaderIndices { get; set; }
 
         #endregion Properties
 
         #region Methods
 
-        public void AddAdditionalColumns()
-        {
-            AddCodeColumns();
-            AddLocationColumns();
-        }
-
         /// <summary>
-        /// Adds the location codes to the input data records.
+        /// Adds the matched location codes.
         /// </summary>
-        /// <param name="locationData">The location data.</param>
-        public void GetLocationCodes(LocationData locationData)
+        /// <param name="gazetteer">The gazetteer.</param>
+        public void AddMatchedLocationCodes(LocationData gazetteer)
         {
-            foreach (DataRow dataRow in dt.Rows)
+            foreach (DataRow dataRow in data.Rows)
             {
                 //create location, use the added location columns
                 Location location = new Location();
@@ -61,7 +64,7 @@ namespace GeoLocationTool.Logic
                     dataRow[Loc3ColumnName].ToString();
 
                 // get codes
-                locationData.GetLocationCodes(location);
+                gazetteer.GetLocationCodes(location);
 
                 //add codes
                 dataRow[Loc1CodeColumnName] = location.ProvinceCode;
@@ -69,7 +72,7 @@ namespace GeoLocationTool.Logic
                 dataRow[Loc3CodeColumnName] = location.BarangayCode;
                 dataRow.AcceptChanges();
             }
-            dt.AcceptChanges();
+            data.AcceptChanges();
         }
 
         /// <summary>
@@ -79,7 +82,7 @@ namespace GeoLocationTool.Logic
         public DataView GetUnmatchedRecords()
         {
             // only show those records where a location code is null
-            EnumerableRowCollection<DataRow> query = from record in dt.AsEnumerable()
+            EnumerableRowCollection<DataRow> query = from record in data.AsEnumerable()
                 where record.Field<String>(Loc1CodeColumnName) == null ||
                       record.Field<string>(Loc2CodeColumnName) == null ||
                       record.Field<string>(Loc3CodeColumnName) == null
@@ -95,51 +98,15 @@ namespace GeoLocationTool.Logic
         /// </summary>
         public void InitialiseLocationColumns()
         {
-            CopyColumn(OriginalLoc1ColumnIndex, Loc1ColumnName);
-            CopyColumn(OriginalLoc2ColumnIndex, Loc2ColumnName);
-            CopyColumn(OriginalLoc3ColumnIndex, Loc3ColumnName);
+            CopyColumn(HeaderIndices.Admin1, Loc1ColumnName);
+            CopyColumn(HeaderIndices.Admin2, Loc2ColumnName);
+            CopyColumn(HeaderIndices.Admin3, Loc3ColumnName);
         }
 
-        /// <summary>
-        /// Loads the CSV file.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="isFirstRowHeader">if set to <c>true</c> [is first row the header].</param>
-        public void LoadCsvFile(string path, bool isFirstRowHeader, string delimiter = ",")
+        private void AddAdditionalColumns()
         {
-            dt = InputFile.ReadCsvFile(path, isFirstRowHeader, delimiter);
             AddCodeColumns();
             AddLocationColumns();
-            SetColumnsAsReadOnly();
-        }
-
-        /// <summary>
-        /// Loads the excel file.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="worksheetName">Name of the worksheet.</param>
-        public void LoadExcelFile(string path, string worksheetName)
-        {
-            dt = InputFile.ReadExcelFile(path, worksheetName);
-            AddCodeColumns();
-        }
-
-        /// <summary>
-        /// Saves to CSV file.
-        /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        public void SaveToCsvFile(string fileName)
-        {
-            OutputFile.SaveToCsvFile(fileName, dt);
-        }
-
-        /// <summary>
-        /// Saves to excel file.
-        /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        public void SaveToExcelFile(string fileName)
-        {
-            OutputFile.SaveToExcelFile(fileName, dt);
         }
 
         private void AddCodeColumns()
@@ -151,9 +118,9 @@ namespace GeoLocationTool.Logic
 
         private void AddColumn(string columnName)
         {
-            if (!dt.Columns.Contains(columnName))
+            if (!data.Columns.Contains(columnName))
             {
-                dt.Columns.Add(columnName, typeof (String));
+                data.Columns.Add(columnName, typeof (String));
             }
         }
 
@@ -180,7 +147,7 @@ namespace GeoLocationTool.Logic
 
         private void CopyColumn(int sourceColumnIndex, string targetColumnName)
         {
-            foreach (DataRow row in dt.Rows)
+            foreach (DataRow row in data.Rows)
             {
                 row[targetColumnName] = row[sourceColumnIndex];
             }
@@ -190,9 +157,9 @@ namespace GeoLocationTool.Logic
         {
             List<string> addedColumns = AddedColumnNames();
 
-            foreach (DataColumn col in dt.Columns)
+            foreach (DataColumn col in data.Columns)
             {
-                if (! addedColumns.Contains(col.ColumnName))
+                if (!addedColumns.Contains(col.ColumnName))
                 {
                     col.ReadOnly = true;
                 }

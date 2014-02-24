@@ -1,35 +1,29 @@
-// GeoLocationData.cs
+﻿// LocationData.cs
 
-namespace GeoLocationTool.Logic
+namespace MultiLevelGeoCoder.Logic
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using MultiLevelGeoCoder.Logic;
 
     /// <summary>
     /// Holds the location data to match against 
     /// Provides the location codes where there are exact matches
-    /// Provides lists of locations for a level
+    /// Provides lists of locations for a level 
     /// </summary>
     public class LocationData
     {
         #region Fields
 
-        private readonly IEnumerable<Gadm> locationList;
+        private readonly IEnumerable<Gadm> gazzetteerData;
 
         #endregion Fields
 
         #region Constructors
 
-        public LocationData(IEnumerable<Gadm> locationList)
+        public LocationData(IEnumerable<Gadm> gazzetteerData)
         {
-            this.locationList = locationList;
-        }
-
-        public LocationData()
-        {
-            locationList = new List<Gadm>();
+            this.gazzetteerData = gazzetteerData;
         }
 
         #endregion Constructors
@@ -37,7 +31,7 @@ namespace GeoLocationTool.Logic
         #region Methods
 
         /// <summary>
-        /// Gets the location codes for the given location names. Adds them to the given location.
+        /// Gets the location codes for the given location. Adds them to the given location.
         /// </summary>
         /// <param name="location">The location.</param>
         public void GetLocationCodes(Location location)
@@ -66,7 +60,7 @@ namespace GeoLocationTool.Logic
         /// <returns>List of location names</returns>
         public IList<string> Level1LocationNames()
         {
-            var levelList = locationList.Select(l => l.NAME_1);
+            var levelList = gazzetteerData.Select(l => l.NAME_1);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
@@ -77,7 +71,7 @@ namespace GeoLocationTool.Logic
         /// <returns>List of location names.</returns>
         public IList<string> Level2LocationNames(string level1Name)
         {
-            var levelList = locationList
+            var levelList = gazzetteerData
                 .Where(
                     n =>
                         String.Equals(
@@ -97,7 +91,7 @@ namespace GeoLocationTool.Logic
         /// <returns>List of location names.</returns>
         public IList<string> Level3LocationNames(string level1Name, string level2Name)
         {
-            var levelList = locationList
+            var levelList = gazzetteerData
                 .Where(
                     n =>
                         String.Equals(
@@ -115,7 +109,7 @@ namespace GeoLocationTool.Logic
         private Gadm Level1Match(Location location)
         {
             // just match level 1
-            var matchRecords = from record in locationList
+            var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,
@@ -130,7 +124,7 @@ namespace GeoLocationTool.Logic
         private Gadm Level2Match(Location location)
         {
             // must match level 1 and 2
-            var matchRecords = from record in locationList
+            var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,
@@ -149,7 +143,7 @@ namespace GeoLocationTool.Logic
         private Gadm Level3Match(Location location)
         {
             // must match all three levels
-            var matchRecords = from record in locationList
+            var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,

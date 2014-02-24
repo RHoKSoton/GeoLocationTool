@@ -60,7 +60,13 @@
     <Compile Include="DataAccess\IColumnsMappingProvider.cs" />
     <Compile Include="DataAccess\DBHelper.cs" />
     <Compile Include="DataAccess\INearMatchesProvider.cs" />
+    <Compile Include="DataAccess\InputFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DataAccess\NearMatchesProvider.cs" />
+    <Compile Include="Logic\LocationData.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\LocationColumnsMapping.cs" />
     <Compile Include="Model\Location3NearMatch.cs" />
     <Compile Include="Model\Location2NearMatch.cs" />
@@ -87,14 +93,10 @@
     <Compile Include="Logic\FuzzyMatch.cs" />
     <Compile Include="Logic\FuzzyMatchResult.cs" />
     <Compile Include="Logic\Gadm.cs" />
-    <Compile Include="Logic\LocationData.cs" />
-    <Compile Include="DataAccess\InputFile.cs" />
-    <Compile Include="Logic\Location.cs" />
     <Compile Include="DataAccess\LocationGadmFile.cs" />
     <Compile Include="DataAccess\OutputFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Logic\InputData.cs" />
     <Compile Include="UI\UiHelper.cs" />
     <EmbeddedResource Include="UI\FormLoadData.resx">
       <DependentUpon>FormLoadData.cs</DependentUpon>
@@ -127,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MultiLevelGeoCoder\MultiLevelGeoCoder.csproj">
+      <Project>{1A4397AB-1712-4AB0-A589-EC28FE1F876A}</Project>
+      <Name>MultiLevelGeoCoder</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

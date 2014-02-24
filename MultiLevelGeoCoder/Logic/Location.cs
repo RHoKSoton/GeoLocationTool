@@ -1,6 +1,6 @@
 ﻿// Location.cs
 
-namespace GeoLocationTool.Logic
+namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
     /// DTO holding location text and codes
@@ -38,5 +38,7 @@ namespace GeoLocationTool.Logic
         public string ProvinceCode { get; set; }
 
         #endregion Properties
+
+        //todo remove the codes?
     }
 }

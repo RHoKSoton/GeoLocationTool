@@ -6,16 +6,21 @@ namespace GeoLocationTool.UI
     using System.Windows.Forms;
     using Logic;
     using GeoLocationTool.DataAccess;
+    using MultiLevelGeoCoder;
+    using MultiLevelGeoCoder.Logic;
+    using InputData = MultiLevelGeoCoder.Logic.InputData;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
     /// </summary>
     public partial class FormManualMatch : Form
     {
+        private readonly GeoCoder geoCoder;
+
         #region Fields
-        private readonly FuzzyMatch fuzzyMatch;
-        private readonly InputData inputData;
-        private readonly LocationData locationData;
+        private readonly MultiLevelGeoCoder.Logic.FuzzyMatch fuzzyMatch;
+        //private readonly InputData inputData;
+        //private readonly LocationData locationData;
         private readonly INearMatchesProvider nearMatches;
 
         private int selectedRowIndex;
@@ -24,12 +29,20 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormManualMatch(InputData inputData, LocationData locationData)
+        //public FormManualMatch(InputData inputData, LocationData locationData)
+        //{
+        //    InitializeComponent();
+        //    this.inputData = inputData;
+        //    this.locationData = locationData;
+        //    fuzzyMatch = new FuzzyMatch(locationData);
+        //    nearMatches = new NearMatchesProvider(Program.Connection);
+        //}
+
+        public FormManualMatch(GeoCoder geoCoder)
         {
             InitializeComponent();
-            this.inputData = inputData;
-            this.locationData = locationData;
-            fuzzyMatch = new FuzzyMatch(locationData);
+            this.geoCoder = geoCoder;
+            fuzzyMatch = new MultiLevelGeoCoder.Logic.FuzzyMatch(geoCoder.Gazetteer);
             nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
@@ -201,7 +214,7 @@ namespace GeoLocationTool.UI
         private void DisplayBarangayList()
         {
             // based on selected level 1 and 2
-            cboBarangay.DataSource = locationData.Level3LocationNames(
+            cboBarangay.DataSource = geoCoder.Gazetteer.Level3LocationNames(
                 cboProvince.SelectedValue.ToString(),
                 cboMunicipality.SelectedValue.ToString());
         }
@@ -224,7 +237,7 @@ namespace GeoLocationTool.UI
         private void DisplayMunicipalityList()
         {
             // based on selected level 1
-            cboMunicipality.DataSource = locationData.Level2LocationNames(
+            cboMunicipality.DataSource = geoCoder.Gazetteer.Level2LocationNames(
                 cboProvince.SelectedValue.ToString());
         }
 
@@ -244,7 +257,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayProvinceList()
         {
-            cboProvince.DataSource = locationData.Level1LocationNames();
+            cboProvince.DataSource = geoCoder.Gazetteer.Level1LocationNames();
         }
 
         private void DisplayProvinceSuggestions()
@@ -260,26 +273,27 @@ namespace GeoLocationTool.UI
 
         private void DisplaySelectedRecord()
         {
+            ColumnHeaderIndices indices = geoCoder.InputColumnIndices();
             txtProvince.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    inputData.OriginalLoc1ColumnIndex]
+                    indices.Admin1]
                     .Value as
                     string;
             txtMunicipality.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    inputData.OriginalLoc2ColumnIndex]
+                    indices.Admin2]
                     .Value as
                     string;
             txtBarangay.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    inputData.OriginalLoc3ColumnIndex]
+                    indices.Admin3]
                     .Value as
                     string;
         }
 
         private void DisplayUnmatchedRecords()
         {
-            dataGridView1.DataSource = inputData.GetUnmatchedRecords();
+            dataGridView1.DataSource = geoCoder.UnmatchedRecords();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -342,7 +356,7 @@ namespace GeoLocationTool.UI
 
             //get codes using new names
             Location location = new Location(level1, level3, level2);
-            locationData.GetLocationCodes(location);
+            geoCoder.Gazetteer.GetLocationCodes(location);
 
             //display codes
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1CodeColumnName]
