@@ -10,7 +10,7 @@ namespace MultiLevelGeoCoder
     /// <summary>
     /// Service Gateway, all access should be through this class
     /// </summary>
-    public class GeoCoder
+    public class GeoCoder : IGeoCoder
     {
         #region Fields
 
@@ -20,18 +20,18 @@ namespace MultiLevelGeoCoder
 
         #region Constructors
 
-        public GeoCoder(LocationMatcher gazetteer)
+        public GeoCoder(LocationMatcher matcher)
         {
-            Gazetteer = gazetteer;
+            Matcher = matcher;
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public LocationMatcher Gazetteer { get; private set; }
+        public LocationMatcher Matcher { get; private set; }
 
-        public DataTable InputDataTable
+        public DataTable InputRecords
         {
             get
             {
@@ -76,12 +76,12 @@ namespace MultiLevelGeoCoder
 
         public void MatchAll()
         {
-            inputData.AddMatchedLocationCodes(Gazetteer);
+            inputData.AddMatchedLocationCodes(Matcher);
         }
 
         public void SaveToCsvFile(string fileName)
         {
-            FileHelper.SaveToCsvFile(fileName, InputDataTable);
+            FileHelper.SaveToCsvFile(fileName, InputRecords);
         }
 
         public void SetOriginalInputColumns(ColumnHeaderIndices indices)

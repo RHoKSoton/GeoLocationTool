@@ -37,7 +37,7 @@ namespace GeoLocationTool.UI
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
-            fuzzyMatch = new FuzzyMatch(geoCoder.Gazetteer);
+            fuzzyMatch = new FuzzyMatch(geoCoder.Matcher);
             nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
@@ -215,7 +215,7 @@ namespace GeoLocationTool.UI
         private void DisplayBarangayList()
         {
             // based on selected level 1 and 2
-            cboBarangay.DataSource = geoCoder.Gazetteer.Level3LocationNames(
+            cboBarangay.DataSource = geoCoder.Matcher.Level3LocationNames(
                 cboProvince.SelectedValue.ToString(),
                 cboMunicipality.SelectedValue.ToString());
         }
@@ -238,7 +238,7 @@ namespace GeoLocationTool.UI
         private void DisplayMunicipalityList()
         {
             // based on selected level 1
-            cboMunicipality.DataSource = geoCoder.Gazetteer.Level2LocationNames(
+            cboMunicipality.DataSource = geoCoder.Matcher.Level2LocationNames(
                 cboProvince.SelectedValue.ToString());
         }
 
@@ -258,7 +258,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayProvinceList()
         {
-            cboProvince.DataSource = geoCoder.Gazetteer.Level1LocationNames();
+            cboProvince.DataSource = geoCoder.Matcher.Level1LocationNames();
         }
 
         private void DisplayProvinceSuggestions()
@@ -364,7 +364,7 @@ namespace GeoLocationTool.UI
 
             //get codes using new names
             Location location = new Location(level1, level2: level2, level3: level3);
-            geoCoder.Gazetteer.GetLocationCodes(location);
+            geoCoder.Matcher.GetLocationCodes(location);
 
             //display codes
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1CodeColumnName]

@@ -65,14 +65,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Gazetteer == null)
+                if (geoCoder.Matcher == null)
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
                     return;
                 }
 
-                if (geoCoder.InputDataTable == null)
+                if (geoCoder.InputRecords == null)
                 {
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
@@ -93,14 +93,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Gazetteer == null)
+                if (geoCoder.Matcher == null)
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
                     return;
                 }
 
-                if (geoCoder.InputDataTable == null)
+                if (geoCoder.InputRecords == null)
                 {
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
@@ -110,7 +110,7 @@ namespace GeoLocationTool.UI
                 geoCoder.InitialiseLocationColumns();
 
                 geoCoder.MatchAll();
-                dataGridView1.DataSource = geoCoder.InputDataTable;
+                dataGridView1.DataSource = geoCoder.InputRecords;
             }
             catch (Exception ex)
             {
@@ -179,7 +179,7 @@ namespace GeoLocationTool.UI
             if (!String.IsNullOrWhiteSpace(path))
             {
                 geoCoder.LoadInputFileCsv(path);
-                dataGridView1.DataSource = geoCoder.InputDataTable;
+                dataGridView1.DataSource = geoCoder.InputRecords;
                 dataGridView1.AutoSizeColumnsMode =
                     DataGridViewAutoSizeColumnsMode.Fill;
                 SetColumnStyle();
@@ -214,7 +214,7 @@ namespace GeoLocationTool.UI
             if (!String.IsNullOrWhiteSpace(path))
             {
                 geoCoder.LoadInputFileTabDelim(path);
-                dataGridView1.DataSource = geoCoder.InputDataTable;
+                dataGridView1.DataSource = geoCoder.InputRecords;
                 dataGridView1.AutoSizeColumnsMode =
                     DataGridViewAutoSizeColumnsMode.Fill;
                 SetColumnStyle();

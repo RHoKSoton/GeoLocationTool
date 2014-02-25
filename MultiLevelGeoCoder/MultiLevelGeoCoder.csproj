@@ -55,6 +55,7 @@
     <Compile Include="DataAccess\INearMatchesProvider.cs" />
     <Compile Include="DataAccess\FileHelper.cs" />
     <Compile Include="DataAccess\NearMatchesProvider.cs" />
+    <Compile Include="IGeoCoder.cs" />
     <Compile Include="Logic\ColumnHeaderIndices.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />
     <Compile Include="Logic\FuzzyMatchResult.cs" />
