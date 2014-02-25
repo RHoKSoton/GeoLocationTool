@@ -1,10 +1,9 @@
-﻿using GeoLocationTool.Model;
-using System;
-using System.Collections.Generic;
-
-namespace GeoLocationTool.DataAccess
+﻿namespace MultiLevelGeoCoder.DataAccess
 {
-    interface INearMatchesProvider
+    using System.Collections.Generic;
+    using MultiLevelGeoCoder.Model;
+
+    public interface INearMatchesProvider
     {
         IEnumerable<Location1NearMatch> GetActualMatches(string nearMatch);
         IEnumerable<Location2NearMatch> GetActualMatches(string nearMatch, string location1);

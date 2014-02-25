@@ -33,7 +33,10 @@ namespace MultiLevelGeoCoder
 
         public DataTable InputDataTable
         {
-            get { return inputData.data; }
+            get
+            {
+                return inputData!= null ? inputData.data : null;
+            }
         }
 
         #endregion Properties
@@ -42,8 +45,8 @@ namespace MultiLevelGeoCoder
 
         public static GazetteerFile GetGazetteerFile(string path)
         {
-            InputFile inputFile = new InputFile();
-            DataTable dt = inputFile.ReadCsvFile(path);
+            const bool isFirstRowHeader = true;
+            DataTable dt = InputFile.ReadCsvFile(path, isFirstRowHeader);
             return new GazetteerFile(dt);
         }
 
@@ -59,8 +62,8 @@ namespace MultiLevelGeoCoder
 
         public void LoadInputFileCsv(string path)
         {
-            InputFile inputFile = new InputFile();
-            DataTable dt = inputFile.ReadCsvFile(path);
+            const bool isFirstRowHeader = true;
+            DataTable dt = InputFile.ReadCsvFile(path, isFirstRowHeader);
             inputData = new InputData(dt);
         }
 

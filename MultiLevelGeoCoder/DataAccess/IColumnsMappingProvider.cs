@@ -1,10 +1,8 @@
-﻿using GeoLocationTool.Model;
-using System;
-using System.Collections.Generic;
-
-namespace GeoLocationTool.DataAccess
+﻿namespace MultiLevelGeoCoder.DataAccess
 {
-    interface IColumnsMappingProvider
+    using Model;
+
+    public interface IColumnsMappingProvider
     {
         LocationColumnsMapping GetLocationColumnsMapping(string fileName);
         void SaveLocationColumnsMapping(LocationColumnsMapping columnMapping);

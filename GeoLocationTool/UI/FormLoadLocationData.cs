@@ -4,10 +4,10 @@ namespace GeoLocationTool.UI
 {
     using System;
     using System.Windows.Forms;
-    using DataAccess;
-    using Model;
     using MultiLevelGeoCoder;
+    using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
+    using MultiLevelGeoCoder.Model;
 
     /// <summary>
     /// Form to display the  gazetter location data and enable the user to 
@@ -84,7 +84,8 @@ namespace GeoLocationTool.UI
                     {
                         SaveColumnMappings();
 
-                        LocationData gazetteer = new LocationData(gazetteerFile.LocationList);
+                        LocationData gazetteer =
+                            new LocationData(gazetteerFile.LocationList);
 
                         // Load next screen
                         FormLoadData formLoadData = new FormLoadData(gazetteer);

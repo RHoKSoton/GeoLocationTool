@@ -12,11 +12,11 @@ namespace MultiLevelGeoCoder.DataAccess
     /// <summary>
     /// Read the data from file into a dataTable
     /// </summary>
-    internal class InputFile
+    public class InputFile
     {
         #region Methods
 
-        internal static DataTable ReadCsvFileOld(
+        public static DataTable ReadCsvFileOld(
             string path,
             bool isFirstRowHeader,
             string delimiter)
@@ -72,9 +72,10 @@ namespace MultiLevelGeoCoder.DataAccess
         /// Reads the CSV file.
         /// </summary>
         /// <param name="path">The path.</param>
+        /// <param name="isFirstRowHeader">True if first row is a header row</param>
         /// <param name="delimiter">The delimiter.</param>
         /// <returns>A data table</returns>
-        internal DataTable ReadCsvFile(string path, string delimiter = ",")
+        public static DataTable ReadCsvFile(string path, bool isFirstRowHeader, string delimiter = ",")
         {
             {
                 DataTable dataTable = new DataTable();
@@ -88,8 +89,16 @@ namespace MultiLevelGeoCoder.DataAccess
                         {
                             if (dataTable.Columns.Count == 0)
                             {
-                                foreach (var field in csvReader.FieldHeaders)
-                                    dataTable.Columns.Add(field);
+                                if (isFirstRowHeader)
+                                {
+                                    foreach (var field in csvReader.FieldHeaders)
+                                        dataTable.Columns.Add(field);
+                                }
+                                else
+                                {
+                                    for (int j = 0; j < csvReader.FieldHeaders.Length; j++)
+                                        dataTable.Columns.Add((j + 1).ToString());
+                                }
                             }
 
                             DataRow row = dataTable.NewRow();

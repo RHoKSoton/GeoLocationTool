@@ -1,19 +1,18 @@
-﻿using CsvHelper;
-using GeoLocationTool.DataAccess;
-using GeoLocationTool.Logic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlServerCe;
-using System.IO;
-using System.Linq;
-using System.Text;
-using DuoVia.FuzzyStrings;
+﻿// FuzzyStringTests.cs
 
-namespace GeoLocationToolTests
+namespace MultiLevelGeoCoderTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Common;
+    using System.Data.SqlServerCe;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using DuoVia.FuzzyStrings;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class FuzzyStringTests
     {

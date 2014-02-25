@@ -26,7 +26,7 @@ namespace GeoLocationTool.UI
         public FormLoadData(LocationData gazetteer)
         {
             InitializeComponent();
-            geoCoder = new GeoCoder(gazetteer);            
+            geoCoder = new GeoCoder(gazetteer);
         }
 
         #endregion Constructors

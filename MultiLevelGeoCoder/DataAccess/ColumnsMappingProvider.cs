@@ -1,16 +1,14 @@
-﻿using GeoLocationTool.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dapper;
-using System.Data.Common;
-
-namespace GeoLocationTool.DataAccess
+﻿namespace MultiLevelGeoCoder.DataAccess
 {
+    using System.Data.Common;
+    using System.Linq;
+    using Dapper;
+    using Model;
+
     /// <summary>
     /// Get or save Columns Mapping
     /// </summary>
-    internal class ColumnsMappingProvider : IColumnsMappingProvider
+    public class ColumnsMappingProvider : IColumnsMappingProvider
     {
         public DbConnection SqlConnection { get; set; }
 

@@ -4,23 +4,19 @@ namespace GeoLocationTool.UI
 {
     using System;
     using System.Windows.Forms;
-    using Logic;
-    using GeoLocationTool.DataAccess;
     using MultiLevelGeoCoder;
+    using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
-    using InputData = MultiLevelGeoCoder.Logic.InputData;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
     /// </summary>
     public partial class FormManualMatch : Form
     {
-        private readonly GeoCoder geoCoder;
-
         #region Fields
-        private readonly MultiLevelGeoCoder.Logic.FuzzyMatch fuzzyMatch;
-        //private readonly InputData inputData;
-        //private readonly LocationData locationData;
+
+        private readonly FuzzyMatch fuzzyMatch;
+        private readonly GeoCoder geoCoder;
         private readonly INearMatchesProvider nearMatches;
 
         private int selectedRowIndex;
@@ -37,18 +33,30 @@ namespace GeoLocationTool.UI
         //    fuzzyMatch = new FuzzyMatch(locationData);
         //    nearMatches = new NearMatchesProvider(Program.Connection);
         //}
-
         public FormManualMatch(GeoCoder geoCoder)
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
-            fuzzyMatch = new MultiLevelGeoCoder.Logic.FuzzyMatch(geoCoder.Gazetteer);
+            fuzzyMatch = new FuzzyMatch(geoCoder.Gazetteer);
             nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
         #endregion Constructors
 
         #region Methods
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private void btnMainScreen_Click(object sender, EventArgs e)
         {
@@ -132,13 +140,6 @@ namespace GeoLocationTool.UI
                     "Error applying suggested selection to the data.",
                     ex);
             }
-        }
-
-        private void SaveNearMatch(string province, string municipality, string barangay)
-        {
-            nearMatches.SaveMatch(txtProvince.Text, province);
-            nearMatches.SaveMatch(txtMunicipality.Text, province, municipality);
-            nearMatches.SaveMatch(txtBarangay.Text, province, municipality, barangay);
         }
 
         private void cboMunicipalitySuggestion_SelectedIndexChanged(
@@ -337,6 +338,13 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void SaveNearMatch(string province, string municipality, string barangay)
+        {
+            nearMatches.SaveMatch(txtProvince.Text, province);
+            nearMatches.SaveMatch(txtMunicipality.Text, province, municipality);
+            nearMatches.SaveMatch(txtBarangay.Text, province, municipality, barangay);
+        }
+
         private void SetGridDefaults()
         {
             dataGridView1.AllowUserToAddRows = false;
@@ -370,19 +378,6 @@ namespace GeoLocationTool.UI
                 location.BarangayCode;
 
             DisplayUnmatchedRecords();
-        }
-        
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         #endregion Methods

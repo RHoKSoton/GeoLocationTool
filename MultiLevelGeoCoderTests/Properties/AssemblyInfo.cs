@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GeoLocationToolTests")]
+[assembly: AssemblyTitle("MultiLevelGeoCoderTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GeoLocationToolTests")]
+[assembly: AssemblyProduct("MultiLevelGeoCoderTests")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0d5ea125-902f-4472-9974-bef1e75cde59")]
+[assembly: Guid("b18b304c-539f-4733-9d4e-1e42dd8da358")]
 
 // Version information for an assembly consists of the following four values:
 //

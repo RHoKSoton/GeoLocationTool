@@ -1,15 +1,15 @@
-﻿using GeoLocationTool.DataAccess;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlServerCe;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿// DbIntegrationTests.cs
 
-namespace GeoLocationToolTests
+namespace MultiLevelGeoCoderTests
 {
+    using System;
+    using System.Data.Common;
+    using System.Data.SqlServerCe;
+    using System.IO;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MultiLevelGeoCoder.DataAccess;
+
     [TestClass]
     public class DbIntegrationTests
     {
@@ -77,7 +77,7 @@ namespace GeoLocationToolTests
             connection.InitializeDB();
             INearMatchesProvider provider = new NearMatchesProvider(connection);
             string veryLong = new String('a', maxLength);
-            
+
             //When
             provider.SaveMatch(veryLong, veryLong);
             var matches = provider.GetActualMatches(veryLong);
@@ -90,7 +90,7 @@ namespace GeoLocationToolTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SqlCeException))]
+        [ExpectedException(typeof (SqlCeException))]
         public void InsertTooLongMatch()
         {
             //Given
@@ -101,7 +101,7 @@ namespace GeoLocationToolTests
 
             //When
             provider.SaveMatch(tooLong, tooLong);
-    
+
             var matches = provider.GetActualMatches(tooLong);
 
             //Then exception
@@ -114,7 +114,8 @@ namespace GeoLocationToolTests
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
             INearMatchesProvider provider = new NearMatchesProvider(connection);
-            string specialCharacters = "%ùéèôçà六书/六書形声字/形聲字абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+            string specialCharacters =
+                "%ùéèôçà六书/六書形声字/形聲字абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
             int length = specialCharacters.Length;
 
             //When

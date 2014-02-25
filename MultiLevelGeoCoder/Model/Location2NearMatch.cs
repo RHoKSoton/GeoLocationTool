@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace GeoLocationTool.Model
+﻿namespace MultiLevelGeoCoder.Model
 {
-    internal class Location2NearMatch
+    using System;
+
+    public class Location2NearMatch
     {
         public Guid MatchId { get; set; }
         public string NearMatch { get; set; }

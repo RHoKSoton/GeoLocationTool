@@ -33,11 +33,15 @@
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.2.2\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.13\lib\net40\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DuoVia.FuzzyStrings">
       <HintPath>..\packages\DuoVia.FuzzyStrings.1.0.0\lib\net40\DuoVia.FuzzyStrings.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\ColumnsMappingProvider.cs" />
+    <Compile Include="DataAccess\DBHelper.cs" />
+    <Compile Include="DataAccess\IColumnsMappingProvider.cs" />
+    <Compile Include="DataAccess\INearMatchesProvider.cs" />
     <Compile Include="DataAccess\InputFile.cs" />
+    <Compile Include="DataAccess\NearMatchesProvider.cs" />
     <Compile Include="DataAccess\OutputFile.cs" />
     <Compile Include="Logic\ColumnHeaderIndices.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />
@@ -56,6 +65,10 @@
     <Compile Include="GeoCoder.cs" />
     <Compile Include="Logic\Gadm.cs" />
     <Compile Include="Logic\Location.cs" />
+    <Compile Include="Model\Location1NearMatch.cs" />
+    <Compile Include="Model\Location2NearMatch.cs" />
+    <Compile Include="Model\Location3NearMatch.cs" />
+    <Compile Include="Model\LocationColumnsMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

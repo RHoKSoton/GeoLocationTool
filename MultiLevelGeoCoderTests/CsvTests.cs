@@ -1,18 +1,15 @@
-﻿using CsvHelper;
-using GeoLocationTool.DataAccess;
-using GeoLocationTool.Logic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlServerCe;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace GeoLocationToolTests
+﻿
+namespace MultiLevelGeoCoderTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using CsvHelper;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MultiLevelGeoCoder.Logic;
+    using MultiLevelGeoCoder.DataAccess;
+
     [TestClass]
     public class CsvTests
     {

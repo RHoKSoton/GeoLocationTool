@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace GeoLocationTool.Model
+﻿namespace MultiLevelGeoCoder.Model
 {
-    internal class LocationColumnsMapping
+    public class LocationColumnsMapping
     {
         public string FileName { get; set; }
         public int Location1Code { get; set; }

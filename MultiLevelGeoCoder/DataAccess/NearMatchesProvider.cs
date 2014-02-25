@@ -1,16 +1,16 @@
-﻿using GeoLocationTool.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dapper;
-using System.Data.Common;
-
-namespace GeoLocationTool.DataAccess
+﻿namespace MultiLevelGeoCoder.DataAccess
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Common;
+    using System.Linq;
+    using Dapper;
+    using MultiLevelGeoCoder.Model;
+
     /// <summary>
     /// Get or save NearMatches
     /// </summary>
-    internal class NearMatchesProvider : INearMatchesProvider
+    public class NearMatchesProvider : INearMatchesProvider
     {
         public DbConnection SqlConnection { get; set; }
 

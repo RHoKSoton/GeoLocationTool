@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace GeoLocationTool
 {
-    using GeoLocationTool.DataAccess;
+    using MultiLevelGeoCoder.DataAccess;
     using System.Data.Common;
     using UI;
 

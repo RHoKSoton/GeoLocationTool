@@ -1,6 +1,6 @@
 // FuzzyMatch.cs
 
-namespace GeoLocationTool.Logic
+namespace MultiLevelGeoCoder.Logic
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,7 +9,7 @@ namespace GeoLocationTool.Logic
     /// <summary>
     /// Provides suggested matches using fuzzy matching
     /// </summary>
-    internal class FuzzyMatch
+    public class FuzzyMatch
     {
         #region Fields
 

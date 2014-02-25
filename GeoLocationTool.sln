@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoLocationTool", "GeoLocationTool\GeoLocationTool.csproj", "{0E227640-7745-477C-A8AE-F0FFBBAF620A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoLocationToolTests", "GeoLocationToolTests\GeoLocationToolTests.csproj", "{4E33460F-603D-4344-9D75-9EF2A541E057}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelGeoCoder", "MultiLevelGeoCoder\MultiLevelGeoCoder.csproj", "{1A4397AB-1712-4AB0-A589-EC28FE1F876A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiLevelGeoCoderTests", "MultiLevelGeoCoderTests\MultiLevelGeoCoderTests.csproj", "{C37A3734-DF34-4114-947C-B5EB7802E6B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,14 @@ Global
 		{0E227640-7745-477C-A8AE-F0FFBBAF620A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E227640-7745-477C-A8AE-F0FFBBAF620A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E227640-7745-477C-A8AE-F0FFBBAF620A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E33460F-603D-4344-9D75-9EF2A541E057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E33460F-603D-4344-9D75-9EF2A541E057}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E33460F-603D-4344-9D75-9EF2A541E057}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E33460F-603D-4344-9D75-9EF2A541E057}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A4397AB-1712-4AB0-A589-EC28FE1F876A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A4397AB-1712-4AB0-A589-EC28FE1F876A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A4397AB-1712-4AB0-A589-EC28FE1F876A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A4397AB-1712-4AB0-A589-EC28FE1F876A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37A3734-DF34-4114-947C-B5EB7802E6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37A3734-DF34-4114-947C-B5EB7802E6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37A3734-DF34-4114-947C-B5EB7802E6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37A3734-DF34-4114-947C-B5EB7802E6B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

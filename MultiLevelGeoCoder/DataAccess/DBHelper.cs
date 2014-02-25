@@ -1,17 +1,15 @@
-﻿using System;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.SqlServerCe;
-using System.IO;
-using System.Linq;
-using Dapper;
-
-namespace GeoLocationTool.DataAccess
+﻿namespace MultiLevelGeoCoder.DataAccess
 {
+    using System.Data.Common;
+    using System.Data.SqlServerCe;
+    using System.IO;
+    using System.Linq;
+    using Dapper;
+
     /// <summary>
     /// Helper class to make it easy to load or create the database
     /// </summary>
-    internal static class DBHelper
+    public static class DBHelper
     {
         public static SqlCeConnection GetDbConnection(string dbLocation)
         {
