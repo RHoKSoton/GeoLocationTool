@@ -9,7 +9,7 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Holds the location data to match against 
     /// Provides the location codes where there are exact matches
-    /// Provides lists of locations for a level 
+    /// Provides lists of location names for each level 
     /// </summary>
     public class LocationData
     {
@@ -36,7 +36,12 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="location">The location.</param>
         public void GetLocationCodes(Location location)
         {
+            // todo return a CodedLocation
             Location location1 = location;
+            location1.MunicipalityCode = null;
+            location1.ProvinceCode = null;
+            location1.BarangayCode = null;
+
             var level1 = Level1Match(location1);
             if (level1 != null)
             {
@@ -44,11 +49,11 @@ namespace MultiLevelGeoCoder.Logic
                 Gadm level2 = Level2Match(location1);
                 if (level2 != null)
                 {
-                    location.MunicipalityCode = level1.ID_2;
+                    location1.MunicipalityCode = level1.ID_2;
                     Gadm level3 = Level3Match(location1);
                     if (level3 != null)
                     {
-                        location.BarangayCode = level3.ID_3;
+                        location1.BarangayCode = level3.ID_3;
                     }
                 }
             }

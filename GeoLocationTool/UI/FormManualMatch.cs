@@ -363,7 +363,7 @@ namespace GeoLocationTool.UI
                 level3;
 
             //get codes using new names
-            Location location = new Location(level1, level3, level2);
+            Location location = new Location(level1, municipality: level2, barangay: level3);
             geoCoder.Gazetteer.GetLocationCodes(location);
 
             //display codes

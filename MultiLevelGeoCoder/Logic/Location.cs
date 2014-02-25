@@ -9,7 +9,7 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Constructors
 
-        public Location(string province, string barangay, string municipality)
+        public Location(string province, string municipality = "", string barangay = "")
         {
             Province = province;
             Barangay = barangay;
@@ -20,6 +20,7 @@ namespace MultiLevelGeoCoder.Logic
         {
 
         }
+      
 
         #endregion Constructors
 
