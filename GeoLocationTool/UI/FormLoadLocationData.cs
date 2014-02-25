@@ -19,7 +19,7 @@ namespace GeoLocationTool.UI
 
         private readonly IColumnsMappingProvider columnsMapping;
 
-        private GazetteerFile gazetteerFile;
+        private GazetteerData gazetteerData;
 
         #endregion Fields
 
@@ -33,8 +33,8 @@ namespace GeoLocationTool.UI
             {
                 string path = args[0];
                 txtLocationFileName.Text = path;
-                gazetteerFile = GeoCoder.GetGazetteerFile(path);
-                dataGridView1.DataSource = gazetteerFile.Data;
+                gazetteerData = GeoCoder.GetGazetteerFile(path);
+                dataGridView1.DataSource = gazetteerData.Data;
                 FormatGrid();
 
                 DisplaySavedColumnHeaderIndices(path);
@@ -55,8 +55,8 @@ namespace GeoLocationTool.UI
                 var path = txtLocationFileName.Text.Trim();
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    gazetteerFile = GeoCoder.GetGazetteerFile(path);
-                    dataGridView1.DataSource = gazetteerFile.Data;
+                    gazetteerData = GeoCoder.GetGazetteerFile(path);
+                    dataGridView1.DataSource = gazetteerData.Data;
                     FormatGrid();
                 }
             }
@@ -70,7 +70,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (gazetteerFile == null)
+                if (gazetteerData == null)
                 {
                     UiHelper.DisplayMessage(
                         "Please load the gazetteer data.",
@@ -80,12 +80,12 @@ namespace GeoLocationTool.UI
                 {
                     SetColumnIndices();
 
-                    if (gazetteerFile.ColumnIndicesValid())
+                    if (gazetteerData.ColumnIndicesValid())
                     {
                         SaveColumnMappings();
 
-                        LocationData gazetteer =
-                            new LocationData(gazetteerFile.LocationList);
+                        LocationMatcher gazetteer =
+                            new LocationMatcher(gazetteerData.LocationList);
 
                         // Load next screen
                         FormLoadData formLoadData = new FormLoadData(gazetteer);
@@ -168,17 +168,17 @@ namespace GeoLocationTool.UI
 
         private void SetColumnIndices()
         {
-            gazetteerFile.Admin1Code = (int) udCode1.Value - 1;
-            gazetteerFile.Admin1Name = (int) udName1.Value - 1;
-            gazetteerFile.Admin1AltName = (int) udAltName1.Value - 1;
+            gazetteerData.Admin1Code = (int) udCode1.Value - 1;
+            gazetteerData.Admin1Name = (int) udName1.Value - 1;
+            gazetteerData.Admin1AltName = (int) udAltName1.Value - 1;
 
-            gazetteerFile.Admin2Code = (int) udCode2.Value - 1;
-            gazetteerFile.Admin2Name = (int) udName2.Value - 1;
-            gazetteerFile.Admin2AltName = (int) udAltName2.Value - 1;
+            gazetteerData.Admin2Code = (int) udCode2.Value - 1;
+            gazetteerData.Admin2Name = (int) udName2.Value - 1;
+            gazetteerData.Admin2AltName = (int) udAltName2.Value - 1;
 
-            gazetteerFile.Admin3Code = (int) udCode3.Value - 1;
-            gazetteerFile.Admin3Name = (int) udName3.Value - 1;
-            gazetteerFile.Admin3AltName = (int) udAltName3.Value - 1;
+            gazetteerData.Admin3Code = (int) udCode3.Value - 1;
+            gazetteerData.Admin3Name = (int) udName3.Value - 1;
+            gazetteerData.Admin3AltName = (int) udAltName3.Value - 1;
         }
 
         #endregion Methods

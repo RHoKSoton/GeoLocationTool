@@ -1,4 +1,4 @@
-﻿// GazetteerFile.cs
+﻿// GazetteerData.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
@@ -9,11 +9,11 @@ namespace MultiLevelGeoCoder.Logic
     /// Holds all the gazetter data, and details of the columns to be used.
     /// Provides a subset of the data that just contains the required data.
     /// </summary>
-    public class GazetteerFile
+    public class GazetteerData
     {
         #region Constructors
 
-        public GazetteerFile(DataTable data)
+        public GazetteerData(DataTable data)
         {
             Data = data;
         }

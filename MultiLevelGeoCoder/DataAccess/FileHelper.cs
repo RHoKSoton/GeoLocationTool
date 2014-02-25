@@ -1,18 +1,20 @@
-﻿// InputFile.cs
+﻿// FileHelper.cs
 
 namespace MultiLevelGeoCoder.DataAccess
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.OleDb;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using CsvHelper;
 
     /// <summary>
-    /// Read the data from file into a dataTable
+    /// Helper class to read the data to and from file.
     /// </summary>
-    public class InputFile
+    public class FileHelper
     {
         #region Methods
 
@@ -75,7 +77,10 @@ namespace MultiLevelGeoCoder.DataAccess
         /// <param name="isFirstRowHeader">True if first row is a header row</param>
         /// <param name="delimiter">The delimiter.</param>
         /// <returns>A data table</returns>
-        public static DataTable ReadCsvFile(string path, bool isFirstRowHeader, string delimiter = ",")
+        public static DataTable ReadCsvFile(
+            string path,
+            bool isFirstRowHeader,
+            string delimiter = ",")
         {
             {
                 DataTable dataTable = new DataTable();
@@ -96,7 +101,9 @@ namespace MultiLevelGeoCoder.DataAccess
                                 }
                                 else
                                 {
-                                    for (int j = 0; j < csvReader.FieldHeaders.Length; j++)
+                                    for (int j = 0;
+                                        j < csvReader.FieldHeaders.Length;
+                                        j++)
                                         dataTable.Columns.Add((j + 1).ToString());
                                 }
                             }
@@ -121,5 +128,47 @@ namespace MultiLevelGeoCoder.DataAccess
         }
 
         #endregion Methods
+
+        internal static void SaveToCsvFile(string fileName, DataTable data)
+        {
+            var lines = new List<string>();
+
+            string[] columnNames = data.Columns.Cast<DataColumn>().
+                Select(column => column.ColumnName).
+                ToArray();
+
+            var header = String.Join(",", columnNames);
+            lines.Add(header);
+
+            var valueLines = EnumerableRowCollectionExtensions.Select(
+                data.AsEnumerable(),
+                row => String.Join(",", EscapeQuotes(row.ItemArray)));
+
+            lines.AddRange(valueLines);
+
+            File.WriteAllLines(fileName, lines);
+        }
+
+        private static string[] EscapeQuotes(IList<object> itemArray)
+        {
+            // todo only quote the fields that need it
+            string[] escaped = new string[itemArray.Count];
+
+            for (int i = 0; i < itemArray.Count; i++)
+            {
+                escaped[i] = "\"" + itemArray[i] + "\"";
+            }
+
+            return escaped;
+        }
+
+        //internal static void SaveToExcelFile(string fileName, DataTable data)
+        //{
+        //    XLWorkbook wb = new XLWorkbook();
+        //    //todo use the table name if it has one
+        //    data.TableName = "Sheet1";
+        //    wb.Worksheets.Add(data);
+        //    wb.SaveAs(fileName);
+        //}
     }
 }

@@ -20,7 +20,7 @@ namespace MultiLevelGeoCoder
 
         #region Constructors
 
-        public GeoCoder(LocationData gazetteer)
+        public GeoCoder(LocationMatcher gazetteer)
         {
             Gazetteer = gazetteer;
         }
@@ -29,7 +29,7 @@ namespace MultiLevelGeoCoder
 
         #region Properties
 
-        public LocationData Gazetteer { get; private set; }
+        public LocationMatcher Gazetteer { get; private set; }
 
         public DataTable InputDataTable
         {
@@ -43,11 +43,11 @@ namespace MultiLevelGeoCoder
 
         #region Methods
 
-        public static GazetteerFile GetGazetteerFile(string path)
+        public static GazetteerData GetGazetteerFile(string path)
         {
             const bool isFirstRowHeader = true;
-            DataTable dt = InputFile.ReadCsvFile(path, isFirstRowHeader);
-            return new GazetteerFile(dt);
+            DataTable dt = FileHelper.ReadCsvFile(path, isFirstRowHeader);
+            return new GazetteerData(dt);
         }
 
         public ColumnHeaderIndices InputColumnIndices()
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder
         public void LoadInputFileCsv(string path)
         {
             const bool isFirstRowHeader = true;
-            DataTable dt = InputFile.ReadCsvFile(path, isFirstRowHeader);
+            DataTable dt = FileHelper.ReadCsvFile(path, isFirstRowHeader);
             inputData = new InputData(dt);
         }
 
@@ -81,7 +81,7 @@ namespace MultiLevelGeoCoder
 
         public void SaveToCsvFile(string fileName)
         {
-            OutputFile.SaveToCsvFile(fileName, InputDataTable);
+            FileHelper.SaveToCsvFile(fileName, InputDataTable);
         }
 
         public void SetOriginalInputColumns(ColumnHeaderIndices indices)

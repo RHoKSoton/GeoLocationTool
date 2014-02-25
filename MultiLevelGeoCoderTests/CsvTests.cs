@@ -46,7 +46,7 @@ namespace MultiLevelGeoCoderTests
             string path = Path.GetFullPath(@"input.csv");
 
             //When
-            var dataTable = InputFile.ReadCsvFile(path, true, ",");
+            var dataTable = FileHelper.ReadCsvFile(path, true, ",");
 
             //Then
             Assert.AreEqual(2, dataTable.Rows.Count);
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoderTests
             string path = Path.GetFullPath(@"input.csv");
 
             //When
-            var dataTable = InputFile.ReadCsvFileOld(path, true, null);
+            var dataTable = FileHelper.ReadCsvFileOld(path, true, null);
 
             //Then
             Assert.AreEqual(2, dataTable.Rows.Count);
@@ -80,7 +80,7 @@ namespace MultiLevelGeoCoderTests
             string path = Path.GetFullPath(@"inputTabs.csv");
 
             //When
-            var dataTable = InputFile.ReadCsvFile(path, true, "\t");
+            var dataTable = FileHelper.ReadCsvFile(path, true, "\t");
 
             //Then
             Assert.AreEqual(2, dataTable.Rows.Count);
@@ -101,7 +101,7 @@ namespace MultiLevelGeoCoderTests
             string path = Path.GetFullPath(@"inputTabs.csv");
 
             //When
-            var dataTable = InputFile.ReadCsvFileOld(path, true, "TabDelimited");
+            var dataTable = FileHelper.ReadCsvFileOld(path, true, "TabDelimited");
 
             //Then
             Assert.AreEqual(2, dataTable.Rows.Count);

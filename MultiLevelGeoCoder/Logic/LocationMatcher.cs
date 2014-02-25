@@ -7,11 +7,11 @@ namespace MultiLevelGeoCoder.Logic
     using System.Linq;
 
     /// <summary>
-    /// Holds the location data to match against 
+    /// Holds the list of location names/codes to match against
     /// Provides the location codes where there are exact matches
     /// Provides lists of location names for each level 
     /// </summary>
-    public class LocationData
+    public class LocationMatcher
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Constructors
 
-        public LocationData(IEnumerable<Gadm> gazzetteerData)
+        public LocationMatcher(IEnumerable<Gadm> gazzetteerData)
         {
             this.gazzetteerData = gazzetteerData;
         }
@@ -38,22 +38,22 @@ namespace MultiLevelGeoCoder.Logic
         {
             // todo return a CodedLocation
             Location location1 = location;
-            location1.MunicipalityCode = null;
-            location1.ProvinceCode = null;
-            location1.BarangayCode = null;
+            location1.Level2Code = null;
+            location1.Level1Code = null;
+            location1.Level3Code = null;
 
             var level1 = Level1Match(location1);
             if (level1 != null)
             {
-                location.ProvinceCode = level1.ID_1;
+                location.Level1Code = level1.ID_1;
                 Gadm level2 = Level2Match(location1);
                 if (level2 != null)
                 {
-                    location1.MunicipalityCode = level1.ID_2;
+                    location1.Level2Code = level1.ID_2;
                     Gadm level3 = Level3Match(location1);
                     if (level3 != null)
                     {
-                        location1.BarangayCode = level3.ID_3;
+                        location1.Level3Code = level3.ID_3;
                     }
                 }
             }
@@ -118,7 +118,7 @@ namespace MultiLevelGeoCoder.Logic
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Province.Trim(),
+                        location.Level1.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
@@ -133,11 +133,11 @@ namespace MultiLevelGeoCoder.Logic
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Province.Trim(),
+                        location.Level1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_2,
-                        location.Municipality.Trim(),
+                        location.Level2.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
@@ -152,15 +152,15 @@ namespace MultiLevelGeoCoder.Logic
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Province.Trim(),
+                        location.Level1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_2,
-                        location.Municipality.Trim(),
+                        location.Level2.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_3,
-                        location.Barangay.Trim(),
+                        location.Level3.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 

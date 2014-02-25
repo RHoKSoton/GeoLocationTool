@@ -1,4 +1,4 @@
-﻿// LocationCoderTests.cs
+﻿// LocationMatcherTests.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -7,11 +7,11 @@ namespace MultiLevelGeoCoderTests
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
-    /// Excercises the LocationData class, in particular it tests that the 
+    /// Excercises the LocationMatcher class, in particular it tests that the 
     /// correct codes are matched to a given location
     /// </summary>
     [TestClass]
-    public class LocationDataTests
+    public class LocationMatcherTests
     {
         #region Fields
 
@@ -53,16 +53,16 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // no codes added
-            Assert.AreEqual(code1, location.ProvinceCode);
-            Assert.AreEqual(code2, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(code1, location.Level1Code);
+            Assert.AreEqual(code2, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
@@ -90,16 +90,16 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // no codes added
-            Assert.AreEqual(code1, location.ProvinceCode);
-            Assert.AreEqual(null, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(code1, location.Level1Code);
+            Assert.AreEqual(null, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
@@ -128,16 +128,16 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // correct codes added
-            Assert.AreEqual(code1, location.ProvinceCode);
-            Assert.AreEqual(code2, location.MunicipalityCode);
-            Assert.AreEqual(code3, location.BarangayCode);
+            Assert.AreEqual(code1, location.Level1Code);
+            Assert.AreEqual(code2, location.Level2Code);
+            Assert.AreEqual(code3, location.Level3Code);
         }
 
         /// <summary>
@@ -166,16 +166,16 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // correct codes added
-            Assert.AreEqual(code1, location.ProvinceCode);
-            Assert.AreEqual(code2, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(code1, location.Level1Code);
+            Assert.AreEqual(code2, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
@@ -204,16 +204,16 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // correct codes added
-            Assert.AreEqual(code1, location.ProvinceCode);
-            Assert.AreEqual(null, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(code1, location.Level1Code);
+            Assert.AreEqual(null, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
@@ -241,16 +241,16 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // no codes added
-            Assert.AreEqual(null, location.ProvinceCode);
-            Assert.AreEqual(null, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(null, location.Level1Code);
+            Assert.AreEqual(null, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
@@ -264,9 +264,9 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // create location input, level 1, 2  and 3
             Location location = new Location("SomeName", name2, name3);
-            location.ProvinceCode = "1";
-            location.MunicipalityCode = "22";
-            location.BarangayCode = "150";
+            location.Level1Code = "1";
+            location.Level2Code = "22";
+            location.Level3Code = "150";
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -281,16 +281,16 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationData locationData = new LocationData(gazzetteerData);
+            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
 
             // Act
-            locationData.GetLocationCodes(location);
+            locationMatcher.GetLocationCodes(location);
 
             // Assert
             // no codes added
-            Assert.AreEqual(null, location.ProvinceCode);
-            Assert.AreEqual(null, location.MunicipalityCode);
-            Assert.AreEqual(null, location.BarangayCode);
+            Assert.AreEqual(null, location.Level1Code);
+            Assert.AreEqual(null, location.Level2Code);
+            Assert.AreEqual(null, location.Level3Code);
         }
 
         private static IList<Gadm> CreateGazetteerData()

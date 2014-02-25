@@ -50,26 +50,26 @@ namespace MultiLevelGeoCoder.Logic
         /// Adds the matched location codes.
         /// </summary>
         /// <param name="gazetteer">The gazetteer.</param>
-        public void AddMatchedLocationCodes(LocationData gazetteer)
+        public void AddMatchedLocationCodes(LocationMatcher gazetteer)
         {
             foreach (DataRow dataRow in data.Rows)
             {
                 //create location, use the added location columns
                 Location location = new Location();
-                location.Province =
+                location.Level1 =
                     dataRow[Loc1ColumnName].ToString();
-                location.Municipality =
+                location.Level2 =
                     dataRow[Loc2ColumnName].ToString();
-                location.Barangay =
+                location.Level3 =
                     dataRow[Loc3ColumnName].ToString();
 
                 // get codes
                 gazetteer.GetLocationCodes(location);
 
                 //add codes
-                dataRow[Loc1CodeColumnName] = location.ProvinceCode;
-                dataRow[Loc2CodeColumnName] = location.MunicipalityCode;
-                dataRow[Loc3CodeColumnName] = location.BarangayCode;
+                dataRow[Loc1CodeColumnName] = location.Level1Code;
+                dataRow[Loc2CodeColumnName] = location.Level2Code;
+                dataRow[Loc3CodeColumnName] = location.Level3Code;
                 dataRow.AcceptChanges();
             }
             data.AcceptChanges();

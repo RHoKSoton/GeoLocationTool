@@ -3,17 +3,18 @@
 namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
-    /// DTO holding location text and codes
+    /// DTO holding location names and codes
     /// </summary>
     public class Location
     {
+        //todo remove the codes to a seperate class?
         #region Constructors
 
-        public Location(string province, string municipality = "", string barangay = "")
+        public Location(string level1, string level2 = "", string level3 = "")
         {
-            Province = province;
-            Barangay = barangay;
-            Municipality = municipality;
+            Level1 = level1;
+            Level2 = level2;
+            Level3 = level3;
         }
 
         public Location()
@@ -21,25 +22,24 @@ namespace MultiLevelGeoCoder.Logic
 
         }
       
-
         #endregion Constructors
 
         #region Properties
 
-        public string Barangay { get; set; }
+        public string Level3 { get; set; }
 
-        public string BarangayCode { get; set; }
+        public string Level3Code { get; set; }
 
-        public string Municipality { get; set; }
+        public string Level2 { get; set; }
 
-        public string MunicipalityCode { get; set; }
+        public string Level2Code { get; set; }
 
-        public string Province { get; set; }
+        public string Level1 { get; set; }
 
-        public string ProvinceCode { get; set; }
+        public string Level1Code { get; set; }
 
         #endregion Properties
 
-        //todo remove the codes?
+     
     }
 }

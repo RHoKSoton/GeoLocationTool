@@ -23,7 +23,7 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormLoadData(LocationData gazetteer)
+        public FormLoadData(LocationMatcher gazetteer)
         {
             InitializeComponent();
             geoCoder = new GeoCoder(gazetteer);

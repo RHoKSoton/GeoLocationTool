@@ -363,19 +363,19 @@ namespace GeoLocationTool.UI
                 level3;
 
             //get codes using new names
-            Location location = new Location(level1, municipality: level2, barangay: level3);
+            Location location = new Location(level1, level2: level2, level3: level3);
             geoCoder.Gazetteer.GetLocationCodes(location);
 
             //display codes
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1CodeColumnName]
                 .Value =
-                location.ProvinceCode;
+                location.Level1Code;
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc2CodeColumnName]
                 .Value =
-                location.MunicipalityCode;
+                location.Level2Code;
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc3CodeColumnName]
                 .Value =
-                location.BarangayCode;
+                location.Level3Code;
 
             DisplayUnmatchedRecords();
         }
