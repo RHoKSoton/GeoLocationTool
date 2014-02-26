@@ -3,6 +3,7 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.Linq;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
@@ -226,13 +227,14 @@ namespace GeoLocationTool.UI
             string level1 = cboProvinceSuggestion.SelectedValue.ToString();
             string level2 = cboMunicipalitySuggestion.SelectedValue.ToString();
             string level3 = txtBarangay.Text.Trim();
+            var barangayNearMatches = nearMatches.GetActualMatches(level3, level1, level2).Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
 
             cboBarangaySuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboBarangaySuggestion.ValueMember = "Location";
 
             cboBarangaySuggestion.DataSource =
-                fuzzyMatch.GetLevel3Suggestions(level1, level2, level3);
+                barangayNearMatches.Concat(fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
         private void DisplayMunicipalityList()
@@ -247,13 +249,14 @@ namespace GeoLocationTool.UI
             //based on the suggested level 1 and the original level2
             string level1 = cboProvinceSuggestion.SelectedValue.ToString();
             string level2 = txtMunicipality.Text.Trim();
+            var municipalityNearMatches = nearMatches.GetActualMatches(level2, level1).Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
 
             cboMunicipalitySuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboMunicipalitySuggestion.ValueMember = "Location";
 
             cboMunicipalitySuggestion.DataSource =
-                fuzzyMatch.GetLevel2Suggestions(level1, level2);
+                municipalityNearMatches.Concat(fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
         }
 
         private void DisplayProvinceList()
@@ -264,12 +267,13 @@ namespace GeoLocationTool.UI
         private void DisplayProvinceSuggestions()
         {
             string level1 = txtProvince.Text;
+            var provinceNearMatches = nearMatches.GetActualMatches(level1).Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
             cboProvinceSuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboProvinceSuggestion.ValueMember = "Location";
 
             cboProvinceSuggestion.DataSource =
-                fuzzyMatch.GetLevel1Suggestions(level1);
+                provinceNearMatches.Concat(fuzzyMatch.GetLevel1Suggestions(level1)).ToList();
         }
 
         private void DisplaySelectedRecord()
