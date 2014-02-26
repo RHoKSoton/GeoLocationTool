@@ -69,9 +69,9 @@ namespace MultiLevelGeoCoder
 
         public void LoadInputFileTabDelim(string path)
         {
-            throw new NotImplementedException();
-            //DataFileReader dataFileReader = new DataFileReader();
-            //dataFileReader.ReadTabDelimFile(path);
+            const bool isFirstRowHeader = true;
+            DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader, "\t");
+            inputData = new InputData(dt);
         }
 
         public void MatchAll()
