@@ -1,4 +1,4 @@
-﻿// LocationData.cs
+﻿// LocationCodes.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
@@ -11,7 +11,7 @@ namespace MultiLevelGeoCoder.Logic
     /// Provides the location codes where there are exact matches
     /// Provides lists of location names for each level 
     /// </summary>
-    public class LocationMatcher
+    public class LocationCodes
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Constructors
 
-        public LocationMatcher(IEnumerable<Gadm> gazzetteerData)
+        public LocationCodes(IEnumerable<Gadm> gazzetteerData)
         {
             this.gazzetteerData = gazzetteerData;
         }

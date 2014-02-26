@@ -50,7 +50,7 @@ namespace MultiLevelGeoCoder.Logic
         /// Adds the matched location codes.
         /// </summary>
         /// <param name="gazetteer">The gazetteer.</param>
-        public void AddMatchedLocationCodes(LocationMatcher gazetteer)
+        public void AddMatchedLocationCodes(LocationCodes gazetteer)
         {
             foreach (DataRow dataRow in data.Rows)
             {

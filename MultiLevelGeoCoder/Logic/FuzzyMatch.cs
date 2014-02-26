@@ -13,15 +13,15 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        private readonly LocationMatcher locationMatcher;
+        private readonly LocationCodes locationCodes;
 
         #endregion Fields
 
         #region Constructors
 
-        public FuzzyMatch(LocationMatcher locationMatcher)
+        public FuzzyMatch(LocationCodes locationCodes)
         {
-            this.locationMatcher = locationMatcher;
+            this.locationCodes = locationCodes;
         }
 
         #endregion Constructors
@@ -35,7 +35,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<FuzzyMatchResult> GetLevel1Suggestions(string level1)
         {
-            IList<string> locationList = this.locationMatcher.Level1LocationNames();
+            IList<string> locationList = this.locationCodes.Level1LocationNames();
             return Suggestions(level1, locationList);          
         }
 
@@ -47,7 +47,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<FuzzyMatchResult> GetLevel2Suggestions(string level1, string level2)
         {
-            IList<string> locationList = this.locationMatcher.Level2LocationNames(level1);
+            IList<string> locationList = this.locationCodes.Level2LocationNames(level1);
             return Suggestions(level2, locationList);
         }
 
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder.Logic
             string level2,
             string level3)
         {
-            IList<string> locationList = this.locationMatcher.Level3LocationNames(
+            IList<string> locationList = this.locationCodes.Level3LocationNames(
                 level1,
                 level2);
             return Suggestions(level3, locationList);

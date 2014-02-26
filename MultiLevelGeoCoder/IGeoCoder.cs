@@ -11,7 +11,7 @@ namespace MultiLevelGeoCoder
 
         DataTable InputRecords { get; }
 
-        LocationMatcher Matcher { get; }
+        LocationCodes Codes { get; }
 
         #endregion Properties
 

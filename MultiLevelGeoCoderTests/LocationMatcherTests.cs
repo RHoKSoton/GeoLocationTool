@@ -53,10 +53,10 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // no codes added
@@ -90,10 +90,10 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // no codes added
@@ -128,10 +128,10 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // correct codes added
@@ -166,10 +166,10 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // correct codes added
@@ -204,10 +204,10 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // correct codes added
@@ -241,10 +241,10 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // no codes added
@@ -281,10 +281,10 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationMatcher locationMatcher = new LocationMatcher(gazzetteerData);
+            LocationCodes locationCodes = new LocationCodes(gazzetteerData);
 
             // Act
-            locationMatcher.GetLocationCodes(location);
+            locationCodes.GetLocationCodes(location);
 
             // Assert
             // no codes added

@@ -84,8 +84,8 @@ namespace GeoLocationTool.UI
                     {
                         SaveColumnMappings();
 
-                        LocationMatcher gazetteer =
-                            new LocationMatcher(gazetteerData.LocationList);
+                        LocationCodes gazetteer =
+                            new LocationCodes(gazetteerData.LocationList);
 
                         // Load next screen
                         FormLoadData formLoadData = new FormLoadData(gazetteer);

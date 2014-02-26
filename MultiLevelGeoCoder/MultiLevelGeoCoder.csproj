@@ -51,9 +51,10 @@
   <ItemGroup>
     <Compile Include="DataAccess\ColumnsMappingProvider.cs" />
     <Compile Include="DataAccess\DBHelper.cs" />
+    <Compile Include="DataAccess\FileExport.cs" />
     <Compile Include="DataAccess\IColumnsMappingProvider.cs" />
     <Compile Include="DataAccess\INearMatchesProvider.cs" />
-    <Compile Include="DataAccess\FileHelper.cs" />
+    <Compile Include="DataAccess\FileImport.cs" />
     <Compile Include="DataAccess\NearMatchesProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Logic\ColumnHeaderIndices.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Logic\FuzzyMatchResult.cs" />
     <Compile Include="Logic\InputData.cs" />
     <Compile Include="Logic\GazetteerData.cs" />
-    <Compile Include="Logic\LocationMatcher.cs" />
+    <Compile Include="Logic\LocationCodes.cs" />
     <Compile Include="GeoCoder.cs" />
     <Compile Include="Logic\Gadm.cs" />
     <Compile Include="Logic\Location.cs" />

@@ -23,7 +23,7 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormLoadData(LocationMatcher gazetteer)
+        public FormLoadData(LocationCodes gazetteer)
         {
             InitializeComponent();
             geoCoder = new GeoCoder(gazetteer);
@@ -65,7 +65,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Matcher == null)
+                if (geoCoder.Codes == null)
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
@@ -93,7 +93,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Matcher == null)
+                if (geoCoder.Codes == null)
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
