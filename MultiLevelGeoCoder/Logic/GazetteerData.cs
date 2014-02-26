@@ -96,5 +96,16 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         #endregion Methods
+
+        public void SetColumnHeaders(GazetteerColumnHeaders headers)
+        {
+            Admin1Name = headers.Admin1Name;
+            Admin2Name = headers.Admin2Name;
+            Admin3Name = headers.Admin3Name;
+
+            Admin1Code = headers.Admin1Code;
+            Admin2Code = headers.Admin2Code;
+            Admin3Code = headers.Admin3Code;
+        }
     }
 }

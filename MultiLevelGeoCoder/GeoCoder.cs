@@ -14,55 +14,32 @@ namespace MultiLevelGeoCoder
     {
         #region Fields
 
+        private GazetteerData gazetteer;
         private InputData inputData;
-        private GazetteerData gazetteerData;
 
         #endregion Fields
-
-        #region Constructors
-
-        public GeoCoder(GazetteerData gazetteerData)
-        {
-           GazetteerData = gazetteerData;
-        }
-
-        #endregion Constructors
 
         #region Properties
 
         public LocationCodes Codes { get; private set; }
 
-        public DataTable InputRecords
+        public DataTable GazetteerData
         {
-            get
-            {
-                return inputData!= null ? inputData.data : null;
-            }
+            get { return gazetteer.Data; }
         }
 
-        public GazetteerData GazetteerData
+        public DataTable InputRecords
         {
-            get
-            {
-                return gazetteerData;
-            }
-            set
-            {
-                gazetteerData = value;
-                Codes = new LocationCodes(value.LocationList);
-                // todo should the location Codes just be recreated as needed from the gazetteer data?
-            }
+            get { return inputData != null ? inputData.data : null; }
         }
 
         #endregion Properties
 
         #region Methods
 
-        public static GazetteerData GetGazetteer(string path)
+        public void InitialiseLocationColumns()
         {
-            const bool isFirstRowHeader = true;
-            DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
-            return new GazetteerData(dt);
+            inputData.InitialiseLocationColumns();
         }
 
         public ColumnHeaderIndices InputColumnIndices()
@@ -70,9 +47,17 @@ namespace MultiLevelGeoCoder
             return inputData.HeaderIndices;
         }
 
-        public void InitialiseLocationColumns()
+        public bool IsGazetteerInitialised()
         {
-            inputData.InitialiseLocationColumns();
+            return gazetteer != null;
+        }
+
+        public void LoadGazetter(string path)
+        {
+            const bool isFirstRowHeader = true;
+            // todo remove as first row is always header
+            DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
+            gazetteer = new GazetteerData(dt);
         }
 
         public void LoadInputFileCsv(string path)
@@ -97,6 +82,12 @@ namespace MultiLevelGeoCoder
         public void SaveToCsvFile(string fileName)
         {
             FileExport.SaveToCsvFile(fileName, InputRecords);
+        }
+
+        public void SetGazetteerColumns(GazetteerColumnHeaders headers)
+        {
+            gazetteer.SetColumnHeaders(headers);
+            Codes = new LocationCodes(gazetteer.LocationList);
         }
 
         public void SetOriginalInputColumns(ColumnHeaderIndices indices)

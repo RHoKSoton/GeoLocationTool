@@ -21,7 +21,7 @@ namespace GeoLocationTool.UI
         private readonly IColumnsMappingProvider columnsMapping;
 
         private FormLoadData formLoadData;
-        private GazetteerData gazetteerData;
+        private readonly IGeoCoder geoCoder = new GeoCoder();
 
         #endregion Fields
 
@@ -35,8 +35,8 @@ namespace GeoLocationTool.UI
             {
                 string path = args[0];
                 txtLocationFileName.Text = path;
-                gazetteerData = GeoCoder.GetGazetteer(path);
-                dataGridView1.DataSource = gazetteerData.Data;
+                geoCoder.LoadGazetter(path);
+                dataGridView1.DataSource = geoCoder.GazetteerData;
                 FormatGrid();
 
                 DisplaySavedColumnHeaderIndices(path);
@@ -57,8 +57,8 @@ namespace GeoLocationTool.UI
                 var path = txtLocationFileName.Text.Trim();
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    gazetteerData = GeoCoder.GetGazetteer(path);
-                    dataGridView1.DataSource = gazetteerData.Data;
+                    geoCoder.LoadGazetter(path);
+                    dataGridView1.DataSource = geoCoder.GazetteerData;
                     FormatGrid();
                 }
             }
@@ -72,7 +72,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (gazetteerData == null)
+                if (!geoCoder.IsGazetteerInitialised())
                 {
                     UiHelper.DisplayMessage(
                         "Please load the gazetteer data.",
@@ -80,19 +80,15 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    SetColumnIndices();
-
-                    if (gazetteerData.ColumnIndicesValid())
-                    {
-                        SaveColumnMappings();
-                        LoadNextScreen();
-                    }
-                    else
+                    SetColumnHeaders(); 
+                    if (!ColumnHeadersSet())
                     {
                         UiHelper.DisplayMessage(
                             "Please select column numbers for the Code and Name columns.",
                             "Missing Data");
                     }
+                    SaveColumnMappings();
+                    LoadNextScreen();                   
                 }
             }
             catch (Exception ex)
@@ -101,6 +97,14 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private bool ColumnHeadersSet()
+        {
+            const bool areSet = true;
+            //todo check that collumns have been selected
+
+            return areSet;
+        }
+     
         private void DisplaySavedColumnHeaderIndices(string path)
         {
             var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(path);
@@ -142,19 +146,17 @@ namespace GeoLocationTool.UI
         {
             if (formLoadData == null)
             {
-                formLoadData = new FormLoadData();
+                formLoadData = new FormLoadData(geoCoder);
                 formLoadData.Closing += FormLoadDataClosing;
             }
-
-            formLoadData.GazetteerData = gazetteerData;
-
+                 
             formLoadData.Show(this);
             Hide();
         }
 
         private void SaveColumnMappings()
         {
-            // todo move  code away from the UI
+            // todo move  code away from the UI, save via the geoCoder
             int loc1Code = (int) udCode1.Value - 1;
             int loc1Name = (int) udName1.Value - 1;
             int loc1AltName = (int) udAltName1.Value - 1;
@@ -182,19 +184,23 @@ namespace GeoLocationTool.UI
                 );
         }
 
-        private void SetColumnIndices()
+        private void SetColumnHeaders()
         {
-            gazetteerData.Admin1Code = (int) udCode1.Value - 1;
-            gazetteerData.Admin1Name = (int) udName1.Value - 1;
-            gazetteerData.Admin1AltName = (int) udAltName1.Value - 1;
+            // todo use column names instead of indices
+            GazetteerColumnHeaders  headers = new GazetteerColumnHeaders();
+            headers.Admin1Code = (int)udCode1.Value - 1;
+            headers.Admin1Name = (int)udName1.Value - 1;
+            headers.Admin1AltName = (int)udAltName1.Value - 1;
 
-            gazetteerData.Admin2Code = (int) udCode2.Value - 1;
-            gazetteerData.Admin2Name = (int) udName2.Value - 1;
-            gazetteerData.Admin2AltName = (int) udAltName2.Value - 1;
+            headers.Admin2Code = (int)udCode2.Value - 1;
+            headers.Admin2Name = (int)udName2.Value - 1;
+            headers.Admin2AltName = (int)udAltName2.Value - 1;
 
-            gazetteerData.Admin3Code = (int) udCode3.Value - 1;
-            gazetteerData.Admin3Name = (int) udName3.Value - 1;
-            gazetteerData.Admin3AltName = (int) udAltName3.Value - 1;
+            headers.Admin3Code = (int)udCode3.Value - 1;
+            headers.Admin3Name = (int)udName3.Value - 1;
+            headers.Admin3AltName = (int)udAltName3.Value - 1;
+            geoCoder.SetGazetteerColumns(headers);
+        
         }
 
         #endregion Methods

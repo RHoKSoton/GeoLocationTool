@@ -60,6 +60,7 @@
     <Compile Include="Logic\ColumnHeaderIndices.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />
     <Compile Include="Logic\FuzzyMatchResult.cs" />
+    <Compile Include="Logic\GazetteerColumnHeaders.cs" />
     <Compile Include="Logic\InputData.cs" />
     <Compile Include="Logic\GazetteerData.cs" />
     <Compile Include="Logic\LocationCodes.cs" />

@@ -16,7 +16,7 @@ namespace GeoLocationTool.UI
         #region Fields
 
         private readonly FuzzyMatch fuzzyMatch;
-        private readonly GeoCoder geoCoder;
+        private readonly IGeoCoder geoCoder;
         private readonly INearMatchesProvider nearMatches;
 
         private int selectedRowIndex;
@@ -33,7 +33,7 @@ namespace GeoLocationTool.UI
         //    fuzzyMatch = new FuzzyMatch(locationData);
         //    nearMatches = new NearMatchesProvider(Program.Connection);
         //}
-        public FormManualMatch(GeoCoder geoCoder)
+        public FormManualMatch(IGeoCoder geoCoder)
         {
             InitializeComponent();
             this.geoCoder = geoCoder;

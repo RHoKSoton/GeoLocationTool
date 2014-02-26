@@ -17,38 +17,19 @@ namespace GeoLocationTool.UI
     {
         #region Fields
 
-        private GeoCoder geoCoder;
+        private readonly IGeoCoder geoCoder;
 
         #endregion Fields
 
         #region Constructors
 
-        public FormLoadData()
+        public FormLoadData(IGeoCoder geoCoder)
         {
             InitializeComponent();
+            this.geoCoder = geoCoder;
         }
 
         #endregion Constructors
-
-        #region Properties
-
-        public GazetteerData GazetteerData
-        {
-            get { return geoCoder.GazetteerData; }
-            set
-            {
-                if (geoCoder == null)
-                {
-                    geoCoder = new GeoCoder(value);
-                }
-                else
-                {
-                    geoCoder.GazetteerData = value;
-                }
-            }
-        }
-
-        #endregion Properties
 
         #region Methods
 
@@ -85,7 +66,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Codes == null)
+                if (!geoCoder.IsGazetteerInitialised())
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
@@ -113,7 +94,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (geoCoder.Codes == null)
+                if (! geoCoder.IsGazetteerInitialised() )
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");

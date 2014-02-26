@@ -9,13 +9,21 @@ namespace MultiLevelGeoCoder
     {
         #region Properties
 
-        DataTable InputRecords { get; }
-
         LocationCodes Codes { get; }
+        DataTable GazetteerData { get; }
+        DataTable InputRecords { get; }
 
         #endregion Properties
 
         #region Methods
+
+        void InitialiseLocationColumns();
+
+        ColumnHeaderIndices InputColumnIndices();
+
+        bool IsGazetteerInitialised();
+
+        void LoadGazetter(string path);
 
         void LoadInputFileCsv(string path);
 
@@ -24,6 +32,10 @@ namespace MultiLevelGeoCoder
         void MatchAll();
 
         void SaveToCsvFile(string fileName);
+
+        void SetGazetteerColumns(GazetteerColumnHeaders headers);
+
+        void SetOriginalInputColumns(ColumnHeaderIndices indices);
 
         DataView UnmatchedRecords();
 
