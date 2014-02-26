@@ -65,7 +65,7 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
             Assert.AreEqual("near", match.NearMatch);
-            Assert.AreEqual("actual", match.Location1);
+            Assert.AreEqual("actual", match.Level1);
             Assert.AreEqual(2, match.Weight);
         }
 
@@ -86,7 +86,7 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
             Assert.AreEqual(veryLong, match.NearMatch);
-            Assert.AreEqual(veryLong, match.Location1);
+            Assert.AreEqual(veryLong, match.Level1);
         }
 
         [TestMethod]
@@ -127,7 +127,7 @@ namespace MultiLevelGeoCoderTests
             var match = matches.Single();
             Assert.AreEqual(specialCharacters.Length, match.NearMatch.Length);
             Assert.AreEqual(specialCharacters, match.NearMatch);
-            Assert.AreEqual(specialCharacters, match.Location1);
+            Assert.AreEqual(specialCharacters, match.Level1);
         }
 
         [TestMethod]
@@ -187,13 +187,13 @@ namespace MultiLevelGeoCoderTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.SaveMatch("near", "location1", "location2");
-            var matches = provider.GetActualMatches("near", "location1");
+            provider.SaveMatch("near", "level1", "level2");
+            var matches = provider.GetActualMatches("near", "level1");
 
             //Then
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
-            Assert.AreEqual("location2", match.Location2);
+            Assert.AreEqual("level2", match.Level2);
         }
 
         [TestMethod]
@@ -205,13 +205,13 @@ namespace MultiLevelGeoCoderTests
             INearMatchesProvider provider = new NearMatchesProvider(connection);
 
             //When
-            provider.SaveMatch("near", "location1", "location2", "location3");
-            var matches = provider.GetActualMatches("near", "location1", "location2");
+            provider.SaveMatch("near", "level1", "level2", "level3");
+            var matches = provider.GetActualMatches("near", "level1", "level2");
 
             //Then
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
-            Assert.AreEqual("location3", match.Location3);
+            Assert.AreEqual("level3", match.Level3);
             Assert.AreEqual(1, match.Weight);
         }
     }

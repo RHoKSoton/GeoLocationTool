@@ -19,91 +19,91 @@
             SqlConnection = sqlConnection;
         }
 
-        public IEnumerable<Location1NearMatch> GetActualMatches(string nearMatch)
+        public IEnumerable<Level1NearMatch> GetActualMatches(string nearMatch)
         {
-            return SqlConnection.Query<Location1NearMatch>(
-                @"SELECT * FROM Location1NearMatches
+            return SqlConnection.Query<Level1NearMatch>(
+                @"SELECT * FROM Level1NearMatches
                     WHERE NearMatch=@nearMatch",
                 new { nearMatch }
             );
         }
 
-        public IEnumerable<Location2NearMatch> GetActualMatches(string nearMatch, string location1)
+        public IEnumerable<Level2NearMatch> GetActualMatches(string nearMatch, string level1)
         {
-            return SqlConnection.Query<Location2NearMatch>(
-                @"SELECT * FROM Location2NearMatches
-                    WHERE NearMatch=@nearMatch AND Location1=@location1",
-                new { nearMatch, location1 }
+            return SqlConnection.Query<Level2NearMatch>(
+                @"SELECT * FROM Level2NearMatches
+                    WHERE NearMatch=@nearMatch AND Level1=@level1",
+                new { nearMatch, level1 }
             );
         }
 
-        public IEnumerable<Location3NearMatch> GetActualMatches(string nearMatch, string location1, string location2)
+        public IEnumerable<Level3NearMatch> GetActualMatches(string nearMatch, string level1, string level2)
         {
-            return SqlConnection.Query<Location3NearMatch>(
-                @"SELECT * FROM Location3NearMatches
-                    WHERE NearMatch=@nearMatch AND Location1=@location1 AND Location2=@location2",
-                new { nearMatch, location1, location2 }
+            return SqlConnection.Query<Level3NearMatch>(
+                @"SELECT * FROM Level3NearMatches
+                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2",
+                new { nearMatch, level1, level2 }
             );
         }
 
-        public void SaveMatch(string nearMatch, string location1)
+        public void SaveMatch(string nearMatch, string level1)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Location1NearMatches
-                    WHERE NearMatch=@nearMatch AND Location1=@location1",
-                new { nearMatch, location1 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level1NearMatches
+                    WHERE NearMatch=@nearMatch AND Level1=@level1",
+                new { nearMatch, level1 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Location1NearMatches (Id, Location1, NearMatch, Weight)
-                                    VALUES (newid(), @location1, @NearMatch, 1)",
-                                    new { location1, nearMatch });
+                SqlConnection.Execute(@"INSERT INTO Level1NearMatches (Id, Level1, NearMatch, Weight)
+                                    VALUES (newid(), @level1, @NearMatch, 1)",
+                                    new { level1, nearMatch });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Location1NearMatches
+                SqlConnection.Execute(@"UPDATE Level1NearMatches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }
         }
 
-        public void SaveMatch(string nearMatch, string location1, string location2)
+        public void SaveMatch(string nearMatch, string level1, string level2)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Location2NearMatches
-                    WHERE NearMatch=@nearMatch AND Location1=@location1 AND Location2=@location2",
-                new { nearMatch, location1, location2 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level2NearMatches
+                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2",
+                new { nearMatch, level1, level2 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Location2NearMatches (Id, Location1, Location2, NearMatch, Weight)
-                                    VALUES (newid(), @location1, @location2, @nearMatch, 1)",
-                                    new { nearMatch, location1, location2 });
+                SqlConnection.Execute(@"INSERT INTO Level2NearMatches (Id, Level1, Level2, NearMatch, Weight)
+                                    VALUES (newid(), @level1, @level2, @nearMatch, 1)",
+                                    new { nearMatch, level1, level2 });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Location2NearMatches
+                SqlConnection.Execute(@"UPDATE Level2NearMatches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }
         }
 
-        public void SaveMatch(string nearMatch, string location1, string location2, string location3)
+        public void SaveMatch(string nearMatch, string level1, string level2, string level3)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Location3NearMatches
-                    WHERE NearMatch=@nearMatch AND Location1=@location1 AND Location2=@location2 AND Location3=@location3",
-                new { nearMatch, location1, location2, location3 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level3NearMatches
+                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2 AND Level3=@level3",
+                new { nearMatch, level1, level2, level3 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Location3NearMatches (Id, Location1, Location2, Location3, NearMatch, Weight)
-                                    VALUES (newid(), @location1, @location2, @location3, @nearMatch, 1)",
-                                    new { nearMatch, location1, location2, location3 });
+                SqlConnection.Execute(@"INSERT INTO Level3NearMatches (Id, Level1, Level2, Level3, NearMatch, Weight)
+                                    VALUES (newid(), @level1, @level2, @level3, @nearMatch, 1)",
+                                    new { nearMatch, level1, level2, level3 });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Location3NearMatches
+                SqlConnection.Execute(@"UPDATE Level3NearMatches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }

@@ -110,15 +110,15 @@ namespace GeoLocationTool.UI
             var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(path);
             if (locationColumnMapping != null)
             {
-                udCode1.Value = locationColumnMapping.Location1Code + 1;
-                udName1.Value = locationColumnMapping.Location1Name + 1;
-                udAltName1.Value = locationColumnMapping.Location1AltName + 1;
-                udCode2.Value = locationColumnMapping.Location2Code + 1;
-                udName2.Value = locationColumnMapping.Location2Name + 1;
-                udAltName2.Value = locationColumnMapping.Location2AltName + 1;
-                udCode3.Value = locationColumnMapping.Location3Code + 1;
-                udName3.Value = locationColumnMapping.Location3Name + 1;
-                udAltName3.Value = locationColumnMapping.Location3AltName + 1;
+                udCode1.Value = locationColumnMapping.Level1Code + 1;
+                udName1.Value = locationColumnMapping.Level1Name + 1;
+                udAltName1.Value = locationColumnMapping.Level1AltName + 1;
+                udCode2.Value = locationColumnMapping.Level2Code + 1;
+                udName2.Value = locationColumnMapping.Level2Name + 1;
+                udAltName2.Value = locationColumnMapping.Level2AltName + 1;
+                udCode3.Value = locationColumnMapping.Level3Code + 1;
+                udName3.Value = locationColumnMapping.Level3Name + 1;
+                udAltName3.Value = locationColumnMapping.Level3AltName + 1;
             }
         }
 
@@ -171,15 +171,15 @@ namespace GeoLocationTool.UI
                 new LocationColumnsMapping
                 {
                     FileName = txtLocationFileName.Text,
-                    Location1Code = loc1Code,
-                    Location1Name = loc1Name,
-                    Location1AltName = loc1AltName,
-                    Location2Code = loc2Code,
-                    Location2Name = loc2Name,
-                    Location2AltName = loc2AltName,
-                    Location3Code = loc3Code,
-                    Location3Name = loc3Name,
-                    Location3AltName = loc3AltName,
+                    Level1Code = loc1Code,
+                    Level1Name = loc1Name,
+                    Level1AltName = loc1AltName,
+                    Level2Code = loc2Code,
+                    Level2Name = loc2Name,
+                    Level2AltName = loc2AltName,
+                    Level3Code = loc3Code,
+                    Level3Name = loc3Name,
+                    Level3AltName = loc3AltName,
                 }
                 );
         }

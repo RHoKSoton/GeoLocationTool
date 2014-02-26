@@ -38,38 +38,38 @@
                 SqlConnection.Execute(
                     @"INSERT INTO LocationColumnsMapping (
                         FileName,
-                        Location1Code,
-                        Location1Name,
-                        Location1AltName,
-                        Location2Code,
-                        Location2Name,
-                        Location2AltName,
-                        Location3Code,
-                        Location3Name,
-                        Location3AltName
+                        Level1Code,
+                        Level1Name,
+                        Level1AltName,
+                        Level2Code,
+                        Level2Name,
+                        Level2AltName,
+                        Level3Code,
+                        Level3Name,
+                        Level3AltName
                     ) VALUES (
                         @FileName,
-                        @Location1Code,
-                        @Location1Name,
-                        @Location1AltName,
-                        @Location2Code,
-                        @Location2Name,
-                        @Location2AltName,
-                        @Location3Code,
-                        @Location3Name,
-                        @Location3AltName
+                        @Level1Code,
+                        @Level1Name,
+                        @Level1AltName,
+                        @Level2Code,
+                        @Level2Name,
+                        @Level2AltName,
+                        @Level3Code,
+                        @Level3Name,
+                        @Level3AltName
                     )",
                     new {
                         columnMapping.FileName,
-                        columnMapping.Location1Code,
-                        columnMapping.Location1Name,
-                        columnMapping.Location1AltName,
-                        columnMapping.Location2Code,
-                        columnMapping.Location2Name,
-                        columnMapping.Location2AltName,
-                        columnMapping.Location3Code,
-                        columnMapping.Location3Name,
-                        columnMapping.Location3AltName,
+                        columnMapping.Level1Code,
+                        columnMapping.Level1Name,
+                        columnMapping.Level1AltName,
+                        columnMapping.Level2Code,
+                        columnMapping.Level2Name,
+                        columnMapping.Level2AltName,
+                        columnMapping.Level3Code,
+                        columnMapping.Level3Name,
+                        columnMapping.Level3AltName,
                     }
                 );
             }
@@ -78,27 +78,27 @@
                 SqlConnection.Execute(
                     @"UPDATE LocationColumnsMapping
                         SET
-                            Location1Code=@Location1Code,
-                            Location1Name=@Location1Name,
-                            Location1AltName=@Location1AltName,
-                            Location2Code=@Location2Code,
-                            Location2Name=@Location2Name,
-                            Location2AltName=@Location2AltName,
-                            Location3Code=@Location3Code,
-                            Location3Name=@Location3Name,
-                            Location3AltName=@Location3AltName
+                            Level1Code=@Level1Code,
+                            Level1Name=@Level1Name,
+                            Level1AltName=@Level1AltName,
+                            Level2Code=@Level2Code,
+                            Level2Name=@Level2Name,
+                            Level2AltName=@Level2AltName,
+                            Level3Code=@Level3Code,
+                            Level3Name=@Level3Name,
+                            Level3AltName=@Level3AltName
                         WHERE FileName=@FileName",
                     new {
                         columnMapping.FileName,
-                        columnMapping.Location1Code,
-                        columnMapping.Location1Name,
-                        columnMapping.Location1AltName,
-                        columnMapping.Location2Code,
-                        columnMapping.Location2Name,
-                        columnMapping.Location2AltName,
-                        columnMapping.Location3Code,
-                        columnMapping.Location3Name,
-                        columnMapping.Location3AltName,
+                        columnMapping.Level1Code,
+                        columnMapping.Level1Name,
+                        columnMapping.Level1AltName,
+                        columnMapping.Level2Code,
+                        columnMapping.Level2Name,
+                        columnMapping.Level2AltName,
+                        columnMapping.Level3Code,
+                        columnMapping.Level3Name,
+                        columnMapping.Level3AltName,
                     }
                 );
             }

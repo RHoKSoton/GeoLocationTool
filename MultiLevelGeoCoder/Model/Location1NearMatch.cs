@@ -1,9 +1,9 @@
 ﻿namespace MultiLevelGeoCoder.Model
 {
-    public class Location1NearMatch
+    public class Level1NearMatch
     {
         public string NearMatch { get; set; }
-        public string Location1 { get; set; }
+        public string Level1 { get; set; }
         public int Weight { get; set; }
     }
 }

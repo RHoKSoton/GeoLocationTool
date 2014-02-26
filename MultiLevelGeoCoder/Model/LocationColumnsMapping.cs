@@ -3,14 +3,14 @@
     public class LocationColumnsMapping
     {
         public string FileName { get; set; }
-        public int Location1Code { get; set; }
-        public int Location1Name { get; set; }
-        public int Location1AltName { get; set; }
-        public int Location2Code { get; set; }
-        public int Location2Name { get; set; }
-        public int Location2AltName { get; set; }
-        public int Location3Code { get; set; }
-        public int Location3Name { get; set; }
-        public int Location3AltName { get; set; }
+        public int Level1Code { get; set; }
+        public int Level1Name { get; set; }
+        public int Level1AltName { get; set; }
+        public int Level2Code { get; set; }
+        public int Level2Name { get; set; }
+        public int Level2AltName { get; set; }
+        public int Level3Code { get; set; }
+        public int Level3Name { get; set; }
+        public int Level3AltName { get; set; }
     }
 }

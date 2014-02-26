@@ -27,24 +27,24 @@
 
         public static void InitializeDB(this DbConnection connection)
         {
-            if (!connection.TableExists("Location1NearMatches"))
+            if (!connection.TableExists("Level1NearMatches"))
             {
-                connection.Execute(@"CREATE TABLE Location1NearMatches (
+                connection.Execute(@"CREATE TABLE Level1NearMatches (
                                         Id uniqueidentifier PRIMARY KEY,
-                                        Location1 nvarchar(255),
+                                        Level1 nvarchar(255),
                                         NearMatch nvarchar(255),
                                         Weight int)");
-                connection.Execute(@"CREATE TABLE Location2NearMatches (
+                connection.Execute(@"CREATE TABLE Level2NearMatches (
                                         Id uniqueidentifier PRIMARY KEY,
-                                        Location1 nvarchar(255),
-                                        Location2 nvarchar(255),
+                                        Level1 nvarchar(255),
+                                        Level2 nvarchar(255),
                                         NearMatch nvarchar(255),
                                         Weight int)");
-                connection.Execute(@"CREATE TABLE Location3NearMatches (
+                connection.Execute(@"CREATE TABLE Level3NearMatches (
                                         Id uniqueidentifier PRIMARY KEY,
-                                        Location1 nvarchar(255),
-                                        Location2 nvarchar(255),
-                                        Location3 nvarchar(255),
+                                        Level1 nvarchar(255),
+                                        Level2 nvarchar(255),
+                                        Level3 nvarchar(255),
                                         NearMatch nvarchar(255),
                                         Weight int)");
             }
@@ -53,15 +53,15 @@
             {
                 connection.Execute(@"CREATE TABLE LocationColumnsMapping (
                                         FileName nvarchar(255) PRIMARY KEY,
-                                        Location1Code int,
-                                        Location1Name int,
-                                        Location1AltName int,
-                                        Location2Code int,
-                                        Location2Name int,
-                                        Location2AltName int,
-                                        Location3Code int,
-                                        Location3Name int,
-                                        Location3AltName int)");
+                                        Level1Code int,
+                                        Level1Name int,
+                                        Level1AltName int,
+                                        Level2Code int,
+                                        Level2Name int,
+                                        Level2AltName int,
+                                        Level3Code int,
+                                        Level3Name int,
+                                        Level3AltName int)");
             }
         }
 
