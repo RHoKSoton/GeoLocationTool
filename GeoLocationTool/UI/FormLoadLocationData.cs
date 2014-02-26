@@ -3,6 +3,7 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.ComponentModel;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
@@ -19,6 +20,7 @@ namespace GeoLocationTool.UI
 
         private readonly IColumnsMappingProvider columnsMapping;
 
+        private FormLoadData formLoadData;
         private GazetteerData gazetteerData;
 
         #endregion Fields
@@ -33,7 +35,7 @@ namespace GeoLocationTool.UI
             {
                 string path = args[0];
                 txtLocationFileName.Text = path;
-                gazetteerData = GeoCoder.GetGazetteerFile(path);
+                gazetteerData = GeoCoder.GetGazetteer(path);
                 dataGridView1.DataSource = gazetteerData.Data;
                 FormatGrid();
 
@@ -55,7 +57,7 @@ namespace GeoLocationTool.UI
                 var path = txtLocationFileName.Text.Trim();
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    gazetteerData = GeoCoder.GetGazetteerFile(path);
+                    gazetteerData = GeoCoder.GetGazetteer(path);
                     dataGridView1.DataSource = gazetteerData.Data;
                     FormatGrid();
                 }
@@ -83,13 +85,7 @@ namespace GeoLocationTool.UI
                     if (gazetteerData.ColumnIndicesValid())
                     {
                         SaveColumnMappings();
-
-                        LocationCodes gazetteer =
-                            new LocationCodes(gazetteerData.LocationList);
-
-                        // Load next screen
-                        FormLoadData formLoadData = new FormLoadData(gazetteer);
-                        formLoadData.Show();
+                        LoadNextScreen();
                     }
                     else
                     {
@@ -134,6 +130,26 @@ namespace GeoLocationTool.UI
             }
             dataGridView1.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void FormLoadDataClosing(object sender, CancelEventArgs e)
+        {
+            // close this form too if the main form has closed
+            Close();
+        }
+
+        private void LoadNextScreen()
+        {
+            if (formLoadData == null)
+            {
+                formLoadData = new FormLoadData();
+                formLoadData.Closing += FormLoadDataClosing;
+            }
+
+            formLoadData.GazetteerData = gazetteerData;
+
+            formLoadData.Show(this);
+            Hide();
         }
 
         private void SaveColumnMappings()

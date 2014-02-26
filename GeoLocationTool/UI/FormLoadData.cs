@@ -17,25 +17,45 @@ namespace GeoLocationTool.UI
     {
         #region Fields
 
-        private readonly GeoCoder geoCoder;
+        private GeoCoder geoCoder;
 
         #endregion Fields
 
         #region Constructors
 
-        public FormLoadData(LocationCodes gazetteer)
+        public FormLoadData()
         {
             InitializeComponent();
-            geoCoder = new GeoCoder(gazetteer);
         }
 
         #endregion Constructors
+
+        #region Properties
+
+        public GazetteerData GazetteerData
+        {
+            get { return geoCoder.GazetteerData; }
+            set
+            {
+                if (geoCoder == null)
+                {
+                    geoCoder = new GeoCoder(value);
+                }
+                else
+                {
+                    geoCoder.GazetteerData = value;
+                }
+            }
+        }
+
+        #endregion Properties
 
         #region Methods
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Close();
+            Owner.Show();
+            Hide();
         }
 
         private void btnLoadInputFile_Click(object sender, EventArgs e)

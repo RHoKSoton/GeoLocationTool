@@ -15,14 +15,15 @@ namespace MultiLevelGeoCoder
         #region Fields
 
         private InputData inputData;
+        private GazetteerData gazetteerData;
 
         #endregion Fields
 
         #region Constructors
 
-        public GeoCoder(LocationCodes codes)
+        public GeoCoder(GazetteerData gazetteerData)
         {
-            Codes = codes;
+           GazetteerData = gazetteerData;
         }
 
         #endregion Constructors
@@ -39,11 +40,25 @@ namespace MultiLevelGeoCoder
             }
         }
 
+        public GazetteerData GazetteerData
+        {
+            get
+            {
+                return gazetteerData;
+            }
+            set
+            {
+                gazetteerData = value;
+                Codes = new LocationCodes(value.LocationList);
+                // todo should the location Codes just be recreated as needed from the gazetteer data?
+            }
+        }
+
         #endregion Properties
 
         #region Methods
 
-        public static GazetteerData GetGazetteerFile(string path)
+        public static GazetteerData GetGazetteer(string path)
         {
             const bool isFirstRowHeader = true;
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);

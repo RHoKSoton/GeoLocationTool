@@ -216,7 +216,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.90909F));
-            this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnLoadInputFile, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.udProvince, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 11);
@@ -238,6 +237,7 @@
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.button1, 3, 8);
             this.tableLayoutPanel1.Controls.Add(this.button2, 4, 8);
+            this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 10);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -340,7 +340,6 @@
             // 
             this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportTabDelim.AutoSize = true;
-            this.rdoImportTabDelim.Enabled = true;
             this.rdoImportTabDelim.Location = new System.Drawing.Point(334, 29);
             this.rdoImportTabDelim.Name = "rdoImportTabDelim";
             this.rdoImportTabDelim.Size = new System.Drawing.Size(147, 21);
@@ -387,7 +386,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(147, 33);
             this.btnBack.TabIndex = 26;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "Geographical Data";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -398,7 +397,7 @@
             this.ClientSize = new System.Drawing.Size(1245, 723);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormLoadData";
-            this.Text = "Geo Location Tool - Input Data";
+            this.Text = "Multi Level Geo Coder Tool - Input Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLoadData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
