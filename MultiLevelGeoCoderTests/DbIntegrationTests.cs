@@ -49,6 +49,25 @@ namespace MultiLevelGeoCoderTests
         }
 
         [TestMethod]
+        public void InsertAndGetDifferentCase()
+        {
+            //Given
+            connection = DBHelper.GetDbConnection(dbLocation);
+            connection.InitializeDB();
+            INearMatchesProvider provider = new NearMatchesProvider(connection);
+
+            //When
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("Near", "actual");
+            var matches = provider.GetActualMatches("NEAR");
+
+            //Then
+            Assert.AreEqual(1, matches.Count());
+            Assert.AreEqual("near", matches.First().NearMatch);
+            Assert.AreEqual("actual", matches.First().Level1);
+        }
+
+        [TestMethod]
         public void InsertDuplicatedMatch()
         {
             //Given
