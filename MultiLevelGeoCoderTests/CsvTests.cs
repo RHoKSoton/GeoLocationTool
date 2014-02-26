@@ -57,23 +57,6 @@ namespace MultiLevelGeoCoderTests
         }
 
         [TestMethod]
-        public void LoadInputCSVJet()
-        {
-            //Given
-            string path = Path.GetFullPath(@"input.csv");
-
-            //When
-            var dataTable = FileImport.ReadCsvFileOld(path, true, null);
-
-            //Then
-            Assert.AreEqual(2, dataTable.Rows.Count);
-            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
-            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
-            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
-            Assert.AreEqual("BO,AC", dataTable.Rows[1][1]);
-        }
-
-        [TestMethod]
         public void LoadInputTabDelim()
         {
             //Given
@@ -81,27 +64,6 @@ namespace MultiLevelGeoCoderTests
 
             //When
             var dataTable = FileImport.ReadCsvFile(path, true, "\t");
-
-            //Then
-            Assert.AreEqual(2, dataTable.Rows.Count);
-            Assert.AreEqual("MARINDUQUE", dataTable.Rows[0][0]);
-            Assert.AreEqual("BOAC", dataTable.Rows[0][1]);
-            Assert.AreEqual("MARINDUQUE", dataTable.Rows[1][0]);
-            Assert.AreEqual("BO\tAC", dataTable.Rows[1][1]);
-        }
-
-        [TestMethod]
-        [Ignore]
-        //JET is reading format from registry or ini file and ignoring the specified format in the connection string.
-        //http://social.microsoft.com/Forums/en-US/9f7d2b67-cea5-4840-96ef-2e12011752d7/read-tabdelimited-flat-file-with-jet-engine?forum=Offtopic
-        //http://stackoverflow.com/questions/4063685/using-oledbconnection-to-read-tab-seperated-file
-        public void LoadInputTabDelimJet()
-        {
-            //Given
-            string path = Path.GetFullPath(@"inputTabs.csv");
-
-            //When
-            var dataTable = FileImport.ReadCsvFileOld(path, true, "TabDelimited");
 
             //Then
             Assert.AreEqual(2, dataTable.Rows.Count);

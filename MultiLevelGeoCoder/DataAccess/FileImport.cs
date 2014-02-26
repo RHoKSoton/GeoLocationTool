@@ -18,37 +18,6 @@ namespace MultiLevelGeoCoder.DataAccess
     {
         #region Methods
 
-        public static DataTable ReadCsvFileOld(
-            string path,
-            bool isFirstRowHeader,
-            string delimiter)
-        {
-            // todo remove if not needed
-            string header = isFirstRowHeader ? "Yes" : "No";
-            string extendedProperties = "Text;HDR=" + header;
-            if (delimiter != null)
-            {
-                extendedProperties += ";FMT=" + delimiter;
-            }
-
-            string pathOnly = Path.GetDirectoryName(path);
-            string fileName = Path.GetFileName(path);
-
-            string sql = @"SELECT * FROM [" + fileName + "]";
-
-            using (OleDbConnection connection = new OleDbConnection(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathOnly +
-                ";Extended Properties=\"" + extendedProperties + "\""))
-            using (OleDbCommand command = new OleDbCommand(sql, connection))
-            using (OleDbDataAdapter adapter = new OleDbDataAdapter(command))
-            {
-                DataTable dataTable = new DataTable();
-                dataTable.Locale = CultureInfo.CurrentCulture;
-                adapter.Fill(dataTable);
-                return dataTable;
-            }
-        }
-
         internal static DataTable ReadExcelFile(string path, string worksheetName)
         {
             // todo remove this if not needed
