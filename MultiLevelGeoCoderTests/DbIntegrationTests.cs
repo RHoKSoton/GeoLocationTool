@@ -233,5 +233,31 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual("level3", match.Level3);
             Assert.AreEqual(1, match.Weight);
         }
+
+        [TestMethod]
+        public void HighestWeightFirst()
+        {
+            //Given
+            connection = DBHelper.GetDbConnection(dbLocation);
+            connection.InitializeDB();
+            INearMatchesProvider provider = new NearMatchesProvider(connection);
+
+            //When
+            provider.SaveMatch("near", "actual");
+            provider.SaveMatch("near", "actual2");
+            provider.SaveMatch("near", "actual2");
+            var matches = provider.GetActualMatches("near");
+
+            //Then
+            Assert.AreEqual(2, matches.Count());
+            var match1 = matches.First();
+            var match2 = matches.Last();
+            Assert.AreEqual("near", match1.NearMatch);
+            Assert.AreEqual("actual2", match1.Level1);
+            Assert.AreEqual(2, match1.Weight);
+            Assert.AreEqual("near", match2.NearMatch);
+            Assert.AreEqual("actual", match2.Level1);
+            Assert.AreEqual(1, match2.Weight);
+        }
     }
 }

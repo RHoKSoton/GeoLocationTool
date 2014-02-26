@@ -23,7 +23,7 @@
         {
             return SqlConnection.Query<Level1NearMatch>(
                 @"SELECT * FROM Level1NearMatches
-                    WHERE NearMatch=@nearMatch",
+                    WHERE NearMatch=@nearMatch ORDER BY Weight DESC",
                 new { nearMatch }
             );
         }
@@ -32,7 +32,7 @@
         {
             return SqlConnection.Query<Level2NearMatch>(
                 @"SELECT * FROM Level2NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1",
+                    WHERE NearMatch=@nearMatch AND Level1=@level1 ORDER BY Weight DESC",
                 new { nearMatch, level1 }
             );
         }
@@ -41,7 +41,7 @@
         {
             return SqlConnection.Query<Level3NearMatch>(
                 @"SELECT * FROM Level3NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2",
+                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2 ORDER BY Weight DESC",
                 new { nearMatch, level1, level2 }
             );
         }
