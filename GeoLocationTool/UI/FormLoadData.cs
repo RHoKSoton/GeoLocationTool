@@ -206,7 +206,7 @@ namespace GeoLocationTool.UI
 
         private void ReadTabDelimFile()
         {
-            const string filter = "tab delimited files (*.csv)|*.csv";
+            const string filter = "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";
             txtFileName.Clear();
             txtFileName.Text = UiHelper.GetFileName(filter);
             var path = txtFileName.Text.Trim();
