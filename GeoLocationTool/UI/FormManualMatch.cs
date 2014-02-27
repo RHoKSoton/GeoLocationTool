@@ -282,6 +282,8 @@ namespace GeoLocationTool.UI
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
+        //TODO Is the name appropriate? Display suggest it has no effect on data. But it seems it has effect
+        //What about AssignCodes or something?
         private void DisplayCodes(Location location)
         {
             geoCoder.GeoCodes.GetLocationCodes(location);
@@ -430,9 +432,9 @@ namespace GeoLocationTool.UI
             string originalLevel2 = txtMunicipality.Text;
             string originalLevel3 = txtBarangay.Text;
             Location location = new Location(
-                originalLevel1,
-                originalLevel2,
-                originalLevel3);
+                level1,
+                level2,
+                level3);
 
             DisplayAltNames(
                 level1,
