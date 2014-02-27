@@ -13,12 +13,12 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        public const string Loc1CodeColumnName = "Code 1";
-        public const string Loc1ColumnName = "Location 1";
-        public const string Loc2CodeColumnName = "Code 2";
-        public const string Loc2ColumnName = "Location 2";
-        public const string Loc3CodeColumnName = "Code 3";
-        public const string Loc3ColumnName = "Location 3";
+        public const string Level1CodeColumnName = "Code 1";
+        public const string Alt1ColumnName = "Alt Name 1";
+        public const string Level2CodeColumnName = "Code 2";
+        public const string Alt2ColumnName = "Alt Name 2";
+        public const string Level3CodeColumnName = "Code 3";
+        public const string Alt3ColumnName = "Alt Name 3";
 
         #endregion Fields
 
@@ -36,10 +36,6 @@ namespace MultiLevelGeoCoder.Logic
         #region Properties
 
         public DataTable data { get; set; }
-
-        //public int OriginalLoc1ColumnIndex { get; set; }
-        //public int OriginalLoc2ColumnIndex { get; set; }
-        //public int OriginalLoc3ColumnIndex { get; set; }
         public ColumnHeaderIndices HeaderIndices { get; set; }
 
         #endregion Properties
@@ -54,25 +50,23 @@ namespace MultiLevelGeoCoder.Logic
         {
             foreach (DataRow dataRow in data.Rows)
             {
-                //create location, use the added location columns
+                //create location, use the original name
                 Location location = new Location();
                 location.Level1 =
-                    dataRow[Loc1ColumnName].ToString();
+                    dataRow[HeaderIndices.Admin1].ToString();
                 location.Level2 =
-                    dataRow[Loc2ColumnName].ToString();
+                    dataRow[HeaderIndices.Admin2].ToString();
                 location.Level3 =
-                    dataRow[Loc3ColumnName].ToString();
+                    dataRow[HeaderIndices.Admin3].ToString();
 
                 // get codes
                 gazetteer.GetLocationCodes(location);
 
                 //add codes
-                dataRow[Loc1CodeColumnName] = location.Level1Code;
-                dataRow[Loc2CodeColumnName] = location.Level2Code;
-                dataRow[Loc3CodeColumnName] = location.Level3Code;
-                dataRow.AcceptChanges();
+                dataRow[Level1CodeColumnName] = location.Level1Code;
+                dataRow[Level2CodeColumnName] = location.Level2Code;
+                dataRow[Level3CodeColumnName] = location.Level3Code;
             }
-            data.AcceptChanges();
         }
 
         /// <summary>
@@ -83,37 +77,26 @@ namespace MultiLevelGeoCoder.Logic
         {
             // only show those records where a location code is null
             EnumerableRowCollection<DataRow> query = from record in data.AsEnumerable()
-                where record.Field<String>(Loc1CodeColumnName) == null ||
-                      record.Field<string>(Loc2CodeColumnName) == null ||
-                      record.Field<string>(Loc3CodeColumnName) == null
+                where record.Field<String>(Level1CodeColumnName) == null ||
+                      record.Field<string>(Level2CodeColumnName) == null ||
+                      record.Field<string>(Level3CodeColumnName) == null
                 select record;
 
             DataView unmatched = query.AsDataView();
             return unmatched;
         }
 
-        /// <summary>
-        /// Initialises the location columns, copying the contents of the 
-        /// original location columns to the added location columns.
-        /// </summary>
-        public void InitialiseLocationColumns()
-        {
-            CopyColumn(HeaderIndices.Admin1, Loc1ColumnName);
-            CopyColumn(HeaderIndices.Admin2, Loc2ColumnName);
-            CopyColumn(HeaderIndices.Admin3, Loc3ColumnName);
-        }
-
         private void AddAdditionalColumns()
         {
             AddCodeColumns();
-            AddLocationColumns();
+            AddAltNameColumns();
         }
 
         private void AddCodeColumns()
         {
-            AddColumn(Loc1CodeColumnName);
-            AddColumn(Loc2CodeColumnName);
-            AddColumn(Loc3CodeColumnName);
+            AddColumn(Level1CodeColumnName);
+            AddColumn(Level2CodeColumnName);
+            AddColumn(Level3CodeColumnName);
         }
 
         private void AddColumn(string columnName)
@@ -127,32 +110,24 @@ namespace MultiLevelGeoCoder.Logic
         private List<string> AddedColumnNames()
         {
             List<string> addedColumns = new List<string>();
-            addedColumns.Add(Loc1CodeColumnName);
-            addedColumns.Add(Loc2CodeColumnName);
-            addedColumns.Add(Loc3CodeColumnName);
-            addedColumns.Add(Loc1ColumnName);
-            addedColumns.Add(Loc2ColumnName);
-            addedColumns.Add(Loc3ColumnName);
+            addedColumns.Add(Level1CodeColumnName);
+            addedColumns.Add(Level2CodeColumnName);
+            addedColumns.Add(Level3CodeColumnName);
+            addedColumns.Add(Alt1ColumnName);
+            addedColumns.Add(Alt2ColumnName);
+            addedColumns.Add(Alt3ColumnName);
 
             return addedColumns;
         }
 
-        private void AddLocationColumns()
+        private void AddAltNameColumns()
         {
             // add collumns to use for the edited location data
-            AddColumn(Loc1ColumnName);
-            AddColumn(Loc2ColumnName);
-            AddColumn(Loc3ColumnName);
+            AddColumn(Alt1ColumnName);
+            AddColumn(Alt2ColumnName);
+            AddColumn(Alt3ColumnName);
         }
-
-        private void CopyColumn(int sourceColumnIndex, string targetColumnName)
-        {
-            foreach (DataRow row in data.Rows)
-            {
-                row[targetColumnName] = row[sourceColumnIndex];
-            }
-        }
-
+     
         private void SetColumnsAsReadOnly()
         {
             List<string> addedColumns = AddedColumnNames();

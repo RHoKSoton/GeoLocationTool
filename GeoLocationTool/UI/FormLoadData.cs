@@ -94,7 +94,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (! geoCoder.IsGazetteerInitialised() )
+                if (!geoCoder.IsGazetteerInitialised() )
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
@@ -107,9 +107,7 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-                SetOriginalColumnIndices();
-                geoCoder.InitialiseLocationColumns();
-
+                SetColumnHeaders();
                 geoCoder.MatchAll();
                 dataGridView1.DataSource = geoCoder.InputRecords;
             }
@@ -252,13 +250,7 @@ namespace GeoLocationTool.UI
 
         private void SetColumnStyle()
         {
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                if (col.ReadOnly)
-                {
-                    col.DefaultCellStyle.ForeColor = Color.Gray;
-                }
-            }
+            //todo any style needed here?
         }
 
         private void SetDefaults()
@@ -277,14 +269,14 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToOrderColumns = false;
         }
 
-        private void SetOriginalColumnIndices()
+        private void SetColumnHeaders()
         {
-            ColumnHeaderIndices indices = new ColumnHeaderIndices();
-            indices.Admin1 = (int) udProvince.Value - 1;
-            indices.Admin2 = (int) udMunicipality.Value - 1;
-            indices.Admin3 = (int) udBarangay.Value - 1;
+            ColumnHeaderIndices headerIndices = new ColumnHeaderIndices();
+            headerIndices.Admin1 = (int) udProvince.Value - 1;
+            headerIndices.Admin2 = (int) udMunicipality.Value - 1;
+            headerIndices.Admin3 = (int) udBarangay.Value - 1;
 
-            geoCoder.SetOriginalInputColumns(indices);
+            geoCoder.SetInputColumns(headerIndices);
         }
 
         #endregion Methods

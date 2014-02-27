@@ -36,7 +36,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="location">The location.</param>
         public void GetLocationCodes(Location location)
         {
-            // todo return a CodedLocation
+            // todo return a CodedLocation?
             Location location1 = location;
             location1.Level2Code = null;
             location1.Level1Code = null;
@@ -109,6 +109,11 @@ namespace MultiLevelGeoCoder.Logic
                             StringComparison.OrdinalIgnoreCase))
                 .Select(l => l.NAME_3);
             return levelList.Distinct().OrderBy(i => i).ToList();
+        }
+
+        public void RefreshAltCodeList()
+        {
+            // todo recreate the alt name code list
         }
 
         private Gadm Level1Match(Location location)

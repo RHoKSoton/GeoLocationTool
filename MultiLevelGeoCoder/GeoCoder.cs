@@ -21,12 +21,12 @@ namespace MultiLevelGeoCoder
 
         #region Properties
 
-        public LocationCodes Codes { get; private set; }
-
         public DataTable GazetteerData
         {
             get { return gazetteer.Data; }
         }
+
+        public LocationCodes GeoCodes { get; private set; }
 
         public DataTable InputRecords
         {
@@ -36,11 +36,6 @@ namespace MultiLevelGeoCoder
         #endregion Properties
 
         #region Methods
-
-        public void InitialiseLocationColumns()
-        {
-            inputData.InitialiseLocationColumns();
-        }
 
         public ColumnHeaderIndices InputColumnIndices()
         {
@@ -76,7 +71,15 @@ namespace MultiLevelGeoCoder
 
         public void MatchAll()
         {
-            inputData.AddMatchedLocationCodes(Codes);
+            inputData.AddMatchedLocationCodes(GeoCodes);
+        }
+
+        public void SaveNearMatch()
+        {
+            throw new NotImplementedException();
+            // Save to the database
+            // refresh the code list
+            // GeoCodes.RefreshAltCodeList();
         }
 
         public void SaveToCsvFile(string fileName)
@@ -87,10 +90,10 @@ namespace MultiLevelGeoCoder
         public void SetGazetteerColumns(GazetteerColumnHeaders headers)
         {
             gazetteer.SetColumnHeaders(headers);
-            Codes = new LocationCodes(gazetteer.LocationList);
+            GeoCodes = new LocationCodes(gazetteer.LocationList);
         }
 
-        public void SetOriginalInputColumns(ColumnHeaderIndices indices)
+        public void SetInputColumns(ColumnHeaderIndices indices)
         {
             inputData.HeaderIndices = indices;
         }

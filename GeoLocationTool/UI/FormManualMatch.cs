@@ -26,19 +26,11 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        //public FormManualMatch(InputData inputData, LocationData locationData)
-        //{
-        //    InitializeComponent();
-        //    this.inputData = inputData;
-        //    this.locationData = locationData;
-        //    fuzzyMatch = new FuzzyMatch(locationData);
-        //    nearMatches = new NearMatchesProvider(Program.Connection);
-        //}
         public FormManualMatch(IGeoCoder geoCoder)
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
-            fuzzyMatch = new FuzzyMatch(geoCoder.Codes);
+            fuzzyMatch = new FuzzyMatch(geoCoder.GeoCodes);
             nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
@@ -195,6 +187,16 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void ClearAltNames()
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt1ColumnName].Value =
+                null;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt2ColumnName].Value =
+                null;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt3ColumnName].Value =
+                null;
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -213,10 +215,50 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void DisplayAltNames(
+            string level1,
+            string level2,
+            string level3,
+            string originalLevel1,
+            string originalLevel2,
+            string originalLevel3)
+        {
+            ClearAltNames();
+            //display alt names only if different to the original
+            if (!string.Equals(originalLevel1, level1, StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt1ColumnName].Value
+                    =
+                    level1;
+            }
+
+            if (
+                !string.Equals(
+                    originalLevel2,
+                    level2,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt2ColumnName].Value
+                    =
+                    level2;
+            }
+
+            if (
+                !string.Equals(
+                    originalLevel3,
+                    level3,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Alt3ColumnName].Value
+                    =
+                    level3;
+            }
+        }
+
         private void DisplayBarangayList()
         {
             // based on selected level 1 and 2
-            cboBarangay.DataSource = geoCoder.Codes.Level3LocationNames(
+            cboBarangay.DataSource = geoCoder.GeoCodes.Level3LocationNames(
                 cboProvince.SelectedValue.ToString(),
                 cboMunicipality.SelectedValue.ToString());
         }
@@ -227,20 +269,37 @@ namespace GeoLocationTool.UI
             string level1 = cboProvinceSuggestion.SelectedValue.ToString();
             string level2 = cboMunicipalitySuggestion.SelectedValue.ToString();
             string level3 = txtBarangay.Text.Trim();
-            var barangayNearMatches = nearMatches.GetActualMatches(level3, level1, level2).Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
+            var barangayNearMatches =
+                nearMatches.GetActualMatches(level3, level1, level2)
+                    .Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
 
             cboBarangaySuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboBarangaySuggestion.ValueMember = "Location";
 
             cboBarangaySuggestion.DataSource =
-                barangayNearMatches.Concat(fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
+                barangayNearMatches.Concat(
+                    fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
+        }
+
+        private void DisplayCodes(Location location)
+        {
+            geoCoder.GeoCodes.GetLocationCodes(location);
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+                .Value =
+                location.Level1Code;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+                .Value =
+                location.Level2Code;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+                .Value =
+                location.Level3Code;
         }
 
         private void DisplayMunicipalityList()
         {
             // based on selected level 1
-            cboMunicipality.DataSource = geoCoder.Codes.Level2LocationNames(
+            cboMunicipality.DataSource = geoCoder.GeoCodes.Level2LocationNames(
                 cboProvince.SelectedValue.ToString());
         }
 
@@ -249,31 +308,37 @@ namespace GeoLocationTool.UI
             //based on the suggested level 1 and the original level2
             string level1 = cboProvinceSuggestion.SelectedValue.ToString();
             string level2 = txtMunicipality.Text.Trim();
-            var municipalityNearMatches = nearMatches.GetActualMatches(level2, level1).Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
+            var municipalityNearMatches =
+                nearMatches.GetActualMatches(level2, level1)
+                    .Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
 
             cboMunicipalitySuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboMunicipalitySuggestion.ValueMember = "Location";
 
             cboMunicipalitySuggestion.DataSource =
-                municipalityNearMatches.Concat(fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
+                municipalityNearMatches.Concat(
+                    fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
         }
 
         private void DisplayProvinceList()
         {
-            cboProvince.DataSource = geoCoder.Codes.Level1LocationNames();
+            cboProvince.DataSource = geoCoder.GeoCodes.Level1LocationNames();
         }
 
         private void DisplayProvinceSuggestions()
         {
             string level1 = txtProvince.Text;
-            var provinceNearMatches = nearMatches.GetActualMatches(level1).Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
+            var provinceNearMatches =
+                nearMatches.GetActualMatches(level1)
+                    .Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
             cboProvinceSuggestion.DisplayMember = "DisplayText";
             // temp only, change to location after testing
             cboProvinceSuggestion.ValueMember = "Location";
 
             cboProvinceSuggestion.DataSource =
-                provinceNearMatches.Concat(fuzzyMatch.GetLevel1Suggestions(level1)).ToList();
+                provinceNearMatches.Concat(fuzzyMatch.GetLevel1Suggestions(level1))
+                    .ToList();
         }
 
         private void DisplaySelectedRecord()
@@ -344,9 +409,12 @@ namespace GeoLocationTool.UI
 
         private void SaveNearMatch(string province, string municipality, string barangay)
         {
+            // todo call via the geoCoder
             nearMatches.SaveMatch(txtProvince.Text, province);
             nearMatches.SaveMatch(txtMunicipality.Text, province, municipality);
             nearMatches.SaveMatch(txtBarangay.Text, province, municipality, barangay);
+
+           // geoCoder.SaveNearMatch(nearMatch);
         }
 
         private void SetGridDefaults()
@@ -358,29 +426,22 @@ namespace GeoLocationTool.UI
 
         private void UpdateRow(string level1, string level2, string level3)
         {
-            //display new name values
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1ColumnName].Value =
-                level1;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc2ColumnName].Value =
-                level2;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc3ColumnName].Value =
-                level3;
+            string originalLevel1 = txtProvince.Text;
+            string originalLevel2 = txtMunicipality.Text;
+            string originalLevel3 = txtBarangay.Text;
+            Location location = new Location(
+                originalLevel1,
+                originalLevel2,
+                originalLevel3);
 
-            //get codes using new names
-            Location location = new Location(level1, level2: level2, level3: level3);
-            geoCoder.Codes.GetLocationCodes(location);
-
-            //display codes
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc1CodeColumnName]
-                .Value =
-                location.Level1Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc2CodeColumnName]
-                .Value =
-                location.Level2Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Loc3CodeColumnName]
-                .Value =
-                location.Level3Code;
-
+            DisplayAltNames(
+                level1,
+                level2,
+                level3,
+                originalLevel1,
+                originalLevel2,
+                originalLevel3);
+            DisplayCodes(location);
             DisplayUnmatchedRecords();
         }
 
