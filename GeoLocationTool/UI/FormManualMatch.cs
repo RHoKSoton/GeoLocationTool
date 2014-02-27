@@ -448,5 +448,15 @@ namespace GeoLocationTool.UI
         }
 
         #endregion Methods
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            txtRowCount.Text = dataGridView1.RowCount.ToString();
+        }
+
+        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            txtRowCount.Text = dataGridView1.RowCount.ToString();
+        }
     }
 }
