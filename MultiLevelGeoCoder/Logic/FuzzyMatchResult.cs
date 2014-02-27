@@ -24,7 +24,7 @@ namespace MultiLevelGeoCoder.Logic
         public string DisplayText
         {
             // todo remove after testing
-            get { return string.Format("{0}: {1}", Location, Coefficient); }
+            get { return string.Format("{0}: {1:N3}", Location, Coefficient); }
         }
 
         public string Location { get; private set; }
