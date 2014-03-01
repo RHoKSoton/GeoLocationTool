@@ -8,6 +8,7 @@ namespace GeoLocationTool.UI
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
@@ -263,6 +264,20 @@ namespace GeoLocationTool.UI
                 cboMunicipality.SelectedValue.ToString());
         }
 
+        private IEnumerable<FuzzyMatchResult> ConcatWithDistinct(IEnumerable<FuzzyMatchResult> a, IEnumerable<FuzzyMatchResult> b)
+        {
+            var set = new HashSet<string>(a.Select(x => x.Location.ToLower()));
+            var list = a.ToList();
+            foreach (var fuzzyMatch in b)
+            {
+                if (!set.Contains(fuzzyMatch.Location.ToLower()))
+                {
+                    list.Add(fuzzyMatch);
+                }
+            }
+            return list;
+        }
+
         private void DisplayBarangaySuggestions()
         {
             //based on the suggested level 1 and 2 and the original level3
@@ -278,7 +293,7 @@ namespace GeoLocationTool.UI
             cboBarangaySuggestion.ValueMember = "Location";
 
             cboBarangaySuggestion.DataSource =
-                barangayNearMatches.Concat(
+                ConcatWithDistinct(barangayNearMatches,
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
@@ -319,7 +334,7 @@ namespace GeoLocationTool.UI
             cboMunicipalitySuggestion.ValueMember = "Location";
 
             cboMunicipalitySuggestion.DataSource =
-                municipalityNearMatches.Concat(
+                ConcatWithDistinct(municipalityNearMatches,
                     fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
         }
 
@@ -339,7 +354,7 @@ namespace GeoLocationTool.UI
             cboProvinceSuggestion.ValueMember = "Location";
 
             cboProvinceSuggestion.DataSource =
-                provinceNearMatches.Concat(fuzzyMatch.GetLevel1Suggestions(level1))
+                ConcatWithDistinct(provinceNearMatches, fuzzyMatch.GetLevel1Suggestions(level1))
                     .ToList();
         }
 
