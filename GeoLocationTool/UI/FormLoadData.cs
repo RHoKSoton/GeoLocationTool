@@ -44,7 +44,7 @@ namespace GeoLocationTool.UI
                 {
                     ReadCsvFile();
                 }
-                else if (rdoImportTabDelim.Checked)
+                else
                 {
                     ReadTabDelimFile();
                 }
@@ -193,6 +193,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
+            rdoImportCsv.Checked = true;
         }
 
         private void SetColumnHeaders()
