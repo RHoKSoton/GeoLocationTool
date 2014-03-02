@@ -3,12 +3,12 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Form to enable the manual matching/selection of fuzzy match suggestions
@@ -55,36 +55,6 @@ namespace GeoLocationTool.UI
         private void btnMainScreen_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedRowIndex < (dataGridView1.RowCount - 1))
-                {
-                    dataGridView1.Rows[++selectedRowIndex].Selected = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("Navigation error - Next.", ex);
-            }
-        }
-
-        private void btnPrev_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedRowIndex > 0)
-                {
-                    dataGridView1.Rows[--selectedRowIndex].Selected = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("Navigation error - Prev.", ex);
-            }
         }
 
         private void btnUseManual_Click(object sender, EventArgs e)
@@ -198,6 +168,36 @@ namespace GeoLocationTool.UI
                 null;
         }
 
+        private IEnumerable<FuzzyMatchResult> ConcatWithDistinct(
+            IEnumerable<FuzzyMatchResult> a,
+            IEnumerable<FuzzyMatchResult> b)
+        {
+            var set = new HashSet<string>(a.Select(x => x.Location.ToLower()));
+            var list = a.ToList();
+            foreach (var fuzzyMatch in b)
+            {
+                if (!set.Contains(fuzzyMatch.Location.ToLower()))
+                {
+                    list.Add(fuzzyMatch);
+                }
+            }
+            return list;
+        }
+
+        private void dataGridView1_RowsAdded(
+            object sender,
+            DataGridViewRowsAddedEventArgs e)
+        {
+            txtRowCount.Text = dataGridView1.RowCount.ToString();
+        }
+
+        private void dataGridView1_RowsRemoved(
+            object sender,
+            DataGridViewRowsRemovedEventArgs e)
+        {
+            txtRowCount.Text = dataGridView1.RowCount.ToString();
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -264,20 +264,6 @@ namespace GeoLocationTool.UI
                 cboMunicipality.SelectedValue.ToString());
         }
 
-        private IEnumerable<FuzzyMatchResult> ConcatWithDistinct(IEnumerable<FuzzyMatchResult> a, IEnumerable<FuzzyMatchResult> b)
-        {
-            var set = new HashSet<string>(a.Select(x => x.Location.ToLower()));
-            var list = a.ToList();
-            foreach (var fuzzyMatch in b)
-            {
-                if (!set.Contains(fuzzyMatch.Location.ToLower()))
-                {
-                    list.Add(fuzzyMatch);
-                }
-            }
-            return list;
-        }
-
         private void DisplayBarangaySuggestions()
         {
             //based on the suggested level 1 and 2 and the original level3
@@ -293,7 +279,8 @@ namespace GeoLocationTool.UI
             cboBarangaySuggestion.ValueMember = "Location";
 
             cboBarangaySuggestion.DataSource =
-                ConcatWithDistinct(barangayNearMatches,
+                ConcatWithDistinct(
+                    barangayNearMatches,
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
@@ -334,7 +321,8 @@ namespace GeoLocationTool.UI
             cboMunicipalitySuggestion.ValueMember = "Location";
 
             cboMunicipalitySuggestion.DataSource =
-                ConcatWithDistinct(municipalityNearMatches,
+                ConcatWithDistinct(
+                    municipalityNearMatches,
                     fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
         }
 
@@ -354,7 +342,9 @@ namespace GeoLocationTool.UI
             cboProvinceSuggestion.ValueMember = "Location";
 
             cboProvinceSuggestion.DataSource =
-                ConcatWithDistinct(provinceNearMatches, fuzzyMatch.GetLevel1Suggestions(level1))
+                ConcatWithDistinct(
+                    provinceNearMatches,
+                    fuzzyMatch.GetLevel1Suggestions(level1))
                     .ToList();
         }
 
@@ -431,7 +421,7 @@ namespace GeoLocationTool.UI
             nearMatches.SaveMatch(txtMunicipality.Text, province, municipality);
             nearMatches.SaveMatch(txtBarangay.Text, province, municipality, barangay);
 
-           // geoCoder.SaveNearMatch(nearMatch);
+            // geoCoder.SaveNearMatch(nearMatch);
         }
 
         private void SetDefaults()
@@ -465,15 +455,5 @@ namespace GeoLocationTool.UI
         }
 
         #endregion Methods
-
-        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            txtRowCount.Text = dataGridView1.RowCount.ToString();
-        }
-
-        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            txtRowCount.Text = dataGridView1.RowCount.ToString();
-        }
     }
 }

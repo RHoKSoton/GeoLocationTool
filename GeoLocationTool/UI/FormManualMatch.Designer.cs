@@ -36,8 +36,6 @@
             this.btnUseOriginal = new System.Windows.Forms.Button();
             this.btnUseManual = new System.Windows.Forms.Button();
             this.btnUseSuggestion = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPrev = new System.Windows.Forms.Button();
             this.txtRowCount = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtSelectedIndex = new System.Windows.Forms.TextBox();
@@ -51,12 +49,12 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 13);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 202);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 212);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 375);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 365);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
@@ -215,7 +213,7 @@
             // 
             this.btnMainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnMainScreen, 2);
-            this.btnMainScreen.Location = new System.Drawing.Point(1086, 116);
+            this.btnMainScreen.Location = new System.Drawing.Point(1086, 174);
             this.btnMainScreen.Name = "btnMainScreen";
             this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
             this.btnMainScreen.TabIndex = 9;
@@ -252,26 +250,6 @@
             this.btnUseSuggestion.Text = "Use This";
             this.btnUseSuggestion.UseVisualStyleBackColor = true;
             this.btnUseSuggestion.Click += new System.EventHandler(this.btnUseSuggestion_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(1086, 40);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 32);
-            this.btnNext.TabIndex = 10;
-            this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.Location = new System.Drawing.Point(1167, 40);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(75, 32);
-            this.btnPrev.TabIndex = 11;
-            this.btnPrev.Text = "Prev";
-            this.btnPrev.UseVisualStyleBackColor = true;
-            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // txtRowCount
             // 
@@ -327,10 +305,7 @@
             this.tableLayoutPanel1.Controls.Add(this.txtBarangay, 6, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.btnNext, 11, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnPrev, 12, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 4);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboProvinceSuggestion, 1, 3);
@@ -341,6 +316,7 @@
             this.tableLayoutPanel1.Controls.Add(this.cboBarangaySuggestion, 6, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnUseManual, 8, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -399,8 +375,6 @@
         private System.Windows.Forms.Button btnUseOriginal;
         private System.Windows.Forms.Button btnUseManual;
         private System.Windows.Forms.Button btnUseSuggestion;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.TextBox txtRowCount;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtSelectedIndex;
