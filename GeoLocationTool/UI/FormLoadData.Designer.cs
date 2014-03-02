@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtWorksheetName = new System.Windows.Forms.TextBox();
             this.btnMatchData = new System.Windows.Forms.Button();
             this.btnLoadInputFile = new System.Windows.Forms.Button();
             this.txtFileName = new System.Windows.Forms.TextBox();
@@ -46,21 +44,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.tlpSaveOptions = new System.Windows.Forms.TableLayoutPanel();
-            this.rdoSaveAsCsv = new System.Windows.Forms.RadioButton();
-            this.rdoSaveAsExcel = new System.Windows.Forms.RadioButton();
-            this.rdoSaveAsTabDelim = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.rdoImportCsv = new System.Windows.Forms.RadioButton();
             this.rdoImportTabDelim = new System.Windows.Forms.RadioButton();
-            this.rdoImportExcel = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udProvince)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMunicipality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udBarangay)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tlpSaveOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -69,35 +62,15 @@
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 8);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 244);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 216);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 476);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 504);
             this.dataGridView1.TabIndex = 27;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(722, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Worksheet name:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtWorksheetName
-            // 
-            this.txtWorksheetName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWorksheetName.Enabled = false;
-            this.txtWorksheetName.Location = new System.Drawing.Point(847, 28);
-            this.txtWorksheetName.Name = "txtWorksheetName";
-            this.txtWorksheetName.Size = new System.Drawing.Size(241, 22);
-            this.txtWorksheetName.TabIndex = 4;
             // 
             // btnMatchData
             // 
-            this.btnMatchData.Location = new System.Drawing.Point(3, 156);
+            this.btnMatchData.Location = new System.Drawing.Point(3, 128);
             this.btnMatchData.Name = "btnMatchData";
             this.btnMatchData.Size = new System.Drawing.Size(147, 33);
             this.btnMatchData.TabIndex = 8;
@@ -118,11 +91,11 @@
             // txtFileName
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.txtFileName, 4);
-            this.txtFileName.Location = new System.Drawing.Point(506, 62);
+            this.tableLayoutPanel1.SetColumnSpan(this.txtFileName, 3);
+            this.txtFileName.Location = new System.Drawing.Point(696, 28);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(736, 22);
+            this.txtFileName.Size = new System.Drawing.Size(546, 22);
             this.txtFileName.TabIndex = 8;
             this.txtFileName.TabStop = false;
             // 
@@ -130,7 +103,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(353, 64);
+            this.label2.Location = new System.Drawing.Point(480, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 9;
@@ -139,7 +112,7 @@
             // 
             // btnSaveCsv
             // 
-            this.btnSaveCsv.Location = new System.Drawing.Point(3, 205);
+            this.btnSaveCsv.Location = new System.Drawing.Point(3, 177);
             this.btnSaveCsv.Name = "btnSaveCsv";
             this.btnSaveCsv.Size = new System.Drawing.Size(147, 33);
             this.btnSaveCsv.TabIndex = 10;
@@ -149,7 +122,7 @@
             // 
             // udProvince
             // 
-            this.udProvince.Location = new System.Drawing.Point(200, 117);
+            this.udProvince.Location = new System.Drawing.Point(174, 89);
             this.udProvince.Name = "udProvince";
             this.udProvince.Size = new System.Drawing.Size(120, 22);
             this.udProvince.TabIndex = 5;
@@ -157,7 +130,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(200, 97);
+            this.label4.Location = new System.Drawing.Point(174, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 17);
             this.label4.TabIndex = 14;
@@ -166,7 +139,7 @@
             // lblMunicipality
             // 
             this.lblMunicipality.AutoSize = true;
-            this.lblMunicipality.Location = new System.Drawing.Point(353, 97);
+            this.lblMunicipality.Location = new System.Drawing.Point(327, 69);
             this.lblMunicipality.Name = "lblMunicipality";
             this.lblMunicipality.Size = new System.Drawing.Size(42, 17);
             this.lblMunicipality.TabIndex = 16;
@@ -174,7 +147,7 @@
             // 
             // udMunicipality
             // 
-            this.udMunicipality.Location = new System.Drawing.Point(353, 117);
+            this.udMunicipality.Location = new System.Drawing.Point(327, 89);
             this.udMunicipality.Name = "udMunicipality";
             this.udMunicipality.Size = new System.Drawing.Size(120, 22);
             this.udMunicipality.TabIndex = 6;
@@ -182,7 +155,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(506, 97);
+            this.label6.Location = new System.Drawing.Point(480, 69);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 17);
             this.label6.TabIndex = 18;
@@ -190,14 +163,14 @@
             // 
             // udBarangay
             // 
-            this.udBarangay.Location = new System.Drawing.Point(506, 117);
+            this.udBarangay.Location = new System.Drawing.Point(480, 89);
             this.udBarangay.Name = "udBarangay";
             this.udBarangay.Size = new System.Drawing.Size(120, 22);
             this.udBarangay.TabIndex = 7;
             // 
             // btnManualMatch
             // 
-            this.btnManualMatch.Location = new System.Drawing.Point(200, 156);
+            this.btnManualMatch.Location = new System.Drawing.Point(174, 128);
             this.btnManualMatch.Name = "btnManualMatch";
             this.btnManualMatch.Size = new System.Drawing.Size(147, 33);
             this.btnManualMatch.TabIndex = 9;
@@ -230,15 +203,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tlpSaveOptions, 2, 10);
             this.tableLayoutPanel1.Controls.Add(this.rdoImportCsv, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.rdoImportTabDelim, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.rdoImportExcel, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtWorksheetName, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtFileName, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.button1, 3, 8);
             this.tableLayoutPanel1.Controls.Add(this.button2, 4, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtFileName, 5, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -260,7 +230,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(3, 97);
+            this.label5.Location = new System.Drawing.Point(3, 69);
             this.label5.Name = "label5";
             this.tableLayoutPanel1.SetRowSpan(this.label5, 2);
             this.label5.Size = new System.Drawing.Size(147, 56);
@@ -274,11 +244,8 @@
             this.tlpSaveOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tlpSaveOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tlpSaveOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpSaveOptions.Controls.Add(this.rdoSaveAsCsv, 0, 0);
-            this.tlpSaveOptions.Controls.Add(this.rdoSaveAsExcel, 2, 0);
-            this.tlpSaveOptions.Controls.Add(this.rdoSaveAsTabDelim, 1, 0);
             this.tlpSaveOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpSaveOptions.Location = new System.Drawing.Point(197, 202);
+            this.tlpSaveOptions.Location = new System.Drawing.Point(171, 174);
             this.tlpSaveOptions.Margin = new System.Windows.Forms.Padding(0);
             this.tlpSaveOptions.Name = "tlpSaveOptions";
             this.tlpSaveOptions.RowCount = 1;
@@ -286,49 +253,40 @@
             this.tlpSaveOptions.Size = new System.Drawing.Size(522, 39);
             this.tlpSaveOptions.TabIndex = 22;
             // 
-            // rdoSaveAsCsv
+            // button1
             // 
-            this.rdoSaveAsCsv.AutoSize = true;
-            this.rdoSaveAsCsv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoSaveAsCsv.Location = new System.Drawing.Point(3, 3);
-            this.rdoSaveAsCsv.Name = "rdoSaveAsCsv";
-            this.rdoSaveAsCsv.Size = new System.Drawing.Size(141, 33);
-            this.rdoSaveAsCsv.TabIndex = 20;
-            this.rdoSaveAsCsv.TabStop = true;
-            this.rdoSaveAsCsv.Text = "Csv";
-            this.rdoSaveAsCsv.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(327, 128);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 24;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
-            // rdoSaveAsExcel
+            // btnBack
             // 
-            this.rdoSaveAsExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdoSaveAsExcel.AutoSize = true;
-            this.rdoSaveAsExcel.Enabled = false;
-            this.rdoSaveAsExcel.Location = new System.Drawing.Point(297, 9);
-            this.rdoSaveAsExcel.Name = "rdoSaveAsExcel";
-            this.rdoSaveAsExcel.Size = new System.Drawing.Size(222, 21);
-            this.rdoSaveAsExcel.TabIndex = 21;
-            this.rdoSaveAsExcel.TabStop = true;
-            this.rdoSaveAsExcel.Text = "Excel";
-            this.rdoSaveAsExcel.UseVisualStyleBackColor = true;
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Location = new System.Drawing.Point(1095, 177);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(147, 33);
+            this.btnBack.TabIndex = 26;
+            this.btnBack.Text = "Geographical Data";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // rdoSaveAsTabDelim
+            // button2
             // 
-            this.rdoSaveAsTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdoSaveAsTabDelim.AutoSize = true;
-            this.rdoSaveAsTabDelim.Enabled = false;
-            this.rdoSaveAsTabDelim.Location = new System.Drawing.Point(150, 9);
-            this.rdoSaveAsTabDelim.Name = "rdoSaveAsTabDelim";
-            this.rdoSaveAsTabDelim.Size = new System.Drawing.Size(141, 21);
-            this.rdoSaveAsTabDelim.TabIndex = 22;
-            this.rdoSaveAsTabDelim.TabStop = true;
-            this.rdoSaveAsTabDelim.Text = "Tab Delimited";
-            this.rdoSaveAsTabDelim.UseVisualStyleBackColor = true;
+            this.button2.Location = new System.Drawing.Point(480, 128);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 23);
+            this.button2.TabIndex = 25;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             // 
             // rdoImportCsv
             // 
             this.rdoImportCsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportCsv.AutoSize = true;
-            this.rdoImportCsv.Location = new System.Drawing.Point(200, 29);
+            this.rdoImportCsv.Location = new System.Drawing.Point(174, 29);
             this.rdoImportCsv.Name = "rdoImportCsv";
             this.rdoImportCsv.Size = new System.Drawing.Size(147, 21);
             this.rdoImportCsv.TabIndex = 2;
@@ -340,55 +298,13 @@
             // 
             this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportTabDelim.AutoSize = true;
-            this.rdoImportTabDelim.Location = new System.Drawing.Point(353, 29);
+            this.rdoImportTabDelim.Location = new System.Drawing.Point(327, 29);
             this.rdoImportTabDelim.Name = "rdoImportTabDelim";
             this.rdoImportTabDelim.Size = new System.Drawing.Size(147, 21);
             this.rdoImportTabDelim.TabIndex = 23;
             this.rdoImportTabDelim.TabStop = true;
             this.rdoImportTabDelim.Text = "Tab Delimited";
             this.rdoImportTabDelim.UseVisualStyleBackColor = true;
-            // 
-            // rdoImportExcel
-            // 
-            this.rdoImportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdoImportExcel.AutoSize = true;
-            this.rdoImportExcel.Enabled = false;
-            this.rdoImportExcel.Location = new System.Drawing.Point(506, 29);
-            this.rdoImportExcel.Name = "rdoImportExcel";
-            this.rdoImportExcel.Size = new System.Drawing.Size(210, 21);
-            this.rdoImportExcel.TabIndex = 3;
-            this.rdoImportExcel.TabStop = true;
-            this.rdoImportExcel.Text = "Excel";
-            this.rdoImportExcel.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(353, 156);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
-            this.button1.TabIndex = 24;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(506, 156);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 23);
-            this.button2.TabIndex = 25;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            // 
-            // btnBack
-            // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1095, 205);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(147, 33);
-            this.btnBack.TabIndex = 26;
-            this.btnBack.Text = "Geographical Data";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FormLoadData
             // 
@@ -406,8 +322,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.udBarangay)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tlpSaveOptions.ResumeLayout(false);
-            this.tlpSaveOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -415,8 +329,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtWorksheetName;
         private System.Windows.Forms.Button btnMatchData;
         private System.Windows.Forms.Button btnLoadInputFile;
         private System.Windows.Forms.TextBox txtFileName;
@@ -430,17 +342,13 @@
         private System.Windows.Forms.NumericUpDown udBarangay;
         private System.Windows.Forms.Button btnManualMatch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.RadioButton rdoImportCsv;
-        private System.Windows.Forms.RadioButton rdoImportExcel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton rdoSaveAsCsv;
-        private System.Windows.Forms.RadioButton rdoSaveAsExcel;
         private System.Windows.Forms.TableLayoutPanel tlpSaveOptions;
-        private System.Windows.Forms.RadioButton rdoSaveAsTabDelim;
-        private System.Windows.Forms.RadioButton rdoImportTabDelim;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton rdoImportCsv;
+        private System.Windows.Forms.RadioButton rdoImportTabDelim;
     }
 }
 

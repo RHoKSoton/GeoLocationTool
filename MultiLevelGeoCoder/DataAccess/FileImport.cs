@@ -18,27 +18,6 @@ namespace MultiLevelGeoCoder.DataAccess
     {
         #region Methods
 
-        internal static DataTable ReadExcelFile(string path, string worksheetName)
-        {
-            // todo remove this if not needed
-            // todo make this read all versions of excel
-            var connectionString =
-                String.Format(
-                    "Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties=Excel 12.0;",
-                    path);
-
-            string commandText = String.Format("SELECT *  FROM [{0}$]", worksheetName);
-
-            using (OleDbDataAdapter adapter = new OleDbDataAdapter(
-                commandText,
-                connectionString))
-            {
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
-
         /// <summary>
         /// Reads the CSV file.
         /// </summary>

@@ -3,9 +3,6 @@
 namespace GeoLocationTool.UI
 {
     using System;
-    using System.Data;
-    using System.Data.OleDb;
-    using System.Drawing;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -51,10 +48,6 @@ namespace GeoLocationTool.UI
                 {
                     ReadTabDelimFile();
                 }
-                else
-                {
-                    ReadExcelFile();
-                }
             }
             catch (Exception ex)
             {
@@ -94,7 +87,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (!geoCoder.IsGazetteerInitialised() )
+                if (!geoCoder.IsGazetteerInitialised())
                 {
                     MessageBox.Show(
                         "Gazetteer data missing, please read in a gazetteer file.");
@@ -123,14 +116,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (rdoSaveAsCsv.Checked)
-                {
-                    SaveAsCsv();
-                }
-                else
-                {
-                    SaveAsExcel();
-                }
+                SaveAsCsv();
             }
             catch (Exception ex)
             {
@@ -141,32 +127,6 @@ namespace GeoLocationTool.UI
         private void FormLoadData_Load(object sender, EventArgs e)
         {
             SetDefaults();
-        }
-
-        private string[] GetExcelSheetNames(string excelFileName)
-        {
-            String conStr = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" +
-                            excelFileName +
-                            ";Extended Properties=Excel 8.0;";
-            OleDbConnection con = new OleDbConnection(conStr);
-            con.Open();
-            DataTable dt2 = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-
-            if (dt2 == null)
-            {
-                return null;
-            }
-
-            String[] excelSheetNames = new String[dt2.Rows.Count];
-            int i = 0;
-
-            foreach (DataRow row in dt2.Rows)
-            {
-                excelSheetNames[i] = row["TABLE_NAME"].ToString();
-                i++;
-            }
-
-            return excelSheetNames;
         }
 
         private void ReadCsvFile()
@@ -185,28 +145,10 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void ReadExcelFile()
-        {
-            //const string filter = "excel files (*.xls,*.xlsx)|*.xls*";
-            //txtFileName.Clear();
-            //txtFileName.Text = UiHelper.GetFileName(filter);
-            //var path = txtFileName.Text.Trim();
-
-            // todo provide the user with a list of worksheet names for the selected file
-            // todo remove this
-            //string worksheetName = txtWorksheetName.Text;
-            //if (!String.IsNullOrWhiteSpace(path))
-            //{
-            //    inputData.LoadExcelFile(path, worksheetName);
-            //    dataGridView1.DataSource = inputData.dt;
-            //    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            //    SetColumnStyle();
-            //}
-        }
-
         private void ReadTabDelimFile()
         {
-            const string filter = "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";
+            const string filter =
+                "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";
             txtFileName.Clear();
             txtFileName.Text = UiHelper.GetFileName(filter);
             var path = txtFileName.Text.Trim();
@@ -234,20 +176,6 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void SaveAsExcel()
-        {
-            //using (SaveFileDialog dialog = new SaveFileDialog())
-            //{
-            //    dialog.AddExtension = true;
-            //    dialog.DefaultExt = "xlsx";
-            //    dialog.Filter = "Excel(*.xlsx)|*.*";
-            //    if (dialog.ShowDialog() == DialogResult.OK)
-            //    {
-            //        inputData.SaveToExcelFile(dialog.FileName);
-            //    }
-            //}
-        }
-
         private void SetColumnStyle()
         {
             //todo any style needed here?
@@ -261,9 +189,6 @@ namespace GeoLocationTool.UI
             udProvince.Value = 1;
             udMunicipality.Value = 2;
             udBarangay.Value = 3;
-            txtWorksheetName.Text = "Sheet1";
-            rdoImportCsv.Checked = true;
-            rdoSaveAsCsv.Checked = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
