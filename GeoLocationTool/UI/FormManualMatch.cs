@@ -388,7 +388,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                SetGridDefaults();
+                SetDefaults();
                 DisplayUnmatchedRecords();
                 DisplayProvinceList();
             }
@@ -434,12 +434,13 @@ namespace GeoLocationTool.UI
            // geoCoder.SaveNearMatch(nearMatch);
         }
 
-        private void SetGridDefaults()
+        private void SetDefaults()
         {
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
+            btnUseSuggestion.Select();
         }
 
         private void UpdateRow(string level1, string level2, string level3)

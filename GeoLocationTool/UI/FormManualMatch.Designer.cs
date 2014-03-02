@@ -57,7 +57,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1239, 375);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.TabIndex = 10;
             this.dataGridView1.TabStop = false;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
@@ -108,7 +108,7 @@
             this.cboProvinceSuggestion.Location = new System.Drawing.Point(150, 78);
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboProvinceSuggestion.TabIndex = 3;
+            this.cboProvinceSuggestion.TabIndex = 1;
             this.cboProvinceSuggestion.SelectedIndexChanged += new System.EventHandler(this.cboProvinceSuggestion_SelectedIndexChanged);
             // 
             // cboProvince
@@ -118,7 +118,7 @@
             this.cboProvince.Location = new System.Drawing.Point(150, 116);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(260, 24);
-            this.cboProvince.TabIndex = 0;
+            this.cboProvince.TabIndex = 5;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
             // cboMunicipalitySuggestion
@@ -128,7 +128,7 @@
             this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(427, 78);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboMunicipalitySuggestion.TabIndex = 4;
+            this.cboMunicipalitySuggestion.TabIndex = 2;
             this.cboMunicipalitySuggestion.SelectedIndexChanged += new System.EventHandler(this.cboMunicipalitySuggestion_SelectedIndexChanged);
             // 
             // cboMunicipality
@@ -137,7 +137,7 @@
             this.cboMunicipality.Location = new System.Drawing.Point(427, 116);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
-            this.cboMunicipality.TabIndex = 1;
+            this.cboMunicipality.TabIndex = 6;
             this.cboMunicipality.SelectedIndexChanged += new System.EventHandler(this.cboMunicipality_SelectedIndexChanged);
             // 
             // cboBarangaySuggestion
@@ -147,7 +147,7 @@
             this.cboBarangaySuggestion.Location = new System.Drawing.Point(704, 78);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboBarangaySuggestion.TabIndex = 5;
+            this.cboBarangaySuggestion.TabIndex = 3;
             // 
             // cboBarangay
             // 
@@ -155,7 +155,7 @@
             this.cboBarangay.Location = new System.Drawing.Point(704, 116);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
-            this.cboBarangay.TabIndex = 2;
+            this.cboBarangay.TabIndex = 7;
             // 
             // label2
             // 
@@ -219,7 +219,7 @@
             this.btnMainScreen.Location = new System.Drawing.Point(1086, 116);
             this.btnMainScreen.Name = "btnMainScreen";
             this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
-            this.btnMainScreen.TabIndex = 12;
+            this.btnMainScreen.TabIndex = 9;
             this.btnMainScreen.Text = "Main Screen";
             this.btnMainScreen.UseVisualStyleBackColor = true;
             this.btnMainScreen.Click += new System.EventHandler(this.btnMainScreen_Click);
@@ -229,7 +229,7 @@
             this.btnUseOriginal.Location = new System.Drawing.Point(981, 40);
             this.btnUseOriginal.Name = "btnUseOriginal";
             this.btnUseOriginal.Size = new System.Drawing.Size(75, 32);
-            this.btnUseOriginal.TabIndex = 7;
+            this.btnUseOriginal.TabIndex = 0;
             this.btnUseOriginal.Text = "Use this";
             this.btnUseOriginal.UseVisualStyleBackColor = true;
             this.btnUseOriginal.Click += new System.EventHandler(this.btnUseOriginal_Click);
@@ -249,7 +249,7 @@
             this.btnUseSuggestion.Location = new System.Drawing.Point(981, 78);
             this.btnUseSuggestion.Name = "btnUseSuggestion";
             this.btnUseSuggestion.Size = new System.Drawing.Size(75, 32);
-            this.btnUseSuggestion.TabIndex = 9;
+            this.btnUseSuggestion.TabIndex = 4;
             this.btnUseSuggestion.Text = "Use This";
             this.btnUseSuggestion.UseVisualStyleBackColor = true;
             this.btnUseSuggestion.Click += new System.EventHandler(this.btnUseSuggestion_Click);
