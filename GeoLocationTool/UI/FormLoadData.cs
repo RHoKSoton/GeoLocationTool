@@ -267,6 +267,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
+            dataGridView1.ReadOnly = true;
         }
 
         private void SetColumnHeaders()

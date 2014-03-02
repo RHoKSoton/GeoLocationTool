@@ -406,6 +406,7 @@
             this.Name = "FormLoadLocationData";
             this.Text = "Multi Level Geo Coder Tool - Geographical Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FormLoadLocationData_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

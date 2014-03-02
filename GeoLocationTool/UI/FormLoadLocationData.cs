@@ -19,9 +19,9 @@ namespace GeoLocationTool.UI
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMapping;
+        private readonly IGeoCoder geoCoder = new GeoCoder();
 
         private FormLoadData formLoadData;
-        private readonly IGeoCoder geoCoder = new GeoCoder();
 
         #endregion Fields
 
@@ -80,7 +80,7 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    SetColumnHeaders(); 
+                    SetColumnHeaders();
                     if (!ColumnHeadersSet())
                     {
                         UiHelper.DisplayMessage(
@@ -88,7 +88,7 @@ namespace GeoLocationTool.UI
                             "Missing Data");
                     }
                     SaveColumnMappings();
-                    LoadNextScreen();                   
+                    LoadNextScreen();
                 }
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace GeoLocationTool.UI
 
             return areSet;
         }
-     
+
         private void DisplaySavedColumnHeaderIndices(string path)
         {
             var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(path);
@@ -142,6 +142,11 @@ namespace GeoLocationTool.UI
             Close();
         }
 
+        private void FormLoadLocationData_Load(object sender, EventArgs e)
+        {
+            SetGridDefaults();
+        }
+
         private void LoadNextScreen()
         {
             if (formLoadData == null)
@@ -149,7 +154,7 @@ namespace GeoLocationTool.UI
                 formLoadData = new FormLoadData(geoCoder);
                 formLoadData.Closing += FormLoadDataClosing;
             }
-                 
+
             formLoadData.Show(this);
             Hide();
         }
@@ -187,20 +192,27 @@ namespace GeoLocationTool.UI
         private void SetColumnHeaders()
         {
             // todo use column names instead of indices
-            GazetteerColumnHeaders  headers = new GazetteerColumnHeaders();
-            headers.Admin1Code = (int)udCode1.Value - 1;
-            headers.Admin1Name = (int)udName1.Value - 1;
-            headers.Admin1AltName = (int)udAltName1.Value - 1;
+            GazetteerColumnHeaders headers = new GazetteerColumnHeaders();
+            headers.Admin1Code = (int) udCode1.Value - 1;
+            headers.Admin1Name = (int) udName1.Value - 1;
+            headers.Admin1AltName = (int) udAltName1.Value - 1;
 
-            headers.Admin2Code = (int)udCode2.Value - 1;
-            headers.Admin2Name = (int)udName2.Value - 1;
-            headers.Admin2AltName = (int)udAltName2.Value - 1;
+            headers.Admin2Code = (int) udCode2.Value - 1;
+            headers.Admin2Name = (int) udName2.Value - 1;
+            headers.Admin2AltName = (int) udAltName2.Value - 1;
 
-            headers.Admin3Code = (int)udCode3.Value - 1;
-            headers.Admin3Name = (int)udName3.Value - 1;
-            headers.Admin3AltName = (int)udAltName3.Value - 1;
+            headers.Admin3Code = (int) udCode3.Value - 1;
+            headers.Admin3Name = (int) udName3.Value - 1;
+            headers.Admin3AltName = (int) udAltName3.Value - 1;
             geoCoder.SetGazetteerColumns(headers);
-        
+        }
+
+        private void SetGridDefaults()
+        {
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = false;
+            dataGridView1.ReadOnly = true;
         }
 
         #endregion Methods

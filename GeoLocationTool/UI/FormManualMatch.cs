@@ -439,6 +439,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
+            dataGridView1.ReadOnly = true;
         }
 
         private void UpdateRow(string level1, string level2, string level3)
