@@ -37,7 +37,6 @@
             this.btnUseManual = new System.Windows.Forms.Button();
             this.btnUseSuggestion = new System.Windows.Forms.Button();
             this.txtRowCount = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.txtSelectedIndex = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -71,8 +70,9 @@
             // 
             // txtProvince
             // 
+            this.txtProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.txtProvince, 2);
-            this.txtProvince.Location = new System.Drawing.Point(150, 40);
+            this.txtProvince.Location = new System.Drawing.Point(172, 45);
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.ReadOnly = true;
             this.txtProvince.Size = new System.Drawing.Size(260, 22);
@@ -81,7 +81,8 @@
             // 
             // txtBarangay
             // 
-            this.txtBarangay.Location = new System.Drawing.Point(704, 40);
+            this.txtBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBarangay.Location = new System.Drawing.Point(718, 45);
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.ReadOnly = true;
             this.txtBarangay.Size = new System.Drawing.Size(260, 22);
@@ -90,7 +91,8 @@
             // 
             // txtMunicipality
             // 
-            this.txtMunicipality.Location = new System.Drawing.Point(427, 40);
+            this.txtMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMunicipality.Location = new System.Drawing.Point(445, 45);
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.ReadOnly = true;
             this.txtMunicipality.Size = new System.Drawing.Size(260, 22);
@@ -99,10 +101,11 @@
             // 
             // cboProvinceSuggestion
             // 
+            this.cboProvinceSuggestion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvinceSuggestion, 2);
             this.cboProvinceSuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvinceSuggestion.FormattingEnabled = true;
-            this.cboProvinceSuggestion.Location = new System.Drawing.Point(150, 78);
+            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 82);
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboProvinceSuggestion.TabIndex = 1;
@@ -110,9 +113,10 @@
             // 
             // cboProvince
             // 
+            this.cboProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvince, 2);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(150, 116);
+            this.cboProvince.Location = new System.Drawing.Point(172, 120);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(260, 24);
             this.cboProvince.TabIndex = 5;
@@ -120,9 +124,10 @@
             // 
             // cboMunicipalitySuggestion
             // 
+            this.cboMunicipalitySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(427, 78);
+            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 82);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipalitySuggestion.TabIndex = 2;
@@ -130,8 +135,9 @@
             // 
             // cboMunicipality
             // 
+            this.cboMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(427, 116);
+            this.cboMunicipality.Location = new System.Drawing.Point(445, 120);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipality.TabIndex = 6;
@@ -139,17 +145,19 @@
             // 
             // cboBarangaySuggestion
             // 
+            this.cboBarangaySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(704, 78);
+            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 82);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboBarangaySuggestion.TabIndex = 3;
             // 
             // cboBarangay
             // 
+            this.cboBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(704, 116);
+            this.cboBarangay.Location = new System.Drawing.Point(718, 120);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
             this.cboBarangay.TabIndex = 7;
@@ -158,7 +166,7 @@
             // 
             this.label2.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
-            this.label2.Location = new System.Drawing.Point(150, 20);
+            this.label2.Location = new System.Drawing.Point(172, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 11;
@@ -167,7 +175,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(427, 20);
+            this.label3.Location = new System.Drawing.Point(445, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 17);
             this.label3.TabIndex = 12;
@@ -176,7 +184,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(704, 20);
+            this.label4.Location = new System.Drawing.Point(718, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 17);
             this.label4.TabIndex = 13;
@@ -193,12 +201,13 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 171);
+            this.label6.Location = new System.Drawing.Point(3, 181);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(118, 17);
+            this.label6.Size = new System.Drawing.Size(163, 17);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Unmatched Rows";
+            this.label6.Text = "Unmatched Rows Count:";
             // 
             // label7
             // 
@@ -223,7 +232,7 @@
             // 
             // btnUseOriginal
             // 
-            this.btnUseOriginal.Location = new System.Drawing.Point(981, 40);
+            this.btnUseOriginal.Location = new System.Drawing.Point(991, 40);
             this.btnUseOriginal.Name = "btnUseOriginal";
             this.btnUseOriginal.Size = new System.Drawing.Size(75, 32);
             this.btnUseOriginal.TabIndex = 0;
@@ -233,7 +242,7 @@
             // 
             // btnUseManual
             // 
-            this.btnUseManual.Location = new System.Drawing.Point(981, 116);
+            this.btnUseManual.Location = new System.Drawing.Point(991, 116);
             this.btnUseManual.Name = "btnUseManual";
             this.btnUseManual.Size = new System.Drawing.Size(75, 32);
             this.btnUseManual.TabIndex = 8;
@@ -243,7 +252,7 @@
             // 
             // btnUseSuggestion
             // 
-            this.btnUseSuggestion.Location = new System.Drawing.Point(981, 78);
+            this.btnUseSuggestion.Location = new System.Drawing.Point(991, 78);
             this.btnUseSuggestion.Name = "btnUseSuggestion";
             this.btnUseSuggestion.Size = new System.Drawing.Size(75, 32);
             this.btnUseSuggestion.TabIndex = 4;
@@ -253,27 +262,19 @@
             // 
             // txtRowCount
             // 
-            this.txtRowCount.Location = new System.Drawing.Point(236, 174);
+            this.txtRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRowCount.Location = new System.Drawing.Point(172, 179);
             this.txtRowCount.Name = "txtRowCount";
             this.txtRowCount.ReadOnly = true;
-            this.txtRowCount.Size = new System.Drawing.Size(154, 22);
+            this.txtRowCount.Size = new System.Drawing.Size(116, 22);
             this.txtRowCount.TabIndex = 0;
             this.txtRowCount.TabStop = false;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(150, 171);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 17);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Row Count:";
-            // 
             // txtSelectedIndex
             // 
-            this.txtSelectedIndex.Location = new System.Drawing.Point(1075, 583);
+            this.txtSelectedIndex.Location = new System.Drawing.Point(1078, 583);
             this.txtSelectedIndex.Name = "txtSelectedIndex";
-            this.txtSelectedIndex.Size = new System.Drawing.Size(5, 22);
+            this.txtSelectedIndex.Size = new System.Drawing.Size(1, 22);
             this.txtSelectedIndex.TabIndex = 27;
             this.txtSelectedIndex.Visible = false;
             // 
@@ -296,7 +297,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 10, 8);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtProvince, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 6, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 6);
@@ -305,7 +305,6 @@
             this.tableLayoutPanel1.Controls.Add(this.txtBarangay, 6, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboProvinceSuggestion, 1, 3);
@@ -317,6 +316,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnUseManual, 8, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 1, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -376,7 +376,6 @@
         private System.Windows.Forms.Button btnUseManual;
         private System.Windows.Forms.Button btnUseSuggestion;
         private System.Windows.Forms.TextBox txtRowCount;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtSelectedIndex;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
