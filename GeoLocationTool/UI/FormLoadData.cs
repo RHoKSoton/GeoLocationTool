@@ -137,9 +137,14 @@ namespace GeoLocationTool.UI
 
         private void DisplayColumnHeaderLists()
         {
+            InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
             cboLevel1.DataSource = geoCoder.AllInputColumnNames();
             cboLevel2.DataSource = geoCoder.AllInputColumnNames();
             cboLevel3.DataSource = geoCoder.AllInputColumnNames();
+            // set defaults if they exist in the input sheet
+            cboLevel1.SelectedIndex = cboLevel1.FindStringExact(defaultColumnNames.Level1);
+            cboLevel2.SelectedIndex = cboLevel2.FindStringExact(defaultColumnNames.Level2);
+            cboLevel3.SelectedIndex = cboLevel3.FindStringExact(defaultColumnNames.Level3);
         }
 
         private void FormLoadData_Load(object sender, EventArgs e)

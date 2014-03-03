@@ -32,6 +32,12 @@ namespace MultiLevelGeoCoder
         /// <returns></returns>
         InputColumnNames InputColumnNames();
 
+        /// <summary>
+        /// The default names of the columns that contain the  input data to be matched.
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames DefaultInputColumnNames();
+
         bool IsGazetteerInitialised();
 
         void LoadGazetter(string path);
@@ -56,6 +62,6 @@ namespace MultiLevelGeoCoder
 
         DataView UnmatchedRecords();
 
-        #endregion Methods       
+        #endregion Methods            
     }
 }

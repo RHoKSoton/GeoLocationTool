@@ -48,12 +48,21 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
-        /// The names of the columns that contain the data to be matched
+        /// The names of the columns that contain the data to be matched.
         /// </summary>
         /// <returns></returns>
         public InputColumnNames InputColumnNames()
         {
             return inputData.ColumnNames;
+        }
+
+        /// <summary>
+        /// The default names of the columns that contain the input data to be matched.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames DefaultInputColumnNames()
+        {
+            return inputData.DefaultColumnNames;
         }
 
         public bool IsGazetteerInitialised()

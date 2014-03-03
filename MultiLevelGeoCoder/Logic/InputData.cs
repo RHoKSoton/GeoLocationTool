@@ -14,12 +14,16 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        public const string Level1CodeColumnName = "Code 1";
         public const string Alt1ColumnName = "Alt Name 1";
-        public const string Level2CodeColumnName = "Code 2";
         public const string Alt2ColumnName = "Alt Name 2";
-        public const string Level3CodeColumnName = "Code 3";
         public const string Alt3ColumnName = "Alt Name 3";
+        public const string Level1CodeColumnName = "Code 1";
+        public const string Level2CodeColumnName = "Code 2";
+        public const string Level3CodeColumnName = "Code 3";
+
+        private const string DefaultLevel1ColumnName = "Admin2";
+        private const string DefaultLevel2ColumnName = "Admin3";
+        private const string DefaultLevel3ColumnName = "Admin4";
 
         #endregion Fields
 
@@ -36,9 +40,31 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Properties
 
+        /// <summary>
+        /// The names of the columns that contain the data to be matched.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames ColumnNames { get; set; }
+
         public DataTable data { get; set; }
 
-        public InputColumnNames ColumnNames { get; set; }
+        /// <summary>
+        /// The default names of the columns that contain the input data to be matched.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames DefaultColumnNames
+        {
+            get
+            {
+                InputColumnNames defaults = new InputColumnNames
+                {
+                    Level1 = DefaultLevel1ColumnName,
+                    Level2 = DefaultLevel2ColumnName,
+                    Level3 = DefaultLevel3ColumnName
+                };
+                return defaults;
+            }
+        }
 
         #endregion Properties
 
@@ -72,23 +98,6 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         /// <summary>
-        /// Provides a list of all the column header names present in the data sheet,
-        /// excludes columns added by the application.
-        /// </summary>
-        /// <returns>List of column names</returns>
-        internal IList<string> AllColumnNames()
-        {
-            var addedColumnNames = AddedColumnNames();
-            List<string> list = (
-                from DataColumn dataColumn
-                    in data.Columns
-                where !addedColumnNames.Contains(dataColumn.ColumnName)
-                select dataColumn.ColumnName).ToList();
-
-            return list;
-        }
-
-        /// <summary>
         /// Gets the unmatched records.
         /// </summary>
         /// <returns>A view only containing records where one or more location codes is missing.</returns>
@@ -105,10 +114,35 @@ namespace MultiLevelGeoCoder.Logic
             return unmatched;
         }
 
+        /// <summary>
+        /// Provides a list of all the column header names present in the data sheet,
+        /// excludes columns added by the application.
+        /// </summary>
+        /// <returns>List of column names</returns>
+        internal IList<string> AllColumnNames()
+        {
+            var addedColumnNames = AddedColumnNames();
+            List<string> list = (
+                from DataColumn dataColumn
+                    in data.Columns
+                where !addedColumnNames.Contains(dataColumn.ColumnName)
+                select dataColumn.ColumnName).ToList();
+
+            return list;
+        }
+
         private void AddAdditionalColumns()
         {
             AddCodeColumns();
             AddAltNameColumns();
+        }
+
+        private void AddAltNameColumns()
+        {
+            // add collumns to use for the edited location data
+            AddColumn(Alt1ColumnName);
+            AddColumn(Alt2ColumnName);
+            AddColumn(Alt3ColumnName);
         }
 
         private void AddCodeColumns()
@@ -139,14 +173,6 @@ namespace MultiLevelGeoCoder.Logic
             return addedColumns;
         }
 
-        private void AddAltNameColumns()
-        {
-            // add collumns to use for the edited location data
-            AddColumn(Alt1ColumnName);
-            AddColumn(Alt2ColumnName);
-            AddColumn(Alt3ColumnName);
-        }
-
         private void SetColumnsAsReadOnly()
         {
             List<string> addedColumns = AddedColumnNames();
@@ -161,5 +187,18 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         #endregion Methods
+
+        #region Other
+
+        //private void InitialiseDefaultColumnNames()
+        //{
+        //    InputColumnNames defaultColumnNames = new InputColumnNames();
+        //    defaultColumnNames.Level1 = DefaultLevel1ColumnName;
+        //    defaultColumnNames.Level2 = DefaultLevel2ColumnName;
+        //    defaultColumnNames.Level3 = DefaultLevel3ColumnName;
+        //    DefaultColumnNames = defaultColumnNames;
+        //}
+
+        #endregion Other
     }
 }
