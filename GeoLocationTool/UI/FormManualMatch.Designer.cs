@@ -105,7 +105,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvinceSuggestion, 2);
             this.cboProvinceSuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvinceSuggestion.FormattingEnabled = true;
-            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 82);
+            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 81);
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboProvinceSuggestion.TabIndex = 1;
@@ -116,7 +116,7 @@
             this.cboProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvince, 2);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(172, 120);
+            this.cboProvince.Location = new System.Drawing.Point(172, 119);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(260, 24);
             this.cboProvince.TabIndex = 5;
@@ -127,7 +127,7 @@
             this.cboMunicipalitySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 82);
+            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 81);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipalitySuggestion.TabIndex = 2;
@@ -137,7 +137,7 @@
             // 
             this.cboMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(445, 120);
+            this.cboMunicipality.Location = new System.Drawing.Point(445, 119);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipality.TabIndex = 6;
@@ -148,7 +148,7 @@
             this.cboBarangaySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 82);
+            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 81);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboBarangaySuggestion.TabIndex = 3;
@@ -157,7 +157,7 @@
             // 
             this.cboBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(718, 120);
+            this.cboBarangay.Location = new System.Drawing.Point(718, 119);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
             this.cboBarangay.TabIndex = 7;
@@ -272,7 +272,7 @@
             // 
             // txtSelectedIndex
             // 
-            this.txtSelectedIndex.Location = new System.Drawing.Point(1078, 583);
+            this.txtSelectedIndex.Location = new System.Drawing.Point(1079, 583);
             this.txtSelectedIndex.Name = "txtSelectedIndex";
             this.txtSelectedIndex.Size = new System.Drawing.Size(1, 22);
             this.txtSelectedIndex.TabIndex = 27;

@@ -3,6 +3,7 @@
 namespace MultiLevelGeoCoder
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using DataAccess;
     using Logic;
@@ -36,6 +37,15 @@ namespace MultiLevelGeoCoder
         #endregion Properties
 
         #region Methods
+
+        /// <summary>
+        /// Provides a list of all the column header names present in the input data sheet
+        /// </summary>
+        /// <returns>List of column names</returns>
+        public IList<string> AllInputColumnNames()
+        {
+            return inputData.AllColumnNames();
+        }
 
         public ColumnHeaderIndices InputColumnIndices()
         {

@@ -5,6 +5,7 @@ namespace MultiLevelGeoCoder.Logic
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
 
     /// <summary>
     /// Holds the input data and added codes
@@ -70,6 +71,23 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         /// <summary>
+        /// Provides a list of all the column header names present in the data sheet,
+        /// excludes columns added by the application.
+        /// </summary>
+        /// <returns>List of column names</returns>
+        internal IList<string> AllColumnNames()
+        {
+            var addedColumnNames = AddedColumnNames();
+            List<string> list = (
+                from DataColumn dataColumn
+                    in data.Columns
+                where !addedColumnNames.Contains(dataColumn.ColumnName)
+                select dataColumn.ColumnName).ToList();
+
+            return list;
+        }
+
+        /// <summary>
         /// Gets the unmatched records.
         /// </summary>
         /// <returns>A view only containing records where one or more location codes is missing.</returns>
@@ -127,7 +145,7 @@ namespace MultiLevelGeoCoder.Logic
             AddColumn(Alt2ColumnName);
             AddColumn(Alt3ColumnName);
         }
-     
+
         private void SetColumnsAsReadOnly()
         {
             List<string> addedColumns = AddedColumnNames();

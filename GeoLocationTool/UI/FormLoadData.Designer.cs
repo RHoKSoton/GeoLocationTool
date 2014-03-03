@@ -44,11 +44,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.tlpSaveOptions = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.rdoImportCsv = new System.Windows.Forms.RadioButton();
             this.rdoImportTabDelim = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udProvince)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMunicipality)).BeginInit();
@@ -92,10 +93,10 @@
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtFileName, 3);
-            this.txtFileName.Location = new System.Drawing.Point(696, 28);
+            this.txtFileName.Location = new System.Drawing.Point(722, 28);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(546, 22);
+            this.txtFileName.Size = new System.Drawing.Size(520, 22);
             this.txtFileName.TabIndex = 8;
             this.txtFileName.TabStop = false;
             // 
@@ -103,7 +104,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(480, 31);
+            this.label2.Location = new System.Drawing.Point(506, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 9;
@@ -122,7 +123,7 @@
             // 
             // udProvince
             // 
-            this.udProvince.Location = new System.Drawing.Point(174, 89);
+            this.udProvince.Location = new System.Drawing.Point(200, 89);
             this.udProvince.Name = "udProvince";
             this.udProvince.Size = new System.Drawing.Size(120, 22);
             this.udProvince.TabIndex = 5;
@@ -130,7 +131,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 69);
+            this.label4.Location = new System.Drawing.Point(200, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 17);
             this.label4.TabIndex = 14;
@@ -139,7 +140,7 @@
             // lblMunicipality
             // 
             this.lblMunicipality.AutoSize = true;
-            this.lblMunicipality.Location = new System.Drawing.Point(327, 69);
+            this.lblMunicipality.Location = new System.Drawing.Point(353, 69);
             this.lblMunicipality.Name = "lblMunicipality";
             this.lblMunicipality.Size = new System.Drawing.Size(42, 17);
             this.lblMunicipality.TabIndex = 16;
@@ -147,7 +148,7 @@
             // 
             // udMunicipality
             // 
-            this.udMunicipality.Location = new System.Drawing.Point(327, 89);
+            this.udMunicipality.Location = new System.Drawing.Point(353, 89);
             this.udMunicipality.Name = "udMunicipality";
             this.udMunicipality.Size = new System.Drawing.Size(120, 22);
             this.udMunicipality.TabIndex = 6;
@@ -155,7 +156,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(480, 69);
+            this.label6.Location = new System.Drawing.Point(506, 69);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 17);
             this.label6.TabIndex = 18;
@@ -163,14 +164,14 @@
             // 
             // udBarangay
             // 
-            this.udBarangay.Location = new System.Drawing.Point(480, 89);
+            this.udBarangay.Location = new System.Drawing.Point(506, 89);
             this.udBarangay.Name = "udBarangay";
             this.udBarangay.Size = new System.Drawing.Size(120, 22);
             this.udBarangay.TabIndex = 7;
             // 
             // btnManualMatch
             // 
-            this.btnManualMatch.Location = new System.Drawing.Point(174, 128);
+            this.btnManualMatch.Location = new System.Drawing.Point(200, 128);
             this.btnManualMatch.Name = "btnManualMatch";
             this.btnManualMatch.Size = new System.Drawing.Size(147, 33);
             this.btnManualMatch.TabIndex = 9;
@@ -209,6 +210,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 10);
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 5, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -245,7 +247,7 @@
             this.tlpSaveOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tlpSaveOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpSaveOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpSaveOptions.Location = new System.Drawing.Point(171, 174);
+            this.tlpSaveOptions.Location = new System.Drawing.Point(197, 174);
             this.tlpSaveOptions.Margin = new System.Windows.Forms.Padding(0);
             this.tlpSaveOptions.Name = "tlpSaveOptions";
             this.tlpSaveOptions.RowCount = 1;
@@ -253,14 +255,47 @@
             this.tlpSaveOptions.Size = new System.Drawing.Size(522, 39);
             this.tlpSaveOptions.TabIndex = 22;
             // 
+            // rdoImportCsv
+            // 
+            this.rdoImportCsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoImportCsv.AutoSize = true;
+            this.rdoImportCsv.Location = new System.Drawing.Point(200, 29);
+            this.rdoImportCsv.Name = "rdoImportCsv";
+            this.rdoImportCsv.Size = new System.Drawing.Size(147, 21);
+            this.rdoImportCsv.TabIndex = 2;
+            this.rdoImportCsv.TabStop = true;
+            this.rdoImportCsv.Text = "Csv";
+            this.rdoImportCsv.UseVisualStyleBackColor = true;
+            // 
+            // rdoImportTabDelim
+            // 
+            this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoImportTabDelim.AutoSize = true;
+            this.rdoImportTabDelim.Location = new System.Drawing.Point(353, 29);
+            this.rdoImportTabDelim.Name = "rdoImportTabDelim";
+            this.rdoImportTabDelim.Size = new System.Drawing.Size(147, 21);
+            this.rdoImportTabDelim.TabIndex = 23;
+            this.rdoImportTabDelim.TabStop = true;
+            this.rdoImportTabDelim.Text = "Tab Delimited";
+            this.rdoImportTabDelim.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(327, 128);
+            this.button1.Location = new System.Drawing.Point(353, 128);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 23);
             this.button1.TabIndex = 24;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(506, 128);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 23);
+            this.button2.TabIndex = 25;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             // 
             // btnBack
             // 
@@ -273,38 +308,13 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // button2
+            // comboBox1
             // 
-            this.button2.Location = new System.Drawing.Point(480, 128);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 23);
-            this.button2.TabIndex = 25;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            // 
-            // rdoImportCsv
-            // 
-            this.rdoImportCsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdoImportCsv.AutoSize = true;
-            this.rdoImportCsv.Location = new System.Drawing.Point(174, 29);
-            this.rdoImportCsv.Name = "rdoImportCsv";
-            this.rdoImportCsv.Size = new System.Drawing.Size(147, 21);
-            this.rdoImportCsv.TabIndex = 2;
-            this.rdoImportCsv.TabStop = true;
-            this.rdoImportCsv.Text = "Csv";
-            this.rdoImportCsv.UseVisualStyleBackColor = true;
-            // 
-            // rdoImportTabDelim
-            // 
-            this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdoImportTabDelim.AutoSize = true;
-            this.rdoImportTabDelim.Location = new System.Drawing.Point(327, 29);
-            this.rdoImportTabDelim.Name = "rdoImportTabDelim";
-            this.rdoImportTabDelim.Size = new System.Drawing.Size(147, 21);
-            this.rdoImportTabDelim.TabIndex = 23;
-            this.rdoImportTabDelim.TabStop = true;
-            this.rdoImportTabDelim.Text = "Tab Delimited";
-            this.rdoImportTabDelim.UseVisualStyleBackColor = true;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(722, 89);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 28;
             // 
             // FormLoadData
             // 
@@ -349,6 +359,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton rdoImportCsv;
         private System.Windows.Forms.RadioButton rdoImportTabDelim;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

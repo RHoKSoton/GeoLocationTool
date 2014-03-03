@@ -3,6 +3,7 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -40,19 +41,59 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (rdoImportCsv.Checked)
+                const string csvFilter = "csv files (*.csv)|*.csv";
+                const string tabFilter =
+                        "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";              
+                string filter = csvFilter;
+                bool isTab = rdoImportTabDelim.Checked;
+
+                if (isTab)
                 {
-                    ReadCsvFile();
+                    filter = tabFilter;
                 }
-                else
+             
+                var path = SelectFile(filter);
+                if (!String.IsNullOrWhiteSpace(path))
                 {
-                    ReadTabDelimFile();
+                    LoadFile(path, isTab);
+                    DisplayColumnHeaderList();
                 }
+                
             }
             catch (Exception ex)
             {
                 ErrorHandler.Process("Could not read file.", ex);
             }
+        }
+
+        private void LoadFile(string path, bool isTab)
+        {
+            if (isTab)
+            {
+                geoCoder.LoadInputFileTabDelim(path);
+            }
+            else
+            {
+                geoCoder.LoadInputFileCsv(path);
+            }
+
+            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+            SetColumnStyle();
+        }
+
+        private string SelectFile(string filter)
+        {
+            txtFileName.Clear();
+            var path = UiHelper.GetFileName(filter).Trim();
+            txtFileName.Text = path;
+            return path;
+        }
+
+        private void DisplayColumnHeaderList()
+        {         
+            comboBox1.DataSource = geoCoder.AllInputColumnNames();
         }
 
         private void btnManualMatch_Click(object sender, EventArgs e)
@@ -127,39 +168,6 @@ namespace GeoLocationTool.UI
         private void FormLoadData_Load(object sender, EventArgs e)
         {
             SetDefaults();
-        }
-
-        private void ReadCsvFile()
-        {
-            const string filter = "csv files (*.csv)|*.csv";
-            txtFileName.Clear();
-            txtFileName.Text = UiHelper.GetFileName(filter);
-            var path = txtFileName.Text.Trim();
-            if (!String.IsNullOrWhiteSpace(path))
-            {
-                geoCoder.LoadInputFileCsv(path);
-                dataGridView1.DataSource = geoCoder.InputRecords;
-                dataGridView1.AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill;
-                SetColumnStyle();
-            }
-        }
-
-        private void ReadTabDelimFile()
-        {
-            const string filter =
-                "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";
-            txtFileName.Clear();
-            txtFileName.Text = UiHelper.GetFileName(filter);
-            var path = txtFileName.Text.Trim();
-            if (!String.IsNullOrWhiteSpace(path))
-            {
-                geoCoder.LoadInputFileTabDelim(path);
-                dataGridView1.DataSource = geoCoder.InputRecords;
-                dataGridView1.AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill;
-                SetColumnStyle();
-            }
         }
 
         private void SaveAsCsv()
