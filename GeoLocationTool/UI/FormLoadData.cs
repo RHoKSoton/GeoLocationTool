@@ -188,12 +188,12 @@ namespace GeoLocationTool.UI
 
         private void SetColumnHeaders()
         {
-            ColumnHeaderIndices headerIndices = new ColumnHeaderIndices();
-            headerIndices.Admin1 = (int) udProvince.Value - 1;
-            headerIndices.Admin2 = (int) udMunicipality.Value - 1;
-            headerIndices.Admin3 = (int) udBarangay.Value - 1;
+            InputColumnNames headerNames = new InputColumnNames();
+            headerNames.Level1 = cboLevel1.SelectedValue as string;
+            headerNames.Level2 = cboLevel2.SelectedValue as string;
+            headerNames.Level3 = cboLevel3.SelectedValue as string;
 
-            geoCoder.SetInputColumns(headerIndices);
+            geoCoder.SetInputColumns(headerNames);         
         }
 
         private void SetColumnStyle()
@@ -203,12 +203,6 @@ namespace GeoLocationTool.UI
 
         private void SetDefaults()
         {
-            udBarangay.DecimalPlaces = 0;
-            udProvince.DecimalPlaces = 0;
-            udMunicipality.DecimalPlaces = 0;
-            udProvince.Value = 1;
-            udMunicipality.Value = 2;
-            udBarangay.Value = 3;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;

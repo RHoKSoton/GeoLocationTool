@@ -37,7 +37,8 @@ namespace MultiLevelGeoCoder.Logic
         #region Properties
 
         public DataTable data { get; set; }
-        public ColumnHeaderIndices HeaderIndices { get; set; }
+
+        public InputColumnNames ColumnNames { get; set; }
 
         #endregion Properties
 
@@ -54,11 +55,11 @@ namespace MultiLevelGeoCoder.Logic
                 //create location, use the original name
                 Location location = new Location();
                 location.Level1 =
-                    dataRow[HeaderIndices.Admin1].ToString();
+                    dataRow[ColumnNames.Level1].ToString();
                 location.Level2 =
-                    dataRow[HeaderIndices.Admin2].ToString();
+                    dataRow[ColumnNames.Level2].ToString();
                 location.Level3 =
-                    dataRow[HeaderIndices.Admin3].ToString();
+                    dataRow[ColumnNames.Level3].ToString();
 
                 // get codes
                 gazetteer.GetLocationCodes(location);

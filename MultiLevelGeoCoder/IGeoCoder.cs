@@ -26,7 +26,11 @@ namespace MultiLevelGeoCoder
         /// <returns>List of column names</returns>
         IList<string> AllInputColumnNames();
 
-        ColumnHeaderIndices InputColumnIndices();
+        /// <summary>
+        /// The names of the columns that contain the data to be matched
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames InputColumnNames();
 
         bool IsGazetteerInitialised();
 
@@ -44,7 +48,11 @@ namespace MultiLevelGeoCoder
 
         void SetGazetteerColumns(GazetteerColumnHeaders headers);
 
-        void SetInputColumns(ColumnHeaderIndices indices);
+        /// <summary>
+        /// Sets the column names that hold the input data to be matched.
+        /// </summary>
+        /// <param name="columnNames">The column names.</param>
+        void SetInputColumns(InputColumnNames columnNames);
 
         DataView UnmatchedRecords();
 

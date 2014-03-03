@@ -47,9 +47,13 @@ namespace MultiLevelGeoCoder
             return inputData.AllColumnNames();
         }
 
-        public ColumnHeaderIndices InputColumnIndices()
+        /// <summary>
+        /// The names of the columns that contain the data to be matched
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames InputColumnNames()
         {
-            return inputData.HeaderIndices;
+            return inputData.ColumnNames;
         }
 
         public bool IsGazetteerInitialised()
@@ -103,9 +107,13 @@ namespace MultiLevelGeoCoder
             GeoCodes = new LocationCodes(gazetteer.LocationList);
         }
 
-        public void SetInputColumns(ColumnHeaderIndices indices)
+        /// <summary>
+        /// Sets the column names that hold the input data to be matched.
+        /// </summary>
+        /// <param name="columnNames">The column names.</param>
+        public void SetInputColumns(InputColumnNames columnNames)
         {
-            inputData.HeaderIndices = indices;
+            inputData.ColumnNames = columnNames;
         }
 
         public DataView UnmatchedRecords()

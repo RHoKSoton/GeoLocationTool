@@ -275,7 +275,7 @@ namespace GeoLocationTool.UI
                     .Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
 
             cboBarangaySuggestion.DisplayMember = "DisplayText";
-            // temp only, change to location after testing
+            // todo:  after testing don't display the coeficient
             cboBarangaySuggestion.ValueMember = "Location";
 
             cboBarangaySuggestion.DataSource =
@@ -284,9 +284,7 @@ namespace GeoLocationTool.UI
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
-        //TODO Is the name appropriate? Display suggest it has no effect on data. But it seems it has effect
-        //What about AssignCodes or something?
-        private void DisplayCodes(Location location)
+        private void AssignCodes(Location location)
         {
             geoCoder.GeoCodes.GetLocationCodes(location);
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
@@ -317,7 +315,7 @@ namespace GeoLocationTool.UI
                     .Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
 
             cboMunicipalitySuggestion.DisplayMember = "DisplayText";
-            // temp only, change to location after testing
+            // todo:  after testing don't display the coeficient
             cboMunicipalitySuggestion.ValueMember = "Location";
 
             cboMunicipalitySuggestion.DataSource =
@@ -338,7 +336,7 @@ namespace GeoLocationTool.UI
                 nearMatches.GetActualMatches(level1)
                     .Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
             cboProvinceSuggestion.DisplayMember = "DisplayText";
-            // temp only, change to location after testing
+            // todo:  after testing don't display the coeficient
             cboProvinceSuggestion.ValueMember = "Location";
 
             cboProvinceSuggestion.DataSource =
@@ -350,20 +348,20 @@ namespace GeoLocationTool.UI
 
         private void DisplaySelectedRecord()
         {
-            ColumnHeaderIndices indices = geoCoder.InputColumnIndices();
+            InputColumnNames columnNames = geoCoder.InputColumnNames();
             txtProvince.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    indices.Admin1]
+                    columnNames.Level1]
                     .Value as
                     string;
             txtMunicipality.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    indices.Admin2]
+                    columnNames.Level2]
                     .Value as
                     string;
             txtBarangay.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    indices.Admin3]
+                    columnNames.Level3]
                     .Value as
                     string;
         }
@@ -450,7 +448,7 @@ namespace GeoLocationTool.UI
                 originalLevel1,
                 originalLevel2,
                 originalLevel3);
-            DisplayCodes(location);
+            AssignCodes(location);
             DisplayUnmatchedRecords();
         }
 

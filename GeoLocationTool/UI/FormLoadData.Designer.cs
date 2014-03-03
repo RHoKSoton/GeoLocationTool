@@ -34,12 +34,9 @@
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSaveCsv = new System.Windows.Forms.Button();
-            this.udProvince = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.lblMunicipality = new System.Windows.Forms.Label();
-            this.udMunicipality = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.udBarangay = new System.Windows.Forms.NumericUpDown();
             this.btnManualMatch = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,9 +47,6 @@
             this.cboLevel2 = new System.Windows.Forms.ComboBox();
             this.cboLevel3 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udProvince)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMunicipality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udBarangay)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,14 +114,6 @@
             this.btnSaveCsv.UseVisualStyleBackColor = true;
             this.btnSaveCsv.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // udProvince
-            // 
-            this.udProvince.Location = new System.Drawing.Point(557, 79);
-            this.udProvince.Name = "udProvince";
-            this.udProvince.Size = new System.Drawing.Size(120, 22);
-            this.udProvince.TabIndex = 5;
-            this.udProvince.Visible = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -146,14 +132,6 @@
             this.lblMunicipality.TabIndex = 16;
             this.lblMunicipality.Text = "Town";
             // 
-            // udMunicipality
-            // 
-            this.udMunicipality.Location = new System.Drawing.Point(683, 79);
-            this.udMunicipality.Name = "udMunicipality";
-            this.udMunicipality.Size = new System.Drawing.Size(120, 22);
-            this.udMunicipality.TabIndex = 6;
-            this.udMunicipality.Visible = false;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -162,14 +140,6 @@
             this.label6.Size = new System.Drawing.Size(50, 17);
             this.label6.TabIndex = 18;
             this.label6.Text = "Village";
-            // 
-            // udBarangay
-            // 
-            this.udBarangay.Location = new System.Drawing.Point(1095, 79);
-            this.udBarangay.Name = "udBarangay";
-            this.udBarangay.Size = new System.Drawing.Size(120, 22);
-            this.udBarangay.TabIndex = 7;
-            this.udBarangay.Visible = false;
             // 
             // btnManualMatch
             // 
@@ -204,10 +174,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel1, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.udProvince, 5, 4);
-            this.tableLayoutPanel1.Controls.Add(this.udMunicipality, 6, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel2, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.udBarangay, 7, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel3, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnSaveCsv, 0, 9);
@@ -316,9 +283,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLoadData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udProvince)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMunicipality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udBarangay)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -333,12 +297,9 @@
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSaveCsv;
-        private System.Windows.Forms.NumericUpDown udProvince;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblMunicipality;
-        private System.Windows.Forms.NumericUpDown udMunicipality;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown udBarangay;
         private System.Windows.Forms.Button btnManualMatch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label5;
