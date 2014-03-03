@@ -1,10 +1,10 @@
 ﻿// FormLoadData.cs
-
 namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
 
@@ -43,7 +43,7 @@ namespace GeoLocationTool.UI
             {
                 const string csvFilter = "csv files (*.csv)|*.csv";
                 const string tabFilter =
-                        "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";              
+                        "tab delimited files (*.tsv,*.txt,*.tab)|*.tsv; *.txt; *.tab";
                 string filter = csvFilter;
                 bool isTab = rdoImportTabDelim.Checked;
 
@@ -51,49 +51,19 @@ namespace GeoLocationTool.UI
                 {
                     filter = tabFilter;
                 }
-             
+
                 var path = SelectFile(filter);
                 if (!String.IsNullOrWhiteSpace(path))
                 {
                     LoadFile(path, isTab);
-                    DisplayColumnHeaderList();
+                    DisplayColumnHeaderLists();
                 }
-                
+
             }
             catch (Exception ex)
             {
                 ErrorHandler.Process("Could not read file.", ex);
             }
-        }
-
-        private void LoadFile(string path, bool isTab)
-        {
-            if (isTab)
-            {
-                geoCoder.LoadInputFileTabDelim(path);
-            }
-            else
-            {
-                geoCoder.LoadInputFileCsv(path);
-            }
-
-            dataGridView1.DataSource = geoCoder.InputRecords;
-            dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-            SetColumnStyle();
-        }
-
-        private string SelectFile(string filter)
-        {
-            txtFileName.Clear();
-            var path = UiHelper.GetFileName(filter).Trim();
-            txtFileName.Text = path;
-            return path;
-        }
-
-        private void DisplayColumnHeaderList()
-        {         
-            comboBox1.DataSource = geoCoder.AllInputColumnNames();
         }
 
         private void btnManualMatch_Click(object sender, EventArgs e)
@@ -165,9 +135,33 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void DisplayColumnHeaderLists()
+        {
+            cboLevel1.DataSource = geoCoder.AllInputColumnNames();
+            cboLevel2.DataSource = geoCoder.AllInputColumnNames();
+            cboLevel3.DataSource = geoCoder.AllInputColumnNames();
+        }
+
         private void FormLoadData_Load(object sender, EventArgs e)
         {
             SetDefaults();
+        }
+
+        private void LoadFile(string path, bool isTab)
+        {
+            if (isTab)
+            {
+                geoCoder.LoadInputFileTabDelim(path);
+            }
+            else
+            {
+                geoCoder.LoadInputFileCsv(path);
+            }
+
+            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+            SetColumnStyle();
         }
 
         private void SaveAsCsv()
@@ -182,6 +176,24 @@ namespace GeoLocationTool.UI
                     geoCoder.SaveToCsvFile(dialog.FileName);
                 }
             }
+        }
+
+        private string SelectFile(string filter)
+        {
+            txtFileName.Clear();
+            var path = UiHelper.GetFileName(filter).Trim();
+            txtFileName.Text = path;
+            return path;
+        }
+
+        private void SetColumnHeaders()
+        {
+            ColumnHeaderIndices headerIndices = new ColumnHeaderIndices();
+            headerIndices.Admin1 = (int) udProvince.Value - 1;
+            headerIndices.Admin2 = (int) udMunicipality.Value - 1;
+            headerIndices.Admin3 = (int) udBarangay.Value - 1;
+
+            geoCoder.SetInputColumns(headerIndices);
         }
 
         private void SetColumnStyle()
@@ -202,16 +214,6 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
             rdoImportCsv.Checked = true;
-        }
-
-        private void SetColumnHeaders()
-        {
-            ColumnHeaderIndices headerIndices = new ColumnHeaderIndices();
-            headerIndices.Admin1 = (int) udProvince.Value - 1;
-            headerIndices.Admin2 = (int) udMunicipality.Value - 1;
-            headerIndices.Admin3 = (int) udBarangay.Value - 1;
-
-            geoCoder.SetInputColumns(headerIndices);
         }
 
         #endregion Methods
