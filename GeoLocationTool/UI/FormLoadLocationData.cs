@@ -19,7 +19,7 @@ namespace GeoLocationTool.UI
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMapping;
-        private readonly IGeoCoder geoCoder = new GeoCoder();
+        private readonly IGeoCoder geoCoder = new GeoCoder(Program.Connection);
 
         private FormLoadData formLoadData;
 

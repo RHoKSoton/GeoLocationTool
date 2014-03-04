@@ -5,6 +5,7 @@ namespace MultiLevelGeoCoder
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.Common;
     using DataAccess;
     using Logic;
 
@@ -17,6 +18,13 @@ namespace MultiLevelGeoCoder
 
         private GazetteerData gazetteer;
         private InputData inputData;
+        private readonly INearMatchesProvider nearMatchesProvider;
+
+        public GeoCoder(DbConnection dbConnection)
+        {
+            //todo make the geocoder responsible for the connection and its closing, not the caller?
+            nearMatchesProvider = new NearMatchesProvider(dbConnection);
+        }
 
         #endregion Fields
 
@@ -123,7 +131,7 @@ namespace MultiLevelGeoCoder
         public void SetGazetteerColumns(GazetteerColumnHeaders headers)
         {
             gazetteer.SetColumnHeaders(headers);
-            GeoCodes = new LocationCodes(gazetteer.LocationList);
+            GeoCodes = new LocationCodes(gazetteer.LocationList, nearMatchesProvider);
         }
 
         /// <summary>
