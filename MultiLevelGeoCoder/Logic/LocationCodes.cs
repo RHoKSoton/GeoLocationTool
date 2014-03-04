@@ -34,7 +34,7 @@ namespace MultiLevelGeoCoder.Logic
         /// Gets the location codes for the given location. Adds them to the given location.
         /// </summary>
         /// <param name="location">The location.</param>
-        public void GetLocationCodes(Location location)
+        public Location GetLocationCodes(Location location)
         {
             // todo return a CodedLocation?
             Location location1 = location;
@@ -57,6 +57,12 @@ namespace MultiLevelGeoCoder.Logic
                     }
                 }
             }
+
+            //  todo if not all the codes have been found then try the alternate code list
+            // 
+            return location1;
+
+
         }
 
         /// <summary>

@@ -27,16 +27,23 @@ namespace MultiLevelGeoCoder
         IList<string> AllInputColumnNames();
 
         /// <summary>
-        /// The names of the columns that contain the data to be matched
-        /// </summary>
-        /// <returns></returns>
-        InputColumnNames InputColumnNames();
-
-        /// <summary>
         /// The default names of the columns that contain the  input data to be matched.
         /// </summary>
         /// <returns></returns>
         InputColumnNames DefaultInputColumnNames();
+
+        /// <summary>
+        /// Gets the geo codes for the given location.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <returns>Location with codes added where found.</returns>
+        Location GetGeoCodes(Location location);
+
+        /// <summary>
+        /// The names of the columns that contain the data to be matched
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames InputColumnNames();
 
         bool IsGazetteerInitialised();
 
@@ -62,6 +69,6 @@ namespace MultiLevelGeoCoder
 
         DataView UnmatchedRecords();
 
-        #endregion Methods            
+        #endregion Methods
     }
 }

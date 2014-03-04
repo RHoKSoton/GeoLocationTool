@@ -286,16 +286,16 @@ namespace GeoLocationTool.UI
 
         private void AssignCodes(Location location)
         {
-            geoCoder.GeoCodes.GetLocationCodes(location);
+            Location codedLocation = geoCoder.GetGeoCodes(location);
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
                 .Value =
-                location.Level1Code;
+                codedLocation.Level1Code;
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
                 .Value =
-                location.Level2Code;
+                codedLocation.Level2Code;
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
                 .Value =
-                location.Level3Code;
+                codedLocation.Level3Code;
         }
 
         private void DisplayMunicipalityList()

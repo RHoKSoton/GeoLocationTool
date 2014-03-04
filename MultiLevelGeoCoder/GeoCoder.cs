@@ -48,21 +48,31 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
-        /// The names of the columns that contain the data to be matched.
-        /// </summary>
-        /// <returns></returns>
-        public InputColumnNames InputColumnNames()
-        {
-            return inputData.ColumnNames;
-        }
-
-        /// <summary>
         /// The default names of the columns that contain the input data to be matched.
         /// </summary>
         /// <returns></returns>
         public InputColumnNames DefaultInputColumnNames()
         {
             return inputData.DefaultColumnNames;
+        }
+
+        /// <summary>
+        /// Gets the geo codes for the given location
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <returns>Location with codes added where found.</returns>
+        public Location GetGeoCodes(Location location)
+        {
+            return GeoCodes.GetLocationCodes(location);
+        }
+
+        /// <summary>
+        /// The names of the columns that contain the data to be matched.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames InputColumnNames()
+        {
+            return inputData.ColumnNames;
         }
 
         public bool IsGazetteerInitialised()
