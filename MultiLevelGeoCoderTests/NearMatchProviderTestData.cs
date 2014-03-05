@@ -103,7 +103,7 @@ namespace MultiLevelGeoCoderTests
             List<Level1Match> list = new List<Level1Match>();
             Level1Match record = new Level1Match();
             record.Level1 = GazetteerTestData.name1;
-            record.NearMatch = altName;
+            record.AltLevel1 = altName;
             list.Add(record);
 
             return list;
@@ -115,7 +115,7 @@ namespace MultiLevelGeoCoderTests
             Level2Match record = new Level2Match();
             record.Level1 = GazetteerTestData.name1;
             record.Level2 = GazetteerTestData.name2;
-            record.NearMatch = altName;
+            record.AltLevel2 = altName;
             list.Add(record);
 
             return list;
@@ -128,7 +128,7 @@ namespace MultiLevelGeoCoderTests
             record.Level1 = GazetteerTestData.name1;
             record.Level2 = GazetteerTestData.name2;
             record.Level3 = GazetteerTestData.name3;
-            record.NearMatch = altName;
+            record.AltLevel3 = altName;
             list.Add(record);
 
             return list;

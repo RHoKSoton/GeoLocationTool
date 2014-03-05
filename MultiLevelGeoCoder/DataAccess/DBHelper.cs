@@ -27,25 +27,25 @@
 
         public static void InitializeDB(this DbConnection connection)
         {
-            if (!connection.TableExists("Level1NearMatches"))
+            if (!connection.TableExists("Level1Matches"))
             {
-                connection.Execute(@"CREATE TABLE Level1NearMatches (
+                connection.Execute(@"CREATE TABLE Level1Matches (
                                         Id uniqueidentifier PRIMARY KEY,
                                         Level1 nvarchar(255),
-                                        NearMatch nvarchar(255),
+                                        AltLevel1 nvarchar(255),
                                         Weight int)");
-                connection.Execute(@"CREATE TABLE Level2NearMatches (
+                connection.Execute(@"CREATE TABLE Level2Matches (
                                         Id uniqueidentifier PRIMARY KEY,
                                         Level1 nvarchar(255),
                                         Level2 nvarchar(255),
-                                        NearMatch nvarchar(255),
+                                        AltLevel2 nvarchar(255),
                                         Weight int)");
-                connection.Execute(@"CREATE TABLE Level3NearMatches (
+                connection.Execute(@"CREATE TABLE Level3Matches (
                                         Id uniqueidentifier PRIMARY KEY,
                                         Level1 nvarchar(255),
                                         Level2 nvarchar(255),
                                         Level3 nvarchar(255),
-                                        NearMatch nvarchar(255),
+                                        AltLevel3 nvarchar(255),
                                         Weight int)");
             }
 

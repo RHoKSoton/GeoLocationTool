@@ -19,91 +19,91 @@
             SqlConnection = sqlConnection;
         }
 
-        public IEnumerable<Level1Match> GetActualMatches(string nearMatch)
+        public IEnumerable<Level1Match> GetActualMatches(string alternateName)
         {
             return SqlConnection.Query<Level1Match>(
-                @"SELECT * FROM Level1NearMatches
-                    WHERE NearMatch=@nearMatch ORDER BY Weight DESC",
-                new { nearMatch }
+                @"SELECT * FROM Level1Matches
+                    WHERE AltLevel1=@alternateName ORDER BY Weight DESC",
+                new { alternateName }
             );
         }
 
-        public IEnumerable<Level2Match> GetActualMatches(string nearMatch, string level1)
+        public IEnumerable<Level2Match> GetActualMatches(string alternateName, string level1)
         {
             return SqlConnection.Query<Level2Match>(
-                @"SELECT * FROM Level2NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1 ORDER BY Weight DESC",
-                new { nearMatch, level1 }
+                @"SELECT * FROM Level2Matches
+                    WHERE AltLevel2=@alternateName AND Level1=@level1 ORDER BY Weight DESC",
+                new { alternateName, level1 }
             );
         }
 
-        public IEnumerable<Level3Match> GetActualMatches(string nearMatch, string level1, string level2)
+        public IEnumerable<Level3Match> GetActualMatches(string alternateName, string level1, string level2)
         {
             return SqlConnection.Query<Level3Match>(
-                @"SELECT * FROM Level3NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2 ORDER BY Weight DESC",
-                new { nearMatch, level1, level2 }
+                @"SELECT * FROM Level3Matches
+                    WHERE AltLevel3=@alternateName AND Level1=@level1 AND Level2=@level2 ORDER BY Weight DESC",
+                new { alternateName, level1, level2 }
             );
         }
 
-        public void SaveMatch(string nearMatch, string level1)
+        public void SaveMatch(string alternateName, string level1)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Level1NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1",
-                new { nearMatch, level1 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level1Matches
+                    WHERE AltLevel1=@alternateName AND Level1=@level1",
+                new { alternateName, level1 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Level1NearMatches (Id, Level1, NearMatch, Weight)
-                                    VALUES (newid(), @level1, @NearMatch, 1)",
-                                    new { level1, nearMatch });
+                SqlConnection.Execute(@"INSERT INTO Level1Matches (Id, Level1, AltLevel1, Weight)
+                                    VALUES (newid(), @level1, @alternateName, 1)",
+                                    new { level1, alternateName });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Level1NearMatches
+                SqlConnection.Execute(@"UPDATE Level1Matches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }
         }
 
-        public void SaveMatch(string nearMatch, string level1, string level2)
+        public void SaveMatch(string alternateName, string level1, string level2)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Level2NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2",
-                new { nearMatch, level1, level2 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level2Matches
+                    WHERE AltLevel2=@alternateName AND Level1=@level1 AND Level2=@level2",
+                new { alternateName, level1, level2 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Level2NearMatches (Id, Level1, Level2, NearMatch, Weight)
-                                    VALUES (newid(), @level1, @level2, @nearMatch, 1)",
-                                    new { nearMatch, level1, level2 });
+                SqlConnection.Execute(@"INSERT INTO Level2Matches (Id, Level1, Level2, AltLevel2, Weight)
+                                    VALUES (newid(), @level1, @level2, @alternateName, 1)",
+                                    new { alternateName, level1, level2 });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Level2NearMatches
+                SqlConnection.Execute(@"UPDATE Level2Matches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }
         }
 
-        public void SaveMatch(string nearMatch, string level1, string level2, string level3)
+        public void SaveMatch(string alternateName, string level1, string level2, string level3)
         {
             Guid guid = SqlConnection.Query<Guid>(
-                @"SELECT TOP 1 Id FROM Level3NearMatches
-                    WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2 AND Level3=@level3",
-                new { nearMatch, level1, level2, level3 }).FirstOrDefault();
+                @"SELECT TOP 1 Id FROM Level3Matches
+                    WHERE AltLevel3=@alternateName AND Level1=@level1 AND Level2=@level2 AND Level3=@level3",
+                new { alternateName, level1, level2, level3 }).FirstOrDefault();
             
             if (guid == Guid.Empty)
             {
-                SqlConnection.Execute(@"INSERT INTO Level3NearMatches (Id, Level1, Level2, Level3, NearMatch, Weight)
-                                    VALUES (newid(), @level1, @level2, @level3, @nearMatch, 1)",
-                                    new { nearMatch, level1, level2, level3 });
+                SqlConnection.Execute(@"INSERT INTO Level3Matches (Id, Level1, Level2, Level3, AltLevel3, Weight)
+                                    VALUES (newid(), @level1, @level2, @level3, @alternateName, 1)",
+                                    new { alternateName, level1, level2, level3 });
             }
             else
             {
-                SqlConnection.Execute(@"UPDATE Level3NearMatches
+                SqlConnection.Execute(@"UPDATE Level3Matches
                                     SET Weight=Weight+1 WHERE Id=@guid",
                                     new { guid });
             }

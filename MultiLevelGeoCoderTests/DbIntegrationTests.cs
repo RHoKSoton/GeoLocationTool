@@ -45,7 +45,7 @@ namespace MultiLevelGeoCoderTests
 
             //Then
             Assert.AreEqual(2, matches.Count());
-            Assert.IsTrue(matches.All(x => x.NearMatch == "near"));
+            Assert.IsTrue(matches.All(x => x.AltLevel1 == "near"));
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoderTests
 
             //Then
             Assert.AreEqual(1, matches.Count());
-            Assert.AreEqual("near", matches.First().NearMatch);
+            Assert.AreEqual("near", matches.First().AltLevel1);
             Assert.AreEqual("actual", matches.First().Level1);
         }
 
@@ -83,7 +83,7 @@ namespace MultiLevelGeoCoderTests
             //Then
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
-            Assert.AreEqual("near", match.NearMatch);
+            Assert.AreEqual("near", match.AltLevel1);
             Assert.AreEqual("actual", match.Level1);
             Assert.AreEqual(2, match.Weight);
         }
@@ -104,7 +104,7 @@ namespace MultiLevelGeoCoderTests
             //Then
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
-            Assert.AreEqual(veryLong, match.NearMatch);
+            Assert.AreEqual(veryLong, match.AltLevel1);
             Assert.AreEqual(veryLong, match.Level1);
         }
 
@@ -144,8 +144,8 @@ namespace MultiLevelGeoCoderTests
             //Then
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
-            Assert.AreEqual(specialCharacters.Length, match.NearMatch.Length);
-            Assert.AreEqual(specialCharacters, match.NearMatch);
+            Assert.AreEqual(specialCharacters.Length, match.AltLevel1.Length);
+            Assert.AreEqual(specialCharacters, match.AltLevel1);
             Assert.AreEqual(specialCharacters, match.Level1);
         }
 
@@ -170,7 +170,7 @@ namespace MultiLevelGeoCoderTests
 
             //Then
             Assert.AreEqual(2, matches.Count());
-            Assert.IsTrue(matches.All(x => x.NearMatch == "near"));
+            Assert.IsTrue(matches.All(x => x.AltLevel1 == "near"));
         }
 
         [TestMethod]
@@ -252,10 +252,10 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(2, matches.Count());
             var match1 = matches.First();
             var match2 = matches.Last();
-            Assert.AreEqual("near", match1.NearMatch);
+            Assert.AreEqual("near", match1.AltLevel1);
             Assert.AreEqual("actual2", match1.Level1);
             Assert.AreEqual(2, match1.Weight);
-            Assert.AreEqual("near", match2.NearMatch);
+            Assert.AreEqual("near", match2.AltLevel1);
             Assert.AreEqual("actual", match2.Level1);
             Assert.AreEqual(1, match2.Weight);
         }
