@@ -125,11 +125,11 @@ namespace MultiLevelGeoCoder.Logic
         {
             Gadm record = null;
             // get the alternate name and try again
-            IEnumerable<Level1NearMatch> nearMatches =
+            IEnumerable<Level1Match> nearMatches =
                 nearMatchesProvider.GetActualMatches(location.Level1);
             //  note there should only ever be one actual name for the given alt name
             // todo we need to ensure that there is only one name posibility in the database
-            Level1NearMatch nearMatch = nearMatches.FirstOrDefault();
+            Level1Match nearMatch = nearMatches.FirstOrDefault();
             if (nearMatch != null)
             {
                 // try with the actual name
@@ -144,11 +144,11 @@ namespace MultiLevelGeoCoder.Logic
         {
             Gadm record = null;
             // get the alternate name and try again
-            IEnumerable<Level2NearMatch> nearMatches =
+            IEnumerable<Level2Match> nearMatches =
                 nearMatchesProvider.GetActualMatches(location.Level2, location.Level1);
             //  note there should only ever be one actual name for the given alt name
             // todo we need to ensure that there is only one name posibility in the database
-            Level2NearMatch nearMatch = nearMatches.FirstOrDefault();
+            Level2Match nearMatch = nearMatches.FirstOrDefault();
             if (nearMatch != null)
             {
                 // try with the actual name
@@ -162,14 +162,14 @@ namespace MultiLevelGeoCoder.Logic
         {
             Gadm record = null;
             // get the alternate name and try again
-            IEnumerable<Level3NearMatch> nearMatches =
+            IEnumerable<Level3Match> nearMatches =
                 nearMatchesProvider.GetActualMatches(
                     location.Level3,
                     location.Level1,
                     location.Level2);
             //  note there should only ever be one actual name for the given alt name
             // todo we need to ensure that there is only one name posibility in the database
-            Level3NearMatch nearMatch = nearMatches.FirstOrDefault();
+            Level3Match nearMatch = nearMatches.FirstOrDefault();
             if (nearMatch != null)
             {
                 // try with the actual name

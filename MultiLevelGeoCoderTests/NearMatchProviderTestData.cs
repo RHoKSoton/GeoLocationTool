@@ -24,14 +24,14 @@ namespace MultiLevelGeoCoderTests
                 x => x.GetActualMatches(
                     Arg<string>.Is.Anything,
                     Arg<string>.Is.Anything))
-                .Return(new List<Level2NearMatch>()); // empty list
+                .Return(new List<Level2Match>()); // empty list
             nearMatchesStub.Stub(
                 x =>
                     x.GetActualMatches(
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
-                .Return(new List<Level3NearMatch>()); // empty list
+                .Return(new List<Level3Match>()); // empty list
             return nearMatchesStub;
         }
 
@@ -42,7 +42,7 @@ namespace MultiLevelGeoCoderTests
             nearMatchesStub.Stub(
                 x => x.GetActualMatches(
                     Arg<string>.Is.Anything))
-                .Return(new List<Level1NearMatch>()); // empty list
+                .Return(new List<Level1Match>()); // empty list
             nearMatchesStub.Stub(
                 x => x.GetActualMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
                 .Return(Level2List(altName));
@@ -52,7 +52,7 @@ namespace MultiLevelGeoCoderTests
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
-                .Return(new List<Level3NearMatch>()); // empty list
+                .Return(new List<Level3Match>()); // empty list
             return nearMatchesStub;
         }
 
@@ -63,12 +63,12 @@ namespace MultiLevelGeoCoderTests
             nearMatchesStub.Stub(
                 x => x.GetActualMatches(
                     Arg<string>.Is.Anything))
-                .Return(new List<Level1NearMatch>()); // empty list
+                .Return(new List<Level1Match>()); // empty list
             nearMatchesStub.Stub(
                 x => x.GetActualMatches(
                     Arg<string>.Is.Anything,
                     Arg<string>.Is.Anything))
-                .Return(new List<Level2NearMatch>()); // empty list
+                .Return(new List<Level2Match>()); // empty list
             nearMatchesStub.Stub(
                 x =>
                     x.GetActualMatches(
@@ -84,24 +84,24 @@ namespace MultiLevelGeoCoderTests
             INearMatchesProvider nearMatchesStub =
                 MockRepository.GenerateStub<INearMatchesProvider>();
             nearMatchesStub.Stub(x => x.GetActualMatches(Arg<string>.Is.Anything))
-                .Return(new List<Level1NearMatch>()); // empty list
+                .Return(new List<Level1Match>()); // empty list
             nearMatchesStub.Stub(
                 x => x.GetActualMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
-                .Return(new List<Level2NearMatch>()); // empty list
+                .Return(new List<Level2Match>()); // empty list
             nearMatchesStub.Stub(
                 x =>
                     x.GetActualMatches(
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
-                .Return(new List<Level3NearMatch>()); // empty list
+                .Return(new List<Level3Match>()); // empty list
             return nearMatchesStub;
         }
 
-        private static IEnumerable<Level1NearMatch> Level1List(string altName)
+        private static IEnumerable<Level1Match> Level1List(string altName)
         {
-            List<Level1NearMatch> list = new List<Level1NearMatch>();
-            Level1NearMatch record = new Level1NearMatch();
+            List<Level1Match> list = new List<Level1Match>();
+            Level1Match record = new Level1Match();
             record.Level1 = GazetteerTestData.name1;
             record.NearMatch = altName;
             list.Add(record);
@@ -109,10 +109,10 @@ namespace MultiLevelGeoCoderTests
             return list;
         }
 
-        private static IEnumerable<Level2NearMatch> Level2List(string altName)
+        private static IEnumerable<Level2Match> Level2List(string altName)
         {
-            List<Level2NearMatch> list = new List<Level2NearMatch>();
-            Level2NearMatch record = new Level2NearMatch();
+            List<Level2Match> list = new List<Level2Match>();
+            Level2Match record = new Level2Match();
             record.Level1 = GazetteerTestData.name1;
             record.Level2 = GazetteerTestData.name2;
             record.NearMatch = altName;
@@ -121,10 +121,10 @@ namespace MultiLevelGeoCoderTests
             return list;
         }
 
-        private static IEnumerable<Level3NearMatch> Level3List(string altName)
+        private static IEnumerable<Level3Match> Level3List(string altName)
         {
-            List<Level3NearMatch> list = new List<Level3NearMatch>();
-            Level3NearMatch record = new Level3NearMatch();
+            List<Level3Match> list = new List<Level3Match>();
+            Level3Match record = new Level3Match();
             record.Level1 = GazetteerTestData.name1;
             record.Level2 = GazetteerTestData.name2;
             record.Level3 = GazetteerTestData.name3;

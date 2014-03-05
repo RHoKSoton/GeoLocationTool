@@ -19,27 +19,27 @@
             SqlConnection = sqlConnection;
         }
 
-        public IEnumerable<Level1NearMatch> GetActualMatches(string nearMatch)
+        public IEnumerable<Level1Match> GetActualMatches(string nearMatch)
         {
-            return SqlConnection.Query<Level1NearMatch>(
+            return SqlConnection.Query<Level1Match>(
                 @"SELECT * FROM Level1NearMatches
                     WHERE NearMatch=@nearMatch ORDER BY Weight DESC",
                 new { nearMatch }
             );
         }
 
-        public IEnumerable<Level2NearMatch> GetActualMatches(string nearMatch, string level1)
+        public IEnumerable<Level2Match> GetActualMatches(string nearMatch, string level1)
         {
-            return SqlConnection.Query<Level2NearMatch>(
+            return SqlConnection.Query<Level2Match>(
                 @"SELECT * FROM Level2NearMatches
                     WHERE NearMatch=@nearMatch AND Level1=@level1 ORDER BY Weight DESC",
                 new { nearMatch, level1 }
             );
         }
 
-        public IEnumerable<Level3NearMatch> GetActualMatches(string nearMatch, string level1, string level2)
+        public IEnumerable<Level3Match> GetActualMatches(string nearMatch, string level1, string level2)
         {
-            return SqlConnection.Query<Level3NearMatch>(
+            return SqlConnection.Query<Level3Match>(
                 @"SELECT * FROM Level3NearMatches
                     WHERE NearMatch=@nearMatch AND Level1=@level1 AND Level2=@level2 ORDER BY Weight DESC",
                 new { nearMatch, level1, level2 }
