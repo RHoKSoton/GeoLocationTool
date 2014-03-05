@@ -11,7 +11,7 @@ namespace MultiLevelGeoCoderTests
 
     /// <summary>
     /// Exercises the LocationCodes class, in particular it tests that the 
-    /// correct codes are matched to a given location using only the gazetteer data
+    /// correct codes are applied to a given location using only the gazetteer data
     /// </summary>
     [TestClass]
     public class LocationCodesTests
@@ -31,35 +31,27 @@ namespace MultiLevelGeoCoderTests
         #region Methods
 
         /// <summary>
-        /// Given a location with level 1, 2 and 3 names 
-        /// when level1 and 2 name matches but level3 does not
-        /// then only level1 and 2 code is added
+        /// Given a location with level 1, 2 and 3 names present 
+        /// when level 1 and 2 names are correct but level 3 is not
+        /// and there are no previous saved name matches
+        /// then only level 1 and 2 codes are added
         /// </summary>
         [TestMethod]
         public void
-            GetLocationCodes_Leve1And2MatchAndLevel3NoMatch_Level1And2CodeOnlyAdded()
+            GetLocationCodes_Leve1And2CorrectAndLevel3Incorrect_Level1And2CodeAddedOnly()
         {
             // Arrange
-            // create location input, level 1, 2  and 3
+            // Create location input, containing three levels,
+            // correct level 1 and 2, level 3 is incorrect (i.e. no record in the gazetteer)
             Location location = new Location(name1, name2, "SomeName");
 
             // database contains no saved records
             INearMatchesProvider nearMatchesProviderWithNoRecords =
                 NearMatchesProviderWithNoRecords();
 
-            // create gazetteer data to match against - add a record
-            // containing a match to the location at level 2 and 3 only
+            // create gazetteer data to match against
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2,
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
+
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
                 nearMatchesProviderWithNoRecords);
@@ -68,41 +60,34 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // no codes added
+            // code 1 and 2 only are added, no level 3 code added
             Assert.AreEqual(code1, location.Level1Code);
             Assert.AreEqual(code2, location.Level2Code);
             Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
-        /// Given a location with level 1, 2 and 3 names 
-        /// when level1 name matches but level2 does not
-        /// then only a level1 code is added
+        /// Given a location with level 1, 2 and 3 names present
+        /// when level 1 and 3 names are correct but level 2 is not
+        /// and there are no previous saved name matches
+        /// then only a level 1 code is added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Leve1MatchAndLevel2NoMatch_Level1CodeOnlyAdded()
+        public void
+            GetLocationCodes_Leve1And3CorrectAndLevel2Incorrect_Level1CodeAddedOnly()
         {
             // Arrange
-            // create location input, level 1, 2  and 3
+            // create location input, containing correct level 1 and 3,
+            // level 2 is incorrect (i.e. not in the gazetteer)
             Location location = new Location(name1, "SomeName", name3);
 
             // database contains no saved records
             INearMatchesProvider nearMatchesProviderWithNoRecords =
                 NearMatchesProviderWithNoRecords();
 
-            // create gazetteer data to match against - add a record
-            // containing a match to the location at level 2 and 3 only
+            // create gazetteer data to match against
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2,
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
+
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
                 nearMatchesProviderWithNoRecords);
@@ -111,22 +96,24 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // no codes added
+            //  level 1 codes added only
             Assert.AreEqual(code1, location.Level1Code);
             Assert.AreEqual(null, location.Level2Code);
             Assert.AreEqual(null, location.Level3Code);
         }
 
         /// <summary>
-        /// Given a location containing only level 1, 2 and 3 names
-        /// when both the level 1, 2 and 3 names match a record (case insensitive)
-        /// then the correct level 1, 2 and 3 codes are added
+        /// Given a location containing level 1, 2 and 3 names
+        /// when all the level 1, 2 and 3 names are correct (case insensitive)
+        /// and there are no previous saved name matches
+        /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1And2And3Match_Level1And2And3CodesAdded()
+        public void GetLocationCodes_Level1And2And3Correct_Level1And2And3CodesAdded()
         {
             // Arrange
-            // create location input, level 1, 2  and 3
+            // Create location input, containing correct level 1, 2 and
+            // level 3 (i.e. all are in the gazetteer)
             Location location = new Location(name1, name2, name3.ToLower());
 
             // database contains no saved records
@@ -136,16 +123,6 @@ namespace MultiLevelGeoCoderTests
             // create gazetteer data to match against - add a record
             // containing a match to the location
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2.ToUpper(),
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
@@ -155,7 +132,7 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // correct codes added
+            // all codes added
             Assert.AreEqual(code1, location.Level1Code);
             Assert.AreEqual(code2, location.Level2Code);
             Assert.AreEqual(code3, location.Level3Code);
@@ -163,14 +140,16 @@ namespace MultiLevelGeoCoderTests
 
         /// <summary>
         /// Given a location containing only level 1 and 2 names
-        /// when both the level 1 and 2 names match a record (case insensitive)
-        /// then the correct level 1 and 2 codes are added
+        /// when both the level 1 and 2 names are correct (case insensitive)
+        /// and there are no previous saved name matches
+        /// then the level 1 and 2 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1and2Match_CodeAddedLevel1And2()
+        public void GetLocationCodes_Level1and2Correct_Level1And2CodeAdded()
         {
             // Arrange
-            // create location input, level 1 and 2 only
+            // Create location input, containing correct level 1 and 2,(i.e. in the gazetteer)
+            // no level 3 supplied
             Location location = new Location(name1.ToUpper(), name2.ToLower());
 
             // database contains no saved records
@@ -180,16 +159,6 @@ namespace MultiLevelGeoCoderTests
             // create gazetteer data to match against - add a record
             // containing a match to the location
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2.ToUpper(),
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
@@ -199,7 +168,7 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // correct codes added
+            // level 1 and 2 codes added, no level 3
             Assert.AreEqual(code1, location.Level1Code);
             Assert.AreEqual(code2, location.Level2Code);
             Assert.AreEqual(null, location.Level3Code);
@@ -207,14 +176,16 @@ namespace MultiLevelGeoCoderTests
 
         /// <summary>
         /// Given a location containing only a level 1 name
-        /// when the level 1 names matches a record (case insensitive)
-        /// then the correct level 1 code is added
+        /// when the level 1 name is correct (case insensitive)
+        /// and there are no previous saved name matches
+        /// then the level 1 code  only is added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1Match_CodeAddedLevel1()
+        public void GetLocationCodes_Level1Correct_Level1CodeAdded()
         {
             // Arrange
-            // create location input, level 1 only
+            // Create location input, containing correct level 1,
+            // no level 2 or 3 supplied
             Location location = new Location(name1.ToLower());
 
             // database contains no saved records
@@ -243,7 +214,7 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // correct codes added
+            // level 1 code only added
             Assert.AreEqual(code1, location.Level1Code);
             Assert.AreEqual(null, location.Level2Code);
             Assert.AreEqual(null, location.Level3Code);
@@ -251,14 +222,16 @@ namespace MultiLevelGeoCoderTests
 
         /// <summary>
         /// Given a location with level 1, 2 and 3 names 
-        /// when level1 name does not match a the level1 name on any record 
+        /// when level 1 name is incorrect
+        /// and there are no previous saved name matches
         /// then no codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1NoMatch_NoCodesAdded()
+        public void GetLocationCodes_Level1Incorrect_NoCodesAdded()
         {
             // Arrange
-            // create location input, level 1, 2  and 3
+            // Create location input, containing incorrect level 1 (i.e. not in the gazetteer)
+            // level  2 and 3 are correct
             Location location = new Location("SomeName", name2, name3);
 
             // database contains no saved records
@@ -268,16 +241,7 @@ namespace MultiLevelGeoCoderTests
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name2,
-                    ID_2 = code2,
-                    NAME_2 = name2,
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
+
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
                 nearMatchesProviderWithNoRecords);
@@ -293,15 +257,16 @@ namespace MultiLevelGeoCoderTests
         }
 
         /// <summary>
-        /// Given a location with level 1, 2 and 3 names 
-        /// when level1 and 2 name matches but level3 does not
-        /// then only level1 and 2 code is added
+        /// Given a location with existing codes
+        /// when no codes are added
+        /// then any existing codes are removed
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_NoMatchAtLevel1AndHasExistingCodes_CodesRemoved()
+        public void GetLocationCodes_NoCodedToAddAndHasExistingCodes_CodesRemoved()
         {
             // Arrange
-            // create location input, level 1, 2  and 3
+            // Create location input, containing incorrect level 1,
+            // level  2 and 3 are correct (i.e. in the gazetteer)
             Location location = new Location("SomeName", name2, name3);
             location.Level1Code = "1";
             location.Level2Code = "22";
@@ -314,16 +279,6 @@ namespace MultiLevelGeoCoderTests
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
             var gazzetteerData = CreateGazetteerData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2,
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
@@ -333,7 +288,7 @@ namespace MultiLevelGeoCoderTests
             locationCodes.GetLocationCodes(location);
 
             // Assert
-            // no codes added
+            // no codes present
             Assert.AreEqual(null, location.Level1Code);
             Assert.AreEqual(null, location.Level2Code);
             Assert.AreEqual(null, location.Level3Code);
@@ -377,6 +332,17 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = "3018",
                     NAME_3 = "Tipo-Tipo Proper",
                     VARNAME_3 = "Poblacion"
+                });
+
+            gadmList.Add(
+                new Gadm
+                {
+                    ID_1 = code1,
+                    NAME_1 = name1,
+                    ID_2 = code2,
+                    NAME_2 = name2,
+                    ID_3 = code3,
+                    NAME_3 = name3,
                 });
             return gadmList;
         }
