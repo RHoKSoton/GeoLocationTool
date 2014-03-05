@@ -1,4 +1,4 @@
-﻿// LocationMatcherTests.cs
+﻿// LocationCodesTests.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -6,15 +6,15 @@ namespace MultiLevelGeoCoderTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
+    using MultiLevelGeoCoder.Model;
     using Rhino.Mocks;
 
-
     /// <summary>
-    /// Excercises the LocationMatcher class, in particular it tests that the 
-    /// correct codes are matched to a given location
+    /// Exercises the LocationCodes class, in particular it tests that the 
+    /// correct codes are matched to a given location using only the gazetteer data
     /// </summary>
     [TestClass]
-    public class LocationMatcherTests
+    public class LocationCodesTests
     {
         #region Fields
 
@@ -42,8 +42,10 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // create location input, level 1, 2  and 3
             Location location = new Location(name1, name2, "SomeName");
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -58,7 +60,9 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -81,8 +85,10 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // create location input, level 1, 2  and 3
             Location location = new Location(name1, "SomeName", name3);
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -97,7 +103,9 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -120,8 +128,10 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // create location input, level 1, 2  and 3
             Location location = new Location(name1, name2, name3.ToLower());
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location
@@ -137,7 +147,9 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -161,8 +173,9 @@ namespace MultiLevelGeoCoderTests
             // create location input, level 1 and 2 only
             Location location = new Location(name1.ToUpper(), name2.ToLower());
 
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location
@@ -178,7 +191,9 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -202,8 +217,9 @@ namespace MultiLevelGeoCoderTests
             // create location input, level 1 only
             Location location = new Location(name1.ToLower());
 
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location
@@ -219,7 +235,9 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -243,8 +261,9 @@ namespace MultiLevelGeoCoderTests
             // create location input, level 1, 2  and 3
             Location location = new Location("SomeName", name2, name3);
 
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -259,7 +278,9 @@ namespace MultiLevelGeoCoderTests
                     ID_3 = code3,
                     NAME_3 = name3,
                 });
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -286,9 +307,9 @@ namespace MultiLevelGeoCoderTests
             location.Level2Code = "22";
             location.Level3Code = "150";
 
-            INearMatchesProvider nearMatchesProvider =
-                MockRepository.GenerateStub<INearMatchesProvider>();
-
+            // database contains no saved records
+            INearMatchesProvider nearMatchesProviderWithNoRecords =
+                NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -304,7 +325,9 @@ namespace MultiLevelGeoCoderTests
                     NAME_3 = name3,
                 });
 
-            LocationCodes locationCodes = new LocationCodes(gazzetteerData, nearMatchesProvider);
+            LocationCodes locationCodes = new LocationCodes(
+                gazzetteerData,
+                nearMatchesProviderWithNoRecords);
 
             // Act
             locationCodes.GetLocationCodes(location);
@@ -356,6 +379,25 @@ namespace MultiLevelGeoCoderTests
                     VARNAME_3 = "Poblacion"
                 });
             return gadmList;
+        }
+
+        private static INearMatchesProvider NearMatchesProviderWithNoRecords()
+        {
+            INearMatchesProvider nearMatchesStub =
+                MockRepository.GenerateStub<INearMatchesProvider>();
+            nearMatchesStub.Stub(x => x.GetActualMatches(Arg<string>.Is.Anything))
+                .Return(new List<Level1NearMatch>());
+            nearMatchesStub.Stub(
+                x => x.GetActualMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
+                .Return(new List<Level2NearMatch>());
+            nearMatchesStub.Stub(
+                x =>
+                    x.GetActualMatches(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything))
+                .Return(new List<Level3NearMatch>());
+            return nearMatchesStub;
         }
 
         #endregion Methods
