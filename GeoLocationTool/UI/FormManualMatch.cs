@@ -31,7 +31,7 @@ namespace GeoLocationTool.UI
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
-            fuzzyMatch = new FuzzyMatch(geoCoder.GeoCodes);
+            fuzzyMatch = geoCoder.FuzzyMatcher();
             nearMatches = new NearMatchesProvider(Program.Connection);
         }
 
@@ -50,6 +50,99 @@ namespace GeoLocationTool.UI
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void AddAltNames(
+            string level1,
+            string level2,
+            string level3,
+            string originalLevel1,
+            string originalLevel2,
+            string originalLevel3)
+        {
+            ClearAltNames();
+            //display alt names only if different to the original
+            if (!string.Equals(originalLevel1, level1, StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName]
+                    .Value
+                    =
+                    level1;
+            }
+
+            if (
+                !string.Equals(
+                    originalLevel2,
+                    level2,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used2ColumnName]
+                    .Value
+                    =
+                    level2;
+            }
+
+            if (
+                !string.Equals(
+                    originalLevel3,
+                    level3,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used3ColumnName]
+                    .Value
+                    =
+                    level3;
+            }
+        }
+
+        private void AddCodes(CodedLocation codedLocation)
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+                .Value =
+                codedLocation.GeoCode1.Code;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+                .Value =
+                codedLocation.GeoCode2.Code;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+                .Value =
+                codedLocation.GeoCode3.Code;
+        }
+
+        private void AddUsedNames(CodedLocation codedLocation)
+        {
+            ClearAltNames();
+            //display alt names only if different to the original
+            if (!string.Equals(
+                codedLocation.GeoCode1.Name,
+                codedLocation.Name1,
+                StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName]
+                    .Value
+                    = codedLocation.GeoCode1.Name;
+            }
+
+            if (
+                !string.Equals(
+                    codedLocation.GeoCode2.Name,
+                    codedLocation.Name2,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used2ColumnName]
+                    .Value
+                    = codedLocation.GeoCode2.Name;
+            }
+
+            if (
+                !string.Equals(
+                    codedLocation.GeoCode3.Name,
+                    codedLocation.Name3,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used3ColumnName]
+                    .Value
+                    = codedLocation.GeoCode3.Name;
+            }
         }
 
         private void btnMainScreen_Click(object sender, EventArgs e)
@@ -216,50 +309,10 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void AddAltNames(
-            string level1,
-            string level2,
-            string level3,
-            string originalLevel1,
-            string originalLevel2,
-            string originalLevel3)
-        {
-            ClearAltNames();
-            //display alt names only if different to the original
-            if (!string.Equals(originalLevel1, level1, StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName].Value
-                    =
-                    level1;
-            }
-
-            if (
-                !string.Equals(
-                    originalLevel2,
-                    level2,
-                    StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used2ColumnName].Value
-                    =
-                    level2;
-            }
-
-            if (
-                !string.Equals(
-                    originalLevel3,
-                    level3,
-                    StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used3ColumnName].Value
-                    =
-                    level3;
-            }
-        }
-
         private void DisplayBarangayList()
         {
             // based on selected level 1 and 2
-            cboBarangay.DataSource = geoCoder.GeoCodes.Level3LocationNames(
+            cboBarangay.DataSource = geoCoder.Level3LocationNames(
                 cboProvince.SelectedValue.ToString(),
                 cboMunicipality.SelectedValue.ToString());
         }
@@ -284,24 +337,10 @@ namespace GeoLocationTool.UI
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
-        private void AddCodes(CodedLocation codedLocation)
-        {
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
-                .Value =
-                codedLocation.GeoCode1.Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
-                .Value =
-                codedLocation.GeoCode2.Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
-                .Value =
-                codedLocation.GeoCode3.Code;
-
-        }
-
         private void DisplayMunicipalityList()
         {
             // based on selected level 1
-            cboMunicipality.DataSource = geoCoder.GeoCodes.Level2LocationNames(
+            cboMunicipality.DataSource = geoCoder.Level2LocationNames(
                 cboProvince.SelectedValue.ToString());
         }
 
@@ -326,7 +365,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayProvinceList()
         {
-            cboProvince.DataSource = geoCoder.GeoCodes.Level1LocationNames();
+            cboProvince.DataSource = geoCoder.Level1LocationNames();
         }
 
         private void DisplayProvinceSuggestions()
@@ -443,9 +482,9 @@ namespace GeoLocationTool.UI
                 level3);
 
             Location location2 = new Location(
-               originalLevel1,
-               originalLevel2,
-               originalLevel3);
+                originalLevel1,
+                originalLevel2,
+                originalLevel3);
 
             //DisplayAltNames(
             //    level1,
@@ -460,40 +499,6 @@ namespace GeoLocationTool.UI
             AddCodes(codedLocation);
             AddUsedNames(codedLocation);
             DisplayUnmatchedRecords();
-        }
-
-        private void AddUsedNames(CodedLocation codedLocation)
-        {
-            ClearAltNames();
-            //display alt names only if different to the original
-            if (!string.Equals(
-                codedLocation.GeoCode1.Name, 
-                codedLocation.Name1, 
-                StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName].Value
-                    = codedLocation.GeoCode1.Name;
-            }
-
-            if (
-                !string.Equals(
-                    codedLocation.GeoCode2.Name,
-                    codedLocation.Name2,
-                    StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used2ColumnName].Value
-                    = codedLocation.GeoCode2.Name;
-            }
-
-            if (
-                !string.Equals(
-                    codedLocation.GeoCode3.Name,
-                    codedLocation.Name3,
-                    StringComparison.OrdinalIgnoreCase))
-            {
-                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used3ColumnName].Value
-                    =codedLocation.GeoCode3.Name;
-            }
         }
 
         #endregion Methods

@@ -12,8 +12,6 @@ namespace MultiLevelGeoCoder
 
         DataTable GazetteerData { get; }
 
-        LocationCodes GeoCodes { get; }
-
         DataTable InputRecords { get; }
 
         #endregion Properties
@@ -33,6 +31,12 @@ namespace MultiLevelGeoCoder
         InputColumnNames DefaultInputColumnNames();
 
         /// <summary>
+        /// Provides suggested name matches using fuzzy matching
+        /// </summary>
+        /// <returns>Fuzzy Matcher</returns>
+        FuzzyMatch FuzzyMatcher();
+
+        /// <summary>
         /// Gets the geo codes for the given location.
         /// </summary>
         /// <param name="location">The location.</param>
@@ -46,6 +50,12 @@ namespace MultiLevelGeoCoder
         InputColumnNames InputColumnNames();
 
         bool IsGazetteerInitialised();
+
+        IList<string> Level1LocationNames();
+
+        IList<string> Level2LocationNames(string level1);
+
+        IList<string> Level3LocationNames(string level1, string level2);
 
         void LoadGazetter(string path);
 

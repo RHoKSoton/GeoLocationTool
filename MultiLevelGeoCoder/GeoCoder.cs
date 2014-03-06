@@ -16,9 +16,16 @@ namespace MultiLevelGeoCoder
     {
         #region Fields
 
+        private readonly INearMatchesProvider nearMatchesProvider;
+
         private GazetteerData gazetteer;
         private InputData inputData;
-        private readonly INearMatchesProvider nearMatchesProvider;
+        private LocationCodes locationCodes;
+        private LocationNames locationNames;
+
+        #endregion Fields
+
+        #region Constructors
 
         public GeoCoder(DbConnection dbConnection)
         {
@@ -26,7 +33,7 @@ namespace MultiLevelGeoCoder
             nearMatchesProvider = new NearMatchesProvider(dbConnection);
         }
 
-        #endregion Fields
+        #endregion Constructors
 
         #region Properties
 
@@ -34,8 +41,6 @@ namespace MultiLevelGeoCoder
         {
             get { return gazetteer.Data; }
         }
-
-        public LocationCodes GeoCodes { get; private set; }
 
         public DataTable InputRecords
         {
@@ -65,13 +70,22 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
+        /// Provides suggested name matches using fuzzy matching
+        /// </summary>
+        /// <returns>Fuzzy Matcher</returns>
+        public FuzzyMatch FuzzyMatcher()
+        {
+            return new FuzzyMatch(locationNames);
+        }
+
+        /// <summary>
         /// Gets the geo codes for the given location
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>Location with codes added where found.</returns>
         public CodedLocation GetGeoCodes(Location location)
         {
-            return GeoCodes.GetLocationCodes(location);
+            return locationCodes.GetLocationCodes(location);
         }
 
         /// <summary>
@@ -86,6 +100,21 @@ namespace MultiLevelGeoCoder
         public bool IsGazetteerInitialised()
         {
             return gazetteer != null;
+        }
+
+        public IList<string> Level1LocationNames()
+        {
+            return locationNames.Level1LocationNames();
+        }
+
+        public IList<string> Level2LocationNames(string level1)
+        {
+            return locationNames.Level2LocationNames(level1);
+        }
+
+        public IList<string> Level3LocationNames(string level1, string level2)
+        {
+            return locationNames.Level3LocationNames(level1, level2);
         }
 
         public void LoadGazetter(string path)
@@ -112,7 +141,7 @@ namespace MultiLevelGeoCoder
 
         public void MatchAll()
         {
-            inputData.AddMatchedLocationCodes(GeoCodes);
+            inputData.AddMatchedLocationCodes(locationCodes);
         }
 
         public void SaveNearMatch()
@@ -131,7 +160,8 @@ namespace MultiLevelGeoCoder
         public void SetGazetteerColumns(GazetteerColumnHeaders headers)
         {
             gazetteer.SetColumnHeaders(headers);
-            GeoCodes = new LocationCodes(gazetteer.LocationList, nearMatchesProvider);
+            locationCodes = new LocationCodes(gazetteer.LocationList, nearMatchesProvider);
+            locationNames = new LocationNames(gazetteer.LocationList);
         }
 
         /// <summary>

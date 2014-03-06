@@ -11,7 +11,6 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Holds the list of location names/codes to match against
     /// Provides the location codes where there are matches
-    /// Provides lists of location names for each level 
     /// </summary>
     public class LocationCodes
     {
@@ -58,58 +57,54 @@ namespace MultiLevelGeoCoder.Logic
             return codedLocation;
         }
 
-        /// <summary>
-        /// Lists the Level 1 location names.
-        /// </summary>
-        /// <returns>List of location names</returns>
-        public IList<string> Level1LocationNames()
-        {
-            var levelList = gazzetteerData.Select(l => l.NAME_1);
-            return levelList.Distinct().OrderBy(i => i).ToList();
-        }
-
-        /// <summary>
-        /// Lists the Level 2 location names for the given level 1.
-        /// </summary>
-        /// <param name="level1Name">Name of the level 1 location.</param>
-        /// <returns>List of location names.</returns>
-        public IList<string> Level2LocationNames(string level1Name)
-        {
-            var levelList = gazzetteerData
-                .Where(
-                    n =>
-                        String.Equals(
-                            n.NAME_1,
-                            level1Name,
-                            StringComparison.OrdinalIgnoreCase))
-                .Select(l => l.NAME_2);
-
-            return levelList.Distinct().OrderBy(i => i).ToList();
-        }
-
-        /// <summary>
-        /// Lists the Level 3 location names for the given level 1 and 2.
-        /// </summary>
-        /// <param name="level1Name">Name of the level 1 location.</param>
-        /// <param name="level2Name">Name of the level 2 location.</param>
-        /// <returns>List of location names.</returns>
-        public IList<string> Level3LocationNames(string level1Name, string level2Name)
-        {
-            var levelList = gazzetteerData
-                .Where(
-                    n =>
-                        String.Equals(
-                            n.NAME_1,
-                            level1Name,
-                            StringComparison.OrdinalIgnoreCase) &&
-                        String.Equals(
-                            n.NAME_2,
-                            level2Name,
-                            StringComparison.OrdinalIgnoreCase))
-                .Select(l => l.NAME_3);
-            return levelList.Distinct().OrderBy(i => i).ToList();
-        }
-
+        ///// <summary>
+        ///// Lists the Level 1 location names.
+        ///// </summary>
+        ///// <returns>List of location names</returns>
+        //public IList<string> Level1LocationNames()
+        //{
+        //    var levelList = gazzetteerData.Select(l => l.NAME_1);
+        //    return levelList.Distinct().OrderBy(i => i).ToList();
+        //}
+        ///// <summary>
+        ///// Lists the Level 2 location names for the given level 1.
+        ///// </summary>
+        ///// <param name="level1Name">Name of the level 1 location.</param>
+        ///// <returns>List of location names.</returns>
+        //public IList<string> Level2LocationNames(string level1Name)
+        //{
+        //    var levelList = gazzetteerData
+        //        .Where(
+        //            n =>
+        //                String.Equals(
+        //                    n.NAME_1,
+        //                    level1Name,
+        //                    StringComparison.OrdinalIgnoreCase))
+        //        .Select(l => l.NAME_2);
+        //    return levelList.Distinct().OrderBy(i => i).ToList();
+        //}
+        ///// <summary>
+        ///// Lists the Level 3 location names for the given level 1 and 2.
+        ///// </summary>
+        ///// <param name="level1Name">Name of the level 1 location.</param>
+        ///// <param name="level2Name">Name of the level 2 location.</param>
+        ///// <returns>List of location names.</returns>
+        //public IList<string> Level3LocationNames(string level1Name, string level2Name)
+        //{
+        //    var levelList = gazzetteerData
+        //        .Where(
+        //            n =>
+        //                String.Equals(
+        //                    n.NAME_1,
+        //                    level1Name,
+        //                    StringComparison.OrdinalIgnoreCase) &&
+        //                String.Equals(
+        //                    n.NAME_2,
+        //                    level2Name,
+        //                    StringComparison.OrdinalIgnoreCase))
+        //        .Select(l => l.NAME_3);
+        //    return levelList.Distinct().OrderBy(i => i).ToList();
+        //}
         private GeoCode GetLevel1Code(Location location)
         {
             return Level1UsingGazetteer(location) ??

@@ -13,15 +13,15 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        private readonly LocationCodes locationCodes;
+        private readonly LocationNames locationNames;
 
         #endregion Fields
 
         #region Constructors
 
-        public FuzzyMatch(LocationCodes locationCodes)
+        internal FuzzyMatch(LocationNames locationNames)
         {
-            this.locationCodes = locationCodes;
+            this.locationNames = locationNames;
         }
 
         #endregion Constructors
@@ -35,8 +35,8 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<FuzzyMatchResult> GetLevel1Suggestions(string level1)
         {
-            IList<string> locationList = this.locationCodes.Level1LocationNames();
-            return Suggestions(level1, locationList);          
+            IList<string> locationList = locationNames.Level1LocationNames();
+            return Suggestions(level1, locationList);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<FuzzyMatchResult> GetLevel2Suggestions(string level1, string level2)
         {
-            IList<string> locationList = this.locationCodes.Level2LocationNames(level1);
+            IList<string> locationList = locationNames.Level2LocationNames(level1);
             return Suggestions(level2, locationList);
         }
 
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder.Logic
             string level2,
             string level3)
         {
-            IList<string> locationList = this.locationCodes.Level3LocationNames(
+            IList<string> locationList = locationNames.Level3LocationNames(
                 level1,
                 level2);
             return Suggestions(level3, locationList);
@@ -77,7 +77,7 @@ namespace MultiLevelGeoCoder.Logic
             foreach (string location in locationList)
             {
                 double coefficient = level.FuzzyMatch(location);
-                    matches.Add(new FuzzyMatchResult(location, coefficient));
+                matches.Add(new FuzzyMatchResult(location, coefficient));
             }
             return matches.OrderByDescending(p => p.Coefficient).ToList();
         }
@@ -88,9 +88,7 @@ namespace MultiLevelGeoCoder.Logic
 
         // this is the code for the other posible fuzzy match library, 'FuzzyString', it
         // can be removed if we stick with the current library.
-
         // using FuzzyString;
-
         //List<FuzzyStringComparisonOptions> options = new List<FuzzyStringComparisonOptions>();
         // // Choose which algorithms should weigh in for the comparison
         //options.Add(FuzzyStringComparisonOptions.UseOverlapCoefficient);
