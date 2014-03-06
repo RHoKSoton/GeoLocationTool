@@ -57,6 +57,8 @@
     <Compile Include="DataAccess\FileImport.cs" />
     <Compile Include="DataAccess\NearMatchesProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
+    <Compile Include="Logic\GeoCode.cs" />
+    <Compile Include="Logic\CodedLocation.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />
     <Compile Include="Logic\FuzzyMatchResult.cs" />
     <Compile Include="Logic\GazetteerColumnHeaders.cs" />

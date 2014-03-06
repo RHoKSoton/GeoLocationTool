@@ -69,7 +69,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>Location with codes added where found.</returns>
-        public Location GetGeoCodes(Location location)
+        public CodedLocation GetGeoCodes(Location location)
         {
             return GeoCodes.GetLocationCodes(location);
         }

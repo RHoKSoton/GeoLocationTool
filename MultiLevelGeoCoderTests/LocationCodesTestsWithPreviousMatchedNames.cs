@@ -45,13 +45,16 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(GazetteerTestData.code3, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
@@ -83,13 +86,16 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(GazetteerTestData.code3, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
@@ -122,13 +128,16 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(GazetteerTestData.code3, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
         }
 
         #endregion Methods

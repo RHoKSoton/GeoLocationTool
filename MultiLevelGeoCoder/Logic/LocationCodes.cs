@@ -10,7 +10,7 @@ namespace MultiLevelGeoCoder.Logic
 
     /// <summary>
     /// Holds the list of location names/codes to match against
-    /// Provides the location codes where there are exact matches
+    /// Provides the location codes where there are matches
     /// Provides lists of location names for each level 
     /// </summary>
     public class LocationCodes
@@ -37,36 +37,25 @@ namespace MultiLevelGeoCoder.Logic
         #region Methods
 
         /// <summary>
-        /// Gets the location codes for the given location. Adds them to the given location.
+        /// Gets the location codes.
         /// </summary>
         /// <param name="location">The location.</param>
-        public Location GetLocationCodes(Location location)
+        /// <returns>The location with the codes</returns>
+        public CodedLocation GetLocationCodes(Location location)
         {
-            // todo return a CodedLocation?
-            // todo do we need to keep the original names?
-            // todo do we need a clone here?
-            Location location1 = location;
-            location1.Level2Code = null;
-            location1.Level1Code = null;
-            location1.Level3Code = null;
+            CodedLocation codedLocation = new CodedLocation(location);
 
-            Gadm level1 = FindLevel1(location1);
-            if (level1 != null)
+            codedLocation.GeoCode1 = GetLevel1Code(location);
+            if (codedLocation.GeoCode1 != null)
             {
-                location1.Level1Code = level1.ID_1;
-                Gadm level2 = FindLevel2(location1);
-                if (level2 != null)
+                codedLocation.GeoCode2 = GetLevel2Code(location);
+                if (codedLocation.GeoCode2 != null)
                 {
-                    location1.Level2Code = level1.ID_2;
-                    Gadm level3 = FindLevel3(location1);
-                    if (level3 != null)
-                    {
-                        location1.Level3Code = level3.ID_3;
-                    }
+                    codedLocation.GeoCode3 = GetLevel3Code(location);
                 }
             }
 
-            return location1;
+            return codedLocation;
         }
 
         /// <summary>
@@ -121,150 +110,153 @@ namespace MultiLevelGeoCoder.Logic
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
-        private Gadm AltLevel1Record(Location location)
+        private GeoCode GetLevel1Code(Location location)
         {
-            Gadm record = null;
-            // get the alternate name and try again
-            IEnumerable<Level1Match> nearMatches =
-                nearMatchesProvider.GetActualMatches(location.Level1);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
-            Level1Match nearMatch = nearMatches.FirstOrDefault();
-            if (nearMatch != null)
-            {
-                // try with the actual name
-                location.Level1 = nearMatch.Level1;
-                record = Level1Record(location);
-            }
-
-            return record;
+            return Level1UsingGazetteer(location) ??
+                   Level1UsingMatchedName(location);
         }
 
-        private Gadm AltLevel2Record(Location location)
+        private GeoCode GetLevel2Code(Location location)
         {
-            Gadm record = null;
-            // get the alternate name and try again
-            IEnumerable<Level2Match> nearMatches =
-                nearMatchesProvider.GetActualMatches(location.Level2, location.Level1);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
-            Level2Match nearMatch = nearMatches.FirstOrDefault();
-            if (nearMatch != null)
-            {
-                // try with the actual name
-                location.Level2 = nearMatch.Level2;
-                record = Level2Record(location);
-            }
-            return record;
+            return Level2UsingGazetteer(location) ??
+                   Level2UsingMatchedName(location);
         }
 
-        private Gadm AltLevel3Record(Location location)
+        private GeoCode GetLevel3Code(Location location)
         {
-            Gadm record = null;
-            // get the alternate name and try again
-            IEnumerable<Level3Match> nearMatches =
-                nearMatchesProvider.GetActualMatches(
-                    location.Level3,
-                    location.Level1,
-                    location.Level2);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
-            Level3Match nearMatch = nearMatches.FirstOrDefault();
-            if (nearMatch != null)
-            {
-                // try with the actual name
-                location.Level3 = nearMatch.Level3;
-                record = Level3Record(location);
-            }
-            return record;
+            return Level3UsingGazetteer(location) ??
+                   Level3UsingMatchedName(location);
         }
 
-        private Gadm FindLevel1(Location location)
+        private GeoCode Level1UsingGazetteer(Location location)
         {
-            Gadm gadm = Level1Record(location);
-            if (gadm == null)
-            {
-                gadm = AltLevel1Record(location);
-            }
-            return gadm;
-        }
-
-        private Gadm FindLevel2(Location location)
-        {
-            Gadm gadm = Level2Record(location);
-            if (gadm == null)
-            {
-                gadm = AltLevel2Record(location);
-            }
-
-            return gadm;
-        }
-
-        private Gadm FindLevel3(Location location)
-        {
-            Gadm gadm = Level3Record(location);
-            if (gadm == null)
-            {
-                gadm = AltLevel3Record(location);
-            }
-            return gadm;
-        }
-
-        private Gadm Level1Record(Location location)
-        {
+            GeoCode geoCode = null;
             // just match level 1
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Level1.Trim(),
+                        location.Name1,
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
             Gadm firstOrDefault = matchRecords.FirstOrDefault();
-            return firstOrDefault;
+            if (firstOrDefault != null)
+            {
+                geoCode = new GeoCode(firstOrDefault.ID_1, firstOrDefault.NAME_1);
+            }
+
+            return geoCode;
         }
 
-        private Gadm Level2Record(Location location)
+        private GeoCode Level1UsingMatchedName(Location location)
         {
+            GeoCode record = null;
+            // get the matched name and try again
+            IEnumerable<Level1Match> matches =
+                nearMatchesProvider.GetActualMatches(location.Name1);
+            //  note there should only ever be one actual name for the given alt name
+            // todo we need to ensure that there is only one name posibility in the database
+            Level1Match match = matches.FirstOrDefault();
+            if (match != null)
+            {
+                // try with the matched name
+                location.Name1 = match.Level1;
+                record = Level1UsingGazetteer(location);
+            }
+
+            return record;
+        }
+
+        private GeoCode Level2UsingGazetteer(Location location)
+        {
+            GeoCode geoCode = null;
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Level1.Trim(),
+                        location.Name1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_2,
-                        location.Level2.Trim(),
+                        location.Name2.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
-            return firstOrDefault;
+            if (firstOrDefault != null)
+            {
+                geoCode = new GeoCode(firstOrDefault.ID_2, firstOrDefault.NAME_2);
+            }
+            return geoCode;
         }
 
-        private Gadm Level3Record(Location location)
+        private GeoCode Level2UsingMatchedName(Location location)
         {
+            GeoCode record = null;
+            // get the matched name and try again
+            IEnumerable<Level2Match> nearMatches =
+                nearMatchesProvider.GetActualMatches(location.Name2, location.Name1);
+            //  note there should only ever be one actual name for the given alt name
+            // todo we need to ensure that there is only one name posibility in the database
+            Level2Match match = nearMatches.FirstOrDefault();
+            if (match != null)
+            {
+                // try with the matched name
+                location.Name2 = match.Level2;
+                record = Level2UsingGazetteer(location);
+            }
+            return record;
+        }
+
+        private GeoCode Level3UsingGazetteer(Location location)
+        {
+            GeoCode geoCode = null;
             // must match all three levels
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
                         record.NAME_1,
-                        location.Level1.Trim(),
+                        location.Name1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_2,
-                        location.Level2.Trim(),
+                        location.Name2.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
                         record.NAME_3,
-                        location.Level3.Trim(),
+                        location.Name3.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
-            return firstOrDefault;
+            if (firstOrDefault != null)
+            {
+                geoCode = new GeoCode(firstOrDefault.ID_3, firstOrDefault.NAME_3);
+            }
+            return geoCode;
+        }
+
+        private GeoCode Level3UsingMatchedName(Location location)
+        {
+            GeoCode record = null;
+            // get the matched name and try again
+            IEnumerable<Level3Match> nearMatches =
+                nearMatchesProvider.GetActualMatches(
+                    location.Name3,
+                    location.Name1,
+                    location.Name2);
+            //  note there should only ever be one actual name for the given alt name
+            // todo we need to ensure that there is only one name posibility in the database
+            Level3Match match = nearMatches.FirstOrDefault();
+            if (match != null)
+            {
+                // try with the matched name
+                location.Name3 = match.Level3;
+                record = Level3UsingGazetteer(location);
+            }
+            return record;
         }
 
         #endregion Methods

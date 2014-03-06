@@ -8,7 +8,7 @@ namespace MultiLevelGeoCoderTests
 
     /// <summary>
     /// Exercises the LocationCodes class, in particular it tests that the 
-    /// correct codes are applied to a given location using only the gazetteer data
+    /// correct codes are generated for a given location using only the gazetteer data
     /// </summary>
     [TestClass]
     public class LocationCodesTests
@@ -45,13 +45,15 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // code 1 and 2 only are added, no level 3 code added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         /// <summary>
@@ -84,13 +86,14 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             //  level 1 codes added only
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(null, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(null, codedLocation.GeoCode2);
+            Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         /// <summary>
@@ -122,13 +125,16 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // all codes added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(GazetteerTestData.code3, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
@@ -159,13 +165,15 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // level 1 and 2 codes added, no level 3
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(GazetteerTestData.code2, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         /// <summary>
@@ -204,13 +212,14 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // level 1 code only added
-            Assert.AreEqual(GazetteerTestData.code1, location.Level1Code);
-            Assert.AreEqual(null, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
+            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(null, codedLocation.GeoCode2);
+            Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         /// <summary>
@@ -243,54 +252,13 @@ namespace MultiLevelGeoCoderTests
                 nearMatchesProviderWithNoRecords);
 
             // Act
-            locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
 
             // Assert
             // no codes added
-            Assert.AreEqual(null, location.Level1Code);
-            Assert.AreEqual(null, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
-        }
-
-        /// <summary>
-        /// Given a location with existing codes
-        /// when no codes are added
-        /// then any existing codes are removed
-        /// </summary>
-        [TestMethod]
-        public void GetLocationCodes_NoCodedToAddAndHasExistingCodes_CodesRemoved()
-        {
-            // Arrange
-            // Create location input, containing incorrect level 1,
-            // level  2 and 3 are correct (i.e. in the gazetteer)
-            Location location = new Location(
-                "SomeName",
-                GazetteerTestData.name2,
-                GazetteerTestData.name3);
-            location.Level1Code = "1";
-            location.Level2Code = "22";
-            location.Level3Code = "150";
-
-            // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
-
-            // create gazetteer data to match against - add a record
-            // containing a match to the location at level 2 and 3 only
-            var gazzetteerData = GazetteerTestData.TestData();
-
-            LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                nearMatchesProviderWithNoRecords);
-
-            // Act
-            locationCodes.GetLocationCodes(location);
-
-            // Assert
-            // no codes present
-            Assert.AreEqual(null, location.Level1Code);
-            Assert.AreEqual(null, location.Level2Code);
-            Assert.AreEqual(null, location.Level3Code);
+            Assert.AreEqual(null, codedLocation.GeoCode1);
+            Assert.AreEqual(null, codedLocation.GeoCode2);
+            Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         #endregion Methods

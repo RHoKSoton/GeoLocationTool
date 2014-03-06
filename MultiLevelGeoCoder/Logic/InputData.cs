@@ -14,12 +14,12 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        public const string Alt1ColumnName = "Alt Name 1";
-        public const string Alt2ColumnName = "Alt Name 2";
-        public const string Alt3ColumnName = "Alt Name 3";
         public const string Level1CodeColumnName = "Code 1";
         public const string Level2CodeColumnName = "Code 2";
         public const string Level3CodeColumnName = "Code 3";
+        public const string Used1ColumnName = "Name 1";
+        public const string Used2ColumnName = "Name 2";
+        public const string Used3ColumnName = "Name 3";
 
         private const string DefaultLevel1ColumnName = "Admin2";
         private const string DefaultLevel2ColumnName = "Admin3";
@@ -41,17 +41,27 @@ namespace MultiLevelGeoCoder.Logic
         #region Properties
 
         /// <summary>
-        /// The names of the columns that contain the data to be matched.
+        /// Gets or sets the names of the columns that contain the data to be matched.
         /// </summary>
-        /// <returns></returns>
+        /// <value>
+        /// The column names.
+        /// </value>
         public InputColumnNames ColumnNames { get; set; }
 
+        /// <summary>
+        /// Gets or sets the input data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
         public DataTable data { get; set; }
 
         /// <summary>
-        /// The default names of the columns that contain the input data to be matched.
+        /// Gets the default names of the columns that contain the input data to be matched.
         /// </summary>
-        /// <returns></returns>
+        /// <value>
+        /// The default column names.
+        /// </value>
         public InputColumnNames DefaultColumnNames
         {
             get
@@ -78,22 +88,9 @@ namespace MultiLevelGeoCoder.Logic
         {
             foreach (DataRow dataRow in data.Rows)
             {
-                //create location, use the original name
-                Location location = new Location();
-                location.Level1 =
-                    dataRow[ColumnNames.Level1].ToString();
-                location.Level2 =
-                    dataRow[ColumnNames.Level2].ToString();
-                location.Level3 =
-                    dataRow[ColumnNames.Level3].ToString();
-
-                // get codes
-                gazetteer.GetLocationCodes(location);
-
-                //add codes
-                dataRow[Level1CodeColumnName] = location.Level1Code;
-                dataRow[Level2CodeColumnName] = location.Level2Code;
-                dataRow[Level3CodeColumnName] = location.Level3Code;
+                CodedLocation codedLocation = GetCodes(gazetteer, dataRow);
+                AddCodes(codedLocation, dataRow);
+                AddUsedNames(codedLocation, dataRow);
             }
         }
 
@@ -131,6 +128,44 @@ namespace MultiLevelGeoCoder.Logic
             return list;
         }
 
+        private static void AddCodes(CodedLocation codedLocation, DataRow dataRow)
+        {
+            if (codedLocation.GeoCode1 != null)
+            {
+                dataRow[Level1CodeColumnName] = codedLocation.GeoCode1.Code;
+            }
+
+            if (codedLocation.GeoCode2 != null)
+            {
+                dataRow[Level2CodeColumnName] = codedLocation.GeoCode2.Code;
+            }
+
+            if (codedLocation.GeoCode3 != null)
+            {
+                dataRow[Level3CodeColumnName] = codedLocation.GeoCode3.Code;
+            }
+        }
+
+        private static void AddUsedNames(CodedLocation codedLocation, DataRow dataRow)
+        {
+            // add the actual name used to get the code if different to that on the input
+
+            if (codedLocation.IsName1Different())
+            {
+                dataRow[Used1ColumnName] = codedLocation.GeoCode1.Name;
+            }
+
+            if (codedLocation.IsName2Different())
+            {
+                dataRow[Used2ColumnName] = codedLocation.GeoCode2.Name;
+            }
+
+            if (codedLocation.IsName3Different())
+            {
+                dataRow[Used3ColumnName] = codedLocation.GeoCode3.Name;
+            }
+        }
+
         private void AddAdditionalColumns()
         {
             AddCodeColumns();
@@ -140,9 +175,9 @@ namespace MultiLevelGeoCoder.Logic
         private void AddAltNameColumns()
         {
             // add collumns to use for the edited location data
-            AddColumn(Alt1ColumnName);
-            AddColumn(Alt2ColumnName);
-            AddColumn(Alt3ColumnName);
+            AddColumn(Used1ColumnName);
+            AddColumn(Used2ColumnName);
+            AddColumn(Used3ColumnName);
         }
 
         private void AddCodeColumns()
@@ -166,11 +201,27 @@ namespace MultiLevelGeoCoder.Logic
             addedColumns.Add(Level1CodeColumnName);
             addedColumns.Add(Level2CodeColumnName);
             addedColumns.Add(Level3CodeColumnName);
-            addedColumns.Add(Alt1ColumnName);
-            addedColumns.Add(Alt2ColumnName);
-            addedColumns.Add(Alt3ColumnName);
+            addedColumns.Add(Used1ColumnName);
+            addedColumns.Add(Used2ColumnName);
+            addedColumns.Add(Used3ColumnName);
 
             return addedColumns;
+        }
+
+        private CodedLocation GetCodes(LocationCodes gazetteer, DataRow dataRow)
+        {
+            //create location, use the original name
+            Location location = new Location();
+            location.Name1 =
+                dataRow[ColumnNames.Level1].ToString();
+            location.Name2 =
+                dataRow[ColumnNames.Level2].ToString();
+            location.Name3 =
+                dataRow[ColumnNames.Level3].ToString();
+
+            // get codes
+            CodedLocation codedLocation = gazetteer.GetLocationCodes(location);
+            return codedLocation;
         }
 
         private void SetColumnsAsReadOnly()
@@ -187,18 +238,5 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         #endregion Methods
-
-        #region Other
-
-        //private void InitialiseDefaultColumnNames()
-        //{
-        //    InputColumnNames defaultColumnNames = new InputColumnNames();
-        //    defaultColumnNames.Level1 = DefaultLevel1ColumnName;
-        //    defaultColumnNames.Level2 = DefaultLevel2ColumnName;
-        //    defaultColumnNames.Level3 = DefaultLevel3ColumnName;
-        //    DefaultColumnNames = defaultColumnNames;
-        //}
-
-        #endregion Other
     }
 }

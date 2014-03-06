@@ -37,7 +37,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>Location with codes added where found.</returns>
-        Location GetGeoCodes(Location location);
+        CodedLocation GetGeoCodes(Location location);
 
         /// <summary>
         /// The names of the columns that contain the data to be matched
