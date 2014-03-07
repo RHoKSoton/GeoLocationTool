@@ -67,7 +67,7 @@ namespace GeoLocationTool.UI
         }
 
         private void AddUsedNames(CodedLocation codedLocation)
-        {        
+        {
             //display the used match name if different to the original
             ClearUsedNames();
             if (!string.Equals(
@@ -131,11 +131,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                string level1 = cboLevel1Manual.SelectedValue.ToString();
-                string level2 = cboLevel2Manual.SelectedValue.ToString();
-                string level3 = cboLevel3Manual.SelectedValue.ToString();
-                SaveNearMatch(level1, level2, level3);
-                UpdateRow(level1, level2, level3);
+                if (dataGridView1.RowCount > 0)
+                {
+                    string level1 = cboLevel1Manual.SelectedValue.ToString();
+                    string level2 = cboLevel2Manual.SelectedValue.ToString();
+                    string level3 = cboLevel3Manual.SelectedValue.ToString();
+                    SaveNearMatch(level1, level2, level3);
+                    UpdateRow(level1, level2, level3);
+                }
             }
             catch (Exception ex)
             {
@@ -147,10 +150,13 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                string level1 = txtLevel1Original.Text;
-                string level2 = txtLevel2Original.Text;
-                string level3 = txtLevel3Original.Text;
-                UpdateRow(level1, level2, level3);
+                if (dataGridView1.RowCount > 0)
+                {
+                    string level1 = txtLevel1Original.Text;
+                    string level2 = txtLevel2Original.Text;
+                    string level3 = txtLevel3Original.Text;
+                    UpdateRow(level1, level2, level3);
+                }
             }
             catch (Exception ex)
             {
@@ -162,11 +168,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                string level1 = cboLevel1Suggestion.SelectedValue.ToString();
-                string level2 = cboLevel2Suggestion.SelectedValue.ToString();
-                string level3 = cboLevel3Suggestion.SelectedValue.ToString();
-                SaveNearMatch(level1, level2, level3);
-                UpdateRow(level1, level2, level3);
+                if (dataGridView1.RowCount > 0)
+                {
+                    string level1 = cboLevel1Suggestion.SelectedValue.ToString();
+                    string level2 = cboLevel2Suggestion.SelectedValue.ToString();
+                    string level3 = cboLevel3Suggestion.SelectedValue.ToString();
+                    SaveNearMatch(level1, level2, level3);
+                    UpdateRow(level1, level2, level3);
+                }
             }
             catch (Exception ex)
             {
@@ -373,6 +382,18 @@ namespace GeoLocationTool.UI
                     fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
         }
 
+        private void DisplayRecords()
+        {
+            if (chkUnmatchedOnly.Checked)
+            {
+                DisplayUnmatchedRecords();
+            }
+            else
+            {
+                DisplayAllRecords();
+            }
+        }
+
         private void DisplaySelectedRecord()
         {
             InputColumnNames columnNames = geoCoder.InputColumnNames();
@@ -490,18 +511,6 @@ namespace GeoLocationTool.UI
             AddCodes(codedLocation);
             AddUsedNames(codedLocation);
             DisplayRecords();
-        }
-
-        private void DisplayRecords()
-        {
-            if (chkUnmatchedOnly.Checked)
-            {
-                DisplayUnmatchedRecords();
-            }
-            else
-            {
-                DisplayAllRecords();
-            }
         }
 
         #endregion Methods

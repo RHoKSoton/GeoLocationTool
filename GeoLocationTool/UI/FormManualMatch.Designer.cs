@@ -55,7 +55,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 365);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 393);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
@@ -129,7 +129,7 @@
             this.cboLevel2Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2Suggestion.FormattingEnabled = true;
-            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 81);
+            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 82);
             this.cboLevel2Suggestion.Name = "cboLevel2Suggestion";
             this.cboLevel2Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Suggestion.TabIndex = 2;
@@ -139,7 +139,7 @@
             // 
             this.cboLevel2Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Manual.FormattingEnabled = true;
-            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 119);
+            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 120);
             this.cboLevel2Manual.Name = "cboLevel2Manual";
             this.cboLevel2Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Manual.TabIndex = 6;
@@ -150,7 +150,7 @@
             this.cboLevel3Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3Suggestion.FormattingEnabled = true;
-            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 81);
+            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 82);
             this.cboLevel3Suggestion.Name = "cboLevel3Suggestion";
             this.cboLevel3Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Suggestion.TabIndex = 3;
@@ -159,7 +159,7 @@
             // 
             this.cboLevel3Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Manual.FormattingEnabled = true;
-            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 119);
+            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 120);
             this.cboLevel3Manual.Name = "cboLevel3Manual";
             this.cboLevel3Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Manual.TabIndex = 7;
@@ -274,11 +274,10 @@
             // 
             // txtSelectedIndex
             // 
-            this.txtSelectedIndex.Location = new System.Drawing.Point(1076, 583);
+            this.txtSelectedIndex.Location = new System.Drawing.Point(706, 174);
             this.txtSelectedIndex.Name = "txtSelectedIndex";
-            this.txtSelectedIndex.Size = new System.Drawing.Size(1, 22);
+            this.txtSelectedIndex.Size = new System.Drawing.Size(82, 22);
             this.txtSelectedIndex.TabIndex = 27;
-            this.txtSelectedIndex.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -297,7 +296,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 10, 8);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtLevel1Original, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 6, 1);
@@ -321,6 +319,7 @@
             this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnApplyAll, 8, 6);
             this.tableLayoutPanel1.Controls.Add(this.chkUnmatchedOnly, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 6, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
