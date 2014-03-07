@@ -17,15 +17,15 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtProvince = new System.Windows.Forms.TextBox();
-            this.txtBarangay = new System.Windows.Forms.TextBox();
-            this.txtMunicipality = new System.Windows.Forms.TextBox();
-            this.cboProvinceSuggestion = new System.Windows.Forms.ComboBox();
-            this.cboProvince = new System.Windows.Forms.ComboBox();
-            this.cboMunicipalitySuggestion = new System.Windows.Forms.ComboBox();
-            this.cboMunicipality = new System.Windows.Forms.ComboBox();
-            this.cboBarangaySuggestion = new System.Windows.Forms.ComboBox();
-            this.cboBarangay = new System.Windows.Forms.ComboBox();
+            this.txtLevel1Original = new System.Windows.Forms.TextBox();
+            this.txtLevel3Original = new System.Windows.Forms.TextBox();
+            this.txtLevel2Original = new System.Windows.Forms.TextBox();
+            this.cboLevel1Suggestion = new System.Windows.Forms.ComboBox();
+            this.cboLevel1Manual = new System.Windows.Forms.ComboBox();
+            this.cboLevel2Suggestion = new System.Windows.Forms.ComboBox();
+            this.cboLevel2Manual = new System.Windows.Forms.ComboBox();
+            this.cboLevel3Suggestion = new System.Windows.Forms.ComboBox();
+            this.cboLevel3Manual = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -69,99 +69,99 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Manual Replacement";
             // 
-            // txtProvince
+            // txtAdmin1
             // 
-            this.txtProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tableLayoutPanel1.SetColumnSpan(this.txtProvince, 2);
-            this.txtProvince.Location = new System.Drawing.Point(172, 45);
-            this.txtProvince.Name = "txtProvince";
-            this.txtProvince.ReadOnly = true;
-            this.txtProvince.Size = new System.Drawing.Size(260, 22);
-            this.txtProvince.TabIndex = 0;
-            this.txtProvince.TabStop = false;
+            this.txtLevel1Original.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtLevel1Original, 2);
+            this.txtLevel1Original.Location = new System.Drawing.Point(172, 45);
+            this.txtLevel1Original.Name = "txtLevel1Original";
+            this.txtLevel1Original.ReadOnly = true;
+            this.txtLevel1Original.Size = new System.Drawing.Size(260, 22);
+            this.txtLevel1Original.TabIndex = 0;
+            this.txtLevel1Original.TabStop = false;
             // 
-            // txtBarangay
+            // txtAdmin3
             // 
-            this.txtBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBarangay.Location = new System.Drawing.Point(718, 45);
-            this.txtBarangay.Name = "txtBarangay";
-            this.txtBarangay.ReadOnly = true;
-            this.txtBarangay.Size = new System.Drawing.Size(260, 22);
-            this.txtBarangay.TabIndex = 0;
-            this.txtBarangay.TabStop = false;
+            this.txtLevel3Original.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLevel3Original.Location = new System.Drawing.Point(718, 45);
+            this.txtLevel3Original.Name = "txtLevel3Original";
+            this.txtLevel3Original.ReadOnly = true;
+            this.txtLevel3Original.Size = new System.Drawing.Size(260, 22);
+            this.txtLevel3Original.TabIndex = 0;
+            this.txtLevel3Original.TabStop = false;
             // 
-            // txtMunicipality
+            // txtAdmin2
             // 
-            this.txtMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMunicipality.Location = new System.Drawing.Point(445, 45);
-            this.txtMunicipality.Name = "txtMunicipality";
-            this.txtMunicipality.ReadOnly = true;
-            this.txtMunicipality.Size = new System.Drawing.Size(260, 22);
-            this.txtMunicipality.TabIndex = 0;
-            this.txtMunicipality.TabStop = false;
+            this.txtLevel2Original.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLevel2Original.Location = new System.Drawing.Point(445, 45);
+            this.txtLevel2Original.Name = "txtLevel2Original";
+            this.txtLevel2Original.ReadOnly = true;
+            this.txtLevel2Original.Size = new System.Drawing.Size(260, 22);
+            this.txtLevel2Original.TabIndex = 0;
+            this.txtLevel2Original.TabStop = false;
             // 
-            // cboProvinceSuggestion
+            // cboAdmin1Suggestion
             // 
-            this.cboProvinceSuggestion.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tableLayoutPanel1.SetColumnSpan(this.cboProvinceSuggestion, 2);
-            this.cboProvinceSuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboProvinceSuggestion.FormattingEnabled = true;
-            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 82);
-            this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
-            this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboProvinceSuggestion.TabIndex = 1;
-            this.cboProvinceSuggestion.SelectedIndexChanged += new System.EventHandler(this.cboProvinceSuggestion_SelectedIndexChanged);
+            this.cboLevel1Suggestion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Suggestion, 2);
+            this.cboLevel1Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel1Suggestion.FormattingEnabled = true;
+            this.cboLevel1Suggestion.Location = new System.Drawing.Point(172, 82);
+            this.cboLevel1Suggestion.Name = "cboLevel1Suggestion";
+            this.cboLevel1Suggestion.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel1Suggestion.TabIndex = 1;
+            this.cboLevel1Suggestion.SelectedIndexChanged += new System.EventHandler(this.cboLevel1Suggestion_SelectedIndexChanged);
             // 
-            // cboProvince
+            // cboAdmin1Manual
             // 
-            this.cboProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tableLayoutPanel1.SetColumnSpan(this.cboProvince, 2);
-            this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(172, 120);
-            this.cboProvince.Name = "cboProvince";
-            this.cboProvince.Size = new System.Drawing.Size(260, 24);
-            this.cboProvince.TabIndex = 5;
-            this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
+            this.cboLevel1Manual.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Manual, 2);
+            this.cboLevel1Manual.FormattingEnabled = true;
+            this.cboLevel1Manual.Location = new System.Drawing.Point(172, 120);
+            this.cboLevel1Manual.Name = "cboLevel1Manual";
+            this.cboLevel1Manual.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel1Manual.TabIndex = 5;
+            this.cboLevel1Manual.SelectedIndexChanged += new System.EventHandler(this.cboLevel1Manual_SelectedIndexChanged);
             // 
-            // cboMunicipalitySuggestion
+            // cboAdmin2Suggestion
             // 
-            this.cboMunicipalitySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 82);
-            this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
-            this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboMunicipalitySuggestion.TabIndex = 2;
-            this.cboMunicipalitySuggestion.SelectedIndexChanged += new System.EventHandler(this.cboMunicipalitySuggestion_SelectedIndexChanged);
+            this.cboLevel2Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel2Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel2Suggestion.FormattingEnabled = true;
+            this.cboLevel2Suggestion.Location = new System.Drawing.Point(445, 82);
+            this.cboLevel2Suggestion.Name = "cboLevel2Suggestion";
+            this.cboLevel2Suggestion.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel2Suggestion.TabIndex = 2;
+            this.cboLevel2Suggestion.SelectedIndexChanged += new System.EventHandler(this.cboLevel2Suggestion_SelectedIndexChanged);
             // 
-            // cboMunicipality
+            // cboAdmin2Manual
             // 
-            this.cboMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(445, 120);
-            this.cboMunicipality.Name = "cboMunicipality";
-            this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
-            this.cboMunicipality.TabIndex = 6;
-            this.cboMunicipality.SelectedIndexChanged += new System.EventHandler(this.cboMunicipality_SelectedIndexChanged);
+            this.cboLevel2Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel2Manual.FormattingEnabled = true;
+            this.cboLevel2Manual.Location = new System.Drawing.Point(445, 120);
+            this.cboLevel2Manual.Name = "cboLevel2Manual";
+            this.cboLevel2Manual.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel2Manual.TabIndex = 6;
+            this.cboLevel2Manual.SelectedIndexChanged += new System.EventHandler(this.cboLevel2Manual_SelectedIndexChanged);
             // 
-            // cboBarangaySuggestion
+            // cboAdmin3Suggestion
             // 
-            this.cboBarangaySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 82);
-            this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
-            this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
-            this.cboBarangaySuggestion.TabIndex = 3;
+            this.cboLevel3Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel3Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel3Suggestion.FormattingEnabled = true;
+            this.cboLevel3Suggestion.Location = new System.Drawing.Point(718, 82);
+            this.cboLevel3Suggestion.Name = "cboLevel3Suggestion";
+            this.cboLevel3Suggestion.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel3Suggestion.TabIndex = 3;
             // 
-            // cboBarangay
+            // cboAdmin3Manual
             // 
-            this.cboBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(718, 120);
-            this.cboBarangay.Name = "cboBarangay";
-            this.cboBarangay.Size = new System.Drawing.Size(260, 24);
-            this.cboBarangay.TabIndex = 7;
+            this.cboLevel3Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel3Manual.FormattingEnabled = true;
+            this.cboLevel3Manual.Location = new System.Drawing.Point(718, 120);
+            this.cboLevel3Manual.Name = "cboLevel3Manual";
+            this.cboLevel3Manual.Size = new System.Drawing.Size(260, 24);
+            this.cboLevel3Manual.TabIndex = 7;
             // 
             // label2
             // 
@@ -169,27 +169,27 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Location = new System.Drawing.Point(172, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 17);
+            this.label2.Size = new System.Drawing.Size(59, 17);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Province";
+            this.label2.Text = "Admin 1";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(445, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.Size = new System.Drawing.Size(59, 17);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Town";
+            this.label3.Text = "Admin 2";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(718, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 17);
+            this.label4.Size = new System.Drawing.Size(59, 17);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Village";
+            this.label4.Text = "Admin 3";
             // 
             // label5
             // 
@@ -298,22 +298,22 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtSelectedIndex, 10, 8);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtProvince, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtLevel1Original, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 6, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label3, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtMunicipality, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtBarangay, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtLevel2Original, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtLevel3Original, 6, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboProvinceSuggestion, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboProvince, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboMunicipality, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboMunicipalitySuggestion, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboBarangay, 6, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboBarangaySuggestion, 6, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel1Suggestion, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel1Manual, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel2Manual, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel2Suggestion, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel3Manual, 6, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboLevel3Suggestion, 6, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnUseManual, 8, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 6);
@@ -368,15 +368,15 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtProvince;
-        private System.Windows.Forms.TextBox txtBarangay;
-        private System.Windows.Forms.TextBox txtMunicipality;
-        private System.Windows.Forms.ComboBox cboProvinceSuggestion;
-        private System.Windows.Forms.ComboBox cboProvince;
-        private System.Windows.Forms.ComboBox cboMunicipalitySuggestion;
-        private System.Windows.Forms.ComboBox cboMunicipality;
-        private System.Windows.Forms.ComboBox cboBarangaySuggestion;
-        private System.Windows.Forms.ComboBox cboBarangay;
+        private System.Windows.Forms.TextBox txtLevel1Original;
+        private System.Windows.Forms.TextBox txtLevel3Original;
+        private System.Windows.Forms.TextBox txtLevel2Original;
+        private System.Windows.Forms.ComboBox cboLevel1Suggestion;
+        private System.Windows.Forms.ComboBox cboLevel1Manual;
+        private System.Windows.Forms.ComboBox cboLevel2Suggestion;
+        private System.Windows.Forms.ComboBox cboLevel2Manual;
+        private System.Windows.Forms.ComboBox cboLevel3Suggestion;
+        private System.Windows.Forms.ComboBox cboLevel3Manual;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
