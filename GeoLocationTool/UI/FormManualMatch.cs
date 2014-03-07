@@ -54,6 +54,7 @@ namespace GeoLocationTool.UI
 
         private void AddCodes(CodedLocation codedLocation)
         {
+            // add the codes to the input data
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
                 .Value =
                 codedLocation.GeoCode1.Code;
@@ -66,9 +67,9 @@ namespace GeoLocationTool.UI
         }
 
         private void AddUsedNames(CodedLocation codedLocation)
-        {
+        {        
+            //display the used match name if different to the original
             ClearUsedNames();
-            //display alt names only if different to the original
             if (!string.Equals(
                 codedLocation.GeoCode1.Name,
                 codedLocation.Name1,
@@ -227,6 +228,11 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void chkUnmatchedOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayRecords();
+        }
+
         private void ClearUsedNames()
         {
             dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName].Value =
@@ -283,6 +289,12 @@ namespace GeoLocationTool.UI
             {
                 ErrorHandler.Process("Grid navigation error.", ex);
             }
+        }
+
+        private void DisplayAllRecords()
+        {
+            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void DisplayLevel1List()
@@ -410,6 +422,8 @@ namespace GeoLocationTool.UI
                 if (dataGridView1.Rows.Count > 0)
                 {
                     Cursor = Cursors.WaitCursor;
+
+                    // select the first row and display the suggestions for it
                     dataGridView1.Rows[0].Selected = true;
                     DisplaySelectedRecord();
                     DisplayLevel1Suggestions();
@@ -443,6 +457,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
+            chkUnmatchedOnly.Checked = true;
             btnUseSuggestion.Select();
         }
 
@@ -474,7 +489,19 @@ namespace GeoLocationTool.UI
 
             AddCodes(codedLocation);
             AddUsedNames(codedLocation);
-            DisplayUnmatchedRecords();
+            DisplayRecords();
+        }
+
+        private void DisplayRecords()
+        {
+            if (chkUnmatchedOnly.Checked)
+            {
+                DisplayUnmatchedRecords();
+            }
+            else
+            {
+                DisplayAllRecords();
+            }
         }
 
         #endregion Methods
