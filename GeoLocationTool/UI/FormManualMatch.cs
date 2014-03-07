@@ -145,6 +145,25 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void btnApplyAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                geoCoder.MatchAll();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process(
+                    "Error refreshing the data.",
+                    ex);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
         private void btnMainScreen_Click(object sender, EventArgs e)
         {
             Close();

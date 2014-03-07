@@ -39,6 +39,7 @@
             this.txtRowCount = new System.Windows.Forms.TextBox();
             this.txtSelectedIndex = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnApplyAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1239, 365);
-            this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.TabIndex = 11;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -105,7 +106,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvinceSuggestion, 2);
             this.cboProvinceSuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvinceSuggestion.FormattingEnabled = true;
-            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 81);
+            this.cboProvinceSuggestion.Location = new System.Drawing.Point(172, 82);
             this.cboProvinceSuggestion.Name = "cboProvinceSuggestion";
             this.cboProvinceSuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboProvinceSuggestion.TabIndex = 1;
@@ -116,7 +117,7 @@
             this.cboProvince.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboProvince, 2);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(172, 119);
+            this.cboProvince.Location = new System.Drawing.Point(172, 120);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(260, 24);
             this.cboProvince.TabIndex = 5;
@@ -127,7 +128,7 @@
             this.cboMunicipalitySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipalitySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMunicipalitySuggestion.FormattingEnabled = true;
-            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 81);
+            this.cboMunicipalitySuggestion.Location = new System.Drawing.Point(445, 82);
             this.cboMunicipalitySuggestion.Name = "cboMunicipalitySuggestion";
             this.cboMunicipalitySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipalitySuggestion.TabIndex = 2;
@@ -137,7 +138,7 @@
             // 
             this.cboMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMunicipality.FormattingEnabled = true;
-            this.cboMunicipality.Location = new System.Drawing.Point(445, 119);
+            this.cboMunicipality.Location = new System.Drawing.Point(445, 120);
             this.cboMunicipality.Name = "cboMunicipality";
             this.cboMunicipality.Size = new System.Drawing.Size(260, 24);
             this.cboMunicipality.TabIndex = 6;
@@ -148,7 +149,7 @@
             this.cboBarangaySuggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangaySuggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBarangaySuggestion.FormattingEnabled = true;
-            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 81);
+            this.cboBarangaySuggestion.Location = new System.Drawing.Point(718, 82);
             this.cboBarangaySuggestion.Name = "cboBarangaySuggestion";
             this.cboBarangaySuggestion.Size = new System.Drawing.Size(260, 24);
             this.cboBarangaySuggestion.TabIndex = 3;
@@ -157,7 +158,7 @@
             // 
             this.cboBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboBarangay.FormattingEnabled = true;
-            this.cboBarangay.Location = new System.Drawing.Point(718, 119);
+            this.cboBarangay.Location = new System.Drawing.Point(718, 120);
             this.cboBarangay.Name = "cboBarangay";
             this.cboBarangay.Size = new System.Drawing.Size(260, 24);
             this.cboBarangay.TabIndex = 7;
@@ -225,7 +226,7 @@
             this.btnMainScreen.Location = new System.Drawing.Point(1086, 174);
             this.btnMainScreen.Name = "btnMainScreen";
             this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
-            this.btnMainScreen.TabIndex = 9;
+            this.btnMainScreen.TabIndex = 10;
             this.btnMainScreen.Text = "Main Screen";
             this.btnMainScreen.UseVisualStyleBackColor = true;
             this.btnMainScreen.Click += new System.EventHandler(this.btnMainScreen_Click);
@@ -317,6 +318,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnUseSuggestion, 8, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnMainScreen, 11, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtRowCount, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnApplyAll, 8, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -332,6 +334,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1245, 608);
             this.tableLayoutPanel1.TabIndex = 28;
+            // 
+            // btnApplyAll
+            // 
+            this.btnApplyAll.Location = new System.Drawing.Point(991, 174);
+            this.btnApplyAll.Name = "btnApplyAll";
+            this.btnApplyAll.Size = new System.Drawing.Size(75, 32);
+            this.btnApplyAll.TabIndex = 9;
+            this.btnApplyAll.Text = "Apply All";
+            this.btnApplyAll.UseVisualStyleBackColor = true;
+            this.btnApplyAll.Click += new System.EventHandler(this.btnApplyAll_Click);
             // 
             // FormManualMatch
             // 
@@ -378,5 +390,6 @@
         private System.Windows.Forms.TextBox txtRowCount;
         private System.Windows.Forms.TextBox txtSelectedIndex;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnApplyAll;
     }
 }
