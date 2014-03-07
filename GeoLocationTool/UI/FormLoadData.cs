@@ -82,7 +82,7 @@ namespace GeoLocationTool.UI
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
                 }
-
+                SetColumnHeaders();
                 FormManualMatch formManualMatch = new FormManualMatch(geoCoder);
                 formManualMatch.ShowDialog();
             }
