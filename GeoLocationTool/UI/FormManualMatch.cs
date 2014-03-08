@@ -465,9 +465,9 @@ namespace GeoLocationTool.UI
         private void SaveNearMatch(string level1, string level2, string level3)
         {
             // todo call via the geoCoder
-            matches.SaveMatch(txtLevel1Original.Text, level1);
-            matches.SaveMatch(txtLevel2Original.Text, level1, level2);
-            matches.SaveMatch(txtLevel3Original.Text, level1, level2, level3);
+            matches.SaveMatchLevel1(txtLevel1Original.Text, level1);
+            matches.SaveMatchLevel2(txtLevel2Original.Text, level1, level2);
+            matches.SaveMatchLevel3(txtLevel3Original.Text, level1, level2, level3);
 
             // geoCoder.SaveNearMatch(nearMatch);
         }
