@@ -137,7 +137,7 @@ namespace GeoLocationTool.UI
                     string level2 = cboLevel2Manual.SelectedValue.ToString();
                     string level3 = cboLevel3Manual.SelectedValue.ToString();
                     SaveNearMatch(level1, level2, level3);
-                    UpdateRow(level1, level2, level3);
+                    UpdateRow();
                 }
             }
             catch (Exception ex)
@@ -148,20 +148,17 @@ namespace GeoLocationTool.UI
 
         private void btnUseOriginal_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView1.RowCount > 0)
-                {
-                    string level1 = txtLevel1Original.Text;
-                    string level2 = txtLevel2Original.Text;
-                    string level3 = txtLevel3Original.Text;
-                    UpdateRow(level1, level2, level3);
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("Error applying original selection to the data.", ex);
-            }
+            //try
+            //{
+            //    if (dataGridView1.RowCount > 0)
+            //    {
+            //        UpdateRow();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ErrorHandler.Process("Error applying original selection to the data.", ex);
+            //}
         }
 
         private void btnUseSuggestion_Click(object sender, EventArgs e)
@@ -174,7 +171,7 @@ namespace GeoLocationTool.UI
                     string level2 = cboLevel2Suggestion.SelectedValue.ToString();
                     string level3 = cboLevel3Suggestion.SelectedValue.ToString();
                     SaveNearMatch(level1, level2, level3);
-                    UpdateRow(level1, level2, level3);
+                    UpdateRow();
                 }
             }
             catch (Exception ex)
@@ -482,29 +479,16 @@ namespace GeoLocationTool.UI
             btnUseSuggestion.Select();
         }
 
-        private void UpdateRow(string level1, string level2, string level3)
+        private void UpdateRow()
         {
             string originalLevel1 = txtLevel1Original.Text;
             string originalLevel2 = txtLevel2Original.Text;
             string originalLevel3 = txtLevel3Original.Text;
 
-            Location location = new Location(
-                level1,
-                level2,
-                level3);
-
             Location location2 = new Location(
                 originalLevel1,
                 originalLevel2,
                 originalLevel3);
-
-            //DisplayAltNames(
-            //    level1,
-            //    level2,
-            //    level3,
-            //    originalLevel1,
-            //    originalLevel2,
-            //    originalLevel3);
 
             CodedLocation codedLocation = geoCoder.GetGeoCodes(location2);
 

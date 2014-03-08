@@ -107,7 +107,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Suggestion, 2);
             this.cboLevel1Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1Suggestion.FormattingEnabled = true;
-            this.cboLevel1Suggestion.Location = new System.Drawing.Point(154, 81);
+            this.cboLevel1Suggestion.Location = new System.Drawing.Point(154, 82);
             this.cboLevel1Suggestion.Name = "cboLevel1Suggestion";
             this.cboLevel1Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel1Suggestion.TabIndex = 1;
@@ -118,7 +118,7 @@
             this.cboLevel1Manual.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Manual, 2);
             this.cboLevel1Manual.FormattingEnabled = true;
-            this.cboLevel1Manual.Location = new System.Drawing.Point(154, 119);
+            this.cboLevel1Manual.Location = new System.Drawing.Point(154, 120);
             this.cboLevel1Manual.Name = "cboLevel1Manual";
             this.cboLevel1Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel1Manual.TabIndex = 5;
@@ -129,7 +129,7 @@
             this.cboLevel2Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2Suggestion.FormattingEnabled = true;
-            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 82);
+            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 81);
             this.cboLevel2Suggestion.Name = "cboLevel2Suggestion";
             this.cboLevel2Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Suggestion.TabIndex = 2;
@@ -139,7 +139,7 @@
             // 
             this.cboLevel2Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Manual.FormattingEnabled = true;
-            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 120);
+            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 119);
             this.cboLevel2Manual.Name = "cboLevel2Manual";
             this.cboLevel2Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Manual.TabIndex = 6;
@@ -150,7 +150,7 @@
             this.cboLevel3Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3Suggestion.FormattingEnabled = true;
-            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 82);
+            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 81);
             this.cboLevel3Suggestion.Name = "cboLevel3Suggestion";
             this.cboLevel3Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Suggestion.TabIndex = 3;
@@ -159,7 +159,7 @@
             // 
             this.cboLevel3Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Manual.FormattingEnabled = true;
-            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 120);
+            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 119);
             this.cboLevel3Manual.Name = "cboLevel3Manual";
             this.cboLevel3Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Manual.TabIndex = 7;
@@ -240,6 +240,7 @@
             this.btnUseOriginal.TabIndex = 0;
             this.btnUseOriginal.Text = "Use this";
             this.btnUseOriginal.UseVisualStyleBackColor = true;
+            this.btnUseOriginal.Visible = false;
             this.btnUseOriginal.Click += new System.EventHandler(this.btnUseOriginal_Click);
             // 
             // btnUseManual
