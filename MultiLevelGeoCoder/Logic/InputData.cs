@@ -80,28 +80,27 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Methods
 
-
         /// <summary>
-        /// Adds the location codes and the names used to find those codes,to the input data.
+        /// Adds the codes and the names used to find those codes, to the input data.
         /// </summary>
         /// <param name="locationCodes">The location codes.</param>
         public void AddLocationCodes(LocationCodes locationCodes)
         {
             foreach (DataRow dataRow in data.Rows)
             {
-                CodedLocation codedLocation = GetCodes(locationCodes, dataRow);
+                CodedLocation codedLocation = FindCodes(locationCodes, dataRow);
+                ClearExistingCodes(dataRow);
                 AddCodes(codedLocation, dataRow);
-                AddUsedNames(codedLocation, dataRow);
             }
         }
 
         /// <summary>
-        /// Gets the unmatched records.
+        /// Gets the uncoded records, i.e. those where at least one code is not present
         /// </summary>
-        /// <returns>A view only containing records where one or more location codes is missing.</returns>
-        public DataView GetUnmatchedRecords()
+        /// <returns>A view only containing records where one or more codes is missing.</returns>
+        public DataView GetCodedRecords()
         {
-            // only show those records where a location code is null
+            // only show those records where at least one code is null
             EnumerableRowCollection<DataRow> query = from record in data.AsEnumerable()
                 where record.Field<String>(Level1CodeColumnName) == null ||
                       record.Field<string>(Level2CodeColumnName) == null ||
@@ -145,9 +144,12 @@ namespace MultiLevelGeoCoder.Logic
             {
                 dataRow[Level3CodeColumnName] = codedLocation.GeoCode3.Code;
             }
+
+            // add the names used to generate those codes as information for the user.
+            AddUsedMatchNames(codedLocation, dataRow);
         }
 
-        private static void AddUsedNames(CodedLocation codedLocation, DataRow dataRow)
+        private static void AddUsedMatchNames(CodedLocation codedLocation, DataRow dataRow)
         {
             // add the actual name used to get the code if different to that on the input
 
@@ -209,7 +211,17 @@ namespace MultiLevelGeoCoder.Logic
             return addedColumns;
         }
 
-        private CodedLocation GetCodes(LocationCodes gazetteer, DataRow dataRow)
+        private void ClearExistingCodes(DataRow dataRow)
+        {
+            dataRow[Level1CodeColumnName] = null;
+            dataRow[Level2CodeColumnName] = null;
+            dataRow[Level3CodeColumnName] = null;
+            dataRow[Used1ColumnName] = null;
+            dataRow[Used2ColumnName] = null;
+            dataRow[Used3ColumnName] = null;
+        }
+
+        private CodedLocation FindCodes(LocationCodes gazetteer, DataRow dataRow)
         {
             //create location, use the original name
             Location location = new Location();

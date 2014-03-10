@@ -33,7 +33,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnMainScreen = new System.Windows.Forms.Button();
-            this.btnUseOriginal = new System.Windows.Forms.Button();
             this.btnUseManual = new System.Windows.Forms.Button();
             this.btnUseSuggestion = new System.Windows.Forms.Button();
             this.txtRowCount = new System.Windows.Forms.TextBox();
@@ -50,12 +49,12 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 13);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 212);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 202);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1239, 393);
+            this.dataGridView1.Size = new System.Drawing.Size(1239, 403);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
@@ -64,7 +63,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 113);
+            this.label1.Location = new System.Drawing.Point(3, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(145, 17);
             this.label1.TabIndex = 1;
@@ -74,7 +73,7 @@
             // 
             this.txtLevel1Original.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.txtLevel1Original, 2);
-            this.txtLevel1Original.Location = new System.Drawing.Point(154, 45);
+            this.txtLevel1Original.Location = new System.Drawing.Point(154, 40);
             this.txtLevel1Original.Name = "txtLevel1Original";
             this.txtLevel1Original.ReadOnly = true;
             this.txtLevel1Original.Size = new System.Drawing.Size(260, 22);
@@ -84,7 +83,7 @@
             // txtLevel3Original
             // 
             this.txtLevel3Original.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLevel3Original.Location = new System.Drawing.Point(706, 45);
+            this.txtLevel3Original.Location = new System.Drawing.Point(706, 40);
             this.txtLevel3Original.Name = "txtLevel3Original";
             this.txtLevel3Original.ReadOnly = true;
             this.txtLevel3Original.Size = new System.Drawing.Size(260, 22);
@@ -94,7 +93,7 @@
             // txtLevel2Original
             // 
             this.txtLevel2Original.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLevel2Original.Location = new System.Drawing.Point(430, 45);
+            this.txtLevel2Original.Location = new System.Drawing.Point(430, 40);
             this.txtLevel2Original.Name = "txtLevel2Original";
             this.txtLevel2Original.ReadOnly = true;
             this.txtLevel2Original.Size = new System.Drawing.Size(260, 22);
@@ -107,7 +106,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Suggestion, 2);
             this.cboLevel1Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1Suggestion.FormattingEnabled = true;
-            this.cboLevel1Suggestion.Location = new System.Drawing.Point(154, 82);
+            this.cboLevel1Suggestion.Location = new System.Drawing.Point(154, 71);
             this.cboLevel1Suggestion.Name = "cboLevel1Suggestion";
             this.cboLevel1Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel1Suggestion.TabIndex = 1;
@@ -118,7 +117,7 @@
             this.cboLevel1Manual.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Manual, 2);
             this.cboLevel1Manual.FormattingEnabled = true;
-            this.cboLevel1Manual.Location = new System.Drawing.Point(154, 120);
+            this.cboLevel1Manual.Location = new System.Drawing.Point(154, 109);
             this.cboLevel1Manual.Name = "cboLevel1Manual";
             this.cboLevel1Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel1Manual.TabIndex = 5;
@@ -129,7 +128,7 @@
             this.cboLevel2Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2Suggestion.FormattingEnabled = true;
-            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 81);
+            this.cboLevel2Suggestion.Location = new System.Drawing.Point(430, 72);
             this.cboLevel2Suggestion.Name = "cboLevel2Suggestion";
             this.cboLevel2Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Suggestion.TabIndex = 2;
@@ -139,7 +138,7 @@
             // 
             this.cboLevel2Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel2Manual.FormattingEnabled = true;
-            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 119);
+            this.cboLevel2Manual.Location = new System.Drawing.Point(430, 110);
             this.cboLevel2Manual.Name = "cboLevel2Manual";
             this.cboLevel2Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel2Manual.TabIndex = 6;
@@ -150,7 +149,7 @@
             this.cboLevel3Suggestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Suggestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3Suggestion.FormattingEnabled = true;
-            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 81);
+            this.cboLevel3Suggestion.Location = new System.Drawing.Point(706, 72);
             this.cboLevel3Suggestion.Name = "cboLevel3Suggestion";
             this.cboLevel3Suggestion.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Suggestion.TabIndex = 3;
@@ -159,7 +158,7 @@
             // 
             this.cboLevel3Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboLevel3Manual.FormattingEnabled = true;
-            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 119);
+            this.cboLevel3Manual.Location = new System.Drawing.Point(706, 110);
             this.cboLevel3Manual.Name = "cboLevel3Manual";
             this.cboLevel3Manual.Size = new System.Drawing.Size(260, 24);
             this.cboLevel3Manual.TabIndex = 7;
@@ -195,7 +194,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 75);
+            this.label5.Location = new System.Drawing.Point(3, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(90, 17);
             this.label5.TabIndex = 14;
@@ -205,7 +204,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 181);
+            this.label6.Location = new System.Drawing.Point(3, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(145, 17);
             this.label6.TabIndex = 15;
@@ -224,7 +223,7 @@
             // 
             this.btnMainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.btnMainScreen, 2);
-            this.btnMainScreen.Location = new System.Drawing.Point(1086, 174);
+            this.btnMainScreen.Location = new System.Drawing.Point(1086, 164);
             this.btnMainScreen.Name = "btnMainScreen";
             this.btnMainScreen.Size = new System.Drawing.Size(156, 32);
             this.btnMainScreen.TabIndex = 10;
@@ -232,20 +231,9 @@
             this.btnMainScreen.UseVisualStyleBackColor = true;
             this.btnMainScreen.Click += new System.EventHandler(this.btnMainScreen_Click);
             // 
-            // btnUseOriginal
-            // 
-            this.btnUseOriginal.Location = new System.Drawing.Point(982, 40);
-            this.btnUseOriginal.Name = "btnUseOriginal";
-            this.btnUseOriginal.Size = new System.Drawing.Size(75, 32);
-            this.btnUseOriginal.TabIndex = 0;
-            this.btnUseOriginal.Text = "Use this";
-            this.btnUseOriginal.UseVisualStyleBackColor = true;
-            this.btnUseOriginal.Visible = false;
-            this.btnUseOriginal.Click += new System.EventHandler(this.btnUseOriginal_Click);
-            // 
             // btnUseManual
             // 
-            this.btnUseManual.Location = new System.Drawing.Point(982, 116);
+            this.btnUseManual.Location = new System.Drawing.Point(982, 106);
             this.btnUseManual.Name = "btnUseManual";
             this.btnUseManual.Size = new System.Drawing.Size(75, 32);
             this.btnUseManual.TabIndex = 8;
@@ -255,7 +243,7 @@
             // 
             // btnUseSuggestion
             // 
-            this.btnUseSuggestion.Location = new System.Drawing.Point(982, 78);
+            this.btnUseSuggestion.Location = new System.Drawing.Point(982, 68);
             this.btnUseSuggestion.Name = "btnUseSuggestion";
             this.btnUseSuggestion.Size = new System.Drawing.Size(75, 32);
             this.btnUseSuggestion.TabIndex = 4;
@@ -266,7 +254,7 @@
             // txtRowCount
             // 
             this.txtRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRowCount.Location = new System.Drawing.Point(154, 179);
+            this.txtRowCount.Location = new System.Drawing.Point(154, 169);
             this.txtRowCount.Name = "txtRowCount";
             this.txtRowCount.ReadOnly = true;
             this.txtRowCount.Size = new System.Drawing.Size(116, 22);
@@ -275,7 +263,7 @@
             // 
             // txtSelectedIndex
             // 
-            this.txtSelectedIndex.Location = new System.Drawing.Point(706, 174);
+            this.txtSelectedIndex.Location = new System.Drawing.Point(706, 164);
             this.txtSelectedIndex.Name = "txtSelectedIndex";
             this.txtSelectedIndex.Size = new System.Drawing.Size(82, 22);
             this.txtSelectedIndex.TabIndex = 27;
@@ -304,7 +292,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtLevel2Original, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtLevel3Original, 6, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnUseOriginal, 8, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
@@ -339,7 +326,7 @@
             // 
             // btnApplyAll
             // 
-            this.btnApplyAll.Location = new System.Drawing.Point(982, 174);
+            this.btnApplyAll.Location = new System.Drawing.Point(982, 164);
             this.btnApplyAll.Name = "btnApplyAll";
             this.btnApplyAll.Size = new System.Drawing.Size(75, 32);
             this.btnApplyAll.TabIndex = 9;
@@ -350,7 +337,7 @@
             // chkUnmatchedOnly
             // 
             this.chkUnmatchedOnly.AutoSize = true;
-            this.chkUnmatchedOnly.Location = new System.Drawing.Point(430, 174);
+            this.chkUnmatchedOnly.Location = new System.Drawing.Point(430, 164);
             this.chkUnmatchedOnly.Name = "chkUnmatchedOnly";
             this.chkUnmatchedOnly.Size = new System.Drawing.Size(173, 21);
             this.chkUnmatchedOnly.TabIndex = 28;
@@ -397,7 +384,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnMainScreen;
-        private System.Windows.Forms.Button btnUseOriginal;
         private System.Windows.Forms.Button btnUseManual;
         private System.Windows.Forms.Button btnUseSuggestion;
         private System.Windows.Forms.TextBox txtRowCount;

@@ -175,7 +175,7 @@ namespace MultiLevelGeoCoder
 
         public DataView UnmatchedRecords()
         {
-            return inputData.GetUnmatchedRecords();
+            return inputData.GetCodedRecords();
         }
 
         #endregion Methods

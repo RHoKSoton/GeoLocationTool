@@ -55,47 +55,49 @@ namespace GeoLocationTool.UI
         private void AddCodes(CodedLocation codedLocation)
         {
             // add the codes to the input data
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
-                .Value =
-                codedLocation.GeoCode1.Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
-                .Value =
-                codedLocation.GeoCode2.Code;
-            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
-                .Value =
-                codedLocation.GeoCode3.Code;
+            if (codedLocation.GeoCode1 != null)
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+                    .Value =
+                    codedLocation.GeoCode1.Code;
+            }
+
+            if (codedLocation.GeoCode2 != null)
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+                    .Value =
+                    codedLocation.GeoCode2.Code;
+            }
+
+            if (codedLocation.GeoCode3 != null)
+            {
+                dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+                    .Value =
+                    codedLocation.GeoCode3.Code;
+            }
+
+            // add the names used to generate those codes as information for the user.
+            AddUsedMatchNames(codedLocation);
         }
 
-        private void AddUsedNames(CodedLocation codedLocation)
+        private void AddUsedMatchNames(CodedLocation codedLocation)
         {
-            //display the used match name if different to the original
-            ClearUsedNames();
-            if (!string.Equals(
-                codedLocation.GeoCode1.Name,
-                codedLocation.Name1,
-                StringComparison.OrdinalIgnoreCase))
+            // add the actual name used to get the code if different to that on the input
+            if (codedLocation.IsName1Different())
             {
                 dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used1ColumnName]
                     .Value
                     = codedLocation.GeoCode1.Name;
             }
 
-            if (
-                !string.Equals(
-                    codedLocation.GeoCode2.Name,
-                    codedLocation.Name2,
-                    StringComparison.OrdinalIgnoreCase))
+            if (codedLocation.IsName2Different())
             {
                 dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used2ColumnName]
                     .Value
                     = codedLocation.GeoCode2.Name;
             }
 
-            if (
-                !string.Equals(
-                    codedLocation.GeoCode3.Name,
-                    codedLocation.Name3,
-                    StringComparison.OrdinalIgnoreCase))
+            if (codedLocation.IsName3Different())
             {
                 dataGridView1.Rows[selectedRowIndex].Cells[InputData.Used3ColumnName]
                     .Value
@@ -144,21 +146,6 @@ namespace GeoLocationTool.UI
             {
                 ErrorHandler.Process("Error applying manual selection to the data.", ex);
             }
-        }
-
-        private void btnUseOriginal_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (dataGridView1.RowCount > 0)
-            //    {
-            //        UpdateRow();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ErrorHandler.Process("Error applying original selection to the data.", ex);
-            //}
         }
 
         private void btnUseSuggestion_Click(object sender, EventArgs e)
@@ -237,6 +224,22 @@ namespace GeoLocationTool.UI
         private void chkUnmatchedOnly_CheckedChanged(object sender, EventArgs e)
         {
             DisplayRecords();
+        }
+
+        private void ClearCodes()
+        {
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level1CodeColumnName]
+                .Value = null;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level2CodeColumnName]
+                .Value = null;
+            dataGridView1.Rows[selectedRowIndex].Cells[InputData.Level3CodeColumnName]
+                .Value = null;
+        }
+
+        private void ClearExistingCodes()
+        {
+            ClearCodes();
+            ClearUsedNames();
         }
 
         private void ClearUsedNames()
@@ -491,9 +494,8 @@ namespace GeoLocationTool.UI
                 originalLevel3);
 
             CodedLocation codedLocation = geoCoder.GetGeoCodes(location2);
-
+            ClearExistingCodes();
             AddCodes(codedLocation);
-            AddUsedNames(codedLocation);
             DisplayRecords();
         }
 
