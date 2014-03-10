@@ -18,7 +18,7 @@ namespace MultiLevelGeoCoder
 
         private readonly IMatchProvider matchProvider;
 
-        private GazetteerData gazetteer;
+        private GazetteerData gazetteerData;
         private InputData inputData;
         private LocationCodes locationCodes;
         private LocationNames locationNames;
@@ -39,7 +39,7 @@ namespace MultiLevelGeoCoder
 
         public DataTable GazetteerData
         {
-            get { return gazetteer.Data; }
+            get { return gazetteerData.Data; }
         }
 
         public DataTable InputRecords
@@ -51,6 +51,11 @@ namespace MultiLevelGeoCoder
 
         #region Methods
 
+        public IList<string> AllGazetteerColumnNames()
+        {
+            return gazetteerData.AllColumnNames();
+        }
+
         /// <summary>
         /// Provides a list of all the column header names present in the input data sheet
         /// </summary>
@@ -58,6 +63,17 @@ namespace MultiLevelGeoCoder
         public IList<string> AllInputColumnNames()
         {
             return inputData.AllColumnNames();
+        }
+
+        public void CodeAll()
+        {
+            inputData.AddLocationCodes(locationCodes);
+        }
+
+        public GazetteerColumnNames DefaultGazetteerColumnNames()
+        {
+            //todo get the saved gazetteer column names from the database
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -99,7 +115,7 @@ namespace MultiLevelGeoCoder
 
         public bool IsGazetteerInitialised()
         {
-            return gazetteer != null;
+            return gazetteerData != null;
         }
 
         public IList<string> Level1LocationNames()
@@ -122,7 +138,7 @@ namespace MultiLevelGeoCoder
             const bool isFirstRowHeader = true;
             // todo remove as first row is always header
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
-            gazetteer = new GazetteerData(dt);
+            gazetteerData = new GazetteerData(dt);
         }
 
         public void LoadInputFileCsv(string path)
@@ -139,11 +155,6 @@ namespace MultiLevelGeoCoder
             inputData = new InputData(dt);
         }
 
-        public void CodeAll()
-        {
-            inputData.AddLocationCodes(locationCodes);
-        }
-
         public void SaveNearMatch()
         {
             throw new NotImplementedException();
@@ -157,11 +168,11 @@ namespace MultiLevelGeoCoder
             FileExport.SaveToCsvFile(fileName, InputRecords);
         }
 
-        public void SetGazetteerColumns(GazetteerColumnHeaders headers)
+        public void SetGazetteerColumns(GazetteerColumnNames columnNames)
         {
-            gazetteer.SetColumnHeaders(headers);
-            locationCodes = new LocationCodes(gazetteer.LocationList, matchProvider);
-            locationNames = new LocationNames(gazetteer.LocationList);
+            gazetteerData.ColumnNames = columnNames;
+            locationCodes = new LocationCodes(gazetteerData.LocationList, matchProvider);
+            locationNames = new LocationNames(gazetteerData.LocationList);
         }
 
         /// <summary>

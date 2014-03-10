@@ -6,9 +6,7 @@ namespace GeoLocationTool.UI
     using System.ComponentModel;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
-    using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
-    using MultiLevelGeoCoder.Model;
 
     /// <summary>
     /// Form to display the  gazetter location data and enable the user to 
@@ -18,7 +16,7 @@ namespace GeoLocationTool.UI
     {
         #region Fields
 
-        private readonly IColumnsMappingProvider columnsMapping;
+        //private readonly IColumnsMappingProvider columnsMapping;
         private readonly IGeoCoder geoCoder = new GeoCoder(Program.Connection);
 
         private FormLoadData formLoadData;
@@ -27,19 +25,25 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormLoadLocationData"/> class.
+        /// Reads the gazetteer file path from the args, used in testing. 
+        /// </summary>
+        /// <param name="args">The arguments containing the gazetteer filepath.</param>
         public FormLoadLocationData(string[] args = null)
         {
             InitializeComponent();
-            columnsMapping = new ColumnsMappingProvider(Program.Connection);
+
+            //columnsMapping = new ColumnsMappingProvider(Program.Connection);
             if (args != null && args.Length >= 1)
             {
                 string path = args[0];
-                txtLocationFileName.Text = path;
-                geoCoder.LoadGazetter(path);
-                dataGridView1.DataSource = geoCoder.GazetteerData;
-                FormatGrid();
 
-                DisplaySavedColumnHeaderIndices(path);
+                if (!String.IsNullOrWhiteSpace(path))
+                {
+                    LoadFile(path);
+                    DisplayColumnNameLists();
+                }
             }
         }
 
@@ -47,19 +51,29 @@ namespace GeoLocationTool.UI
 
         #region Methods
 
+        private bool AreColumnNamesSelected()
+        {
+            // levels 1,2 and 3 must be selected
+            bool selected = cboLevel1Codes.SelectedIndex >= 0;
+            selected = selected && cboLevel2Codes.SelectedIndex > 0;
+            selected = selected && cboLevel3Codes.SelectedIndex > 0;
+            selected = selected && cboLevel1Names.SelectedIndex > 0;
+            selected = selected && cboLevel2Names.SelectedIndex > 0;
+            selected = selected && cboLevel3Names.SelectedIndex > 0;
+
+            return selected;
+        }
+
         private void btnLoadData_Click(object sender, EventArgs e)
         {
             try
             {
-                const string filter = "csv files (*.csv)|*.csv";
-                txtLocationFileName.Clear();
-                txtLocationFileName.Text = UiHelper.GetFileName(filter);
-                var path = txtLocationFileName.Text.Trim();
+                var path = SelectFile();
+
                 if (!String.IsNullOrWhiteSpace(path))
                 {
-                    geoCoder.LoadGazetter(path);
-                    dataGridView1.DataSource = geoCoder.GazetteerData;
-                    FormatGrid();
+                    LoadFile(path);
+                    DisplayColumnNameLists();
                 }
             }
             catch (Exception ex)
@@ -80,15 +94,18 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    SetColumnHeaders();
-                    if (!ColumnHeadersSet())
+                    if (!AreColumnNamesSelected())
                     {
                         UiHelper.DisplayMessage(
-                            "Please select column numbers for the Code and Name columns.",
+                            "Please select the column names for the code and name data.",
                             "Missing Data");
                     }
-                    SaveColumnMappings();
-                    LoadNextScreen();
+                    else
+                    {
+                        SetColumnNames();
+                        SaveColumnMappings();
+                        LoadNextScreen();
+                    }
                 }
             }
             catch (Exception ex)
@@ -97,43 +114,40 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private bool ColumnHeadersSet()
+        private void DisplayColumnNameLists()
         {
-            const bool areSet = true;
-            //todo check that collumns have been selected
+            cboLevel1Codes.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel2Codes.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel3Codes.DataSource = geoCoder.AllGazetteerColumnNames();
 
-            return areSet;
+            cboLevel1Names.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel2Names.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel3Names.DataSource = geoCoder.AllGazetteerColumnNames();
+
+            cboLevel1AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel2AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel3AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
+
+            // todo set the defaults to those stored in the database
+            //SetDefaultNames();
         }
 
         private void DisplaySavedColumnHeaderIndices(string path)
         {
-            var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(path);
-            if (locationColumnMapping != null)
-            {
-                udCode1.Value = locationColumnMapping.Level1Code + 1;
-                udName1.Value = locationColumnMapping.Level1Name + 1;
-                udAltName1.Value = locationColumnMapping.Level1AltName + 1;
-                udCode2.Value = locationColumnMapping.Level2Code + 1;
-                udName2.Value = locationColumnMapping.Level2Name + 1;
-                udAltName2.Value = locationColumnMapping.Level2AltName + 1;
-                udCode3.Value = locationColumnMapping.Level3Code + 1;
-                udName3.Value = locationColumnMapping.Level3Name + 1;
-                udAltName3.Value = locationColumnMapping.Level3AltName + 1;
-            }
-        }
-
-        private void FormatGrid()
-        {
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderText = string.Format(
-                    "{0} [{1}]",
-                    column.HeaderText,
-                    column.Index + 1);
-                column.MinimumWidth = column.HeaderText.Length;
-            }
-            dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+            //// todo move  code away from the UI, get these via the geoCoder
+            //var locationColumnMapping = columnsMapping.GetLocationColumnsMapping(path);
+            //if (locationColumnMapping != null)
+            //{
+            //    udCode1.Value = locationColumnMapping.Level1Code + 1;
+            //    udName1.Value = locationColumnMapping.Level1Name + 1;
+            //    udAltName1.Value = locationColumnMapping.Level1AltName + 1;
+            //    udCode2.Value = locationColumnMapping.Level2Code + 1;
+            //    udName2.Value = locationColumnMapping.Level2Name + 1;
+            //    udAltName2.Value = locationColumnMapping.Level2AltName + 1;
+            //    udCode3.Value = locationColumnMapping.Level3Code + 1;
+            //    udName3.Value = locationColumnMapping.Level3Name + 1;
+            //    udAltName3.Value = locationColumnMapping.Level3AltName + 1;
+            //}
         }
 
         private void FormLoadDataClosing(object sender, CancelEventArgs e)
@@ -145,6 +159,14 @@ namespace GeoLocationTool.UI
         private void FormLoadLocationData_Load(object sender, EventArgs e)
         {
             SetGridDefaults();
+        }
+
+        private void LoadFile(string path)
+        {
+            geoCoder.LoadGazetter(path);
+            dataGridView1.DataSource = geoCoder.GazetteerData;
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void LoadNextScreen()
@@ -161,50 +183,85 @@ namespace GeoLocationTool.UI
 
         private void SaveColumnMappings()
         {
-            // todo move  code away from the UI, save via the geoCoder
-            int loc1Code = (int) udCode1.Value - 1;
-            int loc1Name = (int) udName1.Value - 1;
-            int loc1AltName = (int) udAltName1.Value - 1;
-            int loc2Code = (int) udCode2.Value - 1;
-            int loc2Name = (int) udName2.Value - 1;
-            int loc2AltName = (int) udAltName2.Value - 1;
-            int loc3Code = (int) udCode3.Value - 1;
-            int loc3Name = (int) udName3.Value - 1;
-            int loc3AltName = (int) udAltName3.Value - 1;
+            //// todo move  code away from the UI, save via the geoCoder
+            //int loc1Code = (int) udCode1.Value - 1;
+            //int loc1Name = (int) udName1.Value - 1;
+            //int loc1AltName = (int) udAltName1.Value - 1;
+            //int loc2Code = (int) udCode2.Value - 1;
+            //int loc2Name = (int) udName2.Value - 1;
+            //int loc2AltName = (int) udAltName2.Value - 1;
+            //int loc3Code = (int) udCode3.Value - 1;
+            //int loc3Name = (int) udName3.Value - 1;
+            //int loc3AltName = (int) udAltName3.Value - 1;
 
-            columnsMapping.SaveLocationColumnsMapping(
-                new LocationColumnsMapping
-                {
-                    FileName = txtLocationFileName.Text,
-                    Level1Code = loc1Code,
-                    Level1Name = loc1Name,
-                    Level1AltName = loc1AltName,
-                    Level2Code = loc2Code,
-                    Level2Name = loc2Name,
-                    Level2AltName = loc2AltName,
-                    Level3Code = loc3Code,
-                    Level3Name = loc3Name,
-                    Level3AltName = loc3AltName,
-                }
-                );
+            //columnsMapping.SaveLocationColumnsMapping(
+            //    new LocationColumnsMapping
+            //    {
+            //        FileName = txtFileName.Text,
+            //        Level1Code = loc1Code,
+            //        Level1Name = loc1Name,
+            //        Level1AltName = loc1AltName,
+            //        Level2Code = loc2Code,
+            //        Level2Name = loc2Name,
+            //        Level2AltName = loc2AltName,
+            //        Level3Code = loc3Code,
+            //        Level3Name = loc3Name,
+            //        Level3AltName = loc3AltName,
+            //    }
+            //    );
         }
 
-        private void SetColumnHeaders()
+        private string SelectFile()
         {
-            // todo use column names instead of indices
-            GazetteerColumnHeaders headers = new GazetteerColumnHeaders();
-            headers.Admin1Code = (int) udCode1.Value - 1;
-            headers.Admin1Name = (int) udName1.Value - 1;
-            headers.Admin1AltName = (int) udAltName1.Value - 1;
+            const string filter = "csv files (*.csv)|*.csv";
+            txtFileName.Clear();
+            var path = UiHelper.GetFileName(filter).Trim();
+            txtFileName.Text = path;
+            return path;
+        }
 
-            headers.Admin2Code = (int) udCode2.Value - 1;
-            headers.Admin2Name = (int) udName2.Value - 1;
-            headers.Admin2AltName = (int) udAltName2.Value - 1;
+        private void SetColumnNames()
+        {
+            GazetteerColumnNames columnNames = new GazetteerColumnNames();
+            columnNames.Level1Code = cboLevel1Codes.SelectedValue as string;
+            columnNames.Level1Name = cboLevel1Names.SelectedValue as string;
+            columnNames.Level2AltNames = cboLevel1AltNames.SelectedValue as string;
 
-            headers.Admin3Code = (int) udCode3.Value - 1;
-            headers.Admin3Name = (int) udName3.Value - 1;
-            headers.Admin3AltName = (int) udAltName3.Value - 1;
-            geoCoder.SetGazetteerColumns(headers);
+            columnNames.Level2Code = cboLevel2Codes.SelectedValue as string;
+            columnNames.Level2Name = cboLevel2Names.SelectedValue as string;
+            columnNames.Level2AltNames = cboLevel2AltNames.SelectedValue as string;
+
+            columnNames.Level3Code = cboLevel3Codes.SelectedValue as string;
+            columnNames.Level3Name = cboLevel3Names.SelectedValue as string;
+            columnNames.Level3AltNames = cboLevel3AltNames.SelectedValue as string;
+            geoCoder.SetGazetteerColumns(columnNames);
+        }
+
+        private void SetDefaultNames()
+        {
+            // set defaults if they exist in the input sheet
+            GazetteerColumnNames defaultColumnNames =
+                geoCoder.DefaultGazetteerColumnNames();
+            cboLevel1Codes.SelectedIndex =
+                cboLevel1Codes.FindStringExact(defaultColumnNames.Level1Code);
+            cboLevel2Codes.SelectedIndex =
+                cboLevel2Codes.FindStringExact(defaultColumnNames.Level2Code);
+            cboLevel3Codes.SelectedIndex =
+                cboLevel3Codes.FindStringExact(defaultColumnNames.Level3Code);
+
+            cboLevel1Names.SelectedIndex =
+                cboLevel1Names.FindStringExact(defaultColumnNames.Level1Name);
+            cboLevel2Names.SelectedIndex =
+                cboLevel2Names.FindStringExact(defaultColumnNames.Level2Name);
+            cboLevel3Names.SelectedIndex =
+                cboLevel3Names.FindStringExact(defaultColumnNames.Level3Name);
+
+            cboLevel1Codes.SelectedIndex =
+                cboLevel1Codes.FindStringExact(defaultColumnNames.Level1AltNames);
+            cboLevel2Codes.SelectedIndex =
+                cboLevel2Codes.FindStringExact(defaultColumnNames.Level2AltNames);
+            cboLevel3Codes.SelectedIndex =
+                cboLevel3Codes.FindStringExact(defaultColumnNames.Level3AltNames);
         }
 
         private void SetGridDefaults()

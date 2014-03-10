@@ -4,6 +4,7 @@ namespace MultiLevelGeoCoder.Logic
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
 
     /// <summary>
     /// Holds all the gazetter data, and details of the columns to be used.
@@ -22,30 +23,12 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Properties
 
-        public int Admin1AltName { get; set; }
-
-        // column header indices
-        // todo use column names instead
-        public int Admin1Code { get; set; }
-
-        public int Admin1Name { get; set; }
-
-        public int Admin2AltName { get; set; }
-
-        public int Admin2Code { get; set; }
-
-        public int Admin2Name { get; set; }
-
-        public int Admin3AltName { get; set; }
-
-        public int Admin3Code { get; set; }
-
-        public int Admin3Name { get; set; }
+        public GazetteerColumnNames ColumnNames { get; set; }
 
         public DataTable Data { get; private set; }
 
         /// <summary>
-        /// Gets the location list containing just the location columns specified.
+        /// Provides a location list containing just the columns in the Column Names.
         /// </summary>
         /// <value>
         /// The location list.
@@ -59,16 +42,16 @@ namespace MultiLevelGeoCoder.Logic
                 foreach (DataRow row in Data.Rows)
                 {
                     Gadm gadm = new Gadm();
-                    gadm.NAME_1 = row[Admin1Name].ToString();
-                    gadm.ID_1 = row[Admin1Code].ToString();
+                    gadm.NAME_1 = row[ColumnNames.Level1Name].ToString();
+                    gadm.ID_1 = row[ColumnNames.Level1Code].ToString();
                     //gadm.VarName1 = row[AdminAltName].ToString();
 
-                    gadm.NAME_2 = row[Admin2Name].ToString();
-                    gadm.ID_2 = row[Admin2Code].ToString();
+                    gadm.NAME_2 = row[ColumnNames.Level2Name].ToString();
+                    gadm.ID_2 = row[ColumnNames.Level2Code].ToString();
                     //gadm.VarName1 = row[AdminAltName].ToString();
 
-                    gadm.NAME_3 = row[Admin3Name].ToString();
-                    gadm.ID_3 = row[Admin3Code].ToString();
+                    gadm.NAME_3 = row[ColumnNames.Level3Name].ToString();
+                    gadm.ID_3 = row[ColumnNames.Level3Code].ToString();
                     //gadm.VarName1 = row[AdminAltName].ToString();
                     locationCodeList.Add(gadm);
                 }
@@ -80,32 +63,19 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Methods
 
-        public bool ColumnIndicesValid()
+        /// <summary>
+        /// Provides a list of all the column header names present in the gazetteer data.
+        /// </summary>
+        /// <returns>List of column names</returns>
+        public IList<string> AllColumnNames()
         {
-            // code column indices must be greater than 0
-            bool valid = (Admin1Code > 0);
-            valid = valid & (Admin2Code > 0);
-            valid = valid & (Admin3Code > 0);
+            List<string> list =
+                (from DataColumn dataColumn in Data.Columns select dataColumn.ColumnName)
+                    .ToList();
 
-            // name column indices must be greater than 0
-            valid = valid & (Admin1Name > 0);
-            valid = valid & (Admin2Name > 0);
-            valid = valid & (Admin2Name > 0);
-
-            return valid;
+            return list;
         }
 
         #endregion Methods
-
-        public void SetColumnHeaders(GazetteerColumnHeaders headers)
-        {
-            Admin1Name = headers.Admin1Name;
-            Admin2Name = headers.Admin2Name;
-            Admin3Name = headers.Admin3Name;
-
-            Admin1Code = headers.Admin1Code;
-            Admin2Code = headers.Admin2Code;
-            Admin3Code = headers.Admin3Code;
-        }
     }
 }
