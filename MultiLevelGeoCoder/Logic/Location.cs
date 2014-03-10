@@ -3,7 +3,7 @@
 namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
-    /// DTO holding location names
+    /// Simple structure holding location names
     /// </summary>
     public class Location
     {

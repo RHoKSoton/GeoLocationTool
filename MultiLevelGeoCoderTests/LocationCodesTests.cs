@@ -34,7 +34,7 @@ namespace MultiLevelGeoCoderTests
                 "SomeName");
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against
@@ -42,10 +42,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // code 1 and 2 only are added, no level 3 code added
@@ -75,7 +75,7 @@ namespace MultiLevelGeoCoderTests
                 GazetteerTestData.name3);
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against
@@ -83,10 +83,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             //  level 1 codes added only
@@ -113,7 +113,7 @@ namespace MultiLevelGeoCoderTests
                 GazetteerTestData.name3.ToLower());
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
@@ -122,10 +122,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // all codes added
@@ -153,7 +153,7 @@ namespace MultiLevelGeoCoderTests
                 GazetteerTestData.name2.ToLower());
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
@@ -162,10 +162,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // level 1 and 2 codes added, no level 3
@@ -190,7 +190,7 @@ namespace MultiLevelGeoCoderTests
             Location location = new Location(GazetteerTestData.name1.ToLower());
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
@@ -209,10 +209,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // level 1 code only added
@@ -240,7 +240,7 @@ namespace MultiLevelGeoCoderTests
                 GazetteerTestData.name3);
 
             // database contains no saved records
-            INearMatchesProvider nearMatchesProviderWithNoRecords =
+            IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
@@ -249,10 +249,10 @@ namespace MultiLevelGeoCoderTests
 
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
-                nearMatchesProviderWithNoRecords);
+                matchProviderWithNoRecords);
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetLocationCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // no codes added

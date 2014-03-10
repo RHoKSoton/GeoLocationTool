@@ -9,15 +9,16 @@ namespace MultiLevelGeoCoder.Logic
     using Model;
 
     /// <summary>
-    /// Holds the list of location names/codes to match against
-    /// Provides the location codes where there are matches
+    /// Provides the location codes where there are matches in the gazetteer data
+    /// using either the given names or the previously matched names in the database
+    /// Contains the main search algorithm.
     /// </summary>
     public class LocationCodes
     {
         #region Fields
 
         private readonly IEnumerable<Gadm> gazzetteerData;
-        private readonly INearMatchesProvider nearMatchesProvider;
+        private readonly IMatchProvider matchProvider;
 
         #endregion Fields
 
@@ -25,10 +26,10 @@ namespace MultiLevelGeoCoder.Logic
 
         public LocationCodes(
             IEnumerable<Gadm> gazzetteerData,
-            INearMatchesProvider nearMatchesProvider)
+            IMatchProvider matchProvider)
         {
             this.gazzetteerData = gazzetteerData;
-            this.nearMatchesProvider = nearMatchesProvider;
+            this.matchProvider = matchProvider;
         }
 
         #endregion Constructors
@@ -40,7 +41,7 @@ namespace MultiLevelGeoCoder.Logic
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>The location with the codes</returns>
-        public CodedLocation GetLocationCodes(Location location)
+        public CodedLocation GetCodes(Location location)
         {
             CodedLocation codedLocation = new CodedLocation(location);
 
@@ -100,7 +101,7 @@ namespace MultiLevelGeoCoder.Logic
             GeoCode record = null;
             // get the matched name and try again
             IEnumerable<Level1Match> matches =
-                nearMatchesProvider.GetActualMatches(location.Name1);
+                matchProvider.GetMatches(location.Name1);
             //  note there should only ever be one actual name for the given alt name
             // todo we need to ensure that there is only one name posibility in the database
             Level1Match match = matches.FirstOrDefault();
@@ -143,7 +144,7 @@ namespace MultiLevelGeoCoder.Logic
             GeoCode record = null;
             // get the matched name and try again
             IEnumerable<Level2Match> nearMatches =
-                nearMatchesProvider.GetActualMatches(location.Name2, location.Name1);
+                matchProvider.GetMatches(location.Name2, location.Name1);
             //  note there should only ever be one actual name for the given alt name
             // todo we need to ensure that there is only one name posibility in the database
             Level2Match match = nearMatches.FirstOrDefault();
@@ -189,7 +190,7 @@ namespace MultiLevelGeoCoder.Logic
             GeoCode record = null;
             // get the matched name and try again
             IEnumerable<Level3Match> nearMatches =
-                nearMatchesProvider.GetActualMatches(
+                matchProvider.GetMatches(
                     location.Name3,
                     location.Name1,
                     location.Name2);

@@ -10,13 +10,15 @@ namespace MultiLevelGeoCoder.DataAccess
     using Model;
 
     /// <summary>
-    /// Get or save NearMatches
+    /// Get or save Matches. A Match being where the user has specified an 
+    /// alternative name that will be used in the input instead 
+    /// of a particular name in the gazetteer 
     /// </summary>
-    public class NearMatchesProvider : INearMatchesProvider
+    public class MatchProvider : IMatchProvider
     {
         #region Constructors
 
-        public NearMatchesProvider(DbConnection sqlConnection)
+        public MatchProvider(DbConnection sqlConnection)
         {
             SqlConnection = sqlConnection;
         }
@@ -31,7 +33,7 @@ namespace MultiLevelGeoCoder.DataAccess
 
         #region Methods
 
-        public IEnumerable<Level1Match> GetActualMatches(string alternateName)
+        public IEnumerable<Level1Match> GetMatches(string alternateName)
         {
             return SqlConnection.Query<Level1Match>(
                 @"SELECT * FROM Level1Matches
@@ -40,7 +42,7 @@ namespace MultiLevelGeoCoder.DataAccess
                 );
         }
 
-        public IEnumerable<Level2Match> GetActualMatches(
+        public IEnumerable<Level2Match> GetMatches(
             string alternateName,
             string level1)
         {
@@ -51,7 +53,7 @@ namespace MultiLevelGeoCoder.DataAccess
                 );
         }
 
-        public IEnumerable<Level3Match> GetActualMatches(
+        public IEnumerable<Level3Match> GetMatches(
             string alternateName,
             string level1,
             string level2)

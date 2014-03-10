@@ -14,88 +14,88 @@ namespace MultiLevelGeoCoderTests
     {
         #region Methods
 
-        public static INearMatchesProvider NearMatchesProviderLevel1(string altName)
+        public static IMatchProvider NearMatchesProviderLevel1(string altName)
         {
-            INearMatchesProvider nearMatchesStub =
-                MockRepository.GenerateStub<INearMatchesProvider>();
-            nearMatchesStub.Stub(x => x.GetActualMatches(altName))
+            IMatchProvider matchStub =
+                MockRepository.GenerateStub<IMatchProvider>();
+            matchStub.Stub(x => x.GetMatches(altName))
                 .Return(Level1List(altName));
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(
+            matchStub.Stub(
+                x => x.GetMatches(
                     Arg<string>.Is.Anything,
                     Arg<string>.Is.Anything))
                 .Return(new List<Level2Match>()); // empty list
-            nearMatchesStub.Stub(
+            matchStub.Stub(
                 x =>
-                    x.GetActualMatches(
+                    x.GetMatches(
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
                 .Return(new List<Level3Match>()); // empty list
-            return nearMatchesStub;
+            return matchStub;
         }
 
-        public static INearMatchesProvider NearMatchesProviderLevel2(string altName)
+        public static IMatchProvider NearMatchesProviderLevel2(string altName)
         {
-            INearMatchesProvider nearMatchesStub =
-                MockRepository.GenerateStub<INearMatchesProvider>();
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(
+            IMatchProvider matchStub =
+                MockRepository.GenerateStub<IMatchProvider>();
+            matchStub.Stub(
+                x => x.GetMatches(
                     Arg<string>.Is.Anything))
                 .Return(new List<Level1Match>()); // empty list
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
+            matchStub.Stub(
+                x => x.GetMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
                 .Return(Level2List(altName));
-            nearMatchesStub.Stub(
+            matchStub.Stub(
                 x =>
-                    x.GetActualMatches(
+                    x.GetMatches(
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
                 .Return(new List<Level3Match>()); // empty list
-            return nearMatchesStub;
+            return matchStub;
         }
 
-        public static INearMatchesProvider NearMatchesProviderLevel3(string altName)
+        public static IMatchProvider NearMatchesProviderLevel3(string altName)
         {
-            INearMatchesProvider nearMatchesStub =
-                MockRepository.GenerateStub<INearMatchesProvider>();
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(
+            IMatchProvider matchStub =
+                MockRepository.GenerateStub<IMatchProvider>();
+            matchStub.Stub(
+                x => x.GetMatches(
                     Arg<string>.Is.Anything))
                 .Return(new List<Level1Match>()); // empty list
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(
+            matchStub.Stub(
+                x => x.GetMatches(
                     Arg<string>.Is.Anything,
                     Arg<string>.Is.Anything))
                 .Return(new List<Level2Match>()); // empty list
-            nearMatchesStub.Stub(
+            matchStub.Stub(
                 x =>
-                    x.GetActualMatches(
+                    x.GetMatches(
                         altName,
                         GazetteerTestData.name1,
                         GazetteerTestData.name2))
                 .Return(Level3List(altName));
-            return nearMatchesStub;
+            return matchStub;
         }
 
-        public static INearMatchesProvider NearMatchesProviderWithNoRecords()
+        public static IMatchProvider NearMatchesProviderWithNoRecords()
         {
-            INearMatchesProvider nearMatchesStub =
-                MockRepository.GenerateStub<INearMatchesProvider>();
-            nearMatchesStub.Stub(x => x.GetActualMatches(Arg<string>.Is.Anything))
+            IMatchProvider matchStub =
+                MockRepository.GenerateStub<IMatchProvider>();
+            matchStub.Stub(x => x.GetMatches(Arg<string>.Is.Anything))
                 .Return(new List<Level1Match>()); // empty list
-            nearMatchesStub.Stub(
-                x => x.GetActualMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
+            matchStub.Stub(
+                x => x.GetMatches(Arg<string>.Is.Anything, Arg<string>.Is.Anything))
                 .Return(new List<Level2Match>()); // empty list
-            nearMatchesStub.Stub(
+            matchStub.Stub(
                 x =>
-                    x.GetActualMatches(
+                    x.GetMatches(
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything,
                         Arg<string>.Is.Anything))
                 .Return(new List<Level3Match>()); // empty list
-            return nearMatchesStub;
+            return matchStub;
         }
 
         private static IEnumerable<Level1Match> Level1List(string altName)

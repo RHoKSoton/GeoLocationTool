@@ -8,7 +8,7 @@ namespace MultiLevelGeoCoder.Logic
     using System.Linq;
 
     /// <summary>
-    /// Holds the input data and added codes
+    /// Holds the input data and added codes etc
     /// </summary>
     public class InputData
     {
@@ -80,15 +80,16 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Methods
 
+
         /// <summary>
-        /// Adds the matched location codes.
+        /// Adds the location codes and the names used to find those codes,to the input data.
         /// </summary>
-        /// <param name="gazetteer">The gazetteer.</param>
-        public void AddMatchedLocationCodes(LocationCodes gazetteer)
+        /// <param name="locationCodes">The location codes.</param>
+        public void AddLocationCodes(LocationCodes locationCodes)
         {
             foreach (DataRow dataRow in data.Rows)
             {
-                CodedLocation codedLocation = GetCodes(gazetteer, dataRow);
+                CodedLocation codedLocation = GetCodes(locationCodes, dataRow);
                 AddCodes(codedLocation, dataRow);
                 AddUsedNames(codedLocation, dataRow);
             }
@@ -220,7 +221,7 @@ namespace MultiLevelGeoCoder.Logic
                 dataRow[ColumnNames.Level3].ToString();
 
             // get codes
-            CodedLocation codedLocation = gazetteer.GetLocationCodes(location);
+            CodedLocation codedLocation = gazetteer.GetCodes(location);
             return codedLocation;
         }
 

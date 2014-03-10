@@ -42,12 +42,12 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
             provider.SaveMatchLevel1("Near", "actual");
 
             // Act
             List<Level1Match> matchesLowerCase =
-                provider.GetActualMatches("near").ToList();
+                provider.GetMatches("near").ToList();
 
             // Assert
             Assert.AreEqual(1, matchesLowerCase.Count());
@@ -61,11 +61,11 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             //When
             provider.SaveMatchLevel1("near", "actual");
-            var matches = provider.GetActualMatches("near").ToList();
+            var matches = provider.GetMatches("near").ToList();
 
             //Then
             Assert.AreEqual(1, matches.Count());
@@ -78,11 +78,11 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             //When
             provider.SaveMatchLevel2("near", "level1", "level2");
-            var matches = provider.GetActualMatches("near", "level1");
+            var matches = provider.GetMatches("near", "level1");
 
             //Then
             Assert.AreEqual(1, matches.Count());
@@ -96,11 +96,11 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             //When
             provider.SaveMatchLevel3("near", "level1", "level2", "level3");
-            var matches = provider.GetActualMatches("near", "level1", "level2");
+            var matches = provider.GetMatches("near", "level1", "level2");
 
             //Then
             Assert.AreEqual(1, matches.Count());
@@ -115,12 +115,12 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
             string veryLong = new String('a', maxLength);
 
             //When
             provider.SaveMatchLevel1(veryLong, veryLong);
-            var matches = provider.GetActualMatches(veryLong);
+            var matches = provider.GetMatches(veryLong);
 
             //Then
             Assert.AreEqual(1, matches.Count());
@@ -135,14 +135,14 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
             string specialCharacters =
                 "%ùéèôçà六书/六書形声字/形聲字абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
             int length = specialCharacters.Length;
 
             //When
             provider.SaveMatchLevel1(specialCharacters, specialCharacters);
-            var matches = provider.GetActualMatches(specialCharacters);
+            var matches = provider.GetMatches(specialCharacters);
 
             //Then
             Assert.AreEqual(1, matches.Count());
@@ -158,7 +158,7 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             //When
             provider.SaveMatchLevel1("near", "actual");
@@ -168,8 +168,8 @@ namespace MultiLevelGeoCoderTests
 
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            provider = new NearMatchesProvider(connection);
-            var matches = provider.GetActualMatches("near");
+            provider = new MatchProvider(connection);
+            var matches = provider.GetMatches("near");
             connection.Close();
 
             //Then
@@ -182,7 +182,7 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             //When
             provider.SaveMatchLevel1("near", "actual");
@@ -190,8 +190,8 @@ namespace MultiLevelGeoCoderTests
 
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            provider = new NearMatchesProvider(connection);
-            var matches = provider.GetActualMatches("near").ToList();
+            provider = new MatchProvider(connection);
+            var matches = provider.GetMatches("near").ToList();
             connection.Close();
 
             //Then
@@ -206,13 +206,13 @@ namespace MultiLevelGeoCoderTests
             //Given
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
             string tooLong = new String('a', maxLength + 1);
 
             //When
             provider.SaveMatchLevel1(tooLong, tooLong);
 
-            var matches = provider.GetActualMatches(tooLong);
+            var matches = provider.GetMatches(tooLong);
 
             //Then exception
         }
@@ -251,12 +251,12 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             // Act
             provider.SaveMatchLevel1("input", "match_x");
             provider.SaveMatchLevel1("input", "match_y");
-            IEnumerable<Level1Match> matches = provider.GetActualMatches("input").ToList();
+            IEnumerable<Level1Match> matches = provider.GetMatches("input").ToList();
 
             // Asset
             Assert.AreEqual(1, matches.Count());
@@ -277,15 +277,15 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
-            INearMatchesProvider provider = new NearMatchesProvider(connection);
+            IMatchProvider provider = new MatchProvider(connection);
 
             // Act
             provider.SaveMatchLevel1("near", "actual");
             provider.SaveMatchLevel1("Near", "actual");
             List<Level1Match> matchesUpperCase =
-                provider.GetActualMatches("NEAR").ToList();
+                provider.GetMatches("NEAR").ToList();
             List<Level1Match> matchesLowerCase =
-                provider.GetActualMatches("near").ToList();
+                provider.GetMatches("near").ToList();
 
             // Assert
             Assert.AreEqual(1, matchesUpperCase.Count());

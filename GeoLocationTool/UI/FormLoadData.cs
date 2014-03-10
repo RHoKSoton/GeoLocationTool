@@ -112,7 +112,7 @@ namespace GeoLocationTool.UI
                 }
 
                 SetColumnHeaders();
-                geoCoder.MatchAll();
+                geoCoder.CodeAll();
                 dataGridView1.DataSource = geoCoder.InputRecords;
             }
             catch (Exception ex)

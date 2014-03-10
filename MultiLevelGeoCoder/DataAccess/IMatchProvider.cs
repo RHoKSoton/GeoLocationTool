@@ -5,15 +5,15 @@ namespace MultiLevelGeoCoder.DataAccess
     using System.Collections.Generic;
     using Model;
 
-    public interface INearMatchesProvider
+    public interface IMatchProvider
     {
         #region Methods
 
-        IEnumerable<Level1Match> GetActualMatches(string nearMatch);
+        IEnumerable<Level1Match> GetMatches(string nearMatch);
 
-        IEnumerable<Level2Match> GetActualMatches(string nearMatch, string level1);
+        IEnumerable<Level2Match> GetMatches(string nearMatch, string level1);
 
-        IEnumerable<Level3Match> GetActualMatches(
+        IEnumerable<Level3Match> GetMatches(
             string nearMatch,
             string level1,
             string level2);

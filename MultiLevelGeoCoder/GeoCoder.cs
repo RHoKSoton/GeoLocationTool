@@ -16,7 +16,7 @@ namespace MultiLevelGeoCoder
     {
         #region Fields
 
-        private readonly INearMatchesProvider nearMatchesProvider;
+        private readonly IMatchProvider matchProvider;
 
         private GazetteerData gazetteer;
         private InputData inputData;
@@ -30,7 +30,7 @@ namespace MultiLevelGeoCoder
         public GeoCoder(DbConnection dbConnection)
         {
             //todo make the geocoder responsible for the connection and its closing, not the caller?
-            nearMatchesProvider = new NearMatchesProvider(dbConnection);
+            matchProvider = new MatchProvider(dbConnection);
         }
 
         #endregion Constructors
@@ -85,7 +85,7 @@ namespace MultiLevelGeoCoder
         /// <returns>Location with codes added where found.</returns>
         public CodedLocation GetGeoCodes(Location location)
         {
-            return locationCodes.GetLocationCodes(location);
+            return locationCodes.GetCodes(location);
         }
 
         /// <summary>
@@ -139,9 +139,9 @@ namespace MultiLevelGeoCoder
             inputData = new InputData(dt);
         }
 
-        public void MatchAll()
+        public void CodeAll()
         {
-            inputData.AddMatchedLocationCodes(locationCodes);
+            inputData.AddLocationCodes(locationCodes);
         }
 
         public void SaveNearMatch()
@@ -160,7 +160,7 @@ namespace MultiLevelGeoCoder
         public void SetGazetteerColumns(GazetteerColumnHeaders headers)
         {
             gazetteer.SetColumnHeaders(headers);
-            locationCodes = new LocationCodes(gazetteer.LocationList, nearMatchesProvider);
+            locationCodes = new LocationCodes(gazetteer.LocationList, matchProvider);
             locationNames = new LocationNames(gazetteer.LocationList);
         }
 

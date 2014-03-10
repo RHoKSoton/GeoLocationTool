@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder
 
         void LoadInputFileTabDelim(string path);
 
-        void MatchAll();
+        void CodeAll();
 
         void SaveNearMatch();
 

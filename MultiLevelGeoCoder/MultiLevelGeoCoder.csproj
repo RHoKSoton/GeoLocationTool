@@ -53,9 +53,9 @@
     <Compile Include="DataAccess\DBHelper.cs" />
     <Compile Include="DataAccess\FileExport.cs" />
     <Compile Include="DataAccess\IColumnsMappingProvider.cs" />
-    <Compile Include="DataAccess\INearMatchesProvider.cs" />
+    <Compile Include="DataAccess\IMatchProvider.cs" />
     <Compile Include="DataAccess\FileImport.cs" />
-    <Compile Include="DataAccess\NearMatchesProvider.cs" />
+    <Compile Include="DataAccess\MatchProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Logic\LocationNames.cs" />
     <Compile Include="Logic\GeoCode.cs" />

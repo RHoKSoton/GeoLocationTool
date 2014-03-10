@@ -19,7 +19,7 @@ namespace GeoLocationTool.UI
 
         private readonly FuzzyMatch fuzzyMatch;
         private readonly IGeoCoder geoCoder;
-        private readonly INearMatchesProvider matches;
+        private readonly IMatchProvider matches;
 
         private int selectedRowIndex;
 
@@ -32,7 +32,7 @@ namespace GeoLocationTool.UI
             InitializeComponent();
             this.geoCoder = geoCoder;
             fuzzyMatch = geoCoder.FuzzyMatcher();
-            matches = new NearMatchesProvider(Program.Connection);
+            matches = new MatchProvider(Program.Connection);
         }
 
         #endregion Constructors
@@ -108,7 +108,7 @@ namespace GeoLocationTool.UI
             try
             {
                 Cursor = Cursors.WaitCursor;
-                geoCoder.MatchAll();
+                geoCoder.CodeAll();
             }
             catch (Exception ex)
             {
@@ -312,7 +312,7 @@ namespace GeoLocationTool.UI
         {
             string level1 = txtLevel1Original.Text;
             var provinceNearMatches =
-                matches.GetActualMatches(level1)
+                matches.GetMatches(level1)
                     .Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
             cboLevel1Suggestion.DisplayMember = "DisplayText";
             // todo:  after testing don't display the coeficient
@@ -338,7 +338,7 @@ namespace GeoLocationTool.UI
             string level1 = cboLevel1Suggestion.SelectedValue.ToString();
             string level2 = txtLevel2Original.Text.Trim();
             var municipalityNearMatches =
-                matches.GetActualMatches(level2, level1)
+                matches.GetMatches(level2, level1)
                     .Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
 
             cboLevel2Suggestion.DisplayMember = "DisplayText";
@@ -366,7 +366,7 @@ namespace GeoLocationTool.UI
             string level2 = cboLevel2Suggestion.SelectedValue.ToString();
             string level3 = txtLevel3Original.Text.Trim();
             var level3Matches =
-                matches.GetActualMatches(level3, level1, level2)
+                matches.GetMatches(level3, level1, level2)
                     .Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
 
             cboLevel3Suggestion.DisplayMember = "DisplayText";
