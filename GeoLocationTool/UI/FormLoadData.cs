@@ -56,7 +56,7 @@ namespace GeoLocationTool.UI
                 if (!String.IsNullOrWhiteSpace(path))
                 {
                     LoadFile(path, isTab);
-                    DisplayColumnHeaderLists();
+                    DisplayColumnNameLists();
                 }
 
             }
@@ -82,7 +82,7 @@ namespace GeoLocationTool.UI
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
                 }
-                SetColumnHeaders();
+                SetColumnNames();
                 FormManualMatch formManualMatch = new FormManualMatch(geoCoder);
                 formManualMatch.ShowDialog();
             }
@@ -111,7 +111,7 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-                SetColumnHeaders();
+                SetColumnNames();
                 geoCoder.CodeAll();
                 dataGridView1.DataSource = geoCoder.InputRecords;
             }
@@ -135,7 +135,7 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void DisplayColumnHeaderLists()
+        private void DisplayColumnNameLists()
         {
             InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
             cboLevel1.DataSource = geoCoder.AllInputColumnNames();
@@ -145,6 +145,13 @@ namespace GeoLocationTool.UI
             cboLevel1.SelectedIndex = cboLevel1.FindStringExact(defaultColumnNames.Level1);
             cboLevel2.SelectedIndex = cboLevel2.FindStringExact(defaultColumnNames.Level2);
             cboLevel3.SelectedIndex = cboLevel3.FindStringExact(defaultColumnNames.Level3);
+        }
+
+        private void DisplayData()
+        {
+            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void FormLoadData_Load(object sender, EventArgs e)
@@ -163,10 +170,7 @@ namespace GeoLocationTool.UI
                 geoCoder.LoadInputFileCsv(path);
             }
 
-            dataGridView1.DataSource = geoCoder.InputRecords;
-            dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-            SetColumnStyle();
+            DisplayData();
         }
 
         private void SaveAsCsv()
@@ -191,19 +195,14 @@ namespace GeoLocationTool.UI
             return path;
         }
 
-        private void SetColumnHeaders()
+        private void SetColumnNames()
         {
-            InputColumnNames headerNames = new InputColumnNames();
-            headerNames.Level1 = cboLevel1.SelectedValue as string;
-            headerNames.Level2 = cboLevel2.SelectedValue as string;
-            headerNames.Level3 = cboLevel3.SelectedValue as string;
+            InputColumnNames inputColumnNames = new InputColumnNames();
+            inputColumnNames.Level1 = cboLevel1.SelectedValue as string;
+            inputColumnNames.Level2 = cboLevel2.SelectedValue as string;
+            inputColumnNames.Level3 = cboLevel3.SelectedValue as string;
 
-            geoCoder.SetInputColumns(headerNames);         
-        }
-
-        private void SetColumnStyle()
-        {
-            //todo any style needed here?
+            geoCoder.SetInputColumns(inputColumnNames);
         }
 
         private void SetDefaults()
