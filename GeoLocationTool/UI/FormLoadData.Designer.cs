@@ -42,10 +42,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.rdoImportCsv = new System.Windows.Forms.RadioButton();
             this.rdoImportTabDelim = new System.Windows.Forms.RadioButton();
-            this.btnBack = new System.Windows.Forms.Button();
             this.cboLevel1 = new System.Windows.Forms.ComboBox();
             this.cboLevel2 = new System.Windows.Forms.ComboBox();
             this.cboLevel3 = new System.Windows.Forms.ComboBox();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -119,27 +119,27 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(176, 59);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 17);
+            this.label4.Size = new System.Drawing.Size(59, 17);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Province";
+            this.label4.Text = "Admin 1";
             // 
             // lblMunicipality
             // 
             this.lblMunicipality.AutoSize = true;
             this.lblMunicipality.Location = new System.Drawing.Point(303, 59);
             this.lblMunicipality.Name = "lblMunicipality";
-            this.lblMunicipality.Size = new System.Drawing.Size(42, 17);
+            this.lblMunicipality.Size = new System.Drawing.Size(59, 17);
             this.lblMunicipality.TabIndex = 16;
-            this.lblMunicipality.Text = "Town";
+            this.lblMunicipality.Text = "Admin 2";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(430, 59);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 17);
+            this.label6.Size = new System.Drawing.Size(59, 17);
             this.label6.TabIndex = 18;
-            this.label6.Text = "Village";
+            this.label6.Text = "Admin 3";
             // 
             // btnManualMatch
             // 
@@ -234,17 +234,6 @@
             this.rdoImportTabDelim.Text = "Tab Delimited";
             this.rdoImportTabDelim.UseVisualStyleBackColor = true;
             // 
-            // btnBack
-            // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1095, 207);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(147, 33);
-            this.btnBack.TabIndex = 26;
-            this.btnBack.Text = "Geographical Data";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // cboLevel1
             // 
             this.cboLevel1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -271,6 +260,17 @@
             this.cboLevel3.Name = "cboLevel3";
             this.cboLevel3.Size = new System.Drawing.Size(121, 24);
             this.cboLevel3.TabIndex = 30;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Location = new System.Drawing.Point(1095, 207);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(147, 33);
+            this.btnBack.TabIndex = 26;
+            this.btnBack.Text = "Geographical Data";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FormLoadData
             // 
