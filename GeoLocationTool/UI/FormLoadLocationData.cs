@@ -97,7 +97,7 @@ namespace GeoLocationTool.UI
                     if (!AreColumnNamesSelected())
                     {
                         UiHelper.DisplayMessage(
-                            "Please select the column names for the code and name data.",
+                            "Please select the columns that contain the code and name data.",
                             "Missing Data");
                     }
                     else
@@ -129,7 +129,7 @@ namespace GeoLocationTool.UI
             cboLevel3AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
 
             // todo set the defaults to those stored in the database
-            //SetDefaultNames();
+            SetDefaultNames();
         }
 
         private void DisplaySavedColumnHeaderIndices(string path)
@@ -256,12 +256,12 @@ namespace GeoLocationTool.UI
             cboLevel3Names.SelectedIndex =
                 cboLevel3Names.FindStringExact(defaultColumnNames.Level3Name);
 
-            cboLevel1Codes.SelectedIndex =
-                cboLevel1Codes.FindStringExact(defaultColumnNames.Level1AltNames);
-            cboLevel2Codes.SelectedIndex =
-                cboLevel2Codes.FindStringExact(defaultColumnNames.Level2AltNames);
-            cboLevel3Codes.SelectedIndex =
-                cboLevel3Codes.FindStringExact(defaultColumnNames.Level3AltNames);
+            cboLevel1AltNames.SelectedIndex =
+                cboLevel1AltNames.FindStringExact(defaultColumnNames.Level1AltNames);
+            cboLevel2AltNames.SelectedIndex =
+                cboLevel2AltNames.FindStringExact(defaultColumnNames.Level2AltNames);
+           cboLevel3AltNames.SelectedIndex =
+                cboLevel3AltNames.FindStringExact(defaultColumnNames.Level3AltNames);
         }
 
         private void SetGridDefaults()

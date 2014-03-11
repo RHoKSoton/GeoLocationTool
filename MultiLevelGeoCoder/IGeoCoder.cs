@@ -1,24 +1,20 @@
 // IGeoCoder.cs
+
 namespace MultiLevelGeoCoder
 {
     using System.Collections.Generic;
     using System.Data;
-
     using Logic;
 
     public interface IGeoCoder
     {
         #region Properties
 
-        DataTable GazetteerData
-        {
-            get;
-        }
+        DataTable GazetteerData { get; }
 
-        DataTable InputRecords
-        {
-            get;
-        }
+        DataTable InputRecords { get; }
+
+        string OutputFileName { get; set; }
 
         #endregion Properties
 
@@ -77,7 +73,7 @@ namespace MultiLevelGeoCoder
 
         void SaveNearMatch();
 
-        void SaveToCsvFile(string fileName);
+        void SaveToCsvFile();
 
         void SetGazetteerColumns(GazetteerColumnNames columnNames);
 

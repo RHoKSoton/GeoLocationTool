@@ -47,6 +47,8 @@ namespace MultiLevelGeoCoder
             get { return inputData != null ? inputData.data : null; }
         }
 
+        public string OutputFileName { get; set; }
+
         #endregion Properties
 
         #region Methods
@@ -73,7 +75,15 @@ namespace MultiLevelGeoCoder
         public GazetteerColumnNames DefaultGazetteerColumnNames()
         {
             //todo get the saved gazetteer column names from the database
-            throw new NotImplementedException();
+            // temp data
+            GazetteerColumnNames columnNames = new GazetteerColumnNames();
+            columnNames.Level1Code = "ID_1";
+            columnNames.Level2Code = "ID_2";
+            columnNames.Level3Code = "ID_3";
+            columnNames.Level1Name = "NAME_1";
+            columnNames.Level2Name = "NAME_2";
+            columnNames.Level3Name = "NAME_3";
+            return columnNames;
         }
 
         /// <summary>
@@ -163,9 +173,15 @@ namespace MultiLevelGeoCoder
             // GeoCodes.RefreshAltCodeList();
         }
 
-        public void SaveToCsvFile(string fileName)
+        public void SaveToCsvFile()
         {
-            FileExport.SaveToCsvFile(fileName, InputRecords);
+            if (string.IsNullOrEmpty(OutputFileName))
+            {
+                throw new InvalidOperationException(
+                    "Cannot save file, output file name required.");
+            }
+            FileExport.SaveToCsvFile(OutputFileName, InputRecords);
+            inputData.data.AcceptChanges();
         }
 
         public void SetGazetteerColumns(GazetteerColumnNames columnNames)
