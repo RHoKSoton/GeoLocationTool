@@ -168,11 +168,11 @@
             this.tableLayoutPanel1.Controls.Add(this.cboLevel1, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel2, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel3, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 10);
             this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.btnSelectOutputFile, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label1, 4, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtOutputFileName, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -260,7 +260,7 @@
             // btnBack
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1095, 217);
+            this.btnBack.Location = new System.Drawing.Point(1095, 168);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(147, 33);
             this.btnBack.TabIndex = 26;

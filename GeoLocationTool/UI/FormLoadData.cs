@@ -241,7 +241,7 @@ namespace GeoLocationTool.UI
 
         private void SelectOutputFileName()
         {
-            using (OpenFileDialog dialog = new OpenFileDialog())
+            using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.AddExtension = true;
                 dialog.DefaultExt = "csv";
