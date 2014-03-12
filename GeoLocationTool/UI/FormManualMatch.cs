@@ -1,11 +1,11 @@
 ﻿// FormManualMatch.cs
-
 namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
+
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
@@ -472,6 +472,11 @@ namespace GeoLocationTool.UI
             // geoCoder.SaveNearMatch(nearMatch);
         }
 
+        private void SaveOutputFile()
+        {
+            geoCoder.SaveToCsvFile();
+        }
+
         private void SetDefaults()
         {
             dataGridView1.AllowUserToAddRows = false;
@@ -497,6 +502,7 @@ namespace GeoLocationTool.UI
             ClearExistingCodes();
             AddCodes(codedLocation);
             DisplayRecords();
+            SaveOutputFile();
         }
 
         #endregion Methods
