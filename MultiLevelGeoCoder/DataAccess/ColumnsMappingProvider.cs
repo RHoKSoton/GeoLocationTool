@@ -1,4 +1,6 @@
-﻿namespace MultiLevelGeoCoder.DataAccess
+﻿// ColumnsMappingProvider.cs
+
+namespace MultiLevelGeoCoder.DataAccess
 {
     using System.Data.Common;
     using System.Linq;
@@ -6,37 +8,47 @@
     using Model;
 
     /// <summary>
-    /// Get or save Columns Mapping
+    /// Provides the saved gazetteer column selections from the database
     /// </summary>
     public class ColumnsMappingProvider : IColumnsMappingProvider
     {
-        public DbConnection SqlConnection { get; set; }
+        #region Fields
 
-        public ColumnsMappingProvider(DbConnection sqlConnection)
+        private readonly DbConnection dbConnection;
+
+        #endregion Fields
+
+        #region Constructors
+
+        public ColumnsMappingProvider(DbConnection dbConnection)
         {
-            SqlConnection = sqlConnection;
+            this.dbConnection = dbConnection;
         }
 
-        public LocationColumnsMapping GetLocationColumnsMapping(string fileName)
+        #endregion Constructors
+
+        #region Methods
+
+        public GazetteerColumnsMapping GetGazetteerColumnsMapping(string fileName)
         {
-            return SqlConnection.Query<LocationColumnsMapping>(
-                @"SELECT * FROM LocationColumnsMapping
+            return dbConnection.Query<GazetteerColumnsMapping>(
+                @"SELECT * FROM GazetteerColumnsMapping
                     WHERE FileName=@fileName",
-                new { fileName }
-            ).FirstOrDefault();
+                new {fileName}
+                ).FirstOrDefault();
         }
 
-        public void SaveLocationColumnsMapping(LocationColumnsMapping columnMapping)
+        public void SaveGazetteerColumnsMapping(GazetteerColumnsMapping columnMapping)
         {
-            bool exists = SqlConnection.Query<int>(
-                @"SELECT COUNT(*) FROM LocationColumnsMapping
+            bool exists = dbConnection.Query<int>(
+                @"SELECT COUNT(*) FROM GazetteerColumnsMapping
                     WHERE FileName=@FileName",
-                new { columnMapping.FileName }).FirstOrDefault() > 0;
+                new {columnMapping.FileName}).FirstOrDefault() > 0;
 
             if (!exists)
             {
-                SqlConnection.Execute(
-                    @"INSERT INTO LocationColumnsMapping (
+                dbConnection.Execute(
+                    @"INSERT INTO GazetteerColumnsMapping (
                         FileName,
                         Level1Code,
                         Level1Name,
@@ -59,7 +71,8 @@
                         @Level3Name,
                         @Level3AltName
                     )",
-                    new {
+                    new
+                    {
                         columnMapping.FileName,
                         columnMapping.Level1Code,
                         columnMapping.Level1Name,
@@ -71,12 +84,12 @@
                         columnMapping.Level3Name,
                         columnMapping.Level3AltName,
                     }
-                );
+                    );
             }
             else
             {
-                SqlConnection.Execute(
-                    @"UPDATE LocationColumnsMapping
+                dbConnection.Execute(
+                    @"UPDATE GazetteerColumnsMapping
                         SET
                             Level1Code=@Level1Code,
                             Level1Name=@Level1Name,
@@ -88,7 +101,8 @@
                             Level3Name=@Level3Name,
                             Level3AltName=@Level3AltName
                         WHERE FileName=@FileName",
-                    new {
+                    new
+                    {
                         columnMapping.FileName,
                         columnMapping.Level1Code,
                         columnMapping.Level1Name,
@@ -100,8 +114,10 @@
                         columnMapping.Level3Name,
                         columnMapping.Level3AltName,
                     }
-                );
+                    );
             }
         }
+
+        #endregion Methods
     }
 }

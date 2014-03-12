@@ -8,6 +8,7 @@ namespace MultiLevelGeoCoder
     using System.Data.Common;
     using DataAccess;
     using Logic;
+    using Model;
 
     /// <summary>
     /// Service Gateway, all access should be through this class
@@ -16,9 +17,11 @@ namespace MultiLevelGeoCoder
     {
         #region Fields
 
+        private readonly IColumnsMappingProvider columnsMappingProvider;
         private readonly IMatchProvider matchProvider;
 
         private GazetteerData gazetteerData;
+        private string gazetteerFileName;
         private InputData inputData;
         private LocationCodes locationCodes;
         private LocationNames locationNames;
@@ -29,8 +32,9 @@ namespace MultiLevelGeoCoder
 
         public GeoCoder(DbConnection dbConnection)
         {
-            //todo make the geocoder responsible for the connection and its closing, not the caller?
+            //todo make a seperate class responsible for the connection and its closing, not the geoCoder?
             matchProvider = new MatchProvider(dbConnection);
+            columnsMappingProvider = new ColumnsMappingProvider(dbConnection);
         }
 
         #endregion Constructors
@@ -74,15 +78,22 @@ namespace MultiLevelGeoCoder
 
         public GazetteerColumnNames DefaultGazetteerColumnNames()
         {
-            //todo get the saved gazetteer column names from the database
-            // temp data
             GazetteerColumnNames columnNames = new GazetteerColumnNames();
-            columnNames.Level1Code = "ID_1";
-            columnNames.Level2Code = "ID_2";
-            columnNames.Level3Code = "ID_3";
-            columnNames.Level1Name = "NAME_1";
-            columnNames.Level2Name = "NAME_2";
-            columnNames.Level3Name = "NAME_3";
+            GazetteerColumnsMapping columnsMapping =
+                columnsMappingProvider.GetGazetteerColumnsMapping(gazetteerFileName);
+            if (columnsMapping != null)
+            {
+                columnNames.Level1Code = columnsMapping.Level1Code;
+                columnNames.Level2Code = columnsMapping.Level2Code;
+                columnNames.Level3Code = columnsMapping.Level3Code;
+                columnNames.Level1Name = columnsMapping.Level1Name;
+                columnNames.Level2Name = columnsMapping.Level2Name;
+                columnNames.Level3Name = columnsMapping.Level3Name;
+                columnNames.Level1AltName = columnsMapping.Level1AltName;
+                columnNames.Level2AltName = columnsMapping.Level2AltName;
+                columnNames.Level3AltName = columnsMapping.Level3AltName;
+            }
+
             return columnNames;
         }
 
@@ -149,6 +160,7 @@ namespace MultiLevelGeoCoder
             // todo remove as first row is always header
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
             gazetteerData = new GazetteerData(dt);
+            gazetteerFileName = path;
         }
 
         public void LoadInputFileCsv(string path)
@@ -184,15 +196,20 @@ namespace MultiLevelGeoCoder
             inputData.Data.AcceptChanges();
         }
 
+        /// <summary>
+        /// Sets the gazetteer columns that hold the data to provide the codes
+        /// </summary>
+        /// <param name="columnNames">The column names.</param>
         public void SetGazetteerColumns(GazetteerColumnNames columnNames)
         {
             gazetteerData.ColumnNames = columnNames;
             locationCodes = new LocationCodes(gazetteerData.LocationList, matchProvider);
             locationNames = new LocationNames(gazetteerData.LocationList);
+            SaveUserSelection(columnNames, gazetteerFileName);
         }
 
         /// <summary>
-        /// Sets the column names that hold the input data to be matched.
+        /// Sets the column names that hold the input data to be coded.
         /// </summary>
         /// <param name="columnNames">The column names.</param>
         public void SetInputColumns(InputColumnNames columnNames)
@@ -203,6 +220,26 @@ namespace MultiLevelGeoCoder
         public DataView UnmatchedRecords()
         {
             return inputData.GetCodedRecords();
+        }
+
+        private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)
+        {
+            // todo review the code duplication between GazetteerColumnNames and GazetteerColumnsMapping2 classes
+            columnsMappingProvider.SaveGazetteerColumnsMapping(
+                new GazetteerColumnsMapping
+                {
+                    FileName = filename,
+                    Level1Code = columnNames.Level1Code,
+                    Level1Name = columnNames.Level1Name,
+                    Level1AltName = columnNames.Level1AltName,
+                    Level2Code = columnNames.Level2Code,
+                    Level2Name = columnNames.Level2Name,
+                    Level2AltName = columnNames.Level2AltName,
+                    Level3Code = columnNames.Level3Code,
+                    Level3Name = columnNames.Level3Name,
+                    Level3AltName = columnNames.Level3AltName,
+                }
+                );
         }
 
         #endregion Methods

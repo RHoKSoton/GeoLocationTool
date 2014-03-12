@@ -1,13 +1,12 @@
-﻿// GazetteerColumnNames.cs
+﻿// GazetteerColumnsMapping.cs
 
-namespace MultiLevelGeoCoder.Logic
+namespace MultiLevelGeoCoder.Model
 {
-    /// <summary>
-    /// Simple class containing the selected column names of the gazetteer data.
-    /// </summary>
-    public class GazetteerColumnNames
+    public class GazetteerColumnsMapping
     {
         #region Properties
+
+        public string FileName { get; set; }
 
         public string Level1AltName { get; set; }
 

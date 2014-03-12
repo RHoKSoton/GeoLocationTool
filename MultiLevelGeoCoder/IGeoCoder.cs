@@ -75,10 +75,14 @@ namespace MultiLevelGeoCoder
 
         void SaveToCsvFile();
 
+        /// <summary>
+        /// Sets the gazetteer columns that hold the data to provide the codes
+        /// </summary>
+        /// <param name="columnNames">The column names.</param>
         void SetGazetteerColumns(GazetteerColumnNames columnNames);
 
         /// <summary>
-        /// Sets the column names that hold the input data to be matched.
+        /// Sets the column names that hold the input data to be coded.
         /// </summary>
         /// <param name="columnNames">The column names.</param>
         void SetInputColumns(InputColumnNames columnNames);

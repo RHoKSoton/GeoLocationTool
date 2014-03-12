@@ -1,4 +1,6 @@
-﻿namespace MultiLevelGeoCoder.DataAccess
+﻿// DBHelper.cs
+
+namespace MultiLevelGeoCoder.DataAccess
 {
     using System.Data.Common;
     using System.Data.SqlServerCe;
@@ -11,6 +13,8 @@
     /// </summary>
     public static class DBHelper
     {
+        #region Methods
+
         public static SqlCeConnection GetDbConnection(string dbLocation)
         {
             var sqlConnection = new SqlCeConnection();
@@ -49,19 +53,19 @@
                                         Weight int)");
             }
 
-            if (!connection.TableExists("LocationColumnsMapping"))
+            if (!connection.TableExists("GazetteerColumnsMapping"))
             {
-                connection.Execute(@"CREATE TABLE LocationColumnsMapping (
+                connection.Execute(@"CREATE TABLE GazetteerColumnsMapping (
                                         FileName nvarchar(255) PRIMARY KEY,
-                                        Level1Code int,
-                                        Level1Name int,
-                                        Level1AltName int,
-                                        Level2Code int,
-                                        Level2Name int,
-                                        Level2AltName int,
-                                        Level3Code int,
-                                        Level3Name int,
-                                        Level3AltName int)");
+                                        Level1Code nvarchar(255),
+                                        Level1Name nvarchar(255),
+                                        Level1AltName nvarchar(255),
+                                        Level2Code nvarchar(255),
+                                        Level2Name nvarchar(255),
+                                        Level2AltName nvarchar(255),
+                                        Level3Code nvarchar(255),
+                                        Level3Name nvarchar(255),
+                                        Level3AltName nvarchar(255))");
             }
         }
 
@@ -70,5 +74,7 @@
             return connection.Query<int>(@"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES
                                         WHERE TABLE_NAME = '" + table + "'").Single() > 0;
         }
+
+        #endregion Methods
     }
 }
