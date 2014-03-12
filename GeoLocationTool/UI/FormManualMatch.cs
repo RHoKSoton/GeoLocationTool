@@ -302,7 +302,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayAllRecords()
         {
-            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.DataSource = geoCoder.InputData;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 

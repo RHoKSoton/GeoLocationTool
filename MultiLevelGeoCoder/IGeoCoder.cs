@@ -12,7 +12,7 @@ namespace MultiLevelGeoCoder
 
         DataTable GazetteerData { get; }
 
-        DataTable InputRecords { get; }
+        DataTable InputData { get; }
 
         string OutputFileName { get; set; }
 

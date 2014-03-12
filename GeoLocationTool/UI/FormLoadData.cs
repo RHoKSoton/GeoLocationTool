@@ -83,7 +83,7 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-                if (geoCoder.InputRecords == null)
+                if (geoCoder.InputData == null)
                 {
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
@@ -117,7 +117,7 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-                if (geoCoder.InputRecords == null)
+                if (geoCoder.InputData == null)
                 {
                     MessageBox.Show("Input data missing, please read in an input file.");
                     return;
@@ -162,7 +162,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayData()
         {
-            dataGridView1.DataSource = geoCoder.InputRecords;
+            dataGridView1.DataSource = geoCoder.InputData;
             dataGridView1.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -171,8 +171,8 @@ namespace GeoLocationTool.UI
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                if (geoCoder.InputRecords == null) return;
-                if (geoCoder.InputRecords.GetChanges() != null)
+                if (geoCoder.InputData == null) return;
+                if (geoCoder.InputData.GetChanges() != null)
                 {
                     DialogResult result = MessageBox.Show(
                         "Unsaved changes, would you like to save the changes?",

@@ -42,9 +42,9 @@ namespace MultiLevelGeoCoder
             get { return gazetteerData.Data; }
         }
 
-        public DataTable InputRecords
+        public DataTable InputData
         {
-            get { return inputData != null ? inputData.data : null; }
+            get { return inputData != null ? inputData.Data : null; }
         }
 
         public string OutputFileName { get; set; }
@@ -180,8 +180,8 @@ namespace MultiLevelGeoCoder
                 throw new InvalidOperationException(
                     "Output file not saved, file name required.");
             }
-            FileExport.SaveToCsvFile(OutputFileName, InputRecords);
-            inputData.data.AcceptChanges();
+            FileExport.SaveToCsvFile(OutputFileName, InputData);
+            inputData.Data.AcceptChanges();
         }
 
         public void SetGazetteerColumns(GazetteerColumnNames columnNames)

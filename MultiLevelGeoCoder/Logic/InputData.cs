@@ -31,7 +31,7 @@ namespace MultiLevelGeoCoder.Logic
 
         public InputData(DataTable data)
         {
-            this.data = data;
+            this.Data = data;
             AddAdditionalColumns();
             SetColumnsAsReadOnly();
 
@@ -57,7 +57,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <value>
         /// The data.
         /// </value>
-        public DataTable data { get; set; }
+        public DataTable Data { get; set; }
 
         /// <summary>
         /// Gets the default names of the columns that contain the input data to be matched.
@@ -89,7 +89,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="locationCodes">The location codes.</param>
         public void AddLocationCodes(LocationCodes locationCodes)
         {
-            foreach (DataRow dataRow in data.Rows)
+            foreach (DataRow dataRow in Data.Rows)
             {
                 CodedLocation codedLocation = FindCodes(locationCodes, dataRow);
                 ClearExistingCodes(dataRow);
@@ -104,7 +104,7 @@ namespace MultiLevelGeoCoder.Logic
         public DataView GetCodedRecords()
         {
             // only show those records where at least one code is null
-            EnumerableRowCollection<DataRow> query = from record in data.AsEnumerable()
+            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
                 where record.Field<String>(Level1CodeColumnName) == null ||
                       record.Field<string>(Level2CodeColumnName) == null ||
                       record.Field<string>(Level3CodeColumnName) == null
@@ -124,7 +124,7 @@ namespace MultiLevelGeoCoder.Logic
             var addedColumnNames = AddedColumnNames();
             List<string> list = (
                 from DataColumn dataColumn
-                    in data.Columns
+                    in Data.Columns
                 where !addedColumnNames.Contains(dataColumn.ColumnName)
                 select dataColumn.ColumnName).ToList();
 
@@ -195,9 +195,9 @@ namespace MultiLevelGeoCoder.Logic
 
         private void AddColumn(string columnName)
         {
-            if (!data.Columns.Contains(columnName))
+            if (!Data.Columns.Contains(columnName))
             {
-                data.Columns.Add(columnName, typeof (String));
+                Data.Columns.Add(columnName, typeof (String));
             }
         }
 
@@ -244,7 +244,7 @@ namespace MultiLevelGeoCoder.Logic
         {
             List<string> addedColumns = AddedColumnNames();
 
-            foreach (DataColumn col in data.Columns)
+            foreach (DataColumn col in Data.Columns)
             {
                 if (!addedColumns.Contains(col.ColumnName))
                 {
