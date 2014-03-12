@@ -178,7 +178,7 @@ namespace MultiLevelGeoCoder
             if (string.IsNullOrEmpty(OutputFileName))
             {
                 throw new InvalidOperationException(
-                    "Cannot save file, output file name required.");
+                    "Output file not saved, file name required.");
             }
             FileExport.SaveToCsvFile(OutputFileName, InputRecords);
             inputData.data.AcceptChanges();

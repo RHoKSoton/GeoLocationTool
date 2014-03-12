@@ -22,6 +22,7 @@ namespace GeoLocationTool.UI
 
         public FormLoadData(IGeoCoder geoCoder)
         {
+            if (geoCoder == null) throw new ArgumentNullException("geoCoder");
             InitializeComponent();
             this.geoCoder = geoCoder;
         }
@@ -139,7 +140,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                SetOutputFileName();
+                SelectOutputFileName();
             }
             catch (Exception ex)
             {
@@ -168,15 +169,20 @@ namespace GeoLocationTool.UI
 
         private void FormLoadData_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (geoCoder.GazetteerData.GetChanges() != null)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult result = MessageBox.Show(
-                    "Unsaved changes, would you like to save the changes?",
-                    "Unsaved Changes",
-                    MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (geoCoder.InputRecords == null) return;
+                if (geoCoder.InputRecords.GetChanges() != null)
                 {
-                    SaveAsCsv();
+                    DialogResult result = MessageBox.Show(
+                        "Unsaved changes, would you like to save the changes?",
+                        "Unsaved Changes",
+                        MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        SaveAsCsv();
+                        e.Cancel = true;
+                    }
                 }
             }
         }
@@ -206,12 +212,13 @@ namespace GeoLocationTool.UI
             {
                 if (string.IsNullOrEmpty(geoCoder.OutputFileName))
                 {
-                    SetOutputFileName();
+                    SelectOutputFileName();
                 }
 
                 if (!string.IsNullOrEmpty(geoCoder.OutputFileName))
                 {
                     geoCoder.SaveToCsvFile();
+                    MessageBox.Show("Output file saved");
                 }
                 else
                 {
@@ -220,7 +227,7 @@ namespace GeoLocationTool.UI
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("Error saving file.", ex);
+                ErrorHandler.Process("File save error.", ex);
             }
         }
 
@@ -230,6 +237,21 @@ namespace GeoLocationTool.UI
             var path = UiHelper.GetFileName(filter).Trim();
             txtFileName.Text = path;
             return path;
+        }
+
+        private void SelectOutputFileName()
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.AddExtension = true;
+                dialog.DefaultExt = "csv";
+                dialog.Filter = "CSV(*.csv)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    geoCoder.OutputFileName = dialog.FileName;
+                    txtOutputFileName.Text = geoCoder.OutputFileName;
+                }
+            }
         }
 
         private void SetColumnNames()
@@ -249,21 +271,6 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
             rdoImportCsv.Checked = true;
-        }
-
-        private void SetOutputFileName()
-        {
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.DefaultExt = "csv";
-                dialog.Filter = "CSV(*.csv)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    geoCoder.OutputFileName = dialog.FileName;
-                    txtOutputFileName.Text = geoCoder.OutputFileName;
-                }
-            }
         }
 
         #endregion Methods

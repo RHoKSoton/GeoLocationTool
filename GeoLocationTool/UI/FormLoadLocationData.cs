@@ -3,7 +3,6 @@
 namespace GeoLocationTool.UI
 {
     using System;
-    using System.ComponentModel;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -150,10 +149,10 @@ namespace GeoLocationTool.UI
             //}
         }
 
-        private void FormLoadDataClosing(object sender, CancelEventArgs e)
+        private void formLoadData_Closed(object sender, EventArgs e)
         {
-            // close this form too if the main form has closed
-            Close();
+            // quit the application if the main form has closed
+            Application.Exit();
         }
 
         private void FormLoadLocationData_Load(object sender, EventArgs e)
@@ -174,7 +173,7 @@ namespace GeoLocationTool.UI
             if (formLoadData == null)
             {
                 formLoadData = new FormLoadData(geoCoder);
-                formLoadData.Closing += FormLoadDataClosing;
+                formLoadData.Closed += formLoadData_Closed;
             }
 
             formLoadData.Show(this);
@@ -260,7 +259,7 @@ namespace GeoLocationTool.UI
                 cboLevel1AltNames.FindStringExact(defaultColumnNames.Level1AltNames);
             cboLevel2AltNames.SelectedIndex =
                 cboLevel2AltNames.FindStringExact(defaultColumnNames.Level2AltNames);
-           cboLevel3AltNames.SelectedIndex =
+            cboLevel3AltNames.SelectedIndex =
                 cboLevel3AltNames.FindStringExact(defaultColumnNames.Level3AltNames);
         }
 

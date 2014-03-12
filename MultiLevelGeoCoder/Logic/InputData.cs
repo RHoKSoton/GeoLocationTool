@@ -34,6 +34,9 @@ namespace MultiLevelGeoCoder.Logic
             this.data = data;
             AddAdditionalColumns();
             SetColumnsAsReadOnly();
+
+            // adding empty columns should not  be counted as a data change
+            data.AcceptChanges();
         }
 
         #endregion Constructors
