@@ -305,7 +305,7 @@
             this.ClientSize = new System.Drawing.Size(1245, 723);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormLoadData";
-            this.Text = "Multi Level Geo Coder Tool - Input Data";
+            this.Text = "Multi Level Geo-Coder Tool - Input Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLoadData_FormClosing);
             this.Load += new System.EventHandler(this.FormLoadData_Load);

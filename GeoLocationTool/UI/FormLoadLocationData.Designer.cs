@@ -31,25 +31,25 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.txtFileName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cboLevel1Codes = new System.Windows.Forms.ComboBox();
-            this.cboLevel1Names = new System.Windows.Forms.ComboBox();
-            this.cboLevel1AltNames = new System.Windows.Forms.ComboBox();
             this.cboLevel2Codes = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.cboLevel2Names = new System.Windows.Forms.ComboBox();
             this.cboLevel2AltNames = new System.Windows.Forms.ComboBox();
-            this.cboLevel3Codes = new System.Windows.Forms.ComboBox();
-            this.cboLevel3Names = new System.Windows.Forms.ComboBox();
+            this.cboLevel1AltNames = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboLevel1Names = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboLevel1Codes = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cboLevel3AltNames = new System.Windows.Forms.ComboBox();
+            this.cboLevel3Names = new System.Windows.Forms.ComboBox();
+            this.cboLevel3Codes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -131,15 +131,6 @@
             this.label5.TabIndex = 30;
             this.label5.Text = "Select Column Names:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(202, 98);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
-            this.label1.TabIndex = 59;
-            this.label1.Text = "Admin 1";
-            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -200,61 +191,6 @@
             this.txtFileName.TabIndex = 29;
             this.txtFileName.TabStop = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(267, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 17);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Codes";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(394, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 17);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Names";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(521, 81);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 17);
-            this.label6.TabIndex = 37;
-            this.label6.Text = "Alternate Names";
-            // 
-            // cboLevel1Codes
-            // 
-            this.cboLevel1Codes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel1Codes.FormattingEnabled = true;
-            this.cboLevel1Codes.Location = new System.Drawing.Point(267, 101);
-            this.cboLevel1Codes.Name = "cboLevel1Codes";
-            this.cboLevel1Codes.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1Codes.TabIndex = 65;
-            // 
-            // cboLevel1Names
-            // 
-            this.cboLevel1Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel1Names.FormattingEnabled = true;
-            this.cboLevel1Names.Location = new System.Drawing.Point(394, 101);
-            this.cboLevel1Names.Name = "cboLevel1Names";
-            this.cboLevel1Names.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1Names.TabIndex = 66;
-            // 
-            // cboLevel1AltNames
-            // 
-            this.cboLevel1AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel1AltNames.Enabled = false;
-            this.cboLevel1AltNames.FormattingEnabled = true;
-            this.cboLevel1AltNames.Location = new System.Drawing.Point(521, 101);
-            this.cboLevel1AltNames.Name = "cboLevel1AltNames";
-            this.cboLevel1AltNames.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1AltNames.TabIndex = 74;
-            // 
             // cboLevel2Codes
             // 
             this.cboLevel2Codes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -263,15 +199,6 @@
             this.cboLevel2Codes.Name = "cboLevel2Codes";
             this.cboLevel2Codes.Size = new System.Drawing.Size(121, 24);
             this.cboLevel2Codes.TabIndex = 68;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(202, 136);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 17);
-            this.label8.TabIndex = 60;
-            this.label8.Text = "Admin 2";
             // 
             // cboLevel2Names
             // 
@@ -292,23 +219,78 @@
             this.cboLevel2AltNames.Size = new System.Drawing.Size(121, 24);
             this.cboLevel2AltNames.TabIndex = 70;
             // 
-            // cboLevel3Codes
+            // cboLevel1AltNames
             // 
-            this.cboLevel3Codes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel3Codes.FormattingEnabled = true;
-            this.cboLevel3Codes.Location = new System.Drawing.Point(267, 175);
-            this.cboLevel3Codes.Name = "cboLevel3Codes";
-            this.cboLevel3Codes.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel3Codes.TabIndex = 71;
+            this.cboLevel1AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel1AltNames.Enabled = false;
+            this.cboLevel1AltNames.FormattingEnabled = true;
+            this.cboLevel1AltNames.Location = new System.Drawing.Point(521, 101);
+            this.cboLevel1AltNames.Name = "cboLevel1AltNames";
+            this.cboLevel1AltNames.Size = new System.Drawing.Size(121, 24);
+            this.cboLevel1AltNames.TabIndex = 74;
             // 
-            // cboLevel3Names
+            // label6
             // 
-            this.cboLevel3Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel3Names.FormattingEnabled = true;
-            this.cboLevel3Names.Location = new System.Drawing.Point(394, 175);
-            this.cboLevel3Names.Name = "cboLevel3Names";
-            this.cboLevel3Names.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel3Names.TabIndex = 72;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(521, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 17);
+            this.label6.TabIndex = 37;
+            this.label6.Text = "Alternate Name";
+            // 
+            // cboLevel1Names
+            // 
+            this.cboLevel1Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel1Names.FormattingEnabled = true;
+            this.cboLevel1Names.Location = new System.Drawing.Point(394, 101);
+            this.cboLevel1Names.Name = "cboLevel1Names";
+            this.cboLevel1Names.Size = new System.Drawing.Size(121, 24);
+            this.cboLevel1Names.TabIndex = 66;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(394, 81);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "Name";
+            // 
+            // cboLevel1Codes
+            // 
+            this.cboLevel1Codes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel1Codes.FormattingEnabled = true;
+            this.cboLevel1Codes.Location = new System.Drawing.Point(267, 101);
+            this.cboLevel1Codes.Name = "cboLevel1Codes";
+            this.cboLevel1Codes.Size = new System.Drawing.Size(121, 24);
+            this.cboLevel1Codes.TabIndex = 65;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(267, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 17);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Code ID";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(202, 136);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 17);
+            this.label8.TabIndex = 60;
+            this.label8.Text = "Admin 2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(202, 98);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.TabIndex = 59;
+            this.label1.Text = "Admin 1";
             // 
             // cboLevel3AltNames
             // 
@@ -319,6 +301,24 @@
             this.cboLevel3AltNames.Name = "cboLevel3AltNames";
             this.cboLevel3AltNames.Size = new System.Drawing.Size(121, 24);
             this.cboLevel3AltNames.TabIndex = 73;
+            // 
+            // cboLevel3Names
+            // 
+            this.cboLevel3Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel3Names.FormattingEnabled = true;
+            this.cboLevel3Names.Location = new System.Drawing.Point(394, 175);
+            this.cboLevel3Names.Name = "cboLevel3Names";
+            this.cboLevel3Names.Size = new System.Drawing.Size(121, 24);
+            this.cboLevel3Names.TabIndex = 72;
+            // 
+            // cboLevel3Codes
+            // 
+            this.cboLevel3Codes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLevel3Codes.FormattingEnabled = true;
+            this.cboLevel3Codes.Location = new System.Drawing.Point(267, 175);
+            this.cboLevel3Codes.Name = "cboLevel3Codes";
+            this.cboLevel3Codes.Size = new System.Drawing.Size(121, 24);
+            this.cboLevel3Codes.TabIndex = 71;
             // 
             // label9
             // 
@@ -336,7 +336,7 @@
             this.ClientSize = new System.Drawing.Size(1362, 723);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormLoadLocationData";
-            this.Text = "Multi Level Geo Coder Tool - Gazetteer Data";
+            this.Text = "Multi Level Geo-Coder Tool - Gazetteer Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLoadLocationData_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
