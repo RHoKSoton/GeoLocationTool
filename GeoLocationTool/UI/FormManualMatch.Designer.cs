@@ -269,6 +269,7 @@
             this.txtSelectedIndex.Name = "txtSelectedIndex";
             this.txtSelectedIndex.Size = new System.Drawing.Size(82, 22);
             this.txtSelectedIndex.TabIndex = 27;
+            this.txtSelectedIndex.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -332,7 +333,7 @@
             this.btnApplyAll.Name = "btnApplyAll";
             this.btnApplyAll.Size = new System.Drawing.Size(75, 32);
             this.btnApplyAll.TabIndex = 9;
-            this.btnApplyAll.Text = "Apply All";
+            this.btnApplyAll.Text = "Match All";
             this.btnApplyAll.UseVisualStyleBackColor = true;
             this.btnApplyAll.Click += new System.EventHandler(this.btnApplyAll_Click);
             // 
