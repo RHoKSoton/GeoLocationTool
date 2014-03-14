@@ -219,7 +219,7 @@ namespace MultiLevelGeoCoder
 
         public DataView UnmatchedRecords()
         {
-            return inputData.GetCodedRecords();
+            return inputData.GetUnCodedRecords();
         }
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)

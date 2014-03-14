@@ -101,13 +101,13 @@ namespace MultiLevelGeoCoder.Logic
         /// Gets the uncoded records, i.e. those where at least one code is not present
         /// </summary>
         /// <returns>A view only containing records where one or more codes is missing.</returns>
-        public DataView GetCodedRecords()
+        public DataView GetUnCodedRecords()
         {
             // only show those records where at least one code is null
             EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
-                where record.Field<String>(Level1CodeColumnName) == null ||
-                      record.Field<string>(Level2CodeColumnName) == null ||
-                      record.Field<string>(Level3CodeColumnName) == null
+                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
+                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)) ||
+                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName)) 
                 select record;
 
             DataView unmatched = query.AsDataView();
