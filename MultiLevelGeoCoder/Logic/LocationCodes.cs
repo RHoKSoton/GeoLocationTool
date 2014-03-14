@@ -77,6 +77,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level1UsingGazetteer(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name1))
+            {
+                return null;
+            }
+
             GeoCode geoCode = null;
             // just match level 1
             var matchRecords = from record in gazzetteerData
@@ -98,6 +103,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level1UsingMatchedName(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name1))
+            {
+                return null;
+            }
+
             GeoCode record = null;
             // get the matched name and try again
             IEnumerable<Level1Match> matches =
@@ -117,6 +127,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level2UsingGazetteer(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name2))
+            {
+                return null;
+            }
+
             GeoCode geoCode = null;
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
@@ -141,6 +156,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level2UsingMatchedName(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name2))
+            {
+                return null;
+            }
+
             GeoCode record = null;
             // get the matched name and try again
             IEnumerable<Level2Match> nearMatches =
@@ -159,6 +179,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level3UsingGazetteer(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name3))
+            {
+                return null;
+            }
+
             GeoCode geoCode = null;
             // must match all three levels
             var matchRecords = from record in gazzetteerData
@@ -187,7 +212,13 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode Level3UsingMatchedName(Location location)
         {
+            if (string.IsNullOrEmpty(location.Name3))
+            {
+                return null;
+            }
+
             GeoCode record = null;
+
             // get the matched name and try again
             IEnumerable<Level3Match> nearMatches =
                 matchProvider.GetMatches(

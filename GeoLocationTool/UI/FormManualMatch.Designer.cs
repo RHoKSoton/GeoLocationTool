@@ -119,6 +119,7 @@
             // 
             this.cboLevel1Manual.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.cboLevel1Manual, 2);
+            this.cboLevel1Manual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1Manual.FormattingEnabled = true;
             this.cboLevel1Manual.Location = new System.Drawing.Point(107, 109);
             this.cboLevel1Manual.Name = "cboLevel1Manual";
@@ -140,6 +141,7 @@
             // cboLevel2Manual
             // 
             this.cboLevel2Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel2Manual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2Manual.FormattingEnabled = true;
             this.cboLevel2Manual.Location = new System.Drawing.Point(377, 110);
             this.cboLevel2Manual.Name = "cboLevel2Manual";
@@ -160,6 +162,7 @@
             // cboLevel3Manual
             // 
             this.cboLevel3Manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboLevel3Manual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3Manual.FormattingEnabled = true;
             this.cboLevel3Manual.Location = new System.Drawing.Point(647, 110);
             this.cboLevel3Manual.Name = "cboLevel3Manual";
@@ -355,6 +358,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(998, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 32);
@@ -364,6 +368,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(998, 106);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 32);
