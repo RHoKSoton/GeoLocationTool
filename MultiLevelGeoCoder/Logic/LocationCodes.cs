@@ -19,8 +19,38 @@ namespace MultiLevelGeoCoder.Logic
 
         private readonly IEnumerable<Gadm> gazzetteerData;
         private readonly IMatchProvider matchProvider;
-
+        private Dictionary<string, GeoCode> level1Dictionary = null;
+        private Dictionary<string, GeoCode> level2Dictionary = null;
+        private Dictionary<string, GeoCode> level3Dictionary = null;
+        public static bool useDictionaries = true;
+        
         #endregion Fields
+
+        #region Comparers
+        class CompareLevel1 : IEqualityComparer<Gadm>
+        {
+            public bool Equals(Gadm x, Gadm y)
+            {
+                return x.NAME_1 == y.NAME_1;
+            }
+            public int GetHashCode(Gadm codeh)
+            {
+                return codeh.NAME_1.GetHashCode();
+            }
+        }
+
+        class CompareLevel2 : IEqualityComparer<Gadm>
+        {
+            public bool Equals(Gadm x, Gadm y)
+            {
+                return x.NAME_1 == y.NAME_1 && x.NAME_2 == y.NAME_2;
+            }
+            public int GetHashCode(Gadm codeh)
+            {
+                return (codeh.NAME_2 + codeh.NAME_1).GetHashCode();
+            }
+        }
+        #endregion
 
         #region Constructors
 
@@ -30,6 +60,9 @@ namespace MultiLevelGeoCoder.Logic
         {
             this.gazzetteerData = gazzetteerData;
             this.matchProvider = matchProvider;
+            level1Dictionary = gazzetteerData.Distinct(new CompareLevel1()).ToDictionary(x => x.NAME_1.Trim().ToLower(), x => new GeoCode(x.ID_1, x.NAME_1));
+            level2Dictionary = gazzetteerData.Distinct(new CompareLevel2()).ToDictionary(x => x.NAME_1.Trim().ToLower() + x.NAME_2.Trim().ToLower(), x => new GeoCode(x.ID_2, x.NAME_2));
+            level3Dictionary = gazzetteerData.ToDictionary(x => x.NAME_1.Trim().ToLower() + x.NAME_2.Trim().ToLower() + x.NAME_3.Trim().ToLower(), x => new GeoCode(x.ID_3, x.NAME_3));
         }
 
         #endregion Constructors
@@ -66,7 +99,8 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode GetLevel2Code(Location location)
         {
-            return Level2UsingMatchedName(location) ?? Level2UsingGazetteer(location);
+            return Level2UsingMatchedName(location) ??
+                   Level2UsingGazetteer(location);
         }
 
         private GeoCode GetLevel3Code(Location location)
@@ -83,6 +117,13 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             GeoCode geoCode = null;
+
+            if (useDictionaries)
+            {
+                level1Dictionary.TryGetValue(location.Name1.Trim().ToLower(), out geoCode);
+                return geoCode;
+            }
+
             // just match level 1
             var matchRecords = from record in gazzetteerData
                 where
@@ -113,7 +154,7 @@ namespace MultiLevelGeoCoder.Logic
             IEnumerable<Level1Match> matches =
                 matchProvider.GetMatches(location.Name1);
             //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
+            // todo we need to ensure that there is only one name possibility in the database
             Level1Match match = matches.FirstOrDefault();
             if (match != null)
             {
@@ -133,6 +174,13 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             GeoCode geoCode = null;
+
+            if (useDictionaries)
+            {
+                level2Dictionary.TryGetValue(location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower(), out geoCode);
+                return geoCode;
+            }
+
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
                 where
@@ -185,6 +233,12 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             GeoCode geoCode = null;
+
+            if (useDictionaries)
+            {
+                level3Dictionary.TryGetValue(location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower() + location.Name3.Trim().ToLower(), out geoCode);
+                return geoCode;
+            }
             // must match all three levels
             var matchRecords = from record in gazzetteerData
                 where
