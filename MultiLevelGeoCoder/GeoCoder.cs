@@ -205,12 +205,14 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
-        public void SetGazetteerColumns(GazetteerColumnNames columnNames)
+        public void SetGazetteerColumns(GazetteerColumnNames columnNames, bool saveSelection = true)
         {
             gazetteerData.ColumnNames = columnNames;
             locationCodes = new LocationCodes(gazetteerData.LocationList, matchProvider);
             locationNames = new LocationNames(gazetteerData.LocationList);
-            SaveUserSelection(columnNames, gazetteerFileName);
+
+            if (saveSelection)
+                SaveUserSelection(columnNames, gazetteerFileName);
         }
 
         /// <summary>

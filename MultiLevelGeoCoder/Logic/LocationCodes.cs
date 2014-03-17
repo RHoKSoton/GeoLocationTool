@@ -26,32 +26,6 @@ namespace MultiLevelGeoCoder.Logic
         
         #endregion Fields
 
-        #region Comparers
-        class CompareLevel1 : IEqualityComparer<Gadm>
-        {
-            public bool Equals(Gadm x, Gadm y)
-            {
-                return x.NAME_1 == y.NAME_1;
-            }
-            public int GetHashCode(Gadm codeh)
-            {
-                return codeh.NAME_1.GetHashCode();
-            }
-        }
-
-        class CompareLevel2 : IEqualityComparer<Gadm>
-        {
-            public bool Equals(Gadm x, Gadm y)
-            {
-                return x.NAME_1 == y.NAME_1 && x.NAME_2 == y.NAME_2;
-            }
-            public int GetHashCode(Gadm codeh)
-            {
-                return (codeh.NAME_2 + codeh.NAME_1).GetHashCode();
-            }
-        }
-        #endregion
-
         #region Constructors
 
         public LocationCodes(
@@ -60,9 +34,7 @@ namespace MultiLevelGeoCoder.Logic
         {
             this.gazzetteerData = gazzetteerData;
             this.matchProvider = matchProvider;
-            level1Dictionary = gazzetteerData.Distinct(new CompareLevel1()).ToDictionary(x => x.NAME_1.Trim().ToLower(), x => new GeoCode(x.ID_1, x.NAME_1));
-            level2Dictionary = gazzetteerData.Distinct(new CompareLevel2()).ToDictionary(x => x.NAME_1.Trim().ToLower() + x.NAME_2.Trim().ToLower(), x => new GeoCode(x.ID_2, x.NAME_2));
-            level3Dictionary = gazzetteerData.ToDictionary(x => x.NAME_1.Trim().ToLower() + x.NAME_2.Trim().ToLower() + x.NAME_3.Trim().ToLower(), x => new GeoCode(x.ID_3, x.NAME_3));
+            InitializeDictionaries();
         }
 
         #endregion Constructors
@@ -89,6 +61,28 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             return codedLocation;
+        }
+
+        private void InitializeDictionaries()
+        {
+            level1Dictionary = new Dictionary<string, GeoCode>();
+            level2Dictionary = new Dictionary<string, GeoCode>();
+            level3Dictionary = new Dictionary<string, GeoCode>();
+
+            foreach (var gadm in gazzetteerData)
+            {
+                string level1key = gadm.NAME_1.Trim().ToLower();
+                if (!level1Dictionary.ContainsKey(level1key))
+                    level1Dictionary.Add(level1key, new GeoCode(gadm.ID_1, gadm.NAME_1));
+
+                string level2key = level1key + gadm.NAME_2.Trim().ToLower();
+                if (!level2Dictionary.ContainsKey(level2key))
+                    level2Dictionary.Add(level2key, new GeoCode(gadm.ID_2, gadm.NAME_2));
+
+                string level3key = level2key + gadm.NAME_3.Trim().ToLower();
+                if (!level3Dictionary.ContainsKey(level3key))
+                    level3Dictionary.Add(level3key, new GeoCode(gadm.ID_3, gadm.NAME_3));
+            }
         }
 
         private GeoCode GetLevel1Code(Location location)

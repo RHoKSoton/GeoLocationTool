@@ -85,7 +85,7 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
-        void SetGazetteerColumns(GazetteerColumnNames columnNames);
+        void SetGazetteerColumns(GazetteerColumnNames columnNames, bool saveSelection = true);
 
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
