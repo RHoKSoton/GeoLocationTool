@@ -193,20 +193,10 @@ namespace MultiLevelGeoCoderTests
             IMatchProvider matchProviderWithNoRecords =
                 NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
 
-            // create gazetteer data to match against - add a record
+            // create gazetteer data to match against - adds a record
             // containing a match to the location
             var gazzetteerData = GazetteerTestData.TestData();
-            gazzetteerData.Add(
-                new Gadm
-                {
-                    ID_1 = GazetteerTestData.code1,
-                    NAME_1 = GazetteerTestData.name1,
-                    ID_2 = GazetteerTestData.code2,
-                    NAME_2 = GazetteerTestData.name2,
-                    ID_3 = GazetteerTestData.code3,
-                    NAME_3 = GazetteerTestData.name3,
-                });
-
+           
             LocationCodes locationCodes = new LocationCodes(
                 gazzetteerData,
                 matchProviderWithNoRecords);
