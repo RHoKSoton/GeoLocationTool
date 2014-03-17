@@ -93,20 +93,20 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode GetLevel1Code(Location location)
         {
-            return Level1UsingGazetteer(location) ??
-                   Level1UsingMatchedName(location);
+            return Level1UsingMatchedName(location) ??
+                   Level1UsingGazetteer(location);
         }
 
         private GeoCode GetLevel2Code(Location location)
         {
-            return Level2UsingGazetteer(location) ??
-                   Level2UsingMatchedName(location);
+            return Level2UsingMatchedName(location) ??
+                   Level2UsingGazetteer(location);
         }
 
         private GeoCode GetLevel3Code(Location location)
         {
-            return Level3UsingGazetteer(location) ??
-                   Level3UsingMatchedName(location);
+            return Level3UsingMatchedName(location) ??
+                   Level3UsingGazetteer(location);
         }
 
         private GeoCode Level1UsingGazetteer(Location location)
