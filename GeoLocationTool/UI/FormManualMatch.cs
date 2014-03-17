@@ -83,7 +83,7 @@ namespace GeoLocationTool.UI
 
         private void AddUsedMatchNames(CodedLocation codedLocation)
         {
-            InputColumnNames columnNames = geoCoder.UsedColumnNames();
+            InputColumnNames columnNames = geoCoder.MatchColumnNames();
             // add the actual name used to get the code if different to that on the input
             if (codedLocation.IsName1Different())
             {
@@ -247,7 +247,7 @@ namespace GeoLocationTool.UI
 
         private void ClearUsedNames()
         {
-            InputColumnNames columnNames = geoCoder.UsedColumnNames();
+            InputColumnNames columnNames = geoCoder.MatchColumnNames();
             dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1].Value =
                 null;
             dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2].Value =
@@ -455,7 +455,7 @@ namespace GeoLocationTool.UI
 
         private void DisplayUnmatchedRecords()
         {
-            dataGridView1.DataSource = geoCoder.UnmatchedRecords();
+            dataGridView1.DataSource = geoCoder.UncodedRecords();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -528,7 +528,7 @@ namespace GeoLocationTool.UI
 
         private void SaveOutputFile()
         {
-            geoCoder.SaveToCsvFile();
+            geoCoder.SaveOutputFile();
         }
 
         private void SaveSelectedMatch(string level1, string level2, string level3)

@@ -126,7 +126,7 @@ namespace GeoLocationTool.UI
                 SetColumnNames();
                 geoCoder.CodeAll();
                 DisplayData();
-                SaveAsCsv();
+                SaveOutputFile();
             }
             catch (Exception ex)
             {
@@ -180,7 +180,7 @@ namespace GeoLocationTool.UI
                         MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        SaveAsCsv();
+                        SaveOutputFile();
                         e.Cancel = true;
                     }
                 }
@@ -206,7 +206,7 @@ namespace GeoLocationTool.UI
             DisplayData();
         }
 
-        private void SaveAsCsv()
+        private void SaveOutputFile()
         {
             try
             {
@@ -217,7 +217,7 @@ namespace GeoLocationTool.UI
 
                 if (!string.IsNullOrEmpty(geoCoder.OutputFileName))
                 {
-                    geoCoder.SaveToCsvFile();
+                    geoCoder.SaveOutputFile();
                     MessageBox.Show("Output file saved");
                 }
                 else

@@ -190,7 +190,7 @@ namespace MultiLevelGeoCoder
             // GeoCodes.RefreshAltCodeList();
         }
 
-        public void SaveToCsvFile()
+        public void SaveOutputFile()
         {
             if (string.IsNullOrEmpty(OutputFileName))
             {
@@ -222,14 +222,18 @@ namespace MultiLevelGeoCoder
             inputData.ColumnNames = columnNames;
         }
 
-        public DataView UnmatchedRecords()
+        public DataView UncodedRecords()
         {
             return inputData.GetUnCodedRecords();
         }
 
-        public InputColumnNames UsedColumnNames()
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames MatchColumnNames()
         {
-            return inputData.UsedColumnNames();
+            return inputData.MatchColumnNames();
         }
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)

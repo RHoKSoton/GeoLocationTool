@@ -20,9 +20,9 @@ namespace MultiLevelGeoCoder.Logic
         private const string Level3CodeColumnName = "Code 3";
 
         // columns to contain the matched names used to find the codes
-        private const string Used1ColumnName = "Name 1";
-        private const string Used2ColumnName = "Name 2";
-        private const string Used3ColumnName = "Name 3";
+        private const string Level1MatchedColumnName = "Name 1";
+        private const string Level2MatchedColumnName = "Name 2";
+        private const string Level3MatchedColumnName = "Name 3";
 
         // default column names
         private const string DefaultLevel1ColumnName = "Admin2";
@@ -101,6 +101,10 @@ namespace MultiLevelGeoCoder.Logic
             }
         }
 
+        /// <summary>
+        /// Codes the column names.
+        /// </summary>
+        /// <returns></returns>
         public InputColumnNames CodeColumnNames()
         {
             InputColumnNames columnNames = new InputColumnNames
@@ -129,13 +133,17 @@ namespace MultiLevelGeoCoder.Logic
             return unmatched;
         }
 
-        public InputColumnNames UsedColumnNames()
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns>The Column Names</returns>
+        public InputColumnNames MatchColumnNames()
         {
             InputColumnNames columnNames = new InputColumnNames
             {
-                Level1 = Used1ColumnName,
-                Level2 = Used2ColumnName,
-                Level3 = Used3ColumnName
+                Level1 = Level1MatchedColumnName,
+                Level2 = Level2MatchedColumnName,
+                Level3 = Level3MatchedColumnName
             };
             return columnNames;
         }
@@ -186,17 +194,17 @@ namespace MultiLevelGeoCoder.Logic
 
             if (codedLocation.IsName1Different())
             {
-                dataRow[Used1ColumnName] = codedLocation.GeoCode1.Name;
+                dataRow[Level1MatchedColumnName] = codedLocation.GeoCode1.Name;
             }
 
             if (codedLocation.IsName2Different())
             {
-                dataRow[Used2ColumnName] = codedLocation.GeoCode2.Name;
+                dataRow[Level2MatchedColumnName] = codedLocation.GeoCode2.Name;
             }
 
             if (codedLocation.IsName3Different())
             {
-                dataRow[Used3ColumnName] = codedLocation.GeoCode3.Name;
+                dataRow[Level3MatchedColumnName] = codedLocation.GeoCode3.Name;
             }
         }
 
@@ -209,9 +217,9 @@ namespace MultiLevelGeoCoder.Logic
         private void AddAltNameColumns()
         {
             // add collumns to use for the edited location data
-            AddColumn(Used1ColumnName);
-            AddColumn(Used2ColumnName);
-            AddColumn(Used3ColumnName);
+            AddColumn(Level1MatchedColumnName);
+            AddColumn(Level2MatchedColumnName);
+            AddColumn(Level3MatchedColumnName);
         }
 
         private void AddCodeColumns()
@@ -235,9 +243,9 @@ namespace MultiLevelGeoCoder.Logic
             addedColumns.Add(Level1CodeColumnName);
             addedColumns.Add(Level2CodeColumnName);
             addedColumns.Add(Level3CodeColumnName);
-            addedColumns.Add(Used1ColumnName);
-            addedColumns.Add(Used2ColumnName);
-            addedColumns.Add(Used3ColumnName);
+            addedColumns.Add(Level1MatchedColumnName);
+            addedColumns.Add(Level2MatchedColumnName);
+            addedColumns.Add(Level3MatchedColumnName);
 
             return addedColumns;
         }
@@ -247,9 +255,9 @@ namespace MultiLevelGeoCoder.Logic
             dataRow[Level1CodeColumnName] = null;
             dataRow[Level2CodeColumnName] = null;
             dataRow[Level3CodeColumnName] = null;
-            dataRow[Used1ColumnName] = null;
-            dataRow[Used2ColumnName] = null;
-            dataRow[Used3ColumnName] = null;
+            dataRow[Level1MatchedColumnName] = null;
+            dataRow[Level2MatchedColumnName] = null;
+            dataRow[Level3MatchedColumnName] = null;
         }
 
         private CodedLocation FindCodes(LocationCodes gazetteer, DataRow dataRow)

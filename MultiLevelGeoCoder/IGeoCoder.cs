@@ -79,7 +79,7 @@ namespace MultiLevelGeoCoder
 
         void SaveNearMatch();
 
-        void SaveToCsvFile();
+        void SaveOutputFile();
 
         /// <summary>
         /// Sets the gazetteer columns that hold the data to provide the codes
@@ -93,13 +93,13 @@ namespace MultiLevelGeoCoder
         /// <param name="columnNames">The column names.</param>
         void SetInputColumns(InputColumnNames columnNames);
 
-        DataView UnmatchedRecords();
+        DataView UncodedRecords();
 
         /// <summary>
         /// The names of the columns that contain the matched names used to find the codes.
         /// </summary>
         /// <returns></returns>
-        InputColumnNames UsedColumnNames();
+        InputColumnNames MatchColumnNames();
 
         #endregion Methods
     }
