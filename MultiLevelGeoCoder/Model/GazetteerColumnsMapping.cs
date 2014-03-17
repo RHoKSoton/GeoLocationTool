@@ -2,7 +2,7 @@
 
 namespace MultiLevelGeoCoder.Model
 {
-    public class GazetteerColumnsMapping
+    internal class GazetteerColumnsMapping
     {
         #region Properties
 

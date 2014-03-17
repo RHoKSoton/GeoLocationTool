@@ -10,7 +10,7 @@ namespace MultiLevelGeoCoder.DataAccess
     /// <summary>
     /// Provides the saved gazetteer column selections from the database
     /// </summary>
-    public class ColumnsMappingProvider : IColumnsMappingProvider
+    internal class ColumnsMappingProvider : IColumnsMappingProvider
     {
         #region Fields
 
