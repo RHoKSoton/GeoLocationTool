@@ -30,12 +30,18 @@ namespace MultiLevelGeoCoder
 
         void CodeAll();
 
+        /// <summary>
+        /// The names of the columns that contain the codes.
+        /// </summary>
+        /// <returns>The column names</returns>
+        InputColumnNames CodeColumnNames();
+
         GazetteerColumnNames DefaultGazetteerColumnNames();
 
         /// <summary>
-        /// The default names of the columns that contain the  input data to be matched.
+        /// The default names of the columns that contain the input data to be matched.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Column Names</returns>
         InputColumnNames DefaultInputColumnNames();
 
         /// <summary>
@@ -88,6 +94,12 @@ namespace MultiLevelGeoCoder
         void SetInputColumns(InputColumnNames columnNames);
 
         DataView UnmatchedRecords();
+
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames UsedColumnNames();
 
         #endregion Methods
     }

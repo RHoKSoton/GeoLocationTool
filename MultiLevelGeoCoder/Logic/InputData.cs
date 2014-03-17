@@ -10,17 +10,21 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Holds the input data and added codes etc
     /// </summary>
-    public class InputData
+    internal class InputData
     {
         #region Fields
 
-        public const string Level1CodeColumnName = "Code 1";
-        public const string Level2CodeColumnName = "Code 2";
-        public const string Level3CodeColumnName = "Code 3";
-        public const string Used1ColumnName = "Name 1";
-        public const string Used2ColumnName = "Name 2";
-        public const string Used3ColumnName = "Name 3";
+        // columns to contain the codes
+        private const string Level1CodeColumnName = "Code 1";
+        private const string Level2CodeColumnName = "Code 2";
+        private const string Level3CodeColumnName = "Code 3";
 
+        // columns to contain the matched names used to find the codes
+        private const string Used1ColumnName = "Name 1";
+        private const string Used2ColumnName = "Name 2";
+        private const string Used3ColumnName = "Name 3";
+
+        // default column names
         private const string DefaultLevel1ColumnName = "Admin2";
         private const string DefaultLevel2ColumnName = "Admin3";
         private const string DefaultLevel3ColumnName = "Admin4";
@@ -31,7 +35,7 @@ namespace MultiLevelGeoCoder.Logic
 
         public InputData(DataTable data)
         {
-            this.Data = data;
+            Data = data;
             AddAdditionalColumns();
             SetColumnsAsReadOnly();
 
@@ -97,6 +101,17 @@ namespace MultiLevelGeoCoder.Logic
             }
         }
 
+        public InputColumnNames CodeColumnNames()
+        {
+            InputColumnNames columnNames = new InputColumnNames
+            {
+                Level1 = Level1CodeColumnName,
+                Level2 = Level2CodeColumnName,
+                Level3 = Level3CodeColumnName
+            };
+            return columnNames;
+        }
+
         /// <summary>
         /// Gets the uncoded records, i.e. those where at least one code is not present
         /// </summary>
@@ -107,11 +122,22 @@ namespace MultiLevelGeoCoder.Logic
             EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
                 where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
                       string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName)) 
+                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))
                 select record;
 
             DataView unmatched = query.AsDataView();
             return unmatched;
+        }
+
+        public InputColumnNames UsedColumnNames()
+        {
+            InputColumnNames columnNames = new InputColumnNames
+            {
+                Level1 = Used1ColumnName,
+                Level2 = Used2ColumnName,
+                Level3 = Used3ColumnName
+            };
+            return columnNames;
         }
 
         /// <summary>
@@ -152,7 +178,9 @@ namespace MultiLevelGeoCoder.Logic
             AddUsedMatchNames(codedLocation, dataRow);
         }
 
-        private static void AddUsedMatchNames(CodedLocation codedLocation, DataRow dataRow)
+        private static void AddUsedMatchNames(
+            CodedLocation codedLocation,
+            DataRow dataRow)
         {
             // add the actual name used to get the code if different to that on the input
 

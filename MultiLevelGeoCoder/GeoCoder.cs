@@ -76,6 +76,11 @@ namespace MultiLevelGeoCoder
             inputData.AddLocationCodes(locationCodes);
         }
 
+        public InputColumnNames CodeColumnNames()
+        {
+            return inputData.CodeColumnNames();
+        }
+
         public GazetteerColumnNames DefaultGazetteerColumnNames()
         {
             GazetteerColumnNames columnNames = new GazetteerColumnNames();
@@ -220,6 +225,11 @@ namespace MultiLevelGeoCoder
         public DataView UnmatchedRecords()
         {
             return inputData.GetUnCodedRecords();
+        }
+
+        public InputColumnNames UsedColumnNames()
+        {
+            return inputData.UsedColumnNames();
         }
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)

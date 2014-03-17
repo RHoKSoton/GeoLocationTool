@@ -13,7 +13,7 @@ namespace MultiLevelGeoCoder.Logic
     /// using either the given names or the previously matched names in the database
     /// Contains the main search algorithm.
     /// </summary>
-    public class LocationCodes
+    internal class LocationCodes
     {
         #region Fields
 

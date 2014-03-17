@@ -5,7 +5,7 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Holds a record from the Gazetteer data file
     /// </summary>
-    public class Gadm
+    internal class Gadm
     {
         // todo can we combine this with the location class?
         public string ID_1 { get; set; }
