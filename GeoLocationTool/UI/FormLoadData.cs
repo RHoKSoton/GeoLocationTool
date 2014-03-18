@@ -91,6 +91,11 @@ namespace GeoLocationTool.UI
 
                 if (string.IsNullOrEmpty(geoCoder.OutputFileName))
                 {
+                    SelectOutputFileName();
+                }
+
+                if (string.IsNullOrEmpty(geoCoder.OutputFileName))
+                {
                     MessageBox.Show("Output file missing, please select the output file.", "Missing");
                     return;
                 }
