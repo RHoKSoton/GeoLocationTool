@@ -542,21 +542,28 @@ namespace GeoLocationTool.UI
                 // todo any feedback for the user here?
                 return;
             }
-            SaveNearMatchLevel1(originalLevel1, level1);
+
+            if (!string.Equals(originalLevel1, level1, StringComparison.InvariantCultureIgnoreCase))
+                SaveNearMatchLevel1(originalLevel1, level1);
 
             if (string.IsNullOrEmpty(originalLevel2))
             {
                 return;
             }
 
-            SaveNearMatchLevel2(originalLevel2, level1, level2);
+            if (!(string.Equals(originalLevel1, level1, StringComparison.InvariantCultureIgnoreCase) &&
+                string.Equals(originalLevel2, level2, StringComparison.InvariantCultureIgnoreCase)))
+                SaveNearMatchLevel2(originalLevel2, level1, level2);
 
             if (string.IsNullOrEmpty(originalLevel3))
             {
                 return;
             }
 
-            SaveNearMatchLevel3(originalLevel3, level1, level2, level3);
+            if (!(string.Equals(originalLevel1, level1, StringComparison.InvariantCultureIgnoreCase) &&
+                string.Equals(originalLevel2, level2, StringComparison.InvariantCultureIgnoreCase) &&
+                string.Equals(originalLevel3, level3, StringComparison.InvariantCultureIgnoreCase)))
+                SaveNearMatchLevel3(originalLevel3, level1, level2, level3);
         }
 
         private void SetDefaults()
