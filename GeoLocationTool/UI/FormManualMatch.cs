@@ -20,6 +20,7 @@ namespace GeoLocationTool.UI
         private readonly FuzzyMatch fuzzyMatch;
         private readonly IGeoCoder geoCoder;
         private readonly IMatchProvider matches;
+        private bool matchInProgress;
 
         private int selectedRowIndex;
 
@@ -111,6 +112,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
+                matchInProgress = true;
                 Cursor = Cursors.WaitCursor;
                 geoCoder.CodeAll();
             }
@@ -123,6 +125,12 @@ namespace GeoLocationTool.UI
             finally
             {
                 Cursor = Cursors.Default;
+                matchInProgress = false;
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[0].Selected = true;
+                }
             }
         }
 
@@ -290,7 +298,7 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                if (!matchInProgress && dataGridView1.SelectedRows.Count > 0)
                 {
                     selectedRowIndex = dataGridView1.SelectedRows[0].Index;
                     txtSelectedIndex.Text = selectedRowIndex.ToString();
