@@ -72,7 +72,7 @@
     <Compile Include="FuzzyStringTests.cs" />
     <Compile Include="GazetteerTestData.cs" />
     <Compile Include="LocationCodesTestsWithPreviousMatchedNames.cs" />
-    <Compile Include="NearMatchProviderTestData.cs" />
+    <Compile Include="MatchProviderTestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocationCodesTests.cs" />
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace MultiLevelGeoCoderTests
     /// <summary>
     /// Provided Near Match Provider stubs returning gazetteer test data
     /// </summary>
-    internal static class NearMatchProviderTestData
+    internal static class MatchProviderTestData
     {
         #region Methods
 

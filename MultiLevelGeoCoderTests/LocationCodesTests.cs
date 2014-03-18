@@ -35,7 +35,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against
             var gazzetteerData = GazetteerTestData.TestData();
@@ -76,7 +76,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against
             var gazzetteerData = GazetteerTestData.TestData();
@@ -114,7 +114,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location
@@ -154,7 +154,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location
@@ -191,7 +191,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - adds a record
             // containing a match to the location
@@ -231,7 +231,7 @@ namespace MultiLevelGeoCoderTests
 
             // database contains no saved records
             IMatchProvider matchProviderWithNoRecords =
-                NearMatchProviderTestData.NearMatchesProviderWithNoRecords();
+                MatchProviderTestData.NearMatchesProviderWithNoRecords();
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
