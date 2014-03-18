@@ -12,67 +12,102 @@ namespace MultiLevelGeoCoderTests
     {
         #region Fields
 
-        internal const string code1 = "1";
-        internal const string code2 = "15";
-        internal const string code3 = "150";
-        internal const string name1 = "TestProvince";
-        internal const string name2 = "TestTown";
-        internal const string name3 = "TestVillage";
+        private static readonly GeoCode P1 = new GeoCode("1", "P1");
+        private static readonly GeoCode P1T1 = new GeoCode("10", "T1");
+        private static readonly GeoCode P1V1 = new GeoCode("100", "V1");
+        private static readonly GeoCode P1V2 = new GeoCode("101", "V2");
+        private static readonly GeoCode P2 = new GeoCode("2", "P2");
+        private static readonly GeoCode P2T2 = new GeoCode("20", "T2");
+        private static readonly GeoCode P2V1 = new GeoCode("200", "V1");
+        private static readonly GeoCode P2V2 = new GeoCode("300", "V2");
+        private static readonly GeoCode P2V3 = new GeoCode("400", "V3");
 
         #endregion Fields
 
         #region Methods
 
+        public static IEnumerable<Gadm> TestData(Gadm gadmRecord)
+        {
+            List<Gadm> gadmList = new List<Gadm>();
+            gadmList.Add(gadmRecord);
+            return gadmList;
+        }
+
+        internal static Gadm Record1()
+        {
+            return new Gadm
+            {
+                ID_1 = P1.Code,
+                NAME_1 = P1.Name,
+                ID_2 = P1T1.Code,
+                NAME_2 = P1T1.Name,
+                ID_3 = P1V1.Code,
+                NAME_3 = P1V1.Name
+            };
+        }
+
+        internal static Gadm Record2()
+        {
+            return new Gadm
+            {
+                ID_1 = P1.Code,
+                NAME_1 = P1.Name,
+                ID_2 = P1T1.Code,
+                NAME_2 = P1T1.Name,
+                ID_3 = P1V2.Code,
+                NAME_3 = P1V2.Name
+            };
+        }
+
+        internal static Gadm Record3()
+        {
+            return new Gadm
+            {
+                ID_1 = P2.Code,
+                NAME_1 = P2.Name,
+                ID_2 = P2T2.Code,
+                NAME_2 = P2T2.Name,
+                ID_3 = P2V1.Code,
+                NAME_3 = P2V1.Name
+            };
+        }
+
+        internal static Gadm Record4()
+        {
+            return new Gadm
+            {
+                ID_1 = P2.Code,
+                NAME_1 = P2.Name,
+                ID_2 = P2T2.Code,
+                NAME_2 = P2T2.Name,
+                ID_3 = P2V2.Code,
+                NAME_3 = P2V2.Name
+            };
+        }
+
+        internal static Gadm Record5()
+        {
+            return new Gadm
+            {
+                ID_1 = P2.Code,
+                NAME_1 = P2.Name,
+                ID_2 = P2T2.Code,
+                NAME_2 = P2T2.Name,
+                ID_3 = P2V3.Code,
+                NAME_3 = P2V3.Name
+            };
+        }
+
         internal static IList<Gadm> TestData()
         {
             List<Gadm> gadmList = new List<Gadm>();
 
-            gadmList.Add(
-                new Gadm
-                {
-                    ID_1 = "1",
-                    NAME_1 = "Abra",
-                    ID_2 = "18",
-                    NAME_2 = "Pidigan",
-                    ID_3 = "188",
-                    NAME_3 = "Alinaya",
-                    VARNAME_3 = ""
-                });
+            gadmList.Add(Record1());
+            gadmList.Add(Record2());
+            gadmList.Add(Record3());
+            gadmList.Add(Record4());
+            gadmList.Add(Record5());
 
-            gadmList.Add(
-                new Gadm
-                {
-                    ID_1 = "1",
-                    NAME_1 = "Abra",
-                    ID_2 = "17",
-                    NAME_2 = "PeÃ±arrubia",
-                    ID_3 = "181",
-                    NAME_3 = "Malamsit",
-                    VARNAME_3 = "Pau-Malamsit"
-                });
-
-            gadmList.Add(
-                new Gadm
-                {
-                    ID_1 = "9",
-                    NAME_1 = "Basilan",
-                    ID_2 = "132",
-                    NAME_2 = "Tipo-Tipo",
-                    ID_3 = "3018",
-                    NAME_3 = "Tipo-Tipo Proper",
-                    VARNAME_3 = "Poblacion"
-                });
-
-            gadmList.Add(
-                new Gadm
-                {
-                    ID_1 = code1,
-                    NAME_1 = name1,
-                    ID_2 = code2,
-                    NAME_2 = name2,
-                    ID_3 = code3,
-                    NAME_3 = name3,
-                });
             return gadmList;
         }
 

@@ -28,14 +28,15 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // Create location input, containing three levels,
             // correct level 1 and 2, level 3 is incorrect (i.e. no record in the gazetteer)
+            Gadm record1 = GazetteerTestData.Record1();
             Location location = new Location(
-                GazetteerTestData.name1,
-                GazetteerTestData.name2,
+                record1.NAME_1,
+                record1.NAME_2,
                 "SomeName");
 
             // database contains saved record for level 3 alternate name
             IMatchProvider matchProvider =
-                MatchProviderTestData.NearMatchesProviderLevel3("SomeName");
+                MatchProviderTestData.MatchProviderLevel3("SomeName", record1);
 
             // create gazetteer data to match against
             var gazzetteerData = GazetteerTestData.TestData();
@@ -49,12 +50,12 @@ namespace MultiLevelGeoCoderTests
 
             // Assert
             // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
-            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
-            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
-            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
+            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(record1.ID_2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(record1.NAME_2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(record1.ID_3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(record1.NAME_3, codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
@@ -69,14 +70,15 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // create location input, containing correct level 1 and 3,
             // level 2 is incorrect (i.e. not in the gazetteer)
+            Gadm record1 = GazetteerTestData.Record1();
             Location location = new Location(
-                GazetteerTestData.name1,
+                record1.NAME_1,
                 "SomeName",
-                GazetteerTestData.name3);
+                record1.NAME_3);
 
             // database contains saved record
             IMatchProvider matchProvider =
-                MatchProviderTestData.NearMatchesProviderLevel2("SomeName");
+                MatchProviderTestData.MatchProviderLevel2("SomeName", record1);
 
             // create gazetteer data to match against
             var gazzetteerData = GazetteerTestData.TestData();
@@ -90,12 +92,12 @@ namespace MultiLevelGeoCoderTests
 
             // Assert
             // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
-            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
-            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
-            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
+            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(record1.ID_2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(record1.NAME_2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(record1.ID_3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(record1.NAME_3, codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
@@ -110,14 +112,15 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // Create location input, containing incorrect level 1 (i.e. not in the gazetteer)
             // level  2 and 3 are correct
+            Gadm record1 = GazetteerTestData.Record1();
             Location location = new Location(
                 "SomeName",
-                GazetteerTestData.name2,
-                GazetteerTestData.name3);
+                record1.NAME_2,
+                record1.NAME_3);
 
             // database contains saved record
             IMatchProvider matchProvider =
-                MatchProviderTestData.NearMatchesProviderLevel1("SomeName");
+                MatchProviderTestData.MatchProviderLevel1("SomeName", record1);
 
             // create gazetteer data to match against - add a record
             // containing a match to the location at level 2 and 3 only
@@ -131,13 +134,13 @@ namespace MultiLevelGeoCoderTests
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
-            // code 1, 2 and 3 codes added
-            Assert.AreEqual(GazetteerTestData.code1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(GazetteerTestData.name1, codedLocation.GeoCode1.Name);
-            Assert.AreEqual(GazetteerTestData.code2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(GazetteerTestData.name2, codedLocation.GeoCode2.Name);
-            Assert.AreEqual(GazetteerTestData.code3, codedLocation.GeoCode3.Code);
-            Assert.AreEqual(GazetteerTestData.name3, codedLocation.GeoCode3.Name);
+            // code 1, 2 and 3 codes added          
+            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
+            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(record1.ID_2, codedLocation.GeoCode2.Code);
+            Assert.AreEqual(record1.NAME_2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(record1.ID_3, codedLocation.GeoCode3.Code);
+            Assert.AreEqual(record1.NAME_3, codedLocation.GeoCode3.Name);
         }
 
         #endregion Methods
