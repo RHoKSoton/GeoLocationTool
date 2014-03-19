@@ -1,4 +1,4 @@
-﻿// INearMatchesProvider.cs
+﻿// IMatchProvider.cs
 
 namespace MultiLevelGeoCoder.DataAccess
 {
@@ -8,6 +8,12 @@ namespace MultiLevelGeoCoder.DataAccess
     public interface IMatchProvider
     {
         #region Methods
+
+        IEnumerable<Level1Match> GetAllLevel1();
+
+        IEnumerable<Level2Match> GetAllLevel2();
+
+        IEnumerable<Level3Match> GetAllLevel3();
 
         IEnumerable<Level1Match> GetMatches(string nearMatch);
 

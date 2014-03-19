@@ -14,20 +14,20 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        // columns to contain the codes
-        private const string Level1CodeColumnName = "Code 1";
-        private const string Level2CodeColumnName = "Code 2";
-        private const string Level3CodeColumnName = "Code 3";
-
-        // columns to contain the matched names used to find the codes
-        private const string Level1MatchedColumnName = "Name 1";
-        private const string Level2MatchedColumnName = "Name 2";
-        private const string Level3MatchedColumnName = "Name 3";
-
         // default column names
         private const string DefaultLevel1ColumnName = "Admin2";
         private const string DefaultLevel2ColumnName = "Admin3";
         private const string DefaultLevel3ColumnName = "Admin4";
+
+        // columns to contain the codes
+        private const string Level1CodeColumnName = "Code 1";
+
+        // columns to contain the matched names used to find the codes
+        private const string Level1MatchedColumnName = "Name 1";
+        private const string Level2CodeColumnName = "Code 2";
+        private const string Level2MatchedColumnName = "Name 2";
+        private const string Level3CodeColumnName = "Code 3";
+        private const string Level3MatchedColumnName = "Name 3";
 
         #endregion Fields
 
@@ -93,9 +93,11 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="locationCodes">The location codes.</param>
         public void AddLocationCodes(LocationCodes locationCodes)
         {
+            const bool useCache = true;
+            locationCodes.RefreshMatchedNamesCache();
             foreach (DataRow dataRow in Data.Rows)
             {
-                CodedLocation codedLocation = FindCodes(locationCodes, dataRow);
+                CodedLocation codedLocation = FindCodes(locationCodes, dataRow, useCache);
                 ClearExistingCodes(dataRow);
                 AddCodes(codedLocation, dataRow);
             }
@@ -260,7 +262,10 @@ namespace MultiLevelGeoCoder.Logic
             dataRow[Level3MatchedColumnName] = null;
         }
 
-        private CodedLocation FindCodes(LocationCodes gazetteer, DataRow dataRow)
+        private CodedLocation FindCodes(
+            LocationCodes locationCodes,
+            DataRow dataRow,
+            bool useCache)
         {
             //create location, use the original name
             Location location = new Location();
@@ -272,7 +277,7 @@ namespace MultiLevelGeoCoder.Logic
                 dataRow[ColumnNames.Level3].ToString();
 
             // get codes
-            CodedLocation codedLocation = gazetteer.GetCodes(location);
+            CodedLocation codedLocation = locationCodes.GetCodes(location, useCache);
             return codedLocation;
         }
 

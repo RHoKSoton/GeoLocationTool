@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="DataAccess\IMatchProvider.cs" />
     <Compile Include="DataAccess\FileImport.cs" />
+    <Compile Include="Logic\MatchedNamesCache.cs" />
     <Compile Include="Model\GazetteerColumnsMapping.cs" />
     <Compile Include="DataAccess\MatchProvider.cs" />
     <Compile Include="IGeoCoder.cs" />

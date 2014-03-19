@@ -17,13 +17,16 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
+        public static bool useDictionaries = true;
+
         private readonly IEnumerable<Gadm> gazzetteerData;
+        private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
+
         private Dictionary<string, GeoCode> level1Dictionary = null;
         private Dictionary<string, GeoCode> level2Dictionary = null;
         private Dictionary<string, GeoCode> level3Dictionary = null;
-        public static bool useDictionaries = true;
-        
+
         #endregion Fields
 
         #region Constructors
@@ -34,6 +37,7 @@ namespace MultiLevelGeoCoder.Logic
         {
             this.gazzetteerData = gazzetteerData;
             this.matchProvider = matchProvider;
+            matchedNamesCache = new MatchedNamesCache(matchProvider);
             InitializeDictionaries();
         }
 
@@ -45,22 +49,46 @@ namespace MultiLevelGeoCoder.Logic
         /// Gets the location codes.
         /// </summary>
         /// <param name="location">The location.</param>
+        /// <param name="useCache">Uses the cache of matched names if true</param>
         /// <returns>The location with the codes</returns>
-        public CodedLocation GetCodes(Location location)
+        public CodedLocation GetCodes(Location location, bool useCache = false)
         {
             CodedLocation codedLocation = new CodedLocation(location);
 
-            codedLocation.GeoCode1 = GetLevel1Code(location);
+            codedLocation.GeoCode1 = GetLevel1Code(location, useCache);
             if (codedLocation.GeoCode1 != null)
             {
-                codedLocation.GeoCode2 = GetLevel2Code(location);
+                codedLocation.GeoCode2 = GetLevel2Code(location, useCache);
                 if (codedLocation.GeoCode2 != null)
                 {
-                    codedLocation.GeoCode3 = GetLevel3Code(location);
+                    codedLocation.GeoCode3 = GetLevel3Code(location, useCache);
                 }
             }
 
             return codedLocation;
+        }
+
+        public void RefreshMatchedNamesCache()
+        {
+            matchedNamesCache.Refresh();
+        }
+
+        private GeoCode GetLevel1Code(Location location, bool useCache)
+        {
+            return Level1UsingMatchedName(location, useCache) ??
+                   Level1UsingGazetteer(location);
+        }
+
+        private GeoCode GetLevel2Code(Location location, bool useCache)
+        {
+            return Level2UsingMatchedName(location, useCache) ??
+                   Level2UsingGazetteer(location);
+        }
+
+        private GeoCode GetLevel3Code(Location location, bool useCache)
+        {
+            return Level3UsingMatchedName(location, useCache) ??
+                   Level3UsingGazetteer(location);
         }
 
         private void InitializeDictionaries()
@@ -83,24 +111,6 @@ namespace MultiLevelGeoCoder.Logic
                 if (!level3Dictionary.ContainsKey(level3key))
                     level3Dictionary.Add(level3key, new GeoCode(gadm.ID_3, gadm.NAME_3));
             }
-        }
-
-        private GeoCode GetLevel1Code(Location location)
-        {
-            return Level1UsingMatchedName(location) ??
-                   Level1UsingGazetteer(location);
-        }
-
-        private GeoCode GetLevel2Code(Location location)
-        {
-            return Level2UsingMatchedName(location) ??
-                   Level2UsingGazetteer(location);
-        }
-
-        private GeoCode GetLevel3Code(Location location)
-        {
-            return Level3UsingMatchedName(location) ??
-                   Level3UsingGazetteer(location);
         }
 
         private GeoCode Level1UsingGazetteer(Location location)
@@ -136,7 +146,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level1UsingMatchedName(Location location)
+        private GeoCode Level1UsingMatchedName(Location location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name1))
             {
@@ -144,12 +154,22 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             GeoCode record = null;
+
             // get the matched name and try again
-            IEnumerable<Level1Match> matches =
-                matchProvider.GetMatches(location.Name1);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name possibility in the database
-            Level1Match match = matches.FirstOrDefault();
+            Level1Match match;
+            if (useCache)
+            {
+                match = matchedNamesCache.Level1Match(location.Name1);
+            }
+            else
+            {
+                IEnumerable<Level1Match> matches =
+                    matchProvider.GetMatches(location.Name1);
+                //  note there should only ever be one actual name for the given alt name
+                // todo we need to ensure that there is only one name possibility in the database
+                match = matches.FirstOrDefault();
+            }
+
             if (match != null)
             {
                 // try with the matched name
@@ -171,7 +191,9 @@ namespace MultiLevelGeoCoder.Logic
 
             if (useDictionaries)
             {
-                level2Dictionary.TryGetValue(location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower(), out geoCode);
+                level2Dictionary.TryGetValue(
+                    location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower(),
+                    out geoCode);
                 return geoCode;
             }
 
@@ -196,7 +218,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level2UsingMatchedName(Location location)
+        private GeoCode Level2UsingMatchedName(Location location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name2))
             {
@@ -204,12 +226,22 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             GeoCode record = null;
+
             // get the matched name and try again
-            IEnumerable<Level2Match> nearMatches =
-                matchProvider.GetMatches(location.Name2, location.Name1);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
-            Level2Match match = nearMatches.FirstOrDefault();
+            Level2Match match;
+            if (useCache)
+            {
+                match = matchedNamesCache.Level2Match(location.Name1, location.Name2);
+            }
+            else
+            {
+                IEnumerable<Level2Match> nearMatches =
+                    matchProvider.GetMatches(location.Name2, location.Name1);
+                //  note there should only ever be one actual name for the given alt name
+                // todo we need to ensure that there is only one name posibility in the database
+                match = nearMatches.FirstOrDefault();
+            }
+
             if (match != null)
             {
                 // try with the matched name
@@ -230,7 +262,10 @@ namespace MultiLevelGeoCoder.Logic
 
             if (useDictionaries)
             {
-                level3Dictionary.TryGetValue(location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower() + location.Name3.Trim().ToLower(), out geoCode);
+                level3Dictionary.TryGetValue(
+                    location.Name1.Trim().ToLower() + location.Name2.Trim().ToLower() +
+                    location.Name3.Trim().ToLower(),
+                    out geoCode);
                 return geoCode;
             }
             // must match all three levels
@@ -258,7 +293,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level3UsingMatchedName(Location location)
+        private GeoCode Level3UsingMatchedName(Location location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name3))
             {
@@ -268,14 +303,26 @@ namespace MultiLevelGeoCoder.Logic
             GeoCode record = null;
 
             // get the matched name and try again
-            IEnumerable<Level3Match> nearMatches =
-                matchProvider.GetMatches(
-                    location.Name3,
+            Level3Match match;
+            if (useCache)
+            {
+                match = matchedNamesCache.Level3Match(
                     location.Name1,
-                    location.Name2);
-            //  note there should only ever be one actual name for the given alt name
-            // todo we need to ensure that there is only one name posibility in the database
-            Level3Match match = nearMatches.FirstOrDefault();
+                    location.Name2,
+                    location.Name3);
+            }
+            else
+            {
+                IEnumerable<Level3Match> nearMatches =
+                    matchProvider.GetMatches(
+                        location.Name3,
+                        location.Name1,
+                        location.Name2);
+                //  note there should only ever be one actual name for the given alt name
+                // todo we need to ensure that there is only one name posibility in the database
+                match = nearMatches.FirstOrDefault();
+            }
+
             if (match != null)
             {
                 // try with the matched name

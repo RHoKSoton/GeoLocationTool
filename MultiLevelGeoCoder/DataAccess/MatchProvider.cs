@@ -1,4 +1,4 @@
-﻿// NearMatchesProvider.cs
+﻿// MatchProvider.cs
 
 namespace MultiLevelGeoCoder.DataAccess
 {
@@ -10,7 +10,7 @@ namespace MultiLevelGeoCoder.DataAccess
     using Model;
 
     /// <summary>
-    /// Get or save Matches. A Match being where the user has specified an 
+    /// Get or save matched names. A match being where the user has specified an 
     /// alternative name that will be used in the input instead 
     /// of a particular name in the gazetteer 
     /// </summary>
@@ -32,6 +32,27 @@ namespace MultiLevelGeoCoder.DataAccess
         #endregion Properties
 
         #region Methods
+
+        public IEnumerable<Level1Match> GetAllLevel1()
+        {
+            return SqlConnection.Query<Level1Match>(
+                @"SELECT * FROM Level1Matches"
+                );
+        }
+
+        public IEnumerable<Level2Match> GetAllLevel2()
+        {
+            return SqlConnection.Query<Level2Match>(
+                @"SELECT * FROM Level2Matches"
+                );
+        }
+
+        public IEnumerable<Level3Match> GetAllLevel3()
+        {
+            return SqlConnection.Query<Level3Match>(
+                @"SELECT * FROM Level3Matches"
+                );
+        }
 
         public IEnumerable<Level1Match> GetMatches(string alternateName)
         {
