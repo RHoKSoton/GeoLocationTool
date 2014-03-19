@@ -28,6 +28,9 @@ namespace MultiLevelGeoCoder
         /// <returns>List of column names</returns>
         IList<string> AllInputColumnNames();
 
+        /// <summary>
+        /// Codes all rows of the input data.
+        /// </summary>
         void CodeAll();
 
         /// <summary>
@@ -47,8 +50,8 @@ namespace MultiLevelGeoCoder
         /// <summary>
         /// Provides suggested name matches using fuzzy matching
         /// </summary>
-        /// <returns>Fuzzy Matcher</returns>
-        FuzzyMatch FuzzyMatcher();
+        /// <returns>Fuzzy Match</returns>
+        FuzzyMatch FuzzyMatch();
 
         /// <summary>
         /// Gets the geo codes for the given location.
@@ -87,6 +90,8 @@ namespace MultiLevelGeoCoder
         /// <param name="columnNames">The column names.</param>
         void SetGazetteerColumns(GazetteerColumnNames columnNames, bool saveSelection = true);
 
+        //todo remove the  version with the save selection parameter from the public api as this is only for the tests
+        
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
         /// </summary>

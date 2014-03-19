@@ -73,7 +73,7 @@ namespace MultiLevelGeoCoder
 
         public void CodeAll()
         {
-            inputData.AddLocationCodes(locationCodes);
+            inputData.CodeAll(locationCodes);
         }
 
         public InputColumnNames CodeColumnNames()
@@ -115,7 +115,7 @@ namespace MultiLevelGeoCoder
         /// Provides suggested name matches using fuzzy matching
         /// </summary>
         /// <returns>Fuzzy Matcher</returns>
-        public FuzzyMatch FuzzyMatcher()
+        public FuzzyMatch FuzzyMatch()
         {
             return new FuzzyMatch(locationNames);
         }

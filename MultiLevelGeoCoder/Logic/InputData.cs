@@ -91,7 +91,7 @@ namespace MultiLevelGeoCoder.Logic
         /// Adds the codes and the names used to find those codes, to the input data.
         /// </summary>
         /// <param name="locationCodes">The location codes.</param>
-        public void AddLocationCodes(LocationCodes locationCodes)
+        public void CodeAll(LocationCodes locationCodes)
         {
             const bool useCache = true;
             locationCodes.RefreshMatchedNamesCache();

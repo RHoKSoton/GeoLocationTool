@@ -32,7 +32,7 @@ namespace GeoLocationTool.UI
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
-            fuzzyMatch = geoCoder.FuzzyMatcher();
+            fuzzyMatch = geoCoder.FuzzyMatch();
             matches = new MatchProvider(Program.Connection);
         }
 
