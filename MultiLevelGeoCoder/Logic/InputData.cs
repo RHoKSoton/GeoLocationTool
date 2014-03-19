@@ -13,6 +13,8 @@ namespace MultiLevelGeoCoder.Logic
     internal class InputData
     {
         #region Fields
+        // Use the cache when coding all the rows
+        public static bool UseMatchedNamesCache = true; // for performance testing
 
         // default column names
         private const string DefaultLevel1ColumnName = "Admin2";
@@ -93,11 +95,10 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="locationCodes">The location codes.</param>
         public void CodeAll(LocationCodes locationCodes)
         {
-            const bool useCache = true;
             locationCodes.RefreshMatchedNamesCache();
             foreach (DataRow dataRow in Data.Rows)
             {
-                CodedLocation codedLocation = FindCodes(locationCodes, dataRow, useCache);
+                CodedLocation codedLocation = FindCodes(locationCodes, dataRow, UseMatchedNamesCache);
                 ClearExistingCodes(dataRow);
                 AddCodes(codedLocation, dataRow);
             }

@@ -17,7 +17,7 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        public static bool useDictionaries = true;
+        public static bool useDictionaries = true; // for performance testing
 
         private readonly IEnumerable<Gadm> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;

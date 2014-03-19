@@ -1,5 +1,4 @@
 ﻿// GeoCoderPerfsTests.cs
-
 namespace MultiLevelGeoCoderTests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -46,10 +45,6 @@ namespace MultiLevelGeoCoderTests
             return inputFileLocation;
         }
 
-        /// <summary>
-        /// Perfs tests
-        /// </summary>
-        
         // Example results
         // Assumption : there are much more exact match than there are saved matches
         // All values are time in seconds (using dictionares vs no dictionary)
@@ -67,10 +62,19 @@ namespace MultiLevelGeoCoderTests
 
         //From 500 to 2000 lines : can be from 370 to 500 times faster if using dictionaries and looking first in Gazetteer
 
+        // Using matched names cache v not using cache (looking first in MatchedNames)
+        // with a GeoLocationToolTest.sdf file containing 9 level3 entries, 1 level1 entry and 1 level2 entry
+        // 500 input lines: 0.0320834 vs 0.6627464
+        // 1000 input lines: 0.0174101 vs 1.3510093
+        // 2000 input lines: 0.0992199 vs 2.6536493
+        // 100000 input lines: 1.0631592 vs 120.1221388
+
         [TestMethod]
         [Ignore]
         public void GeoCoder_PerfsTests()
         {
+            // This test creates an empty GeoLocationToolTest.sdf file from which to load the cache
+            // To use a file containing entries, manually create and copy the file
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
             GeoCoder geoCoder = new GeoCoder(connection);
@@ -97,10 +101,12 @@ namespace MultiLevelGeoCoderTests
                 geoCoder.CodeAll();
                 var elapsed = watch.Elapsed.TotalSeconds;
                 LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
+                InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
                 watch.Restart();
                 geoCoder.CodeAll();
                 Debug.WriteLine(linesCount + " input lines: " + elapsed + " vs " + watch.Elapsed.TotalSeconds);
                 LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
+                InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
 
                 foreach (var row in geoCoder.InputData.AsEnumerable())
                 {
