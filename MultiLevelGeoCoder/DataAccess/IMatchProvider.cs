@@ -24,11 +24,11 @@ namespace MultiLevelGeoCoder.DataAccess
             string level1,
             string level2);
 
-        void SaveMatchLevel1(string input, string level1);
+        void SaveMatchLevel1(string alternateName, string level1);
 
         void SaveMatchLevel2(string alternateName, string level1, string level2);
 
-        void SaveMatchLevel3(string input, string level1, string level2, string level3);
+        void SaveMatchLevel3(string alternateName, string level1, string level2, string level3);
 
         #endregion Methods
     }
