@@ -19,6 +19,9 @@ namespace MultiLevelGeoCoder.Logic
 
         public static bool useDictionaries = true; // for performance testing
 
+        //todo remove after testing
+        public static bool UseGazetteerFirst = true; // for testing
+
         private readonly IEnumerable<Gadm> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
@@ -75,18 +78,36 @@ namespace MultiLevelGeoCoder.Logic
 
         private GeoCode GetLevel1Code(Location location, bool useCache)
         {
+            if (UseGazetteerFirst)
+            {
+                return Level1UsingGazetteer(location) ??
+                       Level1UsingMatchedName(location, useCache);
+            }
+
             return Level1UsingMatchedName(location, useCache) ??
                    Level1UsingGazetteer(location);
         }
 
         private GeoCode GetLevel2Code(Location location, bool useCache)
         {
+            if (UseGazetteerFirst)
+            {
+                return
+                    Level2UsingGazetteer(location) ??
+                    Level2UsingMatchedName(location, useCache);
+            }
+
             return Level2UsingMatchedName(location, useCache) ??
                    Level2UsingGazetteer(location);
         }
 
         private GeoCode GetLevel3Code(Location location, bool useCache)
         {
+            if (UseGazetteerFirst)
+            {
+                return Level3UsingGazetteer(location) ??
+                       Level3UsingMatchedName(location, useCache);
+            }
             return Level3UsingMatchedName(location, useCache) ??
                    Level3UsingGazetteer(location);
         }
