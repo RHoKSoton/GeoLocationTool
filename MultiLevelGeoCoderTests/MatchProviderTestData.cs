@@ -3,6 +3,7 @@
 namespace MultiLevelGeoCoderTests
 {
     using System.Collections.Generic;
+    using System.Linq;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
     using MultiLevelGeoCoder.Model;
@@ -109,6 +110,13 @@ namespace MultiLevelGeoCoderTests
 
         public void AddLevel1(string[] match, string[] actual)
         {
+            // todo refactor the Match Provider to seperate the logic from the data access
+            // todo remove this logic from the test
+            var matched = level1Matches.FirstOrDefault(x => x.AltLevel1 == match[0]);
+            if (matched !=null)
+            {
+                level1Matches.Remove(matched);
+            }
             Level1Match level1Match = new Level1Match();
             level1Match.Level1 = actual[0];
             level1Match.AltLevel1 = match[0];
