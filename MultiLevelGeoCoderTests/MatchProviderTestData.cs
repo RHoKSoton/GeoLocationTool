@@ -9,10 +9,18 @@ namespace MultiLevelGeoCoderTests
     using Rhino.Mocks;
 
     /// <summary>
-    /// Provided Near Match Provider stubs returning gazetteer test data
+    /// Provides Match Provider stubs containing name matches
     /// </summary>
-    internal static class MatchProviderTestData
+    internal class MatchProviderTestData
     {
+        #region Fields
+
+        private readonly List<Level1Match> level1Matches = new List<Level1Match>();
+        private readonly List<Level2Match> level2Matches = new List<Level2Match>();
+        private readonly List<Level3Match> level3Matches = new List<Level3Match>();
+
+        #endregion Fields
+
         #region Methods
 
         public static IMatchProvider MatchProviderLevel1(string matchedName, Gadm gadm)
@@ -99,6 +107,49 @@ namespace MultiLevelGeoCoderTests
             return matchStub;
         }
 
+        public void AddLevel1(string[] match, string[] actual)
+        {
+            Level1Match level1Match = new Level1Match();
+            level1Match.Level1 = actual[0];
+            level1Match.AltLevel1 = match[0];
+            level1Matches.Add(level1Match);
+        }
+
+        public void AddLevel2(string[] match, string[] actual)
+        {
+            Level2Match level2Match = new Level2Match();
+            level2Match.Level1 = actual[0];
+            level2Match.Level2 = actual[1];
+            level2Match.AltLevel2 = match[1];
+            level2Matches.Add(level2Match);
+        }
+
+        public void AddLevel3(string[] match, string[] actual)
+        {
+            Level3Match level3Match = new Level3Match();
+            level3Match.Level1 = actual[0];
+            level3Match.Level2 = actual[1];
+            level3Match.Level3 = actual[2];
+            level3Match.AltLevel3 = match[2];
+            level3Matches.Add(level3Match);
+        }
+
+        public IMatchProvider Data()
+        {
+            IMatchProvider matchStub =
+                MockRepository.GenerateStub<IMatchProvider>();
+            matchStub.Stub(x => x.GetAllLevel1())
+                .Return(AllLevel1());
+            matchStub.Stub(
+                x => x.GetAllLevel2())
+                .Return(AllLevel2());
+            matchStub.Stub(
+                x =>
+                    x.GetAllLevel3())
+                .Return(AllLevel3());
+            return matchStub;
+        }
+
         private static IEnumerable<Level1Match> Level1List(Gadm gadm, string matchedName)
         {
             List<Level1Match> list = new List<Level1Match>();
@@ -133,6 +184,21 @@ namespace MultiLevelGeoCoderTests
             list.Add(record);
 
             return list;
+        }
+
+        private IEnumerable<Level1Match> AllLevel1()
+        {
+            return level1Matches;
+        }
+
+        private IEnumerable<Level2Match> AllLevel2()
+        {
+            return level2Matches;
+        }
+
+        private IEnumerable<Level3Match> AllLevel3()
+        {
+            return level3Matches;
         }
 
         #endregion Methods

@@ -18,7 +18,7 @@ namespace MultiLevelGeoCoder
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMappingProvider;
-        private readonly IMatchProvider matchProvider;
+        private IMatchProvider matchProvider;
 
         private GazetteerData gazetteerData;
         private string gazetteerFileName;
@@ -168,10 +168,20 @@ namespace MultiLevelGeoCoder
             gazetteerFileName = path;
         }
 
+        internal void SetGazetteerData(DataTable dt)
+        {
+            gazetteerData = new GazetteerData(dt);
+        }
+
         public void LoadInputFileCsv(string path)
         {
             const bool isFirstRowHeader = true;
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
+            inputData = new InputData(dt);
+        }
+
+        internal void SetInputData(DataTable dt)
+        {
             inputData = new InputData(dt);
         }
 
@@ -259,5 +269,10 @@ namespace MultiLevelGeoCoder
         }
 
         #endregion Methods
+
+        internal void SetMatchProvider(IMatchProvider provider)
+        {
+            matchProvider = provider;
+        }
     }
 }

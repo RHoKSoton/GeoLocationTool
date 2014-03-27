@@ -3,12 +3,13 @@
 namespace MultiLevelGeoCoderTests
 {
     using System.Collections.Generic;
+    using System.Data;
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
     /// Provides gazetteer test data
     /// </summary>
-    internal static class GazetteerTestData
+    internal class GazetteerTestData
     {
         #region Fields
 
@@ -22,6 +23,9 @@ namespace MultiLevelGeoCoderTests
         private static readonly GeoCode P2V2 = new GeoCode("300", "V2");
         private static readonly GeoCode P2V3 = new GeoCode("400", "V3");
 
+        private readonly List<KeyValuePair<string[], string[]>> lines2 =
+            new List<KeyValuePair<string[], string[]>>();
+
         #endregion Fields
 
         #region Methods
@@ -31,6 +35,33 @@ namespace MultiLevelGeoCoderTests
             List<Gadm> gadmList = new List<Gadm>();
             gadmList.Add(gadmRecord);
             return gadmList;
+        }
+
+        public void AddLine(string[] names, string[] codes)
+        {
+            lines2.Add(new KeyValuePair<string[], string[]>(names, codes));
+        }
+
+        public DataTable Data(GazetteerColumnNames gazetteerColumnNames)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(gazetteerColumnNames.Level1Name);
+            dt.Columns.Add(gazetteerColumnNames.Level2Name);
+            dt.Columns.Add(gazetteerColumnNames.Level3Name);
+            dt.Columns.Add(gazetteerColumnNames.Level1Code);
+            dt.Columns.Add(gazetteerColumnNames.Level2Code);
+            dt.Columns.Add(gazetteerColumnNames.Level3Code);
+
+            foreach (var line in lines2)
+            {
+                object[] values =
+                {
+                    line.Key[0], line.Key[1], line.Key[2],
+                    line.Value[0], line.Value[1], line.Value[2]
+                };
+                dt.LoadDataRow(values, true);
+            }
+            return dt;
         }
 
         internal static Gadm Record1()
