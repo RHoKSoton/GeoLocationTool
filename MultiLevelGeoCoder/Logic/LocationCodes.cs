@@ -20,7 +20,7 @@ namespace MultiLevelGeoCoder.Logic
         public static bool useDictionaries = true; // for performance testing
 
         //todo remove after testing
-        public static bool UseGazetteerFirst = true; // for testing
+        public static bool UseGazetteerFirst = false; // for testing
 
         private readonly IEnumerable<Gadm> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
