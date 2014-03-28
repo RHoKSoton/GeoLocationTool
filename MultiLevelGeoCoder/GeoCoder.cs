@@ -6,6 +6,7 @@ namespace MultiLevelGeoCoder
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
+    using System.Linq;
     using DataAccess;
     using Logic;
     using Model;
@@ -18,13 +19,13 @@ namespace MultiLevelGeoCoder
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMappingProvider;
-        private IMatchProvider matchProvider;
 
         private GazetteerData gazetteerData;
         private string gazetteerFileName;
         private InputData inputData;
         private LocationCodes locationCodes;
         private LocationNames locationNames;
+        private IMatchProvider matchProvider;
 
         #endregion Fields
 
@@ -131,6 +132,75 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
+        /// The saved match for the given level 1 name, if any
+        /// </summary>
+        /// <param name="level1">The level 1.</param>
+        /// <returns>
+        /// The saved match
+        /// </returns>
+        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel1(string level1)
+        {
+            //todo change return type to single result
+
+            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            Level1Match match = matchProvider.GetMatches(level1).FirstOrDefault();
+            if (match != null)
+            {
+                result.Add(new FuzzyMatchResult(match.Level1, match.Weight));
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// The saved match for the given level 2 name, if any
+        /// </summary>
+        /// <param name="level2">The level 2.</param>
+        /// <param name="level1">The level 1.</param>
+        /// <returns>
+        /// The saved match
+        /// </returns>
+        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel2(
+            string level2,
+            string level1)
+        {
+            // todo change return type to single result
+
+            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            Level2Match match = matchProvider.GetMatches(level2, level1).FirstOrDefault();
+            if (match != null)
+            {
+                result.Add(new FuzzyMatchResult(match.Level2, match.Weight));
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// The saved match for the given level 3 name, if any
+        /// </summary>
+        /// <param name="level3">The level 3.</param>
+        /// <param name="level1">The level 1.</param>
+        /// <param name="level2">The level 2.</param>
+        /// <returns>
+        /// The saved match
+        /// </returns>
+        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel3(
+            string level3,
+            string level1,
+            string level2)
+        {
+            // todo change return type to single result
+
+            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            Level3Match match =
+                matchProvider.GetMatches(level3, level1, level2).FirstOrDefault();
+            if (match != null)
+            {
+                result.Add(new FuzzyMatchResult(match.Level3, match.Weight));
+            }
+            return result;
+        }
+
+        /// <summary>
         /// The names of the columns that contain the data to be matched.
         /// </summary>
         /// <returns></returns>
@@ -168,20 +238,10 @@ namespace MultiLevelGeoCoder
             gazetteerFileName = path;
         }
 
-        internal void SetGazetteerData(DataTable dt)
-        {
-            gazetteerData = new GazetteerData(dt);
-        }
-
         public void LoadInputFileCsv(string path)
         {
             const bool isFirstRowHeader = true;
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
-            inputData = new InputData(dt);
-        }
-
-        internal void SetInputData(DataTable dt)
-        {
             inputData = new InputData(dt);
         }
 
@@ -192,12 +252,54 @@ namespace MultiLevelGeoCoder
             inputData = new InputData(dt);
         }
 
-        public void SaveNearMatch()
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns></returns>
+        public InputColumnNames MatchColumnNames()
         {
-            throw new NotImplementedException();
-            // Save to the database
-            // refresh the code list
-            // GeoCodes.RefreshAltCodeList();
+            return inputData.MatchColumnNames();
+        }
+
+        /// <summary>
+        /// Saves the matched level 1 name that corresponds to the given alternate name.
+        /// </summary>
+        /// <param name="alternateLevel1">The alternate level 1 name.</param>
+        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
+        public void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1)
+        {
+            matchProvider.SaveMatchLevel1(alternateLevel1, gazetteerLevel1);
+        }
+
+        public void SaveMatchLevel2(
+            string alternateLevel2,
+            string gazetteerLevel1,
+            string gazetteerLevel2)
+        {
+            matchProvider.SaveMatchLevel2(
+                alternateLevel2,
+                gazetteerLevel1,
+                gazetteerLevel2);
+        }
+
+        /// <summary>
+        /// Saves the level 3 name that corresponds to the given alternate name.
+        /// </summary>
+        /// <param name="alternateLevel3">The alternate level 3 name.</param>
+        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
+        /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
+        /// <param name="gazetteerLevel3">The gazetteer level 3 name.</param>
+        public void SaveMatchLevel3(
+            string alternateLevel3,
+            string gazetteerLevel1,
+            string gazetteerLevel2,
+            string gazetteerLevel3)
+        {
+            matchProvider.SaveMatchLevel3(
+                alternateLevel3,
+                gazetteerLevel1,
+                gazetteerLevel2,
+                gazetteerLevel3);
         }
 
         public void SaveOutputFile()
@@ -215,7 +317,9 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
-        public void SetGazetteerColumns(GazetteerColumnNames columnNames, bool saveSelection = true)
+        public void SetGazetteerColumns(
+            GazetteerColumnNames columnNames,
+            bool saveSelection = true)
         {
             gazetteerData.ColumnNames = columnNames;
             locationCodes = new LocationCodes(gazetteerData.LocationList, matchProvider);
@@ -239,13 +343,19 @@ namespace MultiLevelGeoCoder
             return inputData.GetUnCodedRecords();
         }
 
-        /// <summary>
-        /// The names of the columns that contain the matched names used to find the codes.
-        /// </summary>
-        /// <returns></returns>
-        public InputColumnNames MatchColumnNames()
+        internal void SetGazetteerData(DataTable dt)
         {
-            return inputData.MatchColumnNames();
+            gazetteerData = new GazetteerData(dt);
+        }
+
+        internal void SetInputData(DataTable dt)
+        {
+            inputData = new InputData(dt);
+        }
+
+        internal void SetMatchProvider(IMatchProvider provider)
+        {
+            matchProvider = provider;
         }
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)
@@ -269,10 +379,5 @@ namespace MultiLevelGeoCoder
         }
 
         #endregion Methods
-
-        internal void SetMatchProvider(IMatchProvider provider)
-        {
-            matchProvider = provider;
-        }
     }
 }

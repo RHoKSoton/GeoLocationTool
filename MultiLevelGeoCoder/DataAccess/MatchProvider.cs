@@ -14,7 +14,7 @@ namespace MultiLevelGeoCoder.DataAccess
     /// alternative name that will be used in the input instead 
     /// of a particular name in the gazetteer 
     /// </summary>
-    public class MatchProvider : IMatchProvider
+    internal class MatchProvider : IMatchProvider
     {
         #region Constructors
 

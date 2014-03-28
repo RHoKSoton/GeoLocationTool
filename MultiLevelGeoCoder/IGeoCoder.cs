@@ -80,7 +80,70 @@ namespace MultiLevelGeoCoder
 
         void LoadInputFileTabDelim(string path);
 
-        void SaveNearMatch();
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames MatchColumnNames();
+
+
+        /// <summary>
+        /// The saved match for the given level 1 name, if any
+        /// </summary>
+        /// <param name="level1">The level 1.</param>
+        /// <returns>The saved match</returns>
+        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel1(string level1);
+
+        /// <summary>
+        /// The saved match for the given level 2 name, if any
+        /// </summary>
+        /// <param name="level2">The level 2.</param>
+        /// <param name="level1">The level 1.</param>
+        /// <returns>The saved match</returns>
+        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel2(string level2, string level1);
+
+        /// <summary>
+        /// The saved match for the given level 3 name, if any
+        /// </summary>
+        /// <param name="level2">The level 2.</param>
+        /// <param name="level1">The level 1.</param>
+        /// <param name="level3">The level 3.</param>
+        /// <returns>The saved match</returns>
+        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel3(
+            string level3,
+            string level1,
+            string level2);
+
+        /// <summary>
+        /// Saves the matched level 1 name that corresponds to the given alternate name.
+        /// </summary>
+        /// <param name="alternateLevel1">The alternate level 1 name.</param>
+        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
+        void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1);
+
+        /// <summary>
+        /// Saves the match level 2 name that corresponds to the given alternate name.
+        /// </summary>
+        /// <param name="alternateLevel2">The alternate level 2 name.</param>
+        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
+        /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
+        void SaveMatchLevel2(
+            string alternateLevel2,
+            string gazetteerLevel1,
+            string gazetteerLevel2);
+
+        /// <summary>
+        /// Saves the level 3 name that corresponds to the given alternate name.
+        /// </summary>
+        /// <param name="alternateLevel3">The alternate level 3 name.</param>
+        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
+        /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
+        /// <param name="gazetteerLevel3">The gazetteer level 3 name.</param>
+        void SaveMatchLevel3(
+            string alternateLevel3,
+            string gazetteerLevel1,
+            string gazetteerLevel2,
+            string gazetteerLevel3);
 
         void SaveOutputFile();
 
@@ -88,10 +151,11 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
-        void SetGazetteerColumns(GazetteerColumnNames columnNames, bool saveSelection = true);
+        void SetGazetteerColumns(
+            GazetteerColumnNames columnNames,
+            bool saveSelection = true);
 
         //todo remove the  version with the save selection parameter from the public api as this is only for the tests
-        
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
         /// </summary>
@@ -99,12 +163,6 @@ namespace MultiLevelGeoCoder
         void SetInputColumns(InputColumnNames columnNames);
 
         DataView UncodedRecords();
-
-        /// <summary>
-        /// The names of the columns that contain the matched names used to find the codes.
-        /// </summary>
-        /// <returns></returns>
-        InputColumnNames MatchColumnNames();
 
         #endregion Methods
     }

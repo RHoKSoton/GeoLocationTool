@@ -7,7 +7,6 @@ namespace GeoLocationTool.UI
     using System.Linq;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
-    using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
@@ -19,9 +18,7 @@ namespace GeoLocationTool.UI
 
         private readonly FuzzyMatch fuzzyMatch;
         private readonly IGeoCoder geoCoder;
-        private readonly IMatchProvider matches;
         private bool matchInProgress;
-
         private int selectedRowIndex;
 
         #endregion Fields
@@ -33,7 +30,6 @@ namespace GeoLocationTool.UI
             InitializeComponent();
             this.geoCoder = geoCoder;
             fuzzyMatch = geoCoder.FuzzyMatch();
-            matches = new MatchProvider(Program.Connection);
         }
 
         #endregion Constructors
@@ -327,16 +323,19 @@ namespace GeoLocationTool.UI
         private void DisplayLevel1Suggestions()
         {
             string level1 = txtLevel1Original.Text;
-            var provinceNearMatches =
-                matches.GetMatches(level1)
-                    .Select(x => new FuzzyMatchResult(x.Level1, x.Weight));
+
+            // get any saved matched name
+            IEnumerable<FuzzyMatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
+                level1);
+
+            // add it to the top of the list
             cboLevel1Suggestion.DisplayMember = "DisplayText";
             // todo:  after testing don't display the coeficient
             cboLevel1Suggestion.ValueMember = "Location";
 
             cboLevel1Suggestion.DataSource =
                 ConcatWithDistinct(
-                    provinceNearMatches,
+                    savedMatch,
                     fuzzyMatch.GetLevel1Suggestions(level1))
                     .ToList();
         }
@@ -370,13 +369,15 @@ namespace GeoLocationTool.UI
                 //based on the suggested level 1 and the original level2
                 string level1 = cboLevel1Suggestion.SelectedValue.ToString();
                 string level2 = txtLevel2Original.Text.Trim();
-                var municipalityNearMatches =
-                    matches.GetMatches(level2, level1)
-                        .Select(x => new FuzzyMatchResult(x.Level2, x.Weight));
 
+                // get any saved matched name
+                IEnumerable<FuzzyMatchResult> savedMatch =
+                    geoCoder.GetSavedMatchLevel2(level2, level1);
+
+                // Add it to the top of the suggestions list
                 cboLevel2Suggestion.DataSource =
                     ConcatWithDistinct(
-                        municipalityNearMatches,
+                        savedMatch,
                         fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
 
                 cboLevel2Suggestion.DisplayMember = "DisplayText";
@@ -414,13 +415,15 @@ namespace GeoLocationTool.UI
                 string level1 = cboLevel1Suggestion.SelectedValue.ToString();
                 string level2 = cboLevel2Suggestion.SelectedValue.ToString();
                 string level3 = txtLevel3Original.Text.Trim();
-                var level3Matches =
-                    matches.GetMatches(level3, level1, level2)
-                        .Select(x => new FuzzyMatchResult(x.Level3, x.Weight));
 
+                // get any saved matched name
+                IEnumerable<FuzzyMatchResult> savedMatch =
+                    geoCoder.GetSavedMatchLevel3(level3, level1, level2);
+
+                // Add it to the top of the suggestions list
                 cboLevel3Suggestion.DataSource =
                     ConcatWithDistinct(
-                        level3Matches,
+                        savedMatch,
                         fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
 
                 cboLevel3Suggestion.DisplayMember = "DisplayText";
@@ -509,31 +512,6 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void SaveNearMatchLevel1(string originalLevel1, string level1)
-        {
-            // todo call via the geoCoder
-            matches.SaveMatchLevel1(originalLevel1, level1);
-        }
-
-        private void SaveNearMatchLevel2(
-            string originalLevel2,
-            string level1,
-            string level2)
-        {
-            // todo call via the geoCoder
-            matches.SaveMatchLevel2(originalLevel2, level1, level2);
-        }
-
-        private void SaveNearMatchLevel3(
-            string originalLevel3,
-            string level1,
-            string level2,
-            string level3)
-        {
-            // todo call via the geoCoder
-            matches.SaveMatchLevel3(originalLevel3, level1, level2, level3);
-        }
-
         private void SaveOutputFile()
         {
             geoCoder.SaveOutputFile();
@@ -550,21 +528,22 @@ namespace GeoLocationTool.UI
                 // todo any feedback for the user here?
                 return;
             }
-            SaveNearMatchLevel1(originalLevel1, level1);
+
+            geoCoder.SaveMatchLevel1(originalLevel1, level1);
 
             if (string.IsNullOrEmpty(originalLevel2))
             {
                 return;
             }
 
-            SaveNearMatchLevel2(originalLevel2, level1, level2);
+            geoCoder.SaveMatchLevel2(originalLevel2, level1, level2);
 
             if (string.IsNullOrEmpty(originalLevel3))
             {
                 return;
             }
 
-            SaveNearMatchLevel3(originalLevel3, level1, level2, level3);
+            geoCoder.SaveMatchLevel3(originalLevel3, level1, level2, level3);
         }
 
         private void SetDefaults()
