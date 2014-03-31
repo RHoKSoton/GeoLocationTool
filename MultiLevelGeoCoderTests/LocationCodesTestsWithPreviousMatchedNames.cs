@@ -109,12 +109,13 @@ namespace MultiLevelGeoCoderTests
 
         /// <summary>
         /// Given a location with level 1, 2 and 3 names 
-        /// when level 1 name is incorrect
+        /// when level 1 name is incorrect, level 2 and 3 are correct
         /// and there is a previous match for the level 1 name
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1Incorrect_AllCodesAdded()
+        public void GetLocationCodes_Level1IncorrectAndLevel2And3AreCorrect_AllCodesAdded(
+            )
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
@@ -129,6 +130,86 @@ namespace MultiLevelGeoCoderTests
 
             // saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel1(inputNames);
+
+            LocationCodes locationCodes = new LocationCodes(
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
+
+            // Act
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
+
+            // Assert
+            // code 1, 2 and 3 codes added
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
+            Assert.AreEqual(codes1[2], codedLocation.GeoCode3.Code);
+            Assert.AreEqual(names1[2], codedLocation.GeoCode3.Name);
+        }
+
+        /// <summary>
+        /// Given a location with level 1, 2 and 3 names 
+        /// when level 1 and level2 names are incorrect, level 3 is correct
+        /// and there is a previous match for the level 1 and level2 names
+        /// then level 1, 2 and 3 codes are added
+        /// </summary>
+        [TestMethod]
+        public void GetLocationCodes_Level1And2IncorrectAndLevel3Correct_AllCodesAdded()
+        {
+            // Arrange
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - level 1 miss-spelt
+            string[] inputNames = {"P1x", "T1x", "V1"};
+            Location location = new Location(
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
+
+            // saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubLevel2(inputNames);
+
+            LocationCodes locationCodes = new LocationCodes(
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
+
+            // Act
+            CodedLocation codedLocation = locationCodes.GetCodes(location);
+
+            // Assert
+            // code 1, 2 and 3 codes added
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
+            Assert.AreEqual(codes1[2], codedLocation.GeoCode3.Code);
+            Assert.AreEqual(names1[2], codedLocation.GeoCode3.Name);
+        }
+
+        /// <summary>
+        /// Given a location with level 1, 2 and 3 names 
+        /// when level 1, 2 and 3 names are incorrect
+        /// and there is a previous match for the level 1, level2 and level3 names
+        /// then level 1, 2 and 3 codes are added
+        /// </summary>
+        [TestMethod]
+        public void GetLocationCodes_Level1And2And3Incorrect_AllCodesAdded()
+        {
+            // Arrange
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - level 1 miss-spelt
+            string[] inputNames = {"P1x", "T1x", "V1x"};
+            Location location = new Location(
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
+
+            // saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubLevel3(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
                 gazetteerTestData.GadmList(),
