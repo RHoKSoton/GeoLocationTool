@@ -75,7 +75,8 @@ namespace MultiLevelGeoCoderTests
             matchProviderTestData.AddLevel2(names1, names1);
             matchProviderTestData.AddLevel3(names1, names1);
 
-            geoCoder.SetMatchProvider(matchProviderTestData.Data());
+            MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
+            geoCoder.SetMatchProvider(matchProviderStub.MatchProvider()); 
 
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 
@@ -149,8 +150,9 @@ namespace MultiLevelGeoCoderTests
             matchProviderTestData.AddLevel2(names3, names1);
             matchProviderTestData.AddLevel3(names3, names1);
 
-            geoCoder.SetMatchProvider(matchProviderTestData.Data());
-
+            MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
+            geoCoder.SetMatchProvider(matchProviderStub.MatchProvider()); 
+       
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 
             // act
@@ -226,7 +228,8 @@ namespace MultiLevelGeoCoderTests
             matchProviderTestData.AddLevel2(names3, names1);
             matchProviderTestData.AddLevel3(names3, names1);
 
-            geoCoder.SetMatchProvider(matchProviderTestData.Data());
+            MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
+            geoCoder.SetMatchProvider(matchProviderStub.MatchProvider()); 
 
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 

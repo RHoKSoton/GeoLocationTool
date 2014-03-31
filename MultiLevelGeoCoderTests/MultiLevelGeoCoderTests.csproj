@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MatchProviderStub.cs" />
     <Compile Include="GeoCoderPerfsTests.cs" />
     <Compile Include="CsvTests.cs" />
     <Compile Include="DbIntegrationTests.cs" />

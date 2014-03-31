@@ -3,7 +3,6 @@
 namespace MultiLevelGeoCoderTests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
@@ -13,6 +12,16 @@ namespace MultiLevelGeoCoderTests
     [TestClass]
     public class LocationCodesTests
     {
+        #region Fields
+
+        //correct data
+        private readonly string[] codes1 = {"1", "10", "100"};
+        private readonly string[] codes2 = {"2", "20", "200"};
+        private readonly string[] names1 = {"P1", "T1", "V1"};
+        private readonly string[] names2 = {"P2", "T2", "V2"};
+
+        #endregion Fields
+
         #region Methods
 
         /// <summary>
@@ -26,39 +35,35 @@ namespace MultiLevelGeoCoderTests
             GetLocationCodes_Leve1And2CorrectAndLevel3Incorrect_Level1And2CodeAddedOnly()
         {
             // Arrange
-            // Create location input, containing three levels,
-            // correct level 1 and 2, level 3 is incorrect (i.e. no record in the gazetteer)
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - level 3 miss-spelt
+            string[] inputNames = {"P1", "T1", "V1x"};
             Location location = new Location(
-                GazetteerTestData.Record1().NAME_1,
-                GazetteerTestData.Record1().NAME_2,
-                "SomeName");
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
-
-            // create gazetteer data to match against
-            var gazzetteerData = GazetteerTestData.TestData();
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // code 1 and 2 only are added, no level 3 code added
-            Assert.AreEqual(GazetteerTestData.Record1().ID_1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(
-                GazetteerTestData.Record1().NAME_1,
-                codedLocation.GeoCode1.Name);
-            Assert.AreEqual(GazetteerTestData.Record1().ID_2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(
-                GazetteerTestData.Record1().NAME_2,
-                codedLocation.GeoCode2.Name);
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
+
 
         /// <summary>
         /// Given a location with level 1, 2 and 3 names present
@@ -71,32 +76,30 @@ namespace MultiLevelGeoCoderTests
             GetLocationCodes_Leve1And3CorrectAndLevel2Incorrect_Level1CodeAddedOnly()
         {
             // Arrange
-            // create location input, containing correct level 1 and 3,
-            // level 2 is incorrect (i.e. not in the gazetteer)
-            Gadm record1 = GazetteerTestData.Record1();
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - level 2 miss-spelt
+            string[] inputNames = {"P1", "T1x", "V1"};
             Location location = new Location(
-                record1.NAME_1,
-                "SomeName",
-                record1.NAME_3);
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
-
-            // create gazetteer data to match against
-            var gazzetteerData = GazetteerTestData.TestData();
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             //  level 1 codes added only
-            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
             Assert.AreEqual(null, codedLocation.GeoCode2);
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
@@ -110,112 +113,104 @@ namespace MultiLevelGeoCoderTests
         public void GetLocationCodes_Level1And2And3Correct_Level1And2And3CodesAdded()
         {
             // Arrange
-            // Create location input, containing correct level 1, 2 and
-            // level 3 (i.e. all are in the gazetteer)
-            Gadm record1 = GazetteerTestData.Record1();
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - all spelt correctly
+            string[] inputNames = {"P1", "T1", "V1"};
             Location location = new Location(
-                record1.NAME_1,
-                record1.NAME_2,
-                record1.NAME_3.ToLower());
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
-
-            // create gazetteer data to match against - add a record
-            // containing a match to the location
-            var gazzetteerData = GazetteerTestData.TestData(record1);
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
-            // all codes added
-            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
-            Assert.AreEqual(record1.ID_2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(record1.NAME_2, codedLocation.GeoCode2.Name);
-            Assert.AreEqual(record1.ID_3, codedLocation.GeoCode3.Code);
-            Assert.AreEqual(record1.NAME_3, codedLocation.GeoCode3.Name);
+            // code 1, 2 and 3 codes added
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
+            Assert.AreEqual(codes1[2], codedLocation.GeoCode3.Code);
+            Assert.AreEqual(names1[2], codedLocation.GeoCode3.Name);
         }
 
         /// <summary>
         /// Given a location containing only level 1 and 2 names
-        /// when both the level 1 and 2 names are correct (case insensitive)
+        /// when both the level 1 and 2 names are correct 
         /// then the level 1 and 2 codes are added
         /// </summary>
         [TestMethod]
         public void GetLocationCodes_Level1and2Correct_Level1And2CodeAdded()
         {
             // Arrange
-            // Create location input, containing correct level 1 and 2,(i.e. in the gazetteer)
-            // no level 3 supplied
-            Gadm record1 = GazetteerTestData.Record1();
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - no level 3 supplied
+            string[] inputNames = {"P1", "T1", null};
             Location location = new Location(
-                record1.NAME_1.ToUpper(),
-                record1.NAME_2.ToLower());
+                inputNames[0],
+                inputNames[1]);
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
-
-            // create gazetteer data to match against - add a record
-            // containing a match to the location
-            var gazzetteerData = GazetteerTestData.TestData();
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // level 1 and 2 codes added, no level 3
-            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
-            Assert.AreEqual(record1.ID_2, codedLocation.GeoCode2.Code);
-            Assert.AreEqual(record1.NAME_2, codedLocation.GeoCode2.Name);
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
         /// <summary>
         /// Given a location containing only a level 1 name
-        /// when the level 1 name is correct (case insensitive)
-        /// then the level 1 code  only is added
+        /// when the level 1 name is correct 
+        /// then the level 1 code only is added
         /// </summary>
         [TestMethod]
         public void GetLocationCodes_Level1Correct_Level1CodeAdded()
         {
             // Arrange
-            // Create location input, containing correct level 1,
-            // no level 2 or 3 supplied
-            Gadm record1 = GazetteerTestData.Record1();
-            Location location = new Location(record1.NAME_1.ToLower());
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
+            // input data - no level 3 supplied
+            string[] inputNames = {"P1", null, null};
+            Location location = new Location(
+                inputNames[0]);
 
-            // create gazetteer data to match against - adds a record
-            // containing a match to the location
-            var gazzetteerData = GazetteerTestData.TestData();
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
 
             // Assert
             // level 1 code only added
-            Assert.AreEqual(record1.ID_1, codedLocation.GeoCode1.Code);
-            Assert.AreEqual(record1.NAME_1, codedLocation.GeoCode1.Name);
+            Assert.AreEqual(codes1[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(names1[0], codedLocation.GeoCode1.Name);
             Assert.AreEqual(null, codedLocation.GeoCode2);
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
@@ -230,25 +225,22 @@ namespace MultiLevelGeoCoderTests
         public void GetLocationCodes_Level1Incorrect_NoCodesAdded()
         {
             // Arrange
-            // Create location input, containing incorrect level 1 (i.e. not in the gazetteer)
-            // level  2 and 3 are correct
-            Gadm record1 = GazetteerTestData.Record1();
+            // gazetteer data - contains codes for names1 and names2
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
+
+            // input data - level 2 miss-spelt
+            string[] inputNames = {"P1x", "T1", "V1"};
             Location location = new Location(
-                "SomeName",
-                record1.NAME_2,
-                record1.NAME_3);
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
 
-            // database contains no saved records
-            IMatchProvider matchProviderWithNoRecords =
-                MatchProviderTestData.MatchProviderWithNoRecords();
-
-            // create gazetteer data to match against - add a record
-            // containing a match to the location at level 2 and 3 only
-            var gazzetteerData = GazetteerTestData.TestData();
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazzetteerData,
-                matchProviderWithNoRecords);
+                gazetteerTestData.GadmList(),
+                matchProviderStub.MatchProvider());
 
             // Act
             CodedLocation codedLocation = locationCodes.GetCodes(location);
@@ -258,6 +250,25 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(null, codedLocation.GeoCode1);
             Assert.AreEqual(null, codedLocation.GeoCode2);
             Assert.AreEqual(null, codedLocation.GeoCode3);
+        }
+
+        private GazetteerTestData GazetteerTestData()
+        {
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            gazetteerTestData.AddLine(names2, codes2);
+            return gazetteerTestData;
+        }
+
+        private MatchProviderStub MatchProviderStubEmpty(string[] inputNames)
+        {
+            // database contains no saved records
+            MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
+            MatchProviderStub matchProviderStub =
+                new MatchProviderStub(matchProviderTestData);
+            matchProviderStub.Alternate = inputNames;
+            matchProviderStub.Actual = names1;
+            return matchProviderStub;
         }
 
         #endregion Methods
