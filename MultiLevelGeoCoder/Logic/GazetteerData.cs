@@ -72,7 +72,7 @@ namespace MultiLevelGeoCoder.Logic
             DataRow row,
             string columnName)
         {
-            if (columnName != null)
+            if (!string.IsNullOrEmpty(columnName))
             {
                 Type type = gazetteerRecord.GetType();
                 PropertyInfo propertyInfo = type.GetProperty(propertyName);

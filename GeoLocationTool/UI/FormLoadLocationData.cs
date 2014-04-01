@@ -3,6 +3,7 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -120,11 +121,13 @@ namespace GeoLocationTool.UI
             cboLevel2Names.DataSource = geoCoder.AllGazetteerColumnNames();
             cboLevel3Names.DataSource = geoCoder.AllGazetteerColumnNames();
 
-            cboLevel1AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel2AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel3AltNames.DataSource = geoCoder.AllGazetteerColumnNames();
+            //optional columns so display a blank row at the top
+            IList<string> namesWithBlank = geoCoder.AllGazetteerColumnNames();
+            namesWithBlank.Insert(0,string.Empty);
+            cboLevel1AltNames.DataSource = namesWithBlank;
+            cboLevel2AltNames.DataSource = namesWithBlank;
+            cboLevel3AltNames.DataSource = namesWithBlank;
 
-            // todo set the defaults to those stored in the database
             SetDefaultNames();
         }
 
