@@ -51,11 +51,10 @@
             this.cboLevel3Names = new System.Windows.Forms.ComboBox();
             this.cboLevel3Codes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -99,7 +98,6 @@
             this.tableLayoutPanel1.Controls.Add(this.comboBox2, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.comboBox3, 5, 7);
             this.tableLayoutPanel1.Controls.Add(this.label10, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 1, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -220,7 +218,6 @@
             // cboLevel2AltNames
             // 
             this.cboLevel2AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel2AltNames.Enabled = false;
             this.cboLevel2AltNames.FormattingEnabled = true;
             this.cboLevel2AltNames.Location = new System.Drawing.Point(521, 114);
             this.cboLevel2AltNames.Name = "cboLevel2AltNames";
@@ -230,7 +227,6 @@
             // cboLevel1AltNames
             // 
             this.cboLevel1AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel1AltNames.Enabled = false;
             this.cboLevel1AltNames.FormattingEnabled = true;
             this.cboLevel1AltNames.Location = new System.Drawing.Point(521, 84);
             this.cboLevel1AltNames.Name = "cboLevel1AltNames";
@@ -305,7 +301,6 @@
             // cboLevel3AltNames
             // 
             this.cboLevel3AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLevel3AltNames.Enabled = false;
             this.cboLevel3AltNames.FormattingEnabled = true;
             this.cboLevel3AltNames.Location = new System.Drawing.Point(521, 144);
             this.cboLevel3AltNames.Name = "cboLevel3AltNames";
@@ -340,16 +335,6 @@
             this.label9.TabIndex = 61;
             this.label9.Text = "Admin 3";
             // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(202, 182);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 17);
-            this.label10.TabIndex = 75;
-            this.label10.Text = "Admin 4";
-            // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -380,16 +365,15 @@
             this.comboBox3.Size = new System.Drawing.Size(121, 24);
             this.comboBox3.TabIndex = 78;
             // 
-            // checkBox1
+            // label10
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(182, 174);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(14, 21);
-            this.checkBox1.TabIndex = 79;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(202, 182);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 17);
+            this.label10.TabIndex = 75;
+            this.label10.Text = "Admin 4";
             // 
             // FormLoadLocationData
             // 
@@ -437,6 +421,5 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

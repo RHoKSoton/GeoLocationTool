@@ -174,7 +174,7 @@ namespace GeoLocationTool.UI
             GazetteerColumnNames columnNames = new GazetteerColumnNames();
             columnNames.Level1Code = cboLevel1Codes.SelectedValue as string;
             columnNames.Level1Name = cboLevel1Names.SelectedValue as string;
-            columnNames.Level2AltName = cboLevel1AltNames.SelectedValue as string;
+            columnNames.Level1AltName = cboLevel1AltNames.SelectedValue as string;
 
             columnNames.Level2Code = cboLevel2Codes.SelectedValue as string;
             columnNames.Level2Name = cboLevel2Names.SelectedValue as string;
