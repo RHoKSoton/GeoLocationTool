@@ -120,17 +120,17 @@ namespace MultiLevelGeoCoder.Logic
 
             foreach (var gadm in gazzetteerData)
             {
-                string level1key = gadm.NAME_1.Trim().ToLower();
+                string level1key = gadm.Name1.Trim().ToLower();
                 if (!level1Dictionary.ContainsKey(level1key))
-                    level1Dictionary.Add(level1key, new GeoCode(gadm.ID_1, gadm.NAME_1));
+                    level1Dictionary.Add(level1key, new GeoCode(gadm.Id1, gadm.Name1));
 
-                string level2key = level1key + gadm.NAME_2.Trim().ToLower();
+                string level2key = level1key + gadm.Name2.Trim().ToLower();
                 if (!level2Dictionary.ContainsKey(level2key))
-                    level2Dictionary.Add(level2key, new GeoCode(gadm.ID_2, gadm.NAME_2));
+                    level2Dictionary.Add(level2key, new GeoCode(gadm.Id2, gadm.Name2));
 
-                string level3key = level2key + gadm.NAME_3.Trim().ToLower();
+                string level3key = level2key + gadm.Name3.Trim().ToLower();
                 if (!level3Dictionary.ContainsKey(level3key))
-                    level3Dictionary.Add(level3key, new GeoCode(gadm.ID_3, gadm.NAME_3));
+                    level3Dictionary.Add(level3key, new GeoCode(gadm.Id3, gadm.Name3));
             }
         }
 
@@ -153,7 +153,7 @@ namespace MultiLevelGeoCoder.Logic
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
-                        record.NAME_1,
+                        record.Name1,
                         location.Name1,
                         StringComparison.OrdinalIgnoreCase))
                 select record;
@@ -161,7 +161,7 @@ namespace MultiLevelGeoCoder.Logic
             Gadm firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
             {
-                geoCode = new GeoCode(firstOrDefault.ID_1, firstOrDefault.NAME_1);
+                geoCode = new GeoCode(firstOrDefault.Id1, firstOrDefault.Name1);
             }
 
             return geoCode;
@@ -222,11 +222,11 @@ namespace MultiLevelGeoCoder.Logic
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
-                        record.NAME_1,
+                        record.Name1,
                         location.Name1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
-                        record.NAME_2,
+                        record.Name2,
                         location.Name2.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
@@ -234,7 +234,7 @@ namespace MultiLevelGeoCoder.Logic
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
             {
-                geoCode = new GeoCode(firstOrDefault.ID_2, firstOrDefault.NAME_2);
+                geoCode = new GeoCode(firstOrDefault.Id2, firstOrDefault.Name2);
             }
             return geoCode;
         }
@@ -293,15 +293,15 @@ namespace MultiLevelGeoCoder.Logic
             var matchRecords = from record in gazzetteerData
                 where
                     (String.Equals(
-                        record.NAME_1,
+                        record.Name1,
                         location.Name1.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
-                        record.NAME_2,
+                        record.Name2,
                         location.Name2.Trim(),
                         StringComparison.OrdinalIgnoreCase)) &&
                     (String.Equals(
-                        record.NAME_3,
+                        record.Name3,
                         location.Name3.Trim(),
                         StringComparison.OrdinalIgnoreCase))
                 select record;
@@ -309,7 +309,7 @@ namespace MultiLevelGeoCoder.Logic
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
             {
-                geoCode = new GeoCode(firstOrDefault.ID_3, firstOrDefault.NAME_3);
+                geoCode = new GeoCode(firstOrDefault.Id3, firstOrDefault.Name3);
             }
             return geoCode;
         }

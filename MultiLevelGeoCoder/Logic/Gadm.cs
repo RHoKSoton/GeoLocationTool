@@ -7,14 +7,26 @@ namespace MultiLevelGeoCoder.Logic
     /// </summary>
     internal class Gadm
     {
-        public string ID_1 { get; set; }
-        public string NAME_1 { get; set; }
-        public string ID_2 { get; set; }
-        public string NAME_2 { get; set; }
-        public string ID_3 { get; set; }
-        public string NAME_3 { get; set; }
+        #region Properties
+
         public string AltName1 { get; set; }
+
         public string AltName2 { get; set; }
+
         public string AltName3 { get; set; }
+
+        public string Id1 { get; set; }
+
+        public string Id2 { get; set; }
+
+        public string Id3 { get; set; }
+
+        public string Name1 { get; set; }
+
+        public string Name2 { get; set; }
+
+        public string Name3 { get; set; }
+
+        #endregion Properties
     }
 }

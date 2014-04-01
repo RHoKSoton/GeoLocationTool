@@ -32,12 +32,12 @@ namespace MultiLevelGeoCoderTests
 
             //Then
             Assert.AreEqual(2, gadmList.Count);
-            Assert.AreEqual("Abra", gadmList.First().NAME_1);
-            Assert.AreEqual("Abra", gadmList.Last().NAME_1);
-            Assert.AreEqual("Manabo", gadmList.First().NAME_2);
-            Assert.AreEqual("Manabo", gadmList.Last().NAME_2);
-            Assert.AreEqual("San Jose Norte", gadmList.First().NAME_3);
-            Assert.AreEqual("San Jose Sur", gadmList.Last().NAME_3);
+            Assert.AreEqual("Abra", gadmList.First().Name1);
+            Assert.AreEqual("Abra", gadmList.Last().Name1);
+            Assert.AreEqual("Manabo", gadmList.First().Name2);
+            Assert.AreEqual("Manabo", gadmList.Last().Name2);
+            Assert.AreEqual("San Jose Norte", gadmList.First().Name3);
+            Assert.AreEqual("San Jose Sur", gadmList.Last().Name3);
         }
         [TestMethod]
         public void LoadInputCSV()

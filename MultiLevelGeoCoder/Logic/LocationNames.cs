@@ -34,7 +34,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of location names</returns>
         public IList<string> Level1LocationNames()
         {
-            var levelList = gazzetteerData.Select(l => l.NAME_1);
+            var levelList = gazzetteerData.Select(l => l.Name1);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
@@ -49,10 +49,10 @@ namespace MultiLevelGeoCoder.Logic
                 .Where(
                     n =>
                         String.Equals(
-                            n.NAME_1,
+                            n.Name1,
                             level1Name,
                             StringComparison.OrdinalIgnoreCase))
-                .Select(l => l.NAME_2);
+                .Select(l => l.Name2);
 
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
@@ -69,14 +69,14 @@ namespace MultiLevelGeoCoder.Logic
                 .Where(
                     n =>
                         String.Equals(
-                            n.NAME_1,
+                            n.Name1,
                             level1Name,
                             StringComparison.OrdinalIgnoreCase) &&
                         String.Equals(
-                            n.NAME_2,
+                            n.Name2,
                             level2Name,
                             StringComparison.OrdinalIgnoreCase))
-                .Select(l => l.NAME_3);
+                .Select(l => l.Name3);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 

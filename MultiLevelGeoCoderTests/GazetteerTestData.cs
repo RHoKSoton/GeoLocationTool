@@ -53,12 +53,12 @@ namespace MultiLevelGeoCoderTests
             foreach (var keyValuePair in lines)
             {
                 Gadm record = new Gadm();
-                record.NAME_1 = keyValuePair.Key[0];
-                record.NAME_2 = keyValuePair.Key[1];
-                record.NAME_3 = keyValuePair.Key[2];
-                record.ID_1 = keyValuePair.Value[0];
-                record.ID_2 = keyValuePair.Value[1];
-                record.ID_3 = keyValuePair.Value[2];
+                record.Name1 = keyValuePair.Key[0];
+                record.Name2 = keyValuePair.Key[1];
+                record.Name3 = keyValuePair.Key[2];
+                record.Id1 = keyValuePair.Value[0];
+                record.Id2 = keyValuePair.Value[1];
+                record.Id3 = keyValuePair.Value[2];
                 gadmList.Add(record);
             }
 

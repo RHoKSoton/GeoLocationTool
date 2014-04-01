@@ -1,4 +1,5 @@
 ﻿// GazetteerData.cs
+
 namespace MultiLevelGeoCoder.Logic
 {
     using System;
@@ -24,15 +25,9 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Properties
 
-        public GazetteerColumnNames ColumnNames
-        {
-            get; set;
-        }
+        public GazetteerColumnNames ColumnNames { get; set; }
 
-        public DataTable Data
-        {
-            get; private set;
-        }
+        public DataTable Data { get; private set; }
 
         /// <summary>
         /// Provides a location list containing just the columns in the Column Names.
@@ -71,13 +66,20 @@ namespace MultiLevelGeoCoder.Logic
             return list;
         }
 
-        private static void SetValue(Gadm gazetteerRecord, string propertyName, DataRow row, string columnName)
+        private static void SetValue(
+            Gadm gazetteerRecord,
+            string propertyName,
+            DataRow row,
+            string columnName)
         {
-            if (columnName!= null)
+            if (columnName != null)
             {
                 Type type = gazetteerRecord.GetType();
                 PropertyInfo propertyInfo = type.GetProperty(propertyName);
-                propertyInfo.SetValue(gazetteerRecord, row[columnName].ToString(), new object[] { });
+                propertyInfo.SetValue(
+                    gazetteerRecord,
+                    row[columnName].ToString(),
+                    new object[] {});
             }
         }
 
@@ -85,13 +87,13 @@ namespace MultiLevelGeoCoder.Logic
         {
             Gadm gadm = new Gadm();
 
-            SetValue(gadm, "NAME_1", row, ColumnNames.Level1Name);
-            SetValue(gadm, "NAME_2", row, ColumnNames.Level2Name);
-            SetValue(gadm, "NAME_3", row, ColumnNames.Level3Name);
+            SetValue(gadm, "Name1", row, ColumnNames.Level1Name);
+            SetValue(gadm, "Name2", row, ColumnNames.Level2Name);
+            SetValue(gadm, "Name3", row, ColumnNames.Level3Name);
 
-            SetValue(gadm, "ID_1", row, ColumnNames.Level1Code);
-            SetValue(gadm, "ID_2", row, ColumnNames.Level2Code);
-            SetValue(gadm, "ID_3", row, ColumnNames.Level3Code);
+            SetValue(gadm, "Id1", row, ColumnNames.Level1Code);
+            SetValue(gadm, "Id2", row, ColumnNames.Level2Code);
+            SetValue(gadm, "Id3", row, ColumnNames.Level3Code);
 
             SetValue(gadm, "AltName1", row, ColumnNames.Level1AltName);
             SetValue(gadm, "AltName2", row, ColumnNames.Level2AltName);
