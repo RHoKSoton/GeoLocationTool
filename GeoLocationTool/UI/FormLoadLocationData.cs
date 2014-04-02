@@ -122,11 +122,17 @@ namespace GeoLocationTool.UI
             cboLevel3Names.DataSource = geoCoder.AllGazetteerColumnNames();
 
             //optional columns so display a blank row at the top
-            IList<string> namesWithBlank = geoCoder.AllGazetteerColumnNames();
-            namesWithBlank.Insert(0,string.Empty);
-            cboLevel1AltNames.DataSource = namesWithBlank;
-            cboLevel2AltNames.DataSource = namesWithBlank;
-            cboLevel3AltNames.DataSource = namesWithBlank;
+            IList<string> columnNames1 = geoCoder.AllGazetteerColumnNames();
+            columnNames1.Insert(0,string.Empty);
+            cboLevel1AltNames.DataSource = columnNames1;
+
+            IList<string> columnNames2 = geoCoder.AllGazetteerColumnNames();
+            columnNames2.Insert(0, string.Empty);
+            cboLevel2AltNames.DataSource = columnNames2;
+
+            IList<string> columnNames3 = geoCoder.AllGazetteerColumnNames();
+            columnNames3.Insert(0, string.Empty);
+            cboLevel3AltNames.DataSource = columnNames3;
 
             SetDefaultNames();
         }
