@@ -452,16 +452,29 @@ namespace GeoLocationTool.UI
                     columnNames.Level1]
                     .Value as
                     string;
-            txtLevel2Original.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[
+
+            // level 2 is optional
+            if (!string.IsNullOrEmpty(columnNames.Level2))
+            {
+                txtLevel2Original.Text =
+                    dataGridView1.Rows[selectedRowIndex].Cells[
                     columnNames.Level2]
                     .Value as
                     string;
-            txtLevel3Original.Text =
-                dataGridView1.Rows[selectedRowIndex].Cells[
-                    columnNames.Level3]
-                    .Value as
-                    string;
+            }
+
+               // level 3 is optional
+            if (!string.IsNullOrEmpty(columnNames.Level3))
+            {
+                txtLevel3Original.Text =
+                    dataGridView1.Rows[selectedRowIndex].Cells[
+                  columnNames.Level3]
+                  .Value as
+                  string;
+            }
+
+
+          
         }
 
         private void DisplayUnmatchedRecords()

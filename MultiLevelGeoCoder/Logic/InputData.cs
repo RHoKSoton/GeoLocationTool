@@ -13,6 +13,7 @@ namespace MultiLevelGeoCoder.Logic
     internal class InputData
     {
         #region Fields
+
         // Use the cache when coding all the rows
         public static bool UseMatchedNamesCache = true; // for performance testing
 
@@ -55,7 +56,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <value>
         /// The column names.
         /// </value>
-        public InputColumnNames ColumnNames { get; set; }
+        public InputColumnNames ColumnNames { get; private set; }
 
         /// <summary>
         /// Gets or sets the input data.
@@ -90,6 +91,23 @@ namespace MultiLevelGeoCoder.Logic
         #region Methods
 
         /// <summary>
+        /// Provides a list of all the column header names present in the data sheet,
+        /// excludes columns added by the application.
+        /// </summary>
+        /// <returns>List of column names</returns>
+        public IList<string> AllColumnNames()
+        {
+            var addedColumnNames = AddedColumnNames();
+            List<string> list = (
+                from DataColumn dataColumn
+                    in Data.Columns
+                where !addedColumnNames.Contains(dataColumn.ColumnName)
+                select dataColumn.ColumnName).ToList();
+
+            return list;
+        }
+
+        /// <summary>
         /// Adds the codes and the names used to find those codes, to the input data.
         /// </summary>
         /// <param name="locationCodes">The location codes.</param>
@@ -98,7 +116,10 @@ namespace MultiLevelGeoCoder.Logic
             locationCodes.RefreshMatchedNamesCache();
             foreach (DataRow dataRow in Data.Rows)
             {
-                CodedLocation codedLocation = FindCodes(locationCodes, dataRow, UseMatchedNamesCache);
+                CodedLocation codedLocation = FindCodes(
+                    locationCodes,
+                    dataRow,
+                    UseMatchedNamesCache);
                 ClearExistingCodes(dataRow);
                 AddCodes(codedLocation, dataRow);
             }
@@ -126,11 +147,22 @@ namespace MultiLevelGeoCoder.Logic
         public DataView GetUnCodedRecords()
         {
             // only show those records where at least one code is null
-            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
-                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))
-                select record;
+            EnumerableRowCollection<DataRow> query;
+
+            if (!string.IsNullOrEmpty(ColumnNames.Level3))
+            {
+                query = UncodedAtLevel1And2And3();
+            }
+            else if (!string.IsNullOrEmpty(ColumnNames.Level2))
+            {
+                // level 2 in use
+                query = UncodedAtLevel1And2();
+            }
+            else
+            {
+                // only level 1 in use
+                query = UncodedAtLevel1();
+            }
 
             DataView unmatched = query.AsDataView();
             return unmatched;
@@ -151,21 +183,10 @@ namespace MultiLevelGeoCoder.Logic
             return columnNames;
         }
 
-        /// <summary>
-        /// Provides a list of all the column header names present in the data sheet,
-        /// excludes columns added by the application.
-        /// </summary>
-        /// <returns>List of column names</returns>
-        internal IList<string> AllColumnNames()
+        public void SetColumnNames(InputColumnNames columnNames)
         {
-            var addedColumnNames = AddedColumnNames();
-            List<string> list = (
-                from DataColumn dataColumn
-                    in Data.Columns
-                where !addedColumnNames.Contains(dataColumn.ColumnName)
-                select dataColumn.ColumnName).ToList();
-
-            return list;
+            columnNames.Validitate();
+            ColumnNames = columnNames;
         }
 
         private static void AddCodes(CodedLocation codedLocation, DataRow dataRow)
@@ -272,10 +293,20 @@ namespace MultiLevelGeoCoder.Logic
             Location location = new Location();
             location.Name1 =
                 dataRow[ColumnNames.Level1].ToString();
-            location.Name2 =
-                dataRow[ColumnNames.Level2].ToString();
-            location.Name3 =
-                dataRow[ColumnNames.Level3].ToString();
+
+            // level 2 is optional
+            if (!string.IsNullOrEmpty(ColumnNames.Level2))
+            {
+                location.Name2 =
+                    dataRow[ColumnNames.Level2].ToString();
+            }
+
+            // level 3 is optional
+            if (!string.IsNullOrEmpty(ColumnNames.Level3))
+            {
+                location.Name3 =
+                    dataRow[ColumnNames.Level3].ToString();
+            }
 
             // get codes
             CodedLocation codedLocation = locationCodes.GetCodes(location, useCache);
@@ -293,6 +324,36 @@ namespace MultiLevelGeoCoder.Logic
                     col.ReadOnly = true;
                 }
             }
+        }
+
+        private EnumerableRowCollection<DataRow> UncodedAtLevel1()
+        {
+            // only level 1 in use
+            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
+                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName))
+                select record;
+            return query;
+        }
+
+        private EnumerableRowCollection<DataRow> UncodedAtLevel1And2()
+        {
+            // level 1 and 2 in use
+            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
+                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
+                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName))
+                select record;
+            return query;
+        }
+
+        private EnumerableRowCollection<DataRow> UncodedAtLevel1And2And3()
+        {
+            // level 1, 2 and 3 in use
+            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
+                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
+                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)) ||
+                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))
+                select record;
+            return query;
         }
 
         #endregion Methods

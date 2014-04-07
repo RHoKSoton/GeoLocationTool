@@ -3,7 +3,7 @@
 namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
-    /// DTO to hold the column names from the input list
+    /// Holds the selected input column names to be coded.
     /// </summary>
     public class InputColumnNames
     {
@@ -16,5 +16,41 @@ namespace MultiLevelGeoCoder.Logic
         public string Level3 { get; set; }
 
         #endregion Properties
+
+        #region Methods
+
+        public void Validitate()
+        {
+            // if a level is set then all lower levels must be set
+
+            string errorMessage = string.Empty;
+
+            if (! string.IsNullOrEmpty(Level3))
+            {
+                if (string.IsNullOrEmpty(Level2))
+                {
+                    errorMessage = "Level 2 not set";
+                }
+                if (string.IsNullOrEmpty(Level1))
+                {
+                    errorMessage = "Level 1 not set";
+                }
+            }
+
+            if (!string.IsNullOrEmpty(Level2))
+            {
+                if (string.IsNullOrEmpty(Level1))
+                {
+                    errorMessage = "Level 1 not set";
+                }
+            }
+
+            if (errorMessage.Length > 0)
+            {
+                throw new InvalidColumnNamesException(errorMessage);
+            }
+        }
+
+        #endregion Methods
     }
 }

@@ -335,7 +335,7 @@ namespace MultiLevelGeoCoder
         /// <param name="columnNames">The column names.</param>
         public void SetInputColumns(InputColumnNames columnNames)
         {
-            inputData.ColumnNames = columnNames;
+            inputData.SetColumnNames(columnNames);
         }
 
         public DataView UncodedRecords()

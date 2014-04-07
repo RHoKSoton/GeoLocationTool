@@ -3,6 +3,7 @@
 namespace GeoLocationTool.UI
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -157,8 +158,16 @@ namespace GeoLocationTool.UI
         {
             InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
             cboLevel1.DataSource = geoCoder.AllInputColumnNames();
-            cboLevel2.DataSource = geoCoder.AllInputColumnNames();
-            cboLevel3.DataSource = geoCoder.AllInputColumnNames();
+
+            //level 2 and 3 columns are optional so display a blank row at the top
+            IList<string> columnNames2 = geoCoder.AllInputColumnNames();
+            columnNames2.Insert(0, string.Empty);
+            cboLevel2.DataSource = columnNames2;
+
+            IList<string> columnNames3 = geoCoder.AllInputColumnNames();
+            columnNames3.Insert(0, string.Empty);
+            cboLevel3.DataSource = columnNames3;
+
             // set defaults if they exist in the input sheet
             cboLevel1.SelectedIndex = cboLevel1.FindStringExact(defaultColumnNames.Level1);
             cboLevel2.SelectedIndex = cboLevel2.FindStringExact(defaultColumnNames.Level2);
