@@ -93,6 +93,32 @@ namespace MultiLevelGeoCoderTests
                         Actual[0],
                         Actual[1],
                         Alternate[2]));
+
+            // provide default empty lists if no records found
+
+            //  default empty list if no level 1 match
+            matchStub.Stub(x => x.GetMatches(Arg<string>.Is.Anything))
+              .Return(
+                   matchProviderTestData.EmptyLevel1List());
+
+            //  default  empty list if no level 2 match
+            matchStub.Stub(
+                x => x.GetMatches(
+                    Arg<string>.Is.Anything,
+                    Arg<string>.Is.Anything))
+                .Return(
+                    matchProviderTestData.EmptyLevel2List());
+
+            // default  empty list if no level3 match
+            matchStub.Stub(
+                x =>
+                    x.GetMatches(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything))
+                .Return(
+                    matchProviderTestData.EmptyLevel3List());
+
             return matchStub;
         }
 

@@ -2,6 +2,7 @@
 
 namespace MultiLevelGeoCoderTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using MultiLevelGeoCoder.Logic;
@@ -13,16 +14,16 @@ namespace MultiLevelGeoCoderTests
     {
         #region Fields
 
-        private readonly List<KeyValuePair<string[], string[]>> lines =
-            new List<KeyValuePair<string[], string[]>>();
+        private readonly List<Tuple<string[], string[], string[]>> lines =
+            new List<Tuple<string[], string[], string[]>>();
 
         #endregion Fields
 
         #region Methods
 
-        public void AddLine(string[] names, string[] codes)
+        public void AddLine(string[] names, string[] codes, string[] altNames= null)
         {
-            lines.Add(new KeyValuePair<string[], string[]>(names, codes));
+            lines.Add(new Tuple<string[], string[], string[]>(names, codes, altNames));
         }
 
         public DataTable Data(GazetteerColumnNames gazetteerColumnNames)
@@ -34,13 +35,13 @@ namespace MultiLevelGeoCoderTests
             dt.Columns.Add(gazetteerColumnNames.Level1Code);
             dt.Columns.Add(gazetteerColumnNames.Level2Code);
             dt.Columns.Add(gazetteerColumnNames.Level3Code);
-
+     
             foreach (var line in lines)
             {
                 object[] values =
                 {
-                    line.Key[0], line.Key[1], line.Key[2],
-                    line.Value[0], line.Value[1], line.Value[2]
+                    line.Item1[0], line.Item1[1], line.Item1[2],
+                    line.Item2[0], line.Item2[1], line.Item2[2]
                 };
                 dt.LoadDataRow(values, true);
             }
@@ -50,15 +51,22 @@ namespace MultiLevelGeoCoderTests
         public IEnumerable<Gadm> GadmList()
         {
             List<Gadm> gadmList = new List<Gadm>();
-            foreach (var keyValuePair in lines)
+            foreach (var line in lines)
             {
                 Gadm record = new Gadm();
-                record.Name1 = keyValuePair.Key[0];
-                record.Name2 = keyValuePair.Key[1];
-                record.Name3 = keyValuePair.Key[2];
-                record.Id1 = keyValuePair.Value[0];
-                record.Id2 = keyValuePair.Value[1];
-                record.Id3 = keyValuePair.Value[2];
+                record.Name1 = line.Item1[0];
+                record.Name2 = line.Item1[1];
+                record.Name3 = line.Item1[2];
+                record.Id1 = line.Item2[0];
+                record.Id2 = line.Item2[1];
+                record.Id3 = line.Item2[2];
+                if (line.Item3 != null)
+                {
+                    record.AltName1 = line.Item3[0];
+                    record.AltName2 = line.Item3[1];
+                    record.AltName3 = line.Item3[2];
+                }
+               
                 gadmList.Add(record);
             }
 

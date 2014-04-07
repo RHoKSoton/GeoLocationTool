@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocationCodesTests.cs" />
     <Compile Include="GeoCoderCodeAllTests.cs" />
+    <Compile Include="LocationCodesTestsWithGazetteerAltNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MultiLevelGeoCoder\MultiLevelGeoCoder.csproj">

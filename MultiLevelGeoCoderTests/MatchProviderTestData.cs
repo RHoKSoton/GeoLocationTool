@@ -24,7 +24,6 @@ namespace MultiLevelGeoCoderTests
         public void AddLevel1(string[] match, string[] actual)
         {
             var matched = Level1Matches(match[0]).FirstOrDefault();
-                //level1Matches.FirstOrDefault(x => x.AltLevel1 == match[0]));
             if (matched != null)
             {
                 level1Matches.Remove(matched);
@@ -77,6 +76,21 @@ namespace MultiLevelGeoCoderTests
         public IEnumerable<Level3Match> AllLevel3()
         {
             return level3Matches;
+        }
+
+        public IEnumerable<Level1Match> EmptyLevel1List()
+        {
+            return new List<Level1Match>();
+        }
+
+        public IEnumerable<Level2Match> EmptyLevel2List()
+        {
+            return new List<Level2Match>();
+        }
+
+        public IEnumerable<Level3Match> EmptyLevel3List()
+        {
+            return new List<Level3Match>();
         }
 
         public IEnumerable<Level1Match> Level1Matches(string level1)
