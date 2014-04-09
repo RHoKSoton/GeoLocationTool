@@ -58,7 +58,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>Location with codes added where found.</returns>
-        CodedLocation GetGeoCodes(Location location);
+        CodedLocation GetCodes(Location location);
 
         /// <summary>
         /// The names of the columns that contain the data to be matched
@@ -92,7 +92,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         /// <param name="level1">The level 1.</param>
         /// <returns>The saved match</returns>
-        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel1(string level1);
+        IEnumerable<MatchResult> GetSavedMatchLevel1(string level1);
 
         /// <summary>
         /// The saved match for the given level 2 name, if any
@@ -100,7 +100,7 @@ namespace MultiLevelGeoCoder
         /// <param name="level2">The level 2.</param>
         /// <param name="level1">The level 1.</param>
         /// <returns>The saved match</returns>
-        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel2(string level2, string level1);
+        IEnumerable<MatchResult> GetSavedMatchLevel2(string level2, string level1);
 
         /// <summary>
         /// The saved match for the given level 3 name, if any
@@ -109,7 +109,7 @@ namespace MultiLevelGeoCoder
         /// <param name="level1">The level 1.</param>
         /// <param name="level3">The level 3.</param>
         /// <returns>The saved match</returns>
-        IEnumerable<FuzzyMatchResult> GetSavedMatchLevel3(
+        IEnumerable<MatchResult> GetSavedMatchLevel3(
             string level3,
             string level1,
             string level2);

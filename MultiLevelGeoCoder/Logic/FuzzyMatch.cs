@@ -33,7 +33,7 @@ namespace MultiLevelGeoCoder.Logic
         /// </summary>
         /// <param name="level1">The level 1 location name.</param>
         /// <returns>List of suggested locations and their coeficient.</returns>
-        public List<FuzzyMatchResult> GetLevel1Suggestions(string level1)
+        public List<MatchResult> GetLevel1Suggestions(string level1)
         {
             IList<string> locationList = locationNames.Level1LocationNames();
             return Suggestions(level1, locationList);
@@ -45,7 +45,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="level1">The level 1 location name.</param>
         /// <param name="level2">The level 2 location name.</param>
         /// <returns>List of suggested locations and their coeficient.</returns>
-        public List<FuzzyMatchResult> GetLevel2Suggestions(string level1, string level2)
+        public List<MatchResult> GetLevel2Suggestions(string level1, string level2)
         {
             IList<string> locationList = locationNames.Level2LocationNames(level1);
             return Suggestions(level2, locationList);
@@ -58,7 +58,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="level2">The level 2 location name.</param>
         /// <param name="level3">The level 3 location name.</param>
         /// <returns>List of suggested locations and their coeficient.</returns>
-        public List<FuzzyMatchResult> GetLevel3Suggestions(
+        public List<MatchResult> GetLevel3Suggestions(
             string level1,
             string level2,
             string level3)
@@ -69,15 +69,15 @@ namespace MultiLevelGeoCoder.Logic
             return Suggestions(level3, locationList);
         }
 
-        private static List<FuzzyMatchResult> Suggestions(
+        private static List<MatchResult> Suggestions(
             string level,
             IEnumerable<string> locationList)
         {
-            List<FuzzyMatchResult> matches = new List<FuzzyMatchResult>();
+            List<MatchResult> matches = new List<MatchResult>();
             foreach (string location in locationList)
             {
                 double coefficient = level.FuzzyMatch(location);
-                matches.Add(new FuzzyMatchResult(location, coefficient));
+                matches.Add(new MatchResult(location, coefficient));
             }
             return matches.OrderByDescending(p => p.Coefficient).ToList();
         }

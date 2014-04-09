@@ -126,7 +126,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>Location with codes added where found.</returns>
-        public CodedLocation GetGeoCodes(Location location)
+        public CodedLocation GetCodes(Location location)
         {
             return locationCodes.GetCodes(location);
         }
@@ -138,15 +138,15 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel1(string level1)
+        public IEnumerable<MatchResult> GetSavedMatchLevel1(string level1)
         {
             //todo change return type to single result
 
-            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            List<MatchResult> result = new List<MatchResult>();
             Level1Match match = matchProvider.GetMatches(level1).FirstOrDefault();
             if (match != null)
             {
-                result.Add(new FuzzyMatchResult(match.Level1, match.Weight));
+                result.Add(new MatchResult(match.Level1, match.Weight));
             }
             return result;
         }
@@ -159,17 +159,17 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel2(
+        public IEnumerable<MatchResult> GetSavedMatchLevel2(
             string level2,
             string level1)
         {
             // todo change return type to single result
 
-            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            List<MatchResult> result = new List<MatchResult>();
             Level2Match match = matchProvider.GetMatches(level2, level1).FirstOrDefault();
             if (match != null)
             {
-                result.Add(new FuzzyMatchResult(match.Level2, match.Weight));
+                result.Add(new MatchResult(match.Level2, match.Weight));
             }
             return result;
         }
@@ -183,19 +183,19 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<FuzzyMatchResult> GetSavedMatchLevel3(
+        public IEnumerable<MatchResult> GetSavedMatchLevel3(
             string level3,
             string level1,
             string level2)
         {
             // todo change return type to single result
 
-            List<FuzzyMatchResult> result = new List<FuzzyMatchResult>();
+            List<MatchResult> result = new List<MatchResult>();
             Level3Match match =
                 matchProvider.GetMatches(level3, level1, level2).FirstOrDefault();
             if (match != null)
             {
-                result.Add(new FuzzyMatchResult(match.Level3, match.Weight));
+                result.Add(new MatchResult(match.Level3, match.Weight));
             }
             return result;
         }

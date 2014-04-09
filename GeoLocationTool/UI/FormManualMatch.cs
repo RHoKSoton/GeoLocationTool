@@ -260,9 +260,9 @@ namespace GeoLocationTool.UI
                 null;
         }
 
-        private IEnumerable<FuzzyMatchResult> ConcatWithDistinct(
-            IEnumerable<FuzzyMatchResult> a,
-            IEnumerable<FuzzyMatchResult> b)
+        private IEnumerable<MatchResult> ConcatWithDistinct(
+            IEnumerable<MatchResult> a,
+            IEnumerable<MatchResult> b)
         {
             var set = new HashSet<string>(a.Select(x => x.Location.ToLower()));
             var list = a.ToList();
@@ -325,7 +325,7 @@ namespace GeoLocationTool.UI
             string level1 = txtLevel1Original.Text;
 
             // get any saved matched name
-            IEnumerable<FuzzyMatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
+            IEnumerable<MatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
                 level1);
 
             // add it to the top of the list
@@ -371,7 +371,7 @@ namespace GeoLocationTool.UI
                 string level2 = txtLevel2Original.Text.Trim();
 
                 // get any saved matched name
-                IEnumerable<FuzzyMatchResult> savedMatch =
+                IEnumerable<MatchResult> savedMatch =
                     geoCoder.GetSavedMatchLevel2(level2, level1);
 
                 // Add it to the top of the suggestions list
@@ -417,7 +417,7 @@ namespace GeoLocationTool.UI
                 string level3 = txtLevel3Original.Text.Trim();
 
                 // get any saved matched name
-                IEnumerable<FuzzyMatchResult> savedMatch =
+                IEnumerable<MatchResult> savedMatch =
                     geoCoder.GetSavedMatchLevel3(level3, level1, level2);
 
                 // Add it to the top of the suggestions list
@@ -580,7 +580,7 @@ namespace GeoLocationTool.UI
                 originalLevel2,
                 originalLevel3);
 
-            CodedLocation codedLocation = geoCoder.GetGeoCodes(location2);
+            CodedLocation codedLocation = geoCoder.GetCodes(location2);
             ClearExistingCodes();
             AddCodes(codedLocation);
             DisplayRecords();

@@ -5,11 +5,11 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Holds matched location details
     /// </summary>
-    public class FuzzyMatchResult
+    public class MatchResult
     {
         #region Constructors
 
-        public FuzzyMatchResult(string location, double coefficient)
+        public MatchResult(string location, double coefficient)
         {
             Location = location;
             Coefficient = coefficient;

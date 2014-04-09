@@ -67,7 +67,7 @@
     <Compile Include="Logic\GeoCode.cs" />
     <Compile Include="Logic\CodedLocation.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />
-    <Compile Include="Logic\FuzzyMatchResult.cs" />
+    <Compile Include="Logic\MatchResult.cs" />
     <Compile Include="Logic\InputColumnNames.cs" />
     <Compile Include="Logic\InputData.cs" />
     <Compile Include="Logic\GazetteerData.cs" />
