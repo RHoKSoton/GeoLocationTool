@@ -86,7 +86,6 @@ namespace MultiLevelGeoCoder
         /// <returns></returns>
         InputColumnNames MatchColumnNames();
 
-
         /// <summary>
         /// The saved match for the given level 1 name, if any
         /// </summary>
@@ -115,35 +114,11 @@ namespace MultiLevelGeoCoder
             string level2);
 
         /// <summary>
-        /// Saves the matched level 1 name that corresponds to the given alternate name.
+        /// Saves the match.
         /// </summary>
-        /// <param name="alternateLevel1">The alternate level 1 name.</param>
-        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
-        void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1);
-
-        /// <summary>
-        /// Saves the match level 2 name that corresponds to the given alternate name.
-        /// </summary>
-        /// <param name="alternateLevel2">The alternate level 2 name.</param>
-        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
-        /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
-        void SaveMatchLevel2(
-            string alternateLevel2,
-            string gazetteerLevel1,
-            string gazetteerLevel2);
-
-        /// <summary>
-        /// Saves the level 3 name that corresponds to the given alternate name.
-        /// </summary>
-        /// <param name="alternateLevel3">The alternate level 3 name.</param>
-        /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
-        /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
-        /// <param name="gazetteerLevel3">The gazetteer level 3 name.</param>
-        void SaveMatchLevel3(
-            string alternateLevel3,
-            string gazetteerLevel1,
-            string gazetteerLevel2,
-            string gazetteerLevel3);
+        /// <param name="inputLocation">The input location.</param>
+        /// <param name="gazetteerLocation">The gazetteer location.</param>
+        void SaveMatch(Location inputLocation, Location gazetteerLocation);
 
         void SaveOutputFile();
 

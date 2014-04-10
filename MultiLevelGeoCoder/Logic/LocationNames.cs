@@ -32,9 +32,23 @@ namespace MultiLevelGeoCoder.Logic
         /// Lists the Level 1 location names.
         /// </summary>
         /// <returns>List of location names</returns>
-        public IList<string> Level1LocationNames()
+        public IList<string> Level1AllLocationNames()
+        {
+            var locationNames = Level1MainLocationNames();
+            locationNames.AddRange(Level1AltLocationNames());
+            return locationNames.Distinct().OrderBy(i => i).ToList();
+        }
+
+        public List<string> Level1MainLocationNames()
         {
             var levelList = gazzetteerData.Select(l => l.Name1);
+            var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
+            return locationNames;
+        }
+
+        private IEnumerable<string> Level1AltLocationNames()
+        {
+            var levelList = gazzetteerData.Select(l => l.AltName1);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
@@ -43,7 +57,14 @@ namespace MultiLevelGeoCoder.Logic
         /// </summary>
         /// <param name="level1Name">Name of the level 1 location.</param>
         /// <returns>List of location names.</returns>
-        public IList<string> Level2LocationNames(string level1Name)
+        public IList<string> Level2AllLocationNames(string level1Name)
+        {
+            List<string> locationNames = Level2MainLocationNames(level1Name);
+            locationNames.AddRange(Level2AltLocationNames(level1Name));
+            return locationNames.Distinct().OrderBy(i => i).ToList();
+        }
+
+        public List<string> Level2MainLocationNames(string level1Name)
         {
             var levelList = gazzetteerData
                 .Where(
@@ -54,6 +75,21 @@ namespace MultiLevelGeoCoder.Logic
                             StringComparison.OrdinalIgnoreCase))
                 .Select(l => l.Name2);
 
+            var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
+            return locationNames;
+        }
+
+        private IEnumerable<string> Level2AltLocationNames(string level1Name)
+        {
+            var levelList = gazzetteerData
+                .Where(
+                    n =>
+                        String.Equals(
+                            n.Name1,
+                            level1Name,
+                            StringComparison.OrdinalIgnoreCase))
+                .Select(l => l.AltName2);
+
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
@@ -63,7 +99,14 @@ namespace MultiLevelGeoCoder.Logic
         /// <param name="level1Name">Name of the level 1 location.</param>
         /// <param name="level2Name">Name of the level 2 location.</param>
         /// <returns>List of location names.</returns>
-        public IList<string> Level3LocationNames(string level1Name, string level2Name)
+        public IList<string> Level3AllLocationNames(string level1Name, string level2Name)
+        {
+            var locationNames = Level3MainLocationNames(level1Name, level2Name);
+            locationNames.AddRange(Level3AltLocationNames(level1Name, level2Name));
+            return locationNames.Distinct().OrderBy(i => i).ToList();
+        }
+
+        public List<string> Level3MainLocationNames(string level1Name, string level2Name)
         {
             var levelList = gazzetteerData
                 .Where(
@@ -77,6 +120,26 @@ namespace MultiLevelGeoCoder.Logic
                             level2Name,
                             StringComparison.OrdinalIgnoreCase))
                 .Select(l => l.Name3);
+            var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
+            return locationNames;
+        }
+
+        private IEnumerable<string> Level3AltLocationNames(
+            string level1Name,
+            string level2Name)
+        {
+            var levelList = gazzetteerData
+                .Where(
+                    n =>
+                        String.Equals(
+                            n.Name1,
+                            level1Name,
+                            StringComparison.OrdinalIgnoreCase) &&
+                        String.Equals(
+                            n.Name2,
+                            level2Name,
+                            StringComparison.OrdinalIgnoreCase))
+                .Select(l => l.AltName3);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 

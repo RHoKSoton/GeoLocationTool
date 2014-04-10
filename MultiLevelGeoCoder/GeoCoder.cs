@@ -7,6 +7,7 @@ namespace MultiLevelGeoCoder
     using System.Data;
     using System.Data.Common;
     using System.Linq;
+    using System.Text;
     using DataAccess;
     using Logic;
     using Model;
@@ -216,17 +217,17 @@ namespace MultiLevelGeoCoder
 
         public IList<string> Level1LocationNames()
         {
-            return locationNames.Level1LocationNames();
+            return locationNames.Level1MainLocationNames();
         }
 
         public IList<string> Level2LocationNames(string level1)
         {
-            return locationNames.Level2LocationNames(level1);
+            return locationNames.Level2MainLocationNames(level1);
         }
 
         public IList<string> Level3LocationNames(string level1, string level2)
         {
-            return locationNames.Level3LocationNames(level1, level2);
+            return locationNames.Level3MainLocationNames(level1, level2);
         }
 
         public void LoadGazetter(string path)
@@ -261,17 +262,75 @@ namespace MultiLevelGeoCoder
             return inputData.MatchColumnNames();
         }
 
+
+        public void SaveMatch(Location inputLocation, Location gazetteerLocation)
+        {
+            //todo refactor the logic to a seperate class e.g. MatchedNames
+            bool hasLevel1 = !string.IsNullOrEmpty(inputLocation.Name1);
+            bool hasLevel2 = !string.IsNullOrEmpty(inputLocation.Name2);
+            bool hasLevel3 = !string.IsNullOrEmpty(inputLocation.Name3);
+
+            // throw ex if  locations are not complete
+            CheckLocationsAreComplete(inputLocation, gazetteerLocation);
+
+            // if input and gazetteer are the same don't save, just exit
+            if (inputLocation.Equals(gazetteerLocation))
+            {
+                return;
+            }
+
+            // throw if the input is already in the gazetteer as we do not allow saved matches for existing names
+            // if input and gazetteer value is the same, dont save
+
+            // level1 
+            if (hasLevel1)
+            {
+                if (AreNotTheSame(inputLocation.Name1, gazetteerLocation.Name1))
+                {
+                    CheckLevel1NotInGazetteer(inputLocation);
+                    SaveMatchLevel1(inputLocation.Name1, gazetteerLocation.Name1);
+                }
+
+                // level 2
+                if (hasLevel2)
+                {
+                    if (AreNotTheSame(inputLocation.Name2, gazetteerLocation.Name2))
+                    {
+                        CheckLevel2NotInGazetteer(inputLocation, gazetteerLocation);
+                        SaveMatchLevel2(
+                            inputLocation.Name2,
+                            gazetteerLocation.Name1,
+                            gazetteerLocation.Name2);
+                    }
+
+                    // level 3
+                    if (hasLevel3)
+                    {
+                        if (AreNotTheSame(inputLocation.Name3, gazetteerLocation.Name3))
+                        {
+                            CheckLevel3NotInGazetteer(inputLocation, gazetteerLocation);
+                            SaveMatchLevel3(
+                                inputLocation.Name3,
+                                gazetteerLocation.Name1,
+                                gazetteerLocation.Name2,
+                                gazetteerLocation.Name3);
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Saves the matched level 1 name that corresponds to the given alternate name.
         /// </summary>
         /// <param name="alternateLevel1">The alternate level 1 name.</param>
         /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
-        public void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1)
+        private void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1)
         {
             matchProvider.SaveMatchLevel1(alternateLevel1, gazetteerLevel1);
         }
 
-        public void SaveMatchLevel2(
+        private void SaveMatchLevel2(
             string alternateLevel2,
             string gazetteerLevel1,
             string gazetteerLevel2)
@@ -289,7 +348,7 @@ namespace MultiLevelGeoCoder
         /// <param name="gazetteerLevel1">The gazetteer level 1 name.</param>
         /// <param name="gazetteerLevel2">The gazetteer level 2 name.</param>
         /// <param name="gazetteerLevel3">The gazetteer level 3 name.</param>
-        public void SaveMatchLevel3(
+        private void SaveMatchLevel3(
             string alternateLevel3,
             string gazetteerLevel1,
             string gazetteerLevel2,
@@ -376,6 +435,109 @@ namespace MultiLevelGeoCoder
                     Level3AltName = columnNames.Level3AltName,
                 }
                 );
+        }
+
+        private void CheckLevel3NotInGazetteer(
+            Location inputLocation,
+            Location gazetteerLocation)
+        {
+            if (InLevel3Gazetteer(
+                inputLocation.Name3,
+                gazetteerLocation.Name1,
+                gazetteerLocation.Name2))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name3);
+                throw new NameInGazetteerException(message);
+            }
+        }
+
+        private void CheckLevel2NotInGazetteer(
+            Location inputLocation,
+            Location gazetteerLocation)
+        {
+            if (InLevel2Gazetteer(inputLocation.Name2, gazetteerLocation.Name1))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name2);
+                throw new NameInGazetteerException(message);
+            }
+        }
+
+        private void CheckLevel1NotInGazetteer(Location inputLocation)
+        {
+            // if the suggestion/input combination exists in the gazetteer throw ex
+            if (InLevel1Gazetteer(inputLocation.Name1))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name1);
+                throw new NameInGazetteerException(message);
+            }
+        }
+
+        private static void CheckLocationsAreComplete(
+            Location inputLocation,
+            Location gazetteerLocation)
+        {
+            inputLocation.Validate();
+            gazetteerLocation.Validate();
+        }
+
+        private bool AreNotTheSame(string string1, string string2)
+        {
+            return
+                !string.Equals(
+                    string1,
+                    string2,
+                    StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private bool InLevel3Gazetteer(
+            string inputName3,
+            string gazetteerName1,
+            string gazetteerName2)
+        {
+            if (string.IsNullOrEmpty(inputName3))
+            {
+                return false;
+            }
+
+            // check  gazetteer names list
+            return locationNames.Level3AllLocationNames(gazetteerName1, gazetteerName2)
+                .Contains(
+                    inputName3,
+                    StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private bool InLevel2Gazetteer(string inputName2, string gazetteerName1)
+        {
+            if (string.IsNullOrEmpty(inputName2))
+            {
+                return false;
+            }
+
+            // check gazetteer names list
+            return locationNames.Level2AllLocationNames(gazetteerName1)
+                .Contains(
+                    inputName2,
+                    StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private bool InLevel1Gazetteer(string inputName1)
+        {
+            if (string.IsNullOrEmpty(inputName1))
+            {
+                return false;
+            }
+
+            // check gazetteer names list
+            return locationNames.Level1AllLocationNames()
+                .Contains(
+                    inputName1,
+                    StringComparer.InvariantCultureIgnoreCase);
         }
 
         #endregion Methods

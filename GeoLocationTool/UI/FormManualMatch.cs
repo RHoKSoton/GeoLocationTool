@@ -458,23 +458,20 @@ namespace GeoLocationTool.UI
             {
                 txtLevel2Original.Text =
                     dataGridView1.Rows[selectedRowIndex].Cells[
-                    columnNames.Level2]
-                    .Value as
-                    string;
+                        columnNames.Level2]
+                        .Value as
+                        string;
             }
 
-               // level 3 is optional
+            // level 3 is optional
             if (!string.IsNullOrEmpty(columnNames.Level3))
             {
                 txtLevel3Original.Text =
                     dataGridView1.Rows[selectedRowIndex].Cells[
-                  columnNames.Level3]
-                  .Value as
-                  string;
+                        columnNames.Level3]
+                        .Value as
+                        string;
             }
-
-
-          
         }
 
         private void DisplayUnmatchedRecords()
@@ -536,27 +533,13 @@ namespace GeoLocationTool.UI
             var originalLevel2 = txtLevel2Original.Text;
             var originalLevel3 = txtLevel3Original.Text;
 
-            if (string.IsNullOrEmpty(originalLevel1))
-            {
-                // todo any feedback for the user here?
-                return;
-            }
+            Location inputLocation = new Location(
+                originalLevel1,
+                originalLevel2,
+                originalLevel3);
+            Location gazetteerLocation = new Location(level1, level2, level3);
 
-            geoCoder.SaveMatchLevel1(originalLevel1, level1);
-
-            if (string.IsNullOrEmpty(originalLevel2))
-            {
-                return;
-            }
-
-            geoCoder.SaveMatchLevel2(originalLevel2, level1, level2);
-
-            if (string.IsNullOrEmpty(originalLevel3))
-            {
-                return;
-            }
-
-            geoCoder.SaveMatchLevel3(originalLevel3, level1, level2, level3);
+            geoCoder.SaveMatch(inputLocation, gazetteerLocation);
         }
 
         private void SetDefaults()

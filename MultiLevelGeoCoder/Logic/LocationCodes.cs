@@ -20,16 +20,12 @@ namespace MultiLevelGeoCoder.Logic
         public static bool useDictionaries = true; // for performance testing
 
         //todo remove after testing
-        public static bool UseGazetteerFirst = false; // for testing
+        public static bool UseGazetteerFirst = true; // for testing
 
         private readonly IEnumerable<Gadm> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
         private readonly GazetteerDataDictionaries dictionary;
-
-        private Dictionary<string, GeoCode> level1Dictionary;
-        private Dictionary<string, GeoCode> level2Dictionary;
-        private Dictionary<string, GeoCode> level3Dictionary;
 
         #endregion Fields
 
@@ -53,19 +49,21 @@ namespace MultiLevelGeoCoder.Logic
         /// Gets the location codes.
         /// </summary>
         /// <param name="location">The location.</param>
-        /// <param name="useCache">Uses the cache of matched names if true</param>
+        /// <param name="useMatchedNamesCache">If true, uses the cache of matched names</param>
         /// <returns>The location with the codes</returns>
-        public CodedLocation GetCodes(Location location, bool useCache = false)
+        public CodedLocation GetCodes(
+            Location location,
+            bool useMatchedNamesCache = false)
         {
             CodedLocation codedLocation = new CodedLocation(location);
 
-            codedLocation.GeoCode1 = GetLevel1Code(location, useCache);
+            codedLocation.GeoCode1 = GetLevel1Code(location, useMatchedNamesCache);
             if (codedLocation.GeoCode1 != null)
             {
-                codedLocation.GeoCode2 = GetLevel2Code(location, useCache);
+                codedLocation.GeoCode2 = GetLevel2Code(location, useMatchedNamesCache);
                 if (codedLocation.GeoCode2 != null)
                 {
-                    codedLocation.GeoCode3 = GetLevel3Code(location, useCache);
+                    codedLocation.GeoCode3 = GetLevel3Code(location, useMatchedNamesCache);
                 }
             }
 
