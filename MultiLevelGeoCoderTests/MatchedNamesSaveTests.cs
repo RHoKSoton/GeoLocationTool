@@ -121,7 +121,7 @@ namespace MultiLevelGeoCoderTests
             // exception thrown
         }
 
-        // Given an input to gazetteer match to save
+        // Given a matched input to save
         // When input values are the same as the matched gazzeteer values
         // Then save is not called (no exception thrown)
         [TestMethod]
@@ -152,7 +152,44 @@ namespace MultiLevelGeoCoderTests
                 x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
         }
 
-        // Given an input to gazetteer match to save
+        // Given a matched input to save
+        // When input values are the same as the matched gazzeteer values
+        // Then save is not called (no exception thrown)
+        [TestMethod]
+        public void SaveMatch_InputAndMatchAreSameButDifferentCase_NotSaved()
+        {
+            // Arrange
+            const string name1 = "P1";
+            const string name2 = "T1";
+            const string name3 = "V1";
+
+            // gazetteer data
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
+
+            //match provider
+            var mock = MockRepository.GenerateMock<IMatchProvider>();
+            MatchedNames matchedNames = new MatchedNames(mock);
+
+            // input and match containing the same values
+            Location inputLocation = new Location(
+                name1.ToUpper(),
+                name2.ToUpper(),
+                name3.ToUpper());
+            Location gazetteerLocation = new Location(
+                name1.ToLower(),
+                name2.ToLower(),
+                name3.ToLower());
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            mock.AssertWasNotCalled(
+                x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+        }
+
+        // Given a matched input to save
         // When input values and matched gazzeteer values are an acceptable match at all three levels
         // Then save is called for all three matched values
         [TestMethod]
@@ -290,7 +327,7 @@ namespace MultiLevelGeoCoderTests
         #endregion Methods
 
         #region Other
-      
+
         // todo - MatchedNames.SaveMatch tests to show that input with less that three levels is saved
         // todo - MatchedNames.SaveMatch tests to show that Incomplete Location exception is thrown when  args invalid
 
