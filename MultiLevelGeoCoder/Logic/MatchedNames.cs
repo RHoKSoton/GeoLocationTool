@@ -1,12 +1,11 @@
 // MatchedNames.cs
 
-namespace MultiLevelGeoCoder
+namespace MultiLevelGeoCoder.Logic
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using DataAccess;
-    using Logic;
     using Model;
 
     /// <summary>
