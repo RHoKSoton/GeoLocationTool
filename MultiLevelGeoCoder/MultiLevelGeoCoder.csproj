@@ -61,6 +61,7 @@
     <Compile Include="Logic\IncompleteLocationException.cs" />
     <Compile Include="Logic\InvalidColumnNamesException.cs" />
     <Compile Include="Logic\MatchedNamesCache.cs" />
+    <Compile Include="MatchedNames.cs" />
     <Compile Include="Model\GazetteerColumnsMapping.cs" />
     <Compile Include="DataAccess\MatchProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
