@@ -32,17 +32,23 @@ namespace GeoLocationTool.UI
         public FormLoadLocationData(string[] args = null)
         {
             InitializeComponent();
-
-            if (args != null && args.Length >= 1)
+            try
             {
-                string path = args[0];
-
-                if (!String.IsNullOrWhiteSpace(path))
+                if (args != null && args.Length >= 1)
                 {
-                    LoadFile(path);
-                    DisplayColumnNameLists();
+                    string path = args[0];
+
+                    if (!String.IsNullOrWhiteSpace(path))
+                    {
+                        LoadFile(path);
+                        DisplayColumnNameLists();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("Form load error.",ex);
+            }         
         }
 
         #endregion Constructors
