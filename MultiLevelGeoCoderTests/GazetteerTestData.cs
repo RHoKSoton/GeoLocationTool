@@ -48,7 +48,7 @@ namespace MultiLevelGeoCoderTests
             return dt;
         }
 
-        public IEnumerable<Gadm> GadmList()
+        public List<Gadm> GadmList()
         {
             List<Gadm> gadmList = new List<Gadm>();
             foreach (var line in lines)

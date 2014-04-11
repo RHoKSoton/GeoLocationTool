@@ -123,5 +123,10 @@ namespace MultiLevelGeoCoderTests
         }
 
         #endregion Methods
+
+        public static IMatchProvider EmptyStub()
+        {
+            return MockRepository.GenerateStub<IMatchProvider>();
+        }
     }
 }
