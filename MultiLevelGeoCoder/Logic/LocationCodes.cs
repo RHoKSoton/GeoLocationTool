@@ -60,7 +60,7 @@ namespace MultiLevelGeoCoder.Logic
             GetLevel1Code(codedLocation, useMatchedNamesCache);
             if (codedLocation.GeoCode1 != null)
             {
-                GetLevel2Code(codedLocation,useMatchedNamesCache);
+                GetLevel2Code(codedLocation, useMatchedNamesCache);
                 if (codedLocation.GeoCode2 != null)
                 {
                     GetLevel3Code(codedLocation, useMatchedNamesCache);
@@ -84,7 +84,7 @@ namespace MultiLevelGeoCoder.Logic
                 if (location.GeoCode1 == null)
                 {
                     Level1UsingMatchedName(location, useCache);
-                }              
+                }
             }
 
             //Level1UsingMatchedName(location, useCache) ??
@@ -95,13 +95,11 @@ namespace MultiLevelGeoCoder.Logic
         {
             if (UseGazetteerFirst)
             {
-
                 Level2UsingGazetteer(location);
                 if (location.GeoCode2 == null)
                 {
                     Level2UsingMatchedName(location, useCache);
                 }
-                   
             }
 
             //return Level2UsingMatchedName(location, useCache) ??
@@ -117,7 +115,6 @@ namespace MultiLevelGeoCoder.Logic
                 {
                     Level3UsingMatchedName(location, useCache);
                 }
-                       
             }
             //return Level3UsingMatchedName(location, useCache) ??
             //       Level3UsingGazetteer(location);
@@ -138,12 +135,12 @@ namespace MultiLevelGeoCoder.Logic
 
             // just match level 1
             var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1,
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+                where
+                    (String.Equals(
+                        record.Name1,
+                        location.Name1,
+                        StringComparison.OrdinalIgnoreCase))
+                select record;
 
             Gadm firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
@@ -198,16 +195,16 @@ namespace MultiLevelGeoCoder.Logic
 
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name2,
-                                       location.Name2.Trim(),
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+                where
+                    (String.Equals(
+                        record.Name1,
+                        location.Name1.Trim(),
+                        StringComparison.OrdinalIgnoreCase)) &&
+                    (String.Equals(
+                        record.Name2,
+                        location.Name2.Trim(),
+                        StringComparison.OrdinalIgnoreCase))
+                select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
@@ -264,20 +261,20 @@ namespace MultiLevelGeoCoder.Logic
             }
             // must match all three levels
             var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name2,
-                                       location.Name2.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name3,
-                                       location.Name3.Trim(),
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+                where
+                    (String.Equals(
+                        record.Name1,
+                        location.Name1.Trim(),
+                        StringComparison.OrdinalIgnoreCase)) &&
+                    (String.Equals(
+                        record.Name2,
+                        location.Name2.Trim(),
+                        StringComparison.OrdinalIgnoreCase)) &&
+                    (String.Equals(
+                        record.Name3,
+                        location.Name3.Trim(),
+                        StringComparison.OrdinalIgnoreCase))
+                select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
