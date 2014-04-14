@@ -1,4 +1,4 @@
-﻿// LocationCodesTestsWithPreviousMatchedNames.cs
+﻿// LocationCodesTestsWithSavedMatchedNames.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -11,7 +11,7 @@ namespace MultiLevelGeoCoderTests
     /// and existing matched names
     /// </summary>
     [TestClass]
-    public class LocationCodesTestsWithPreviousMatchedNames
+    public class LocationCodesTestsWithSavedMatchedNames
     {
         #region Fields
 
@@ -33,7 +33,7 @@ namespace MultiLevelGeoCoderTests
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Leve1And2CorrectAndLevel3Incorrect_AllCodesAdded()
+        public void GetCodes_Leve1And2CorrectAndLevel3HasSavedMatch_AllCodesAdded()
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
@@ -74,7 +74,7 @@ namespace MultiLevelGeoCoderTests
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Leve1And3CorrectAndLevel2Incorrect_AllCodesAdded()
+        public void GetCodes_Leve1And3CorrectAndLevel2HasSavedMatch_AllCodesAdded()
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
@@ -114,7 +114,7 @@ namespace MultiLevelGeoCoderTests
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1IncorrectAndLevel2And3AreCorrect_AllCodesAdded(
+        public void GetCodes_Level1HasSavedMatchAndLevel2And3AreCorrect_AllCodesAdded(
             )
         {
             // Arrange
@@ -155,7 +155,7 @@ namespace MultiLevelGeoCoderTests
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1And2IncorrectAndLevel3Correct_AllCodesAdded()
+        public void GetCodes_Level1And2HaveSavedMatchAndLevel3IsCorrect_AllCodesAdded()
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
@@ -195,7 +195,7 @@ namespace MultiLevelGeoCoderTests
         /// then level 1, 2 and 3 codes are added
         /// </summary>
         [TestMethod]
-        public void GetLocationCodes_Level1And2And3Incorrect_AllCodesAdded()
+        public void GetCodes_Level1And2And3HaveSavedmatch_AllCodesAdded()
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
@@ -227,6 +227,7 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(codes1[2], codedLocation.GeoCode3.Code);
             Assert.AreEqual(names1[2], codedLocation.GeoCode3.Name);
         }
+
 
         private GazetteerTestData GazetteerTestData()
         {

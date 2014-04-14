@@ -112,7 +112,7 @@ namespace MultiLevelGeoCoderTests
         /// </summary>
         [TestMethod]
         public void
-            CodeAll_SavedMatchesForMissSpellings_CodesAddedForBothMissSpeltAndCorrectNames
+            CodeAll_CorrectAndMissSpeltInputWithSavedMatchesForMissSpellings_AllCodesAdded
             ()
         {
             // arrange
@@ -186,8 +186,7 @@ namespace MultiLevelGeoCoderTests
         /// Then the correct codes are applied for all miss-spelt names
         /// </summary>
         [TestMethod]
-        public void CodeAll_TwoSavedMatchesForMissSpellings_CodesAddedForMissSpeltNames(
-            
+        public void CodeAll_TwoInputsWithDifferentMissSpellingsAndSavedMatchesForBoth_AllCodesAdded(          
             )
         {
             // arrange
