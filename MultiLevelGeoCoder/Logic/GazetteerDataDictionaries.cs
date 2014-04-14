@@ -71,22 +71,9 @@ namespace MultiLevelGeoCoder.Logic
 
         private void DictionaryLevel2UsingAlternateNames(Gadm gadm)
         {
-            // standard names
+            // standard name
             string level1 = gadm.Name1.Trim().ToLower();
-            string level2 = gadm.Name2.Trim().ToLower();
 
-            // alternate names
-            if (!string.IsNullOrEmpty(gadm.AltName1))
-            {
-                //P1A + T1
-                string altLevel1 = gadm.AltName1.Trim().ToLower();
-
-                string altLevel2Key3 = altLevel1 + level2;
-                if (!level2Dictionary.ContainsKey(altLevel2Key3))
-                    level2Dictionary.Add(
-                        altLevel2Key3,
-                        new GeoCode(gadm.Id2, gadm.Name2));
-            }
 
             if (!string.IsNullOrEmpty(gadm.AltName2))
             {
@@ -96,74 +83,10 @@ namespace MultiLevelGeoCoder.Logic
                 string altLevel2Key1 = level1 + altLevel2;
                 if (!level2Dictionary.ContainsKey(altLevel2Key1))
                     level2Dictionary.Add(altLevel2Key1, new GeoCode(gadm.Id2, gadm.Name2));
-
-                if (!string.IsNullOrEmpty(gadm.AltName1))
-                {
-                    string altLevel1 = gadm.AltName1.Trim().ToLower();
-
-                    //P1A + T1A
-                    string altLevel2Key2 = altLevel1 + altLevel2;
-                    if (!level2Dictionary.ContainsKey(altLevel2Key2))
-                        level2Dictionary.Add(
-                            altLevel2Key2,
-                            new GeoCode(gadm.Id2, gadm.Name2));
-                }
             }
         }
 
-        private void DictionaryLevel3UsingAlternateName1(Gadm gadm)
-        {
-            // standard names
-            string level2 = gadm.Name2.Trim().ToLower();
-            string level3 = gadm.Name3.Trim().ToLower();
-
-            // alternate names
-            if (!string.IsNullOrEmpty(gadm.AltName1))
-            {
-                string altLevel1 = gadm.AltName1.Trim().ToLower();
-
-                // P1A + T1 + V1
-                string altLevel3Key7 = altLevel1 + level2 + level3;
-                if (!level3Dictionary.ContainsKey(altLevel3Key7))
-                    level3Dictionary.Add(
-                        altLevel3Key7,
-                        new GeoCode(gadm.Id3, gadm.Name3));
-            }
-        }
-
-        private void DictionaryLevel3UsingAlternateName2(Gadm gadm)
-        {
-            // standard names
-            string level1 = gadm.Name1.Trim().ToLower();
-            string level3 = gadm.Name3.Trim().ToLower();
-
-            // alternate names
-            if (!string.IsNullOrEmpty(gadm.AltName2))
-            {
-                string altLevel2 = gadm.AltName2.Trim().ToLower();
-
-                // P1 + T1A + V1
-                string altLevel3Key6 = level1 + altLevel2 + level3;
-                if (!level3Dictionary.ContainsKey(altLevel3Key6))
-                    level3Dictionary.Add(
-                        altLevel3Key6,
-                        new GeoCode(gadm.Id3, gadm.Name3));
-
-                if (!string.IsNullOrEmpty(gadm.AltName1))
-                {
-                    string altLevel1 = gadm.AltName1.Trim().ToLower();
-
-                    // P1A + T1A + V1
-                    string altLevel3Key5 = altLevel1 + altLevel2 + level3;
-                    if (!level3Dictionary.ContainsKey(altLevel3Key5))
-                        level3Dictionary.Add(
-                            altLevel3Key5,
-                            new GeoCode(gadm.Id3, gadm.Name3));
-                }
-            }
-        }
-
-        private void DictionaryLevel3UsingAlternateName3(Gadm gadm)
+        private void DictionaryLevel3UsingAlternateNames(Gadm gadm)
         {
             // standard names
             string level1 = gadm.Name1.Trim().ToLower();
@@ -177,45 +100,7 @@ namespace MultiLevelGeoCoder.Logic
                 string altLevel3Key1 = level1 + level2 + altLevel3;
                 if (!level3Dictionary.ContainsKey(altLevel3Key1))
                     level3Dictionary.Add(altLevel3Key1, new GeoCode(gadm.Id3, gadm.Name3));
-
-                if (!string.IsNullOrEmpty(gadm.AltName2))
-                {
-                    string altLevel2 = gadm.AltName2.Trim().ToLower();
-
-                    // P1 + T1A + V1A
-                    string altLevel3Key2 = level1 + altLevel2 + altLevel3;
-                    if (!level3Dictionary.ContainsKey(altLevel3Key2))
-                        level3Dictionary.Add(
-                            altLevel3Key2,
-                            new GeoCode(gadm.Id3, gadm.Name3));
-
-                    if (!string.IsNullOrEmpty(gadm.AltName1))
-                    {
-                        string altLevel1 = gadm.AltName1.Trim().ToLower();
-
-                        // P1A + T1 + V1A
-                        string altLevel3Key3 = altLevel1 + level2 + altLevel3;
-                        if (!level3Dictionary.ContainsKey(altLevel3Key3))
-                            level3Dictionary.Add(
-                                altLevel3Key3,
-                                new GeoCode(gadm.Id3, gadm.Name3));
-
-                        // P1A + T1A + V1A
-                        string altLevel3Key4 = altLevel1 + altLevel2 + altLevel3;
-                        if (!level3Dictionary.ContainsKey(altLevel3Key4))
-                            level3Dictionary.Add(
-                                altLevel3Key4,
-                                new GeoCode(gadm.Id3, gadm.Name3));
-                    }
-                }
             }
-        }
-
-        private void DictionaryLevel3UsingAlternateNames(Gadm gadm)
-        {
-            DictionaryLevel3UsingAlternateName1(gadm);
-            DictionaryLevel3UsingAlternateName2(gadm);
-            DictionaryLevel3UsingAlternateName3(gadm);
         }
 
         private void InitializeDictionaries()
