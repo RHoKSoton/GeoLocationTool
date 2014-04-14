@@ -163,6 +163,66 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(codes1[2], line2[columns.Level3]);
         }
 
+        /// <summary>
+        /// Given input containing lines containing miss-spelt names
+        /// When the match provider contains matched names but with a different casing.
+        /// Then the correct codes are applied for all names
+        /// </summary>
+        [TestMethod]
+        public void CodeAll_InputContainMissSpellingsWithDifferentCasingToSavedMatches_AllCodesAdded()
+        {
+            // arrange
+            GeoCoder geoCoder =
+                new GeoCoder(MockRepository.GenerateStub<IDbConnection>() as DbConnection);
+            InputColumnNames inputColumnNames = InputColumnNames();
+            GazetteerColumnNames gazetteerColumnNames = GazetteerColumnNames();
+
+            //gazetteer data
+            string[] names1 = { "P1", "T1", "V1" };
+            string[] codes1 = { "1", "10", "100" };
+
+            // saved matched names data
+            string[] names2 = { "P1x", "T1x", "V1x" };
+
+            // input data 
+            // line 1, all names miss-spelt with different casing
+            string[] names3 = {"p1x", "t1x", "v1x"};
+
+            InputTestData inputTestData = new InputTestData();
+            inputTestData.AddLine(names3);
+            geoCoder.SetInputData(inputTestData.Data(inputColumnNames));
+            geoCoder.SetInputColumns(inputColumnNames);
+
+            // create gazetteer data
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            geoCoder.SetGazetteerData(gazetteerTestData.Data(gazetteerColumnNames));
+
+            // add records matched names records
+            MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
+
+            // add records matching saved matched names to gazetteer names 
+            matchProviderTestData.AddLevel1(names2, names1);
+            matchProviderTestData.AddLevel2(names2, names1);
+            matchProviderTestData.AddLevel3(names2, names1);
+            MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
+            geoCoder.SetMatchProvider(matchProviderStub.MatchProvider());
+
+            geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
+
+            // act
+            geoCoder.CodeAll();
+
+            // assert
+            var columns = geoCoder.CodeColumnNames();
+
+            //line 1 - should contain codes 1
+            DataRow line1 = geoCoder.InputData.Rows[0];
+            Assert.AreEqual(codes1[0], line1[columns.Level1]);
+            Assert.AreEqual(codes1[1], line1[columns.Level2]);
+            Assert.AreEqual(codes1[2], line1[columns.Level3]);
+        }
+
         private static GazetteerColumnNames GazetteerColumnNames()
         {
             GazetteerColumnNames gazetteerColumnNames = new GazetteerColumnNames();

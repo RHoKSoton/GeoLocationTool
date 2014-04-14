@@ -2,6 +2,7 @@
 
 namespace MultiLevelGeoCoder.Logic
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DataAccess;
@@ -38,21 +39,47 @@ namespace MultiLevelGeoCoder.Logic
             //  note there should only ever be one actual name for the given match name
             // todo we need to ensure that there is only one name possibility in the database
 
-            return level1Matches.FirstOrDefault(x => x.AltLevel1 == match);
+            return
+                level1Matches.FirstOrDefault(
+                    x =>
+                        String.Equals(
+                            x.AltLevel1,
+                            match,
+                            StringComparison.InvariantCultureIgnoreCase));
         }
 
         public Level2Match Level2Match(string level1, string match)
         {
             return
                 level2Matches.FirstOrDefault(
-                    x => x.AltLevel2 == match && x.Level1 == level1);
+                    x =>
+                        String.Equals(
+                            x.AltLevel2,
+                            match,
+                            StringComparison.InvariantCultureIgnoreCase) &&
+                        string.Equals(
+                            x.Level1,
+                            level1,
+                            StringComparison.InvariantCultureIgnoreCase));
         }
 
         public Level3Match Level3Match(string level1, string level2, string match)
         {
             return
                 level3Matches.FirstOrDefault(
-                    x => x.AltLevel3 == match && x.Level1 == level1 && x.Level2 == level2);
+                    x =>
+                        string.Equals(
+                            x.AltLevel3,
+                            match,
+                            StringComparison.InvariantCultureIgnoreCase) &&
+                        string.Equals(
+                            x.Level1,
+                            level1,
+                            StringComparison.InvariantCultureIgnoreCase) &&
+                        string.Equals(
+                            x.Level2,
+                            level2,
+                            StringComparison.InvariantCultureIgnoreCase));
         }
 
         public void Refresh()
