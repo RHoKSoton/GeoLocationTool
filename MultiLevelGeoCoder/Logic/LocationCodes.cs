@@ -57,13 +57,13 @@ namespace MultiLevelGeoCoder.Logic
         {
             CodedLocation codedLocation = new CodedLocation(location);
 
-            codedLocation.GeoCode1 = GetLevel1Code(location, useMatchedNamesCache);
+            codedLocation.GeoCode1 = GetLevel1Code(codedLocation, useMatchedNamesCache);
             if (codedLocation.GeoCode1 != null)
             {
-                codedLocation.GeoCode2 = GetLevel2Code(location, useMatchedNamesCache);
+                codedLocation.GeoCode2 = GetLevel2Code(codedLocation, useMatchedNamesCache);
                 if (codedLocation.GeoCode2 != null)
                 {
-                    codedLocation.GeoCode3 = GetLevel3Code(location, useMatchedNamesCache);
+                    codedLocation.GeoCode3 = GetLevel3Code(codedLocation, useMatchedNamesCache);
                 }
             }
 
@@ -75,7 +75,7 @@ namespace MultiLevelGeoCoder.Logic
             matchedNamesCache.Refresh();
         }
 
-        private GeoCode GetLevel1Code(Location location, bool useCache)
+        private GeoCode GetLevel1Code(CodedLocation location, bool useCache)
         {
             if (UseGazetteerFirst)
             {
@@ -87,7 +87,7 @@ namespace MultiLevelGeoCoder.Logic
                    Level1UsingGazetteer(location);
         }
 
-        private GeoCode GetLevel2Code(Location location, bool useCache)
+        private GeoCode GetLevel2Code(CodedLocation location, bool useCache)
         {
             if (UseGazetteerFirst)
             {
@@ -100,7 +100,7 @@ namespace MultiLevelGeoCoder.Logic
                    Level2UsingGazetteer(location);
         }
 
-        private GeoCode GetLevel3Code(Location location, bool useCache)
+        private GeoCode GetLevel3Code(CodedLocation location, bool useCache)
         {
             if (UseGazetteerFirst)
             {
@@ -111,7 +111,7 @@ namespace MultiLevelGeoCoder.Logic
                    Level3UsingGazetteer(location);
         }
 
-        private GeoCode Level1UsingGazetteer(Location location)
+        private GeoCode Level1UsingGazetteer(CodedLocation location)
         {
             if (string.IsNullOrEmpty(location.Name1))
             {
@@ -146,7 +146,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level1UsingMatchedName(Location location, bool useCache)
+        private GeoCode Level1UsingMatchedName(CodedLocation location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name1))
             {
@@ -180,7 +180,7 @@ namespace MultiLevelGeoCoder.Logic
             return record;
         }
 
-        private GeoCode Level2UsingGazetteer(Location location)
+        private GeoCode Level2UsingGazetteer(CodedLocation location)
         {
             if (string.IsNullOrEmpty(location.Name2))
             {
@@ -192,7 +192,7 @@ namespace MultiLevelGeoCoder.Logic
             if (useDictionaries)
             {
                 geoCode = dictionary.GetLevel2Code(
-                    location.Name1,
+                    location.GeoCode1.Name,
                     location.Name2);
 
                 return geoCode;
@@ -200,16 +200,16 @@ namespace MultiLevelGeoCoder.Logic
 
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
-                where
-                    (String.Equals(
-                        record.Name1,
-                        location.Name1.Trim(),
-                        StringComparison.OrdinalIgnoreCase)) &&
-                    (String.Equals(
-                        record.Name2,
-                        location.Name2.Trim(),
-                        StringComparison.OrdinalIgnoreCase))
-                select record;
+                               where
+                                   (String.Equals(
+                                       record.Name1,
+                                       location.Name1.Trim(),
+                                       StringComparison.OrdinalIgnoreCase)) &&
+                                   (String.Equals(
+                                       record.Name2,
+                                       location.Name2.Trim(),
+                                       StringComparison.OrdinalIgnoreCase))
+                               select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
@@ -219,7 +219,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level2UsingMatchedName(Location location, bool useCache)
+        private GeoCode Level2UsingMatchedName(CodedLocation location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name2))
             {
@@ -232,12 +232,12 @@ namespace MultiLevelGeoCoder.Logic
             Level2Match match;
             if (useCache)
             {
-                match = matchedNamesCache.Level2Match(location.Name1, location.Name2);
+                match = matchedNamesCache.Level2Match(location.GeoCode1.Name, location.Name2);
             }
             else
             {
                 IEnumerable<Level2Match> nearMatches =
-                    matchProvider.GetMatches(location.Name2, location.Name1);
+                    matchProvider.GetMatches(location.Name2, location.GeoCode1.Name);
                 //  note there should only ever be one actual name for the given alt name
                 // todo we need to ensure that there is only one name posibility in the database
                 match = nearMatches.FirstOrDefault();
@@ -252,7 +252,7 @@ namespace MultiLevelGeoCoder.Logic
             return record;
         }
 
-        private GeoCode Level3UsingGazetteer(Location location)
+        private GeoCode Level3UsingGazetteer(CodedLocation location)
         {
             if (string.IsNullOrEmpty(location.Name3))
             {
@@ -264,8 +264,8 @@ namespace MultiLevelGeoCoder.Logic
             if (useDictionaries)
             {
                 geoCode = dictionary.GetLevel3Code(
-                    location.Name1,
-                    location.Name2,
+                    location.GeoCode1.Name,
+                    location.GeoCode2.Name,
                     location.Name3);
 
                 return geoCode;
@@ -295,7 +295,7 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private GeoCode Level3UsingMatchedName(Location location, bool useCache)
+        private GeoCode Level3UsingMatchedName(CodedLocation location, bool useCache)
         {
             if (string.IsNullOrEmpty(location.Name3))
             {
@@ -309,8 +309,8 @@ namespace MultiLevelGeoCoder.Logic
             if (useCache)
             {
                 match = matchedNamesCache.Level3Match(
-                    location.Name1,
-                    location.Name2,
+                    location.GeoCode1.Name,
+                    location.GeoCode2.Name,
                     location.Name3);
             }
             else
@@ -318,8 +318,8 @@ namespace MultiLevelGeoCoder.Logic
                 IEnumerable<Level3Match> nearMatches =
                     matchProvider.GetMatches(
                         location.Name3,
-                        location.Name1,
-                        location.Name2);
+                        location.GeoCode1.Name,
+                        location.GeoCode2.Name);
                 //  note there should only ever be one actual name for the given alt name
                 // todo we need to ensure that there is only one name posibility in the database
                 match = nearMatches.FirstOrDefault();

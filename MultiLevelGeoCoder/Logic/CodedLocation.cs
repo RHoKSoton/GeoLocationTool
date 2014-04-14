@@ -5,13 +5,13 @@ namespace MultiLevelGeoCoder.Logic
     using System;
 
     /// <summary>
-    /// Holds the codes and a copy of the original location.
+    /// Holds the codes and a copy of the input location.
     /// </summary>
     public class CodedLocation
     {
         #region Fields
 
-        private readonly Location location;
+        private readonly Location inputLocation;
 
         #endregion Fields
 
@@ -19,10 +19,16 @@ namespace MultiLevelGeoCoder.Logic
 
         public CodedLocation(Location location)
         {
-            this.location = new Location(
-                location.Name1,
-                location.Name2,
-                location.Name3);
+            if (location == null) throw new ArgumentNullException("location");
+
+            //  keep a copy of the input location for comparison
+            inputLocation = new Location(location.Name1, location.Name2, location.Name3);
+
+            // initialise the names
+            Name1 = string.Copy(inputLocation.Name1);
+            Name2 = string.Copy(inputLocation.Name2);
+            ;
+            Name3 = string.Copy(inputLocation.Name3);
         }
 
         #endregion Constructors
@@ -35,20 +41,11 @@ namespace MultiLevelGeoCoder.Logic
 
         public GeoCode GeoCode3 { get; set; }
 
-        public string Name1
-        {
-            get { return location.Name1.Trim(); }
-        }
+        public string Name1 { get; set; }
 
-        public string Name2
-        {
-            get { return location.Name2.Trim(); }
-        }
+        public string Name2 { get; set; }
 
-        public string Name3
-        {
-            get { return location.Name3.Trim(); }
-        }
+        public string Name3 { get; set; }
 
         #endregion Properties
 
@@ -61,7 +58,10 @@ namespace MultiLevelGeoCoder.Logic
                 return false;
             }
             return
-                !string.Equals(Name1, GeoCode1.Name, StringComparison.OrdinalIgnoreCase);
+                !string.Equals(
+                    inputLocation.Name1,
+                    GeoCode1.Name,
+                    StringComparison.OrdinalIgnoreCase);
         }
 
         public bool IsName2Different()
@@ -71,7 +71,10 @@ namespace MultiLevelGeoCoder.Logic
                 return false;
             }
             return
-                !string.Equals(Name2, GeoCode2.Name, StringComparison.OrdinalIgnoreCase);
+                !string.Equals(
+                    inputLocation.Name2,
+                    GeoCode2.Name,
+                    StringComparison.OrdinalIgnoreCase);
         }
 
         public bool IsName3Different()
@@ -81,7 +84,10 @@ namespace MultiLevelGeoCoder.Logic
                 return false;
             }
             return
-                !string.Equals(Name3, GeoCode3.Name, StringComparison.OrdinalIgnoreCase);
+                !string.Equals(
+                    inputLocation.Name3,
+                    GeoCode3.Name,
+                    StringComparison.OrdinalIgnoreCase);
         }
 
         #endregion Methods
