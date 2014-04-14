@@ -14,32 +14,6 @@ namespace MultiLevelGeoCoderTests
     public class CsvTests
     {
         [TestMethod]
-        public void LoadGadmCSV()
-        {
-            List<Gadm> gadmList;
-
-            //Given
-            string csv = @"""PID"",""ID_0"",""ISO"",""NAME_0"",""ID_1"",""NAME_1"",""ID_2"",""NAME_2"",""ID_3"",""NAME_3"",""NL_NAME_3"",""VARNAME_3"",""TYPE_3"",""ENGTYPE_3""" + Environment.NewLine
-                       + @"50863,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",172,""San Jose Norte"","""","""",""Barangay"",""Village""" + Environment.NewLine
-                       + @"50864,177,""PHL"",""Philippines"",1,""Abra"",16,""Manabo"",173,""San Jose Sur"","""","""",""Barangay"",""Village""" + Environment.NewLine;
-
-            //When
-            using (var sr = new StringReader(csv))
-            {
-                var csvReader = new CsvReader(sr);
-                gadmList = csvReader.GetRecords<Gadm>().ToList();
-            }
-
-            //Then
-            Assert.AreEqual(2, gadmList.Count);
-            Assert.AreEqual("Abra", gadmList.First().Name1);
-            Assert.AreEqual("Abra", gadmList.Last().Name1);
-            Assert.AreEqual("Manabo", gadmList.First().Name2);
-            Assert.AreEqual("Manabo", gadmList.Last().Name2);
-            Assert.AreEqual("San Jose Norte", gadmList.First().Name3);
-            Assert.AreEqual("San Jose Sur", gadmList.Last().Name3);
-        }
-        [TestMethod]
         public void LoadInputCSV()
         {
             //Given
