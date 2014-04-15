@@ -80,13 +80,16 @@ namespace GeoLocationTool.UI
                 if (!geoCoder.IsGazetteerInitialised())
                 {
                     MessageBox.Show(
-                        "Gazetteer data missing, please read in a gazetteer file.", "Missing");
+                        "Gazetteer data missing, please read in a gazetteer file.",
+                        "Missing");
                     return;
                 }
 
                 if (geoCoder.InputData == null)
                 {
-                    MessageBox.Show("Input data missing, please read in an input file.", "Missing");
+                    MessageBox.Show(
+                        "Input data missing, please read in an input file.",
+                        "Missing");
                     return;
                 }
 
@@ -97,7 +100,9 @@ namespace GeoLocationTool.UI
 
                 if (string.IsNullOrEmpty(geoCoder.OutputFileName))
                 {
-                    MessageBox.Show("Output file missing, please select the output file.", "Missing");
+                    MessageBox.Show(
+                        "Output file missing, please select the output file.",
+                        "Missing");
                     return;
                 }
                 SetColumnNames();
@@ -119,13 +124,16 @@ namespace GeoLocationTool.UI
                 if (!geoCoder.IsGazetteerInitialised())
                 {
                     MessageBox.Show(
-                        "Gazetteer data missing, please read in a gazetteer file.", "Missing");
+                        "Gazetteer data missing, please read in a gazetteer file.",
+                        "Missing");
                     return;
                 }
 
                 if (geoCoder.InputData == null)
                 {
-                    MessageBox.Show("Input data missing, please read in an input file.", "Missing");
+                    MessageBox.Show(
+                        "Input data missing, please read in an input file.",
+                        "Missing");
                     return;
                 }
 
@@ -178,7 +186,7 @@ namespace GeoLocationTool.UI
         {
             dataGridView1.DataSource = geoCoder.InputData;
             dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+                DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void FormLoadData_FormClosing(object sender, FormClosingEventArgs e)

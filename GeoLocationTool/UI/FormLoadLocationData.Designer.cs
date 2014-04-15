@@ -156,11 +156,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 10);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 223);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 214);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1356, 487);
+            this.dataGridView1.Size = new System.Drawing.Size(1356, 496);
             this.dataGridView1.TabIndex = 62;
             this.dataGridView1.TabStop = false;
             // 
@@ -168,7 +168,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(648, 23);
+            this.label3.Location = new System.Drawing.Point(795, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 17);
             this.label3.TabIndex = 28;
@@ -180,8 +180,9 @@
             this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnNext.Location = new System.Drawing.Point(1237, 174);
             this.btnNext.Name = "btnNext";
+            this.tableLayoutPanel1.SetRowSpan(this.btnNext, 2);
             this.btnNext.Size = new System.Drawing.Size(122, 33);
-            this.btnNext.TabIndex = 10;
+            this.btnNext.TabIndex = 14;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -190,10 +191,10 @@
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtFileName, 3);
-            this.txtFileName.Location = new System.Drawing.Point(789, 21);
+            this.txtFileName.Location = new System.Drawing.Point(936, 21);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(570, 22);
+            this.txtFileName.Size = new System.Drawing.Size(423, 22);
             this.txtFileName.TabIndex = 29;
             this.txtFileName.TabStop = false;
             // 
@@ -203,58 +204,58 @@
             this.cboLevel2Codes.FormattingEnabled = true;
             this.cboLevel2Codes.Location = new System.Drawing.Point(267, 114);
             this.cboLevel2Codes.Name = "cboLevel2Codes";
-            this.cboLevel2Codes.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel2Codes.TabIndex = 68;
+            this.cboLevel2Codes.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel2Codes.TabIndex = 5;
             // 
             // cboLevel2Names
             // 
             this.cboLevel2Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2Names.FormattingEnabled = true;
-            this.cboLevel2Names.Location = new System.Drawing.Point(394, 114);
+            this.cboLevel2Names.Location = new System.Drawing.Point(443, 114);
             this.cboLevel2Names.Name = "cboLevel2Names";
-            this.cboLevel2Names.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel2Names.TabIndex = 69;
+            this.cboLevel2Names.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel2Names.TabIndex = 6;
             // 
             // cboLevel2AltNames
             // 
             this.cboLevel2AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2AltNames.FormattingEnabled = true;
-            this.cboLevel2AltNames.Location = new System.Drawing.Point(521, 114);
+            this.cboLevel2AltNames.Location = new System.Drawing.Point(619, 114);
             this.cboLevel2AltNames.Name = "cboLevel2AltNames";
-            this.cboLevel2AltNames.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel2AltNames.TabIndex = 70;
+            this.cboLevel2AltNames.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel2AltNames.TabIndex = 7;
             // 
             // cboLevel1AltNames
             // 
             this.cboLevel1AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1AltNames.FormattingEnabled = true;
-            this.cboLevel1AltNames.Location = new System.Drawing.Point(521, 84);
+            this.cboLevel1AltNames.Location = new System.Drawing.Point(619, 84);
             this.cboLevel1AltNames.Name = "cboLevel1AltNames";
-            this.cboLevel1AltNames.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1AltNames.TabIndex = 74;
+            this.cboLevel1AltNames.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel1AltNames.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(521, 64);
+            this.label6.Location = new System.Drawing.Point(619, 64);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 17);
+            this.label6.Size = new System.Drawing.Size(170, 17);
             this.label6.TabIndex = 37;
-            this.label6.Text = "Alternate Name";
+            this.label6.Text = "Alternate Name (optional)";
             // 
             // cboLevel1Names
             // 
             this.cboLevel1Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1Names.FormattingEnabled = true;
-            this.cboLevel1Names.Location = new System.Drawing.Point(394, 84);
+            this.cboLevel1Names.Location = new System.Drawing.Point(443, 84);
             this.cboLevel1Names.Name = "cboLevel1Names";
-            this.cboLevel1Names.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1Names.TabIndex = 66;
+            this.cboLevel1Names.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel1Names.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(394, 64);
+            this.label2.Location = new System.Drawing.Point(443, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 17);
             this.label2.TabIndex = 33;
@@ -266,8 +267,8 @@
             this.cboLevel1Codes.FormattingEnabled = true;
             this.cboLevel1Codes.Location = new System.Drawing.Point(267, 84);
             this.cboLevel1Codes.Name = "cboLevel1Codes";
-            this.cboLevel1Codes.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel1Codes.TabIndex = 65;
+            this.cboLevel1Codes.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel1Codes.TabIndex = 2;
             // 
             // label4
             // 
@@ -302,19 +303,19 @@
             // 
             this.cboLevel3AltNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3AltNames.FormattingEnabled = true;
-            this.cboLevel3AltNames.Location = new System.Drawing.Point(521, 144);
+            this.cboLevel3AltNames.Location = new System.Drawing.Point(619, 144);
             this.cboLevel3AltNames.Name = "cboLevel3AltNames";
-            this.cboLevel3AltNames.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel3AltNames.TabIndex = 73;
+            this.cboLevel3AltNames.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel3AltNames.TabIndex = 10;
             // 
             // cboLevel3Names
             // 
             this.cboLevel3Names.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3Names.FormattingEnabled = true;
-            this.cboLevel3Names.Location = new System.Drawing.Point(394, 144);
+            this.cboLevel3Names.Location = new System.Drawing.Point(443, 144);
             this.cboLevel3Names.Name = "cboLevel3Names";
-            this.cboLevel3Names.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel3Names.TabIndex = 72;
+            this.cboLevel3Names.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel3Names.TabIndex = 9;
             // 
             // cboLevel3Codes
             // 
@@ -322,8 +323,8 @@
             this.cboLevel3Codes.FormattingEnabled = true;
             this.cboLevel3Codes.Location = new System.Drawing.Point(267, 144);
             this.cboLevel3Codes.Name = "cboLevel3Codes";
-            this.cboLevel3Codes.Size = new System.Drawing.Size(121, 24);
-            this.cboLevel3Codes.TabIndex = 71;
+            this.cboLevel3Codes.Size = new System.Drawing.Size(170, 24);
+            this.cboLevel3Codes.TabIndex = 8;
             // 
             // label9
             // 
@@ -342,34 +343,35 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(267, 174);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 76;
+            this.tableLayoutPanel1.SetRowSpan(this.comboBox1, 2);
+            this.comboBox1.Size = new System.Drawing.Size(170, 24);
+            this.comboBox1.TabIndex = 11;
             // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(394, 174);
+            this.comboBox2.Location = new System.Drawing.Point(443, 174);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 77;
+            this.comboBox2.Size = new System.Drawing.Size(170, 24);
+            this.comboBox2.TabIndex = 12;
             // 
             // comboBox3
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.Enabled = false;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(521, 174);
+            this.comboBox3.Location = new System.Drawing.Point(619, 174);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 24);
-            this.comboBox3.TabIndex = 78;
+            this.comboBox3.Size = new System.Drawing.Size(170, 24);
+            this.comboBox3.TabIndex = 13;
             // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(202, 182);
+            this.label10.Location = new System.Drawing.Point(202, 177);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 17);
             this.label10.TabIndex = 75;
@@ -382,7 +384,7 @@
             this.ClientSize = new System.Drawing.Size(1362, 723);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FormLoadLocationData";
-            this.Text = "Multi Level Geo-Coder Tool - Gazetteer Data";
+            this.Text = "Multi Level Geo-Coder Tool   Gazetteer Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLoadLocationData_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

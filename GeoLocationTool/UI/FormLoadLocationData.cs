@@ -47,8 +47,8 @@ namespace GeoLocationTool.UI
             }
             catch (Exception ex)
             {
-                ErrorHandler.Process("Form load error.",ex);
-            }         
+                ErrorHandler.Process("Form load error.", ex);
+            }
         }
 
         #endregion Constructors
@@ -129,7 +129,7 @@ namespace GeoLocationTool.UI
 
             //optional columns so display a blank row at the top
             IList<string> columnNames1 = geoCoder.AllGazetteerColumnNames();
-            columnNames1.Insert(0,string.Empty);
+            columnNames1.Insert(0, string.Empty);
             cboLevel1AltNames.DataSource = columnNames1;
 
             IList<string> columnNames2 = geoCoder.AllGazetteerColumnNames();
@@ -159,7 +159,7 @@ namespace GeoLocationTool.UI
             geoCoder.LoadGazetter(path);
             dataGridView1.DataSource = geoCoder.GazetteerData;
             dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+                DataGridViewAutoSizeColumnsMode.AllCells;
             txtFileName.Text = path;
         }
 
