@@ -26,9 +26,15 @@ namespace MultiLevelGeoCoder.Logic
 
             // initialise the names
             Name1 = string.Copy(inputLocation.Name1);
-            Name2 = string.Copy(inputLocation.Name2);
-            ;
-            Name3 = string.Copy(inputLocation.Name3);
+            if (inputLocation.Name2 != null)
+            {
+                Name2 = string.Copy(inputLocation.Name2);
+            }
+
+            if (inputLocation.Name3 != null)
+            {
+                Name3 = string.Copy(inputLocation.Name3);
+            }        
         }
 
         #endregion Constructors
