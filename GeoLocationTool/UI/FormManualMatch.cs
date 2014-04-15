@@ -317,119 +317,161 @@ namespace GeoLocationTool.UI
 
         private void DisplayLevel1List()
         {
-            cboLevel1Manual.DataSource = geoCoder.Level1LocationNames();
+            if (string.IsNullOrEmpty(Level1Text()))
+            {
+                cboLevel1Manual.DataSource = null;
+            }
+            else
+            {
+                cboLevel1Manual.DataSource = geoCoder.Level1LocationNames();
+            }
+        }
+
+        private string Level1Text()
+        {
+            return txtLevel1Original.Text.Trim();
         }
 
         private void DisplayLevel1Suggestions()
         {
-            string level1 = txtLevel1Original.Text;
+            if (string.IsNullOrEmpty(Level1Text()))
+            {
+                // empty list
+                cboLevel1Suggestion.DataSource = null;
+            }
+            else
+            {
+                // get any saved matched name
+                IEnumerable<MatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
+                    Level1Text());
 
-            // get any saved matched name
-            IEnumerable<MatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
-                level1);
+                // add it to the top of the list
+                cboLevel1Suggestion.DisplayMember = "DisplayText";
+                // todo:  after testing don't display the coeficient
+                cboLevel1Suggestion.ValueMember = "Location";
 
-            // add it to the top of the list
-            cboLevel1Suggestion.DisplayMember = "DisplayText";
-            // todo:  after testing don't display the coeficient
-            cboLevel1Suggestion.ValueMember = "Location";
-
-            cboLevel1Suggestion.DataSource =
-                ConcatWithDistinct(
-                    savedMatch,
-                    fuzzyMatch.GetLevel1Suggestions(level1))
-                    .ToList();
+                cboLevel1Suggestion.DataSource =
+                    ConcatWithDistinct(
+                        savedMatch,
+                        fuzzyMatch.GetLevel1Suggestions(Level1Text()))
+                        .ToList();
+            }
         }
 
         private void DisplayLevel2List()
         {
-            if (string.IsNullOrEmpty(txtLevel2Original.Text))
+            if (string.IsNullOrEmpty(Level2Text()))
             {
                 // empty list
                 cboLevel2Manual.DataSource = null;
-                DisplayLevel3List();
+                cboLevel3Manual.DataSource = null;
             }
             else
             {
-                // based on selected level 1
-                cboLevel2Manual.DataSource = geoCoder.Level2LocationNames(
-                    cboLevel1Manual.SelectedValue.ToString());
+                // display lists based on selected level 1
+                if (cboLevel1Manual.SelectedValue != null)
+                {
+                    cboLevel2Manual.DataSource = geoCoder.Level2LocationNames(
+                        cboLevel1Manual.SelectedValue.ToString());
+                }
             }
+        }
+
+        private string Level2Text()
+        {
+            return txtLevel2Original.Text.Trim();
         }
 
         private void DisplayLevel2Suggestions()
         {
-            if (string.IsNullOrEmpty(txtLevel2Original.Text))
+            if (string.IsNullOrEmpty(Level2Text()))
             {
                 // empty list
-                cboLevel2Suggestion.DataSource = new List<string>();
-                DisplayLevel3Suggestions();
+                cboLevel2Suggestion.DataSource = null;
+                cboLevel3Suggestion.DataSource = null;
             }
             else
             {
                 //based on the suggested level 1 and the original level2
-                string level1 = cboLevel1Suggestion.SelectedValue.ToString();
-                string level2 = txtLevel2Original.Text.Trim();
+                if (cboLevel1Suggestion.SelectedValue != null)
+                {
+                    string level1 = cboLevel1Suggestion.SelectedValue.ToString();
 
-                // get any saved matched name
-                IEnumerable<MatchResult> savedMatch =
-                    geoCoder.GetSavedMatchLevel2(level2, level1);
+                    // get any saved matched name
+                    IEnumerable<MatchResult> savedMatch =
+                        geoCoder.GetSavedMatchLevel2(Level2Text(), level1);
 
-                // Add it to the top of the suggestions list
-                cboLevel2Suggestion.DataSource =
-                    ConcatWithDistinct(
-                        savedMatch,
-                        fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
+                    // Add it to the top of the suggestions list
+                    cboLevel2Suggestion.DataSource =
+                        ConcatWithDistinct(
+                            savedMatch,
+                            fuzzyMatch.GetLevel2Suggestions(level1, Level2Text())).ToList();
 
-                cboLevel2Suggestion.DisplayMember = "DisplayText";
-                // todo:  after testing don't display the coeficient
-                cboLevel2Suggestion.ValueMember = "Location";
+                    cboLevel2Suggestion.DisplayMember = "DisplayText";
+                    // todo:  after testing don't display the coeficient
+                    cboLevel2Suggestion.ValueMember = "Location";
+                }
             }
         }
 
         private void DisplayLevel3List()
         {
-            if (string.IsNullOrEmpty(txtLevel3Original.Text))
+            if (string.IsNullOrEmpty(Level3Text()))
             {
                 // empty list
                 cboLevel3Manual.DataSource = null;
             }
             else
             {
-                // based on selected level 1 and 2
-                cboLevel3Manual.DataSource = geoCoder.Level3LocationNames(
-                    cboLevel1Manual.SelectedValue.ToString(),
-                    cboLevel2Manual.SelectedValue.ToString());
+                if (cboLevel1Manual.SelectedValue != null &&
+                    cboLevel2Manual.SelectedValue != null)
+                {
+                    // display listbased on selected level 1 and 2
+                    cboLevel3Manual.DataSource = geoCoder.Level3LocationNames(
+                        cboLevel1Manual.SelectedValue.ToString(),
+                        cboLevel2Manual.SelectedValue.ToString());
+                }
             }
         }
 
         private void DisplayLevel3Suggestions()
         {
-            if (string.IsNullOrEmpty(txtLevel3Original.Text))
+            if (string.IsNullOrEmpty(Level3Text()))
             {
                 // empty list
-                cboLevel3Suggestion.DataSource = new List<string>();
+                cboLevel3Suggestion.DataSource = null;
             }
             else
             {
-                //based on the suggested level 1 and 2 and the original level3
-                string level1 = cboLevel1Suggestion.SelectedValue.ToString();
-                string level2 = cboLevel2Suggestion.SelectedValue.ToString();
-                string level3 = txtLevel3Original.Text.Trim();
+                if (cboLevel1Suggestion.SelectedValue != null &&
+                    cboLevel2Suggestion.SelectedValue != null)
+                {
+                    // display list based on the suggested level 1 and 2 and the original level3
+                    string level1 = cboLevel1Suggestion.SelectedValue.ToString();
+                    string level2 = cboLevel2Suggestion.SelectedValue.ToString();
+                    string level3 = txtLevel3Original.Text.Trim();
 
-                // get any saved matched name
-                IEnumerable<MatchResult> savedMatch =
-                    geoCoder.GetSavedMatchLevel3(level3, level1, level2);
+                    // get any saved matched name
+                    IEnumerable<MatchResult> savedMatch =
+                        geoCoder.GetSavedMatchLevel3(level3, level1, level2);
 
-                // Add it to the top of the suggestions list
-                cboLevel3Suggestion.DataSource =
-                    ConcatWithDistinct(
-                        savedMatch,
-                        fuzzyMatch.GetLevel3Suggestions(level1, level2, level3)).ToList();
+                    // Add it to the top of the suggestions list
+                    cboLevel3Suggestion.DataSource =
+                        ConcatWithDistinct(
+                            savedMatch,
+                            fuzzyMatch.GetLevel3Suggestions(level1, level2, level3))
+                            .ToList();
 
-                cboLevel3Suggestion.DisplayMember = "DisplayText";
-                // todo:  after testing don't display the coeficient
-                cboLevel3Suggestion.ValueMember = "Location";
+                    cboLevel3Suggestion.DisplayMember = "DisplayText";
+                    // todo:  after testing don't display the coeficient
+                    cboLevel3Suggestion.ValueMember = "Location";
+                }
             }
+        }
+
+        private string Level3Text()
+        {
+            return txtLevel3Original.Text.Trim();
         }
 
         private void DisplayRecords()
