@@ -139,6 +139,7 @@ namespace GeoLocationTool.UI
 
                 SetColumnNames();
                 geoCoder.CodeAll();
+                btnManualMatch.Enabled = true;
                 DisplayData();
                 SaveOutputFile();
             }
@@ -293,6 +294,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
             rdoImportCsv.Checked = true;
+            btnManualMatch.Enabled = false;
         }
 
         #endregion Methods
