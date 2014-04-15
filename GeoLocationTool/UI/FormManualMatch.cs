@@ -312,7 +312,7 @@ namespace GeoLocationTool.UI
         private void DisplayAllRecords()
         {
             dataGridView1.DataSource = geoCoder.InputData;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void DisplayLevel1List()
@@ -519,7 +519,7 @@ namespace GeoLocationTool.UI
         private void DisplayUnmatchedRecords()
         {
             dataGridView1.DataSource = geoCoder.UncodedRecords();
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void FormManualMatch_Load(object sender, EventArgs e)
