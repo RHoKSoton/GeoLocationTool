@@ -97,7 +97,7 @@ namespace MultiLevelGeoCoder.DataAccess
             {
                 SqlConnection.Execute(
                     @"INSERT INTO Level1Matches (Id, Level1, AltLevel1, Weight)
-                                    VALUES (newid(), @level1, @alternateName, 1)",
+                                    VALUES (newid(), @level1, @alternateName, 2)",
                     new {level1, alternateName});
             }
             else
@@ -120,7 +120,7 @@ namespace MultiLevelGeoCoder.DataAccess
             {
                 SqlConnection.Execute(
                     @"INSERT INTO Level2Matches (Id, Level1, Level2, AltLevel2, Weight)
-                                    VALUES (newid(), @level1, @level2, @alternateName, 1)",
+                                    VALUES (newid(), @level1, @level2, @alternateName, 2)",
                     new {alternateName, level1, level2});
             }
             else
@@ -148,7 +148,7 @@ namespace MultiLevelGeoCoder.DataAccess
             {
                 SqlConnection.Execute(
                     @"INSERT INTO Level3Matches (Id, Level1, Level2, Level3, AltLevel3, Weight)
-                                    VALUES (newid(), @level1, @level2, @level3, @alternateName, 1)",
+                                    VALUES (newid(), @level1, @level2, @level3, @alternateName, 2)",
                     new {alternateName, level1, level2, level3});
             }
             else
