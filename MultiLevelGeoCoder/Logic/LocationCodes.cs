@@ -4,6 +4,7 @@ namespace MultiLevelGeoCoder.Logic
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using DataAccess;
     using Model;
@@ -26,6 +27,9 @@ namespace MultiLevelGeoCoder.Logic
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
         private readonly GazetteerDataDictionaries dictionary;
+
+        //todo remove  stopwatch after testing
+        private readonly Stopwatch watch = new Stopwatch();
 
         #endregion Fields
 
@@ -55,9 +59,11 @@ namespace MultiLevelGeoCoder.Logic
             Location location,
             bool useMatchedNamesCache = false)
         {
+            watch.Start();
             CodedLocation codedLocation = new CodedLocation(location);
-
+            var time = watch.Elapsed;
             GetLevel1Code(codedLocation, useMatchedNamesCache);
+
             if (codedLocation.GeoCode1 != null)
             {
                 GetLevel2Code(codedLocation, useMatchedNamesCache);
@@ -67,6 +73,8 @@ namespace MultiLevelGeoCoder.Logic
                 }
             }
 
+            Debug.WriteLine(
+                "Time to get codes: " + watch.Elapsed.Subtract(time) + Environment.NewLine);
             return codedLocation;
         }
 

@@ -118,6 +118,45 @@ namespace MultiLevelGeoCoderTests
             }
         }
 
+        /// <summary>
+        /// Given pre created gazetteer and input csv files and an exising database
+        /// When GeoCoder code all is run
+        /// The time taken and the number of input lines is obtained
+        /// </summary>
+        [TestMethod]
+        public void GeoCoderCodeAll_UseActualData_PerfsTests()
+        {
+            // Manually create and copy the GeoLocationTool.sdf file 
+            // Manually create and copy the input and gazetteer files
+            const string dbLocation1 = @"GeoLocationTool.sdf";
+            connection = DBHelper.GetDbConnection(dbLocation1);
+            // connection.InitializeDB();
+            GeoCoder geoCoder = new GeoCoder(connection);
+            geoCoder.LoadGazetter(@"TestGaz1.csv");// You need to copy this file manually
+            Stopwatch watch = new Stopwatch();
+            geoCoder.SetGazetteerColumns(new GazetteerColumnNames
+            {
+                Level1Code = "ID_1",
+                Level2Code = "ID_2",
+                Level3Code = "ID_3",
+                Level1Name = "NAME_1",
+                Level2Name = "NAME_2",
+                Level3Name = "NAME_3",
+                Level1AltName = "VARNAME_1",
+                Level2AltName = "VARNAME_2",
+                Level3AltName = "VARNAME_3"
+            }, false);
+
+            geoCoder.LoadInputFileCsv("TestInput1.csv"); // You need to copy this file manually
+            geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+            watch.Start();
+            geoCoder.CodeAll();
+            Debug.WriteLine(geoCoder.InputData.Rows.Count + " input lines: " + watch.Elapsed.TotalSeconds);
+
+            // Example results
+            // 25 input lines: 0.072016
+        }
+
         #endregion Methods
     }
 }

@@ -6,6 +6,7 @@ namespace MultiLevelGeoCoder
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
+    using System.Diagnostics;
     using DataAccess;
     using Logic;
     using Model;
@@ -75,7 +76,10 @@ namespace MultiLevelGeoCoder
 
         public void CodeAll()
         {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
             inputData.CodeAll(locationCodes);
+            Debug.WriteLine("CodeAll: " + watch.Elapsed.TotalSeconds);
         }
 
         public InputColumnNames CodeColumnNames()
