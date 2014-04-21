@@ -137,17 +137,27 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
+
                 SetColumnNames();
+
+                // disconnect the data grid untill the coding is complete
+                dataGridView1.DataSource = null;
+
+                Cursor = Cursors.WaitCursor;
                 geoCoder.CodeAll();
                 btnManualMatch.Enabled = true;
                 DisplayData();
-                SaveOutputFile();
+                SaveOutputFile();               
             }
             catch (Exception ex)
             {
                 ErrorHandler.Process(
                     "A problem occurred with the data matching process.",
                     ex);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
