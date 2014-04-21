@@ -18,6 +18,7 @@ namespace GeoLocationTool.UI
 
         private readonly FuzzyMatch fuzzyMatch;
         private readonly IGeoCoder geoCoder;
+        private readonly DataGridView parentGrid;
         private bool matchInProgress;
         private int selectedRowIndex;
 
@@ -25,10 +26,11 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormManualMatch(IGeoCoder geoCoder)
+        public FormManualMatch(IGeoCoder geoCoder, DataGridView parentGrid)
         {
             InitializeComponent();
             this.geoCoder = geoCoder;
+            this.parentGrid = parentGrid;
             fuzzyMatch = geoCoder.FuzzyMatch();
         }
 
@@ -109,8 +111,18 @@ namespace GeoLocationTool.UI
             try
             {
                 matchInProgress = true;
+
+                // disconnect the data grids until the coding is complete
+                dataGridView1.DataSource = null;
+                parentGrid.DataSource = null;
                 Cursor = Cursors.WaitCursor;
                 geoCoder.CodeAll();
+
+                // reconect the data grids
+                DisplayRecords();
+                parentGrid.DataSource = geoCoder.InputData;
+                parentGrid.AutoSizeColumnsMode =
+                    DataGridViewAutoSizeColumnsMode.AllCells;
             }
             catch (Exception ex)
             {

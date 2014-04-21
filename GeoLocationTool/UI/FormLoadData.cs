@@ -106,7 +106,7 @@ namespace GeoLocationTool.UI
                     return;
                 }
                 SetColumnNames();
-                FormManualMatch formManualMatch = new FormManualMatch(geoCoder);
+                FormManualMatch formManualMatch = new FormManualMatch(geoCoder, dataGridView1);
                 formManualMatch.ShowDialog();
             }
             catch (Exception ex)
