@@ -35,12 +35,12 @@ namespace MultiLevelGeoCoder.Logic
         /// <value>
         /// The location list.
         /// </value>
-        public List<Gadm> LocationList
+        public List<GazetteerRecord> LocationList
         {
             get
             {
                 // create a new list of  just the gazetteer data that we need
-                List<Gadm> locationCodeList = new List<Gadm>();
+                List<GazetteerRecord> locationCodeList = new List<GazetteerRecord>();
                 foreach (DataRow row in Data.Rows)
                 {
                     AddRecord(locationCodeList, row);
@@ -67,7 +67,7 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         private static void SetValue(
-            Gadm gazetteerRecord,
+            GazetteerRecord gazetteerRecord,
             string propertyName,
             DataRow row,
             string columnName)
@@ -83,23 +83,23 @@ namespace MultiLevelGeoCoder.Logic
             }
         }
 
-        private void AddRecord(ICollection<Gadm> locationCodeList, DataRow row)
+        private void AddRecord(ICollection<GazetteerRecord> locationCodeList, DataRow row)
         {
-            Gadm gadm = new Gadm();
+            GazetteerRecord gazetteerRecord = new GazetteerRecord();
 
-            SetValue(gadm, "Name1", row, ColumnNames.Level1Name);
-            SetValue(gadm, "Name2", row, ColumnNames.Level2Name);
-            SetValue(gadm, "Name3", row, ColumnNames.Level3Name);
+            SetValue(gazetteerRecord, "Name1", row, ColumnNames.Level1Name);
+            SetValue(gazetteerRecord, "Name2", row, ColumnNames.Level2Name);
+            SetValue(gazetteerRecord, "Name3", row, ColumnNames.Level3Name);
 
-            SetValue(gadm, "Id1", row, ColumnNames.Level1Code);
-            SetValue(gadm, "Id2", row, ColumnNames.Level2Code);
-            SetValue(gadm, "Id3", row, ColumnNames.Level3Code);
+            SetValue(gazetteerRecord, "Id1", row, ColumnNames.Level1Code);
+            SetValue(gazetteerRecord, "Id2", row, ColumnNames.Level2Code);
+            SetValue(gazetteerRecord, "Id3", row, ColumnNames.Level3Code);
 
-            SetValue(gadm, "AltName1", row, ColumnNames.Level1AltName);
-            SetValue(gadm, "AltName2", row, ColumnNames.Level2AltName);
-            SetValue(gadm, "AltName3", row, ColumnNames.Level3AltName);
+            SetValue(gazetteerRecord, "AltName1", row, ColumnNames.Level1AltName);
+            SetValue(gazetteerRecord, "AltName2", row, ColumnNames.Level2AltName);
+            SetValue(gazetteerRecord, "AltName3", row, ColumnNames.Level3AltName);
 
-            locationCodeList.Add(gadm);
+            locationCodeList.Add(gazetteerRecord);
         }
 
         #endregion Methods

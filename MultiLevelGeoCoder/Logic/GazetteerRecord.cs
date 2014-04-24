@@ -1,11 +1,11 @@
-﻿// Gadm.cs
+﻿// GazetteerRecord.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
     /// Holds a record from the Gazetteer data file
     /// </summary>
-    internal class Gadm
+    internal class GazetteerRecord
     {
         #region Properties
 

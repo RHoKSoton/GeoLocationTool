@@ -11,7 +11,7 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        private readonly IEnumerable<Gadm> gazzetteerData;
+        private readonly IEnumerable<GazetteerRecord> gazzetteerData;
 
         private Dictionary<string, GeoCode> level1Dictionary;
         private Dictionary<string, GeoCode> level2Dictionary;
@@ -21,7 +21,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Constructors
 
-        public GazetteerDataDictionaries(IEnumerable<Gadm> gazzetteerData)
+        public GazetteerDataDictionaries(IEnumerable<GazetteerRecord> gazzetteerData)
         {
             this.gazzetteerData = gazzetteerData;
             InitializeDictionaries();
@@ -58,48 +58,48 @@ namespace MultiLevelGeoCoder.Logic
             return geoCode;
         }
 
-        private void DictionaryLevel1UsingAlternateNames(Gadm gadm)
+        private void DictionaryLevel1UsingAlternateNames(GazetteerRecord gazetteerRecord)
         {
             // P1A
-            if (!string.IsNullOrEmpty(gadm.AltName1))
+            if (!string.IsNullOrEmpty(gazetteerRecord.AltName1))
             {
-                string altLevel1Key1 = gadm.AltName1.Trim().ToLower();
+                string altLevel1Key1 = gazetteerRecord.AltName1.Trim().ToLower();
                 if (!level1Dictionary.ContainsKey(altLevel1Key1))
-                    level1Dictionary.Add(altLevel1Key1, new GeoCode(gadm.Id1, gadm.Name1));
+                    level1Dictionary.Add(altLevel1Key1, new GeoCode(gazetteerRecord.Id1, gazetteerRecord.Name1));
             }
         }
 
-        private void DictionaryLevel2UsingAlternateNames(Gadm gadm)
+        private void DictionaryLevel2UsingAlternateNames(GazetteerRecord gazetteerRecord)
         {
             // standard name
-            string level1 = gadm.Name1.Trim().ToLower();
+            string level1 = gazetteerRecord.Name1.Trim().ToLower();
 
 
-            if (!string.IsNullOrEmpty(gadm.AltName2))
+            if (!string.IsNullOrEmpty(gazetteerRecord.AltName2))
             {
-                string altLevel2 = gadm.AltName2.Trim().ToLower();
+                string altLevel2 = gazetteerRecord.AltName2.Trim().ToLower();
 
                 // P1 + T1A
                 string altLevel2Key1 = level1 + altLevel2;
                 if (!level2Dictionary.ContainsKey(altLevel2Key1))
-                    level2Dictionary.Add(altLevel2Key1, new GeoCode(gadm.Id2, gadm.Name2));
+                    level2Dictionary.Add(altLevel2Key1, new GeoCode(gazetteerRecord.Id2, gazetteerRecord.Name2));
             }
         }
 
-        private void DictionaryLevel3UsingAlternateNames(Gadm gadm)
+        private void DictionaryLevel3UsingAlternateNames(GazetteerRecord gazetteerRecord)
         {
             // standard names
-            string level1 = gadm.Name1.Trim().ToLower();
-            string level2 = gadm.Name2.Trim().ToLower();
+            string level1 = gazetteerRecord.Name1.Trim().ToLower();
+            string level2 = gazetteerRecord.Name2.Trim().ToLower();
 
             // alternate names
-            if (!string.IsNullOrEmpty(gadm.AltName3))
+            if (!string.IsNullOrEmpty(gazetteerRecord.AltName3))
             {
-                string altLevel3 = gadm.AltName3.Trim().ToLower();
+                string altLevel3 = gazetteerRecord.AltName3.Trim().ToLower();
                 //P1 + T1 + V1A
                 string altLevel3Key1 = level1 + level2 + altLevel3;
                 if (!level3Dictionary.ContainsKey(altLevel3Key1))
-                    level3Dictionary.Add(altLevel3Key1, new GeoCode(gadm.Id3, gadm.Name3));
+                    level3Dictionary.Add(altLevel3Key1, new GeoCode(gazetteerRecord.Id3, gazetteerRecord.Name3));
             }
         }
 

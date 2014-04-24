@@ -23,7 +23,7 @@ namespace MultiLevelGeoCoder.Logic
         //todo remove after testing
         public static bool UseGazetteerFirst = true; // for testing
 
-        private readonly IEnumerable<Gadm> gazzetteerData;
+        private readonly IEnumerable<GazetteerRecord> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
         private readonly GazetteerDataDictionaries dictionary;
@@ -36,7 +36,7 @@ namespace MultiLevelGeoCoder.Logic
         #region Constructors
 
         public LocationCodes(
-            IEnumerable<Gadm> gazzetteerData,
+            IEnumerable<GazetteerRecord> gazzetteerData,
             IMatchProvider matchProvider)
         {
             this.gazzetteerData = gazzetteerData;
@@ -150,7 +150,7 @@ namespace MultiLevelGeoCoder.Logic
                         StringComparison.OrdinalIgnoreCase))
                 select record;
 
-            Gadm firstOrDefault = matchRecords.FirstOrDefault();
+            GazetteerRecord firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
             {
                 location.GeoCode1 = new GeoCode(firstOrDefault.Id1, firstOrDefault.Name1);

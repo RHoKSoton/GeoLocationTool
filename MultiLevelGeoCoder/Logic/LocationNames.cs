@@ -13,13 +13,13 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
-        private readonly List<Gadm> gazzetteerData;
+        private readonly List<GazetteerRecord> gazzetteerData;
 
         #endregion Fields
 
         #region Constructors
 
-        public LocationNames(List<Gadm> locationList)
+        public LocationNames(List<GazetteerRecord> locationList)
         {
             gazzetteerData = locationList;
         }

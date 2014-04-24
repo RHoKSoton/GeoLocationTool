@@ -48,12 +48,12 @@ namespace MultiLevelGeoCoderTests
             return dt;
         }
 
-        public List<Gadm> GadmList()
+        public List<GazetteerRecord> GadmList()
         {
-            List<Gadm> gadmList = new List<Gadm>();
+            List<GazetteerRecord> gadmList = new List<GazetteerRecord>();
             foreach (var line in lines)
             {
-                Gadm record = new Gadm();
+                GazetteerRecord record = new GazetteerRecord();
                 record.Name1 = line.Item1[0];
                 record.Name2 = line.Item1[1];
                 record.Name3 = line.Item1[2];

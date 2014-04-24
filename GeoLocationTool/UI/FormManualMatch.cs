@@ -360,7 +360,7 @@ namespace GeoLocationTool.UI
                 // add any saved match to the top of the list
                 var list = ConcatWithDistinct(
                     savedMatch,
-                    fuzzyMatch.GetLevel1Suggestions(Level1Original()))
+                    fuzzyMatch.Level1Suggestions(Level1Original()))
                     .ToList();
 
                 cboLevel1Suggestion.DataSource = list;
@@ -425,7 +425,7 @@ namespace GeoLocationTool.UI
                     // Add the saved match to the top of the suggestions list
                     var list = ConcatWithDistinct(
                         savedMatch,
-                        fuzzyMatch.GetLevel2Suggestions(level1, level2)).ToList();
+                        fuzzyMatch.Level2Suggestions(level1, level2)).ToList();
 
                     // add a leave blank option to the bottom of the list
                     MatchResult blank = new MatchResult(LeaveBlankText, 0);
@@ -493,7 +493,7 @@ namespace GeoLocationTool.UI
                     // Add any saved match to the top of the suggestions list
                     var list = ConcatWithDistinct(
                         savedMatch,
-                        fuzzyMatch.GetLevel3Suggestions(level1, level2, level3))
+                        fuzzyMatch.Level3Suggestions(level1, level2, level3))
                         .ToList();
 
                     // add a leave blank option to the bottom of the list
@@ -670,7 +670,7 @@ namespace GeoLocationTool.UI
                 originalLevel2,
                 originalLevel3);
 
-            CodedLocation codedLocation = geoCoder.CodeTheLocation(location2);
+            CodedLocation codedLocation = geoCoder.AddLocationCodes(location2);
             ClearExistingCodes();
             AddCodes(codedLocation);
             DisplayRecords();
