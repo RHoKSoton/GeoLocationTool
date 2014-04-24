@@ -79,11 +79,14 @@ namespace MultiLevelGeoCoder.Logic
             Location gazetteerLocation,
             LocationNames locationNames)
         {
-            bool hasLevel1 = !string.IsNullOrEmpty(inputLocation.Name1);
-            bool hasLevel2 = !string.IsNullOrEmpty(inputLocation.Name2);
-            bool hasLevel3 = !string.IsNullOrEmpty(inputLocation.Name3);
+            bool hasLevel1 = (!string.IsNullOrEmpty(inputLocation.Name1)) &&
+                             !string.IsNullOrEmpty(gazetteerLocation.Name1);
+            bool hasLevel2 = (!string.IsNullOrEmpty(inputLocation.Name2)) &&
+                             !string.IsNullOrEmpty(gazetteerLocation.Name2);
+            bool hasLevel3 = (!string.IsNullOrEmpty(inputLocation.Name3)) &&
+                             !string.IsNullOrEmpty(gazetteerLocation.Name3);
 
-            // throw ex if  locations are not complete
+            // throw ex if locations are not complete
             CheckLocationsAreComplete(inputLocation, gazetteerLocation);
 
             // if input and gazetteer are the same don't save, just exit
@@ -92,14 +95,13 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-            // throw if the input is already in the gazetteer as we do not allow saved matches for existing names
-            // if input and gazetteer value is the same, dont save
-
             // level1
             if (hasLevel1)
             {
+                // if input and gazetteer value is the same, don't save
                 if (AreNotTheSame(inputLocation.Name1, gazetteerLocation.Name1))
                 {
+                    // we do not allow saved matches for existing names
                     CheckLevel1NotInGazetteer(inputLocation, locationNames);
                     SaveMatchLevel1(inputLocation.Name1, gazetteerLocation.Name1);
                 }
