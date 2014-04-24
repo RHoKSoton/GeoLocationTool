@@ -59,11 +59,11 @@ namespace GeoLocationTool.UI
         {
             // levels 1,2 and 3 must be selected
             bool selected = cboLevel1Codes.SelectedIndex >= 0;
-            selected = selected && cboLevel2Codes.SelectedIndex > 0;
-            selected = selected && cboLevel3Codes.SelectedIndex > 0;
-            selected = selected && cboLevel1Names.SelectedIndex > 0;
-            selected = selected && cboLevel2Names.SelectedIndex > 0;
-            selected = selected && cboLevel3Names.SelectedIndex > 0;
+            selected = selected && cboLevel2Codes.SelectedIndex >= 0;
+            selected = selected && cboLevel3Codes.SelectedIndex >= 0;
+            selected = selected && cboLevel1Names.SelectedIndex >= 0;
+            selected = selected && cboLevel2Names.SelectedIndex >= 0;
+            selected = selected && cboLevel3Names.SelectedIndex >= 0;
 
             return selected;
         }
