@@ -124,6 +124,7 @@ namespace MultiLevelGeoCoderTests
         /// The time taken and the number of input lines is obtained
         /// </summary>
         [TestMethod]
+        [Ignore]
         public void GeoCoderCodeAll_UseActualData_PerfsTests()
         {
             // Manually create and copy the GeoLocationTool.sdf file 
