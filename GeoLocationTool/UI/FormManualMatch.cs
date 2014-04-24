@@ -57,7 +57,7 @@ namespace GeoLocationTool.UI
         private void AddCodes(CodedLocation codedLocation)
         {
             // add the codes to the input data
-            InputColumnNames columnNames = geoCoder.CodeColumnNames();
+            InputColumnNames columnNames = geoCoder.LocationCodeColumnNames();
             if (codedLocation.GeoCode1 != null)
             {
                 dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1]
@@ -120,7 +120,7 @@ namespace GeoLocationTool.UI
                 dataGridView1.DataSource = null;
                 parentGrid.DataSource = null;
 
-                geoCoder.CodeAll();
+                geoCoder.AddAllLocationCodes();
 
                 // todo refactor the disconnection and reconnection of the grids to make more robust
                 // reconect the data grids
@@ -251,7 +251,7 @@ namespace GeoLocationTool.UI
 
         private void ClearCodes()
         {
-            InputColumnNames columnNames = geoCoder.CodeColumnNames();
+            InputColumnNames columnNames = geoCoder.LocationCodeColumnNames();
             dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1]
                 .Value = null;
             dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2]
@@ -521,7 +521,7 @@ namespace GeoLocationTool.UI
 
         private void DisplaySelectedRecord()
         {
-            InputColumnNames columnNames = geoCoder.InputColumnNames();
+            InputColumnNames columnNames = geoCoder.InputLocationColumnNames();
             txtLevel1Original.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
                     columnNames.Level1]
@@ -670,7 +670,7 @@ namespace GeoLocationTool.UI
                 originalLevel2,
                 originalLevel3);
 
-            CodedLocation codedLocation = geoCoder.GetCodes(location2);
+            CodedLocation codedLocation = geoCoder.CodeTheLocation(location2);
             ClearExistingCodes();
             AddCodes(codedLocation);
             DisplayRecords();

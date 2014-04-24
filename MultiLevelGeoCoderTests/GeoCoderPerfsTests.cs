@@ -78,7 +78,7 @@ namespace MultiLevelGeoCoderTests
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
             GeoCoder geoCoder = new GeoCoder(connection);
-            geoCoder.LoadGazetter(@"PHL_adm3.csv");//You need to copy this file manually
+            geoCoder.LoadGazetteerFile(@"PHL_adm3.csv");//You need to copy this file manually
             Stopwatch watch = new Stopwatch();
             watch.Start();
             geoCoder.SetGazetteerColumns(new GazetteerColumnNames
@@ -98,12 +98,12 @@ namespace MultiLevelGeoCoderTests
                 geoCoder.LoadInputFileCsv(GenerateInputFile(linesCount));
                 geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
                 watch.Restart();
-                geoCoder.CodeAll();
+                geoCoder.AddAllLocationCodes();
                 var elapsed = watch.Elapsed.TotalSeconds;
                 LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
                 InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
                 watch.Restart();
-                geoCoder.CodeAll();
+                geoCoder.AddAllLocationCodes();
                 Debug.WriteLine(linesCount + " input lines: " + elapsed + " vs " + watch.Elapsed.TotalSeconds);
                 LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
                 InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
@@ -133,7 +133,7 @@ namespace MultiLevelGeoCoderTests
             connection = DBHelper.GetDbConnection(dbLocation1);
             // connection.InitializeDB();
             GeoCoder geoCoder = new GeoCoder(connection);
-            geoCoder.LoadGazetter(@"TestGaz1.csv");// You need to copy this file manually
+            geoCoder.LoadGazetteerFile(@"TestGaz1.csv");// You need to copy this file manually
             Stopwatch watch = new Stopwatch();
             geoCoder.SetGazetteerColumns(new GazetteerColumnNames
             {
@@ -151,7 +151,7 @@ namespace MultiLevelGeoCoderTests
             geoCoder.LoadInputFileCsv("TestInput1.csv"); // You need to copy this file manually
             geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
             watch.Start();
-            geoCoder.CodeAll();
+            geoCoder.AddAllLocationCodes();
             Debug.WriteLine(geoCoder.InputData.Rows.Count + " input lines: " + watch.Elapsed.TotalSeconds);
 
             // Example results

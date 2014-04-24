@@ -119,24 +119,24 @@ namespace GeoLocationTool.UI
 
         private void DisplayColumnNameLists()
         {
-            cboLevel1Codes.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel2Codes.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel3Codes.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel1Codes.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel2Codes.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel3Codes.DataSource = geoCoder.GazetteerColumnNameList();
 
-            cboLevel1Names.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel2Names.DataSource = geoCoder.AllGazetteerColumnNames();
-            cboLevel3Names.DataSource = geoCoder.AllGazetteerColumnNames();
+            cboLevel1Names.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel2Names.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel3Names.DataSource = geoCoder.GazetteerColumnNameList();
 
             //optional columns so display a blank row at the top
-            IList<string> columnNames1 = geoCoder.AllGazetteerColumnNames();
+            IList<string> columnNames1 = geoCoder.GazetteerColumnNameList();
             columnNames1.Insert(0, string.Empty);
             cboLevel1AltNames.DataSource = columnNames1;
 
-            IList<string> columnNames2 = geoCoder.AllGazetteerColumnNames();
+            IList<string> columnNames2 = geoCoder.GazetteerColumnNameList();
             columnNames2.Insert(0, string.Empty);
             cboLevel2AltNames.DataSource = columnNames2;
 
-            IList<string> columnNames3 = geoCoder.AllGazetteerColumnNames();
+            IList<string> columnNames3 = geoCoder.GazetteerColumnNameList();
             columnNames3.Insert(0, string.Empty);
             cboLevel3AltNames.DataSource = columnNames3;
 
@@ -156,7 +156,7 @@ namespace GeoLocationTool.UI
 
         private void LoadFile(string path)
         {
-            geoCoder.LoadGazetter(path);
+            geoCoder.LoadGazetteerFile(path);
             dataGridView1.DataSource = geoCoder.GazetteerData;
             dataGridView1.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.AllCells;

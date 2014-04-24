@@ -19,6 +19,7 @@ namespace MultiLevelGeoCoder
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMappingProvider;
+        private readonly MatchedNames matchedNames;
 
         private GazetteerData gazetteerData;
         private string gazetteerFileName;
@@ -26,7 +27,6 @@ namespace MultiLevelGeoCoder
         private LocationCodes locationCodes;
         private LocationNames locationNames;
         private IMatchProvider matchProvider;
-        private readonly MatchedNames matchedNames;
 
         #endregion Fields
 
@@ -60,21 +60,10 @@ namespace MultiLevelGeoCoder
 
         #region Methods
 
-        public IList<string> AllGazetteerColumnNames()
-        {
-            return gazetteerData.AllColumnNames();
-        }
-
         /// <summary>
-        /// Provides a list of all the column header names present in the input data sheet
+        /// Adds the codes that correspond to the locations in all rows of the input data.
         /// </summary>
-        /// <returns>List of column names</returns>
-        public IList<string> AllInputColumnNames()
-        {
-            return inputData.AllColumnNames();
-        }
-
-        public void CodeAll()
+        public void AddAllLocationCodes()
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
@@ -82,11 +71,22 @@ namespace MultiLevelGeoCoder
             Debug.WriteLine("CodeAll: " + watch.Elapsed.TotalSeconds);
         }
 
-        public InputColumnNames CodeColumnNames()
+        /// <summary>
+        /// Adds the geo codes for the given location
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <returns>Location with codes added where found.</returns>
+        public CodedLocation AddLocationCodes(Location location)
         {
-            return inputData.CodeColumnNames();
+            return locationCodes.GetCodes(location);
         }
 
+        /// <summary>
+        /// The default names of the columns that contain the gazetteer data to be matched.
+        /// </summary>
+        /// <returns>
+        /// The column names
+        /// </returns>
         public GazetteerColumnNames DefaultGazetteerColumnNames()
         {
             GazetteerColumnNames columnNames = new GazetteerColumnNames();
@@ -127,13 +127,14 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
-        /// Gets the geo codes for the given location
+        /// Provides a list of all the column header names present in the gazetteer data sheet
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <returns>Location with codes added where found.</returns>
-        public CodedLocation GetCodes(Location location)
+        /// <returns>
+        /// List of column names
+        /// </returns>
+        public IList<string> GazetteerColumnNameList()
         {
-            return locationCodes.GetCodes(location);
+            return gazetteerData.AllColumnNames();
         }
 
         /// <summary>
@@ -184,35 +185,75 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
+        /// Provides a list of all the column header names present in the input data sheet
+        /// </summary>
+        /// <returns>List of column names</returns>
+        public IList<string> InputColumnNameList()
+        {
+            return inputData.AllColumnNames();
+        }
+
+        /// <summary>
         /// The names of the columns that contain the data to be matched.
         /// </summary>
         /// <returns></returns>
-        public InputColumnNames InputColumnNames()
+        public InputColumnNames InputLocationColumnNames()
         {
             return inputData.ColumnNames;
         }
 
+        /// <summary>
+        /// Determines whether the gazetteer is initialised.
+        /// </summary>
+        /// <returns>
+        /// Returns true if the gazetteer data has been loaded.
+        /// </returns>
         public bool IsGazetteerInitialised()
         {
             return gazetteerData != null;
         }
 
+        /// <summary>
+        /// List of available Level 1 location names from the gazetteer.
+        /// </summary>
+        /// <returns>
+        /// List of location names
+        /// </returns>
         public IList<string> Level1LocationNames()
         {
             return locationNames.Level1MainLocationNames();
         }
 
+        /// <summary>
+        /// List of available Level 2 location names from the gazetteer for the given level 1.
+        /// </summary>
+        /// <param name="level1"></param>
+        /// <returns>
+        /// List of location names
+        /// </returns>
         public IList<string> Level2LocationNames(string level1)
         {
             return locationNames.Level2MainLocationNames(level1);
         }
 
+        /// <summary>
+        /// List of available Level 3 location names from the gazetteer for the given level 1 and 2.
+        /// </summary>
+        /// <param name="level1"></param>
+        /// <param name="level2"></param>
+        /// <returns>
+        /// List of location names
+        /// </returns>
         public IList<string> Level3LocationNames(string level1, string level2)
         {
             return locationNames.Level3MainLocationNames(level1, level2);
         }
 
-        public void LoadGazetter(string path)
+        /// <summary>
+        /// Loads the gazetteer file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        public void LoadGazetteerFile(string path)
         {
             const bool isFirstRowHeader = true;
             // todo remove as first row is always header
@@ -221,6 +262,10 @@ namespace MultiLevelGeoCoder
             gazetteerFileName = path;
         }
 
+        /// <summary>
+        /// Loads the input CSV file .
+        /// </summary>
+        /// <param name="path">The path.</param>
         public void LoadInputFileCsv(string path)
         {
             const bool isFirstRowHeader = true;
@@ -228,11 +273,26 @@ namespace MultiLevelGeoCoder
             inputData = new InputData(dt);
         }
 
+        /// <summary>
+        /// Loads the input tab delimited file.
+        /// </summary>
+        /// <param name="path">The path.</param>
         public void LoadInputFileTabDelim(string path)
         {
             const bool isFirstRowHeader = true;
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader, "\t");
             inputData = new InputData(dt);
+        }
+
+        /// <summary>
+        /// The names of the columns that contain the location codes.
+        /// </summary>
+        /// <returns>
+        /// The column names
+        /// </returns>
+        public InputColumnNames LocationCodeColumnNames()
+        {
+            return inputData.CodeColumnNames();
         }
 
         /// <summary>
@@ -244,7 +304,6 @@ namespace MultiLevelGeoCoder
             return inputData.MatchColumnNames();
         }
 
-
         /// <summary>
         /// Saves the match.
         /// </summary>
@@ -255,7 +314,10 @@ namespace MultiLevelGeoCoder
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
         }
 
-
+        /// <summary>
+        /// Saves the output file.
+        /// </summary>
+        /// <exception cref="System.InvalidOperationException">Output file not saved, file name required.</exception>
         public void SaveOutputFile()
         {
             if (string.IsNullOrEmpty(OutputFileName))
@@ -292,6 +354,12 @@ namespace MultiLevelGeoCoder
             inputData.SetColumnNames(columnNames);
         }
 
+        /// <summary>
+        /// Filters the records to only those that have not had all their codes added.
+        /// </summary>
+        /// <returns>
+        /// The records without codes
+        /// </returns>
         public DataView UncodedRecords()
         {
             return inputData.GetUnCodedRecords();

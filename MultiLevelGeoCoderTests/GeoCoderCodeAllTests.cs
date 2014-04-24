@@ -68,10 +68,10 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 
             // act
-            geoCoder.CodeAll();
+            geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.CodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnNames();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];
@@ -145,10 +145,10 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 
             // act
-            geoCoder.CodeAll();
+            geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.CodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnNames();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];
@@ -211,10 +211,10 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
 
             // act
-            geoCoder.CodeAll();
+            geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.CodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnNames();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];

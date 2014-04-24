@@ -20,31 +20,28 @@ namespace MultiLevelGeoCoder
 
         #region Methods
 
-        IList<string> AllGazetteerColumnNames();
-
         /// <summary>
-        /// Provides a list of all the column header names present in the input data sheet
+        /// Adds the codes that correspond to the locations in all rows of the input data.
         /// </summary>
-        /// <returns>List of column names</returns>
-        IList<string> AllInputColumnNames();
+        void AddAllLocationCodes();
 
         /// <summary>
-        /// Codes all rows of the input data.
+        /// Adds the geo codes for the given location.
         /// </summary>
-        void CodeAll();
+        /// <param name="location">The location.</param>
+        /// <returns>Location with codes added where found.</returns>
+        CodedLocation AddLocationCodes(Location location);
 
         /// <summary>
-        /// The names of the columns that contain the codes.
+        /// The default names of the columns that contain the gazetteer data to be matched.
         /// </summary>
         /// <returns>The column names</returns>
-        InputColumnNames CodeColumnNames();
-
         GazetteerColumnNames DefaultGazetteerColumnNames();
 
         /// <summary>
         /// The default names of the columns that contain the input data to be matched.
         /// </summary>
-        /// <returns>The Column Names</returns>
+        /// <returns>The column names</returns>
         InputColumnNames DefaultInputColumnNames();
 
         /// <summary>
@@ -54,37 +51,10 @@ namespace MultiLevelGeoCoder
         FuzzyMatch FuzzyMatch();
 
         /// <summary>
-        /// Gets the geo codes for the given location.
+        /// Provides a list of all the column header names present in the gazetteer data sheet
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <returns>Location with codes added where found.</returns>
-        CodedLocation GetCodes(Location location);
-
-        /// <summary>
-        /// The names of the columns that contain the data to be matched
-        /// </summary>
-        /// <returns></returns>
-        InputColumnNames InputColumnNames();
-
-        bool IsGazetteerInitialised();
-
-        IList<string> Level1LocationNames();
-
-        IList<string> Level2LocationNames(string level1);
-
-        IList<string> Level3LocationNames(string level1, string level2);
-
-        void LoadGazetter(string path);
-
-        void LoadInputFileCsv(string path);
-
-        void LoadInputFileTabDelim(string path);
-
-        /// <summary>
-        /// The names of the columns that contain the matched names used to find the codes.
-        /// </summary>
-        /// <returns></returns>
-        InputColumnNames MatchColumnNames();
+        /// <returns>List of column names</returns>
+        IList<string> GazetteerColumnNameList();
 
         /// <summary>
         /// The saved match for the given level 1 name, if any
@@ -114,12 +84,81 @@ namespace MultiLevelGeoCoder
             string level2);
 
         /// <summary>
+        /// Provides a list of all the column header names present in the input data sheet
+        /// </summary>
+        /// <returns>List of column names</returns>
+        IList<string> InputColumnNameList();
+
+        /// <summary>
+        /// The names of the columns that contain the input location names to be matched
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames InputLocationColumnNames();
+
+        /// <summary>
+        /// Determines whether the gazetteer is initialised.
+        /// </summary>
+        /// <returns>Returns true if the gazetteer data has been loaded.</returns>
+        bool IsGazetteerInitialised();
+
+        /// <summary>
+        /// List of available Level 1 location names from the gazetteer.
+        /// </summary>
+        /// <returns>List of location names</returns>
+        IList<string> Level1LocationNames();
+
+        /// <summary>
+        /// List of available Level 2 location names from the gazetteer for the given level 1.
+        /// </summary>
+        /// <returns>List of location names</returns>
+        IList<string> Level2LocationNames(string level1);
+
+        /// <summary>
+        /// List of available Level 3 location names from the gazetteer for the given level 1 and 2.
+        /// </summary>
+        /// <returns>List of location names</returns>
+        IList<string> Level3LocationNames(string level1, string level2);
+
+        /// <summary>
+        /// Loads the gazetteer file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        void LoadGazetteerFile(string path);
+
+        /// <summary>
+        /// Loads the input CSV file .
+        /// </summary>
+        /// <param name="path">The path.</param>
+        void LoadInputFileCsv(string path);
+
+        /// <summary>
+        /// Loads the input tab delimited file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        void LoadInputFileTabDelim(string path);
+
+        /// <summary>
+        /// The names of the columns that contain the location codes.
+        /// </summary>
+        /// <returns>The column names</returns>
+        InputColumnNames LocationCodeColumnNames();
+
+        /// <summary>
+        /// The names of the columns that contain the matched names used to find the codes.
+        /// </summary>
+        /// <returns></returns>
+        InputColumnNames MatchColumnNames();
+
+        /// <summary>
         /// Saves the match.
         /// </summary>
         /// <param name="inputLocation">The input location.</param>
         /// <param name="gazetteerLocation">The gazetteer location.</param>
         void SaveMatch(Location inputLocation, Location gazetteerLocation);
 
+        /// <summary>
+        /// Saves the output file.
+        /// </summary>
         void SaveOutputFile();
 
         /// <summary>
@@ -137,6 +176,10 @@ namespace MultiLevelGeoCoder
         /// <param name="columnNames">The column names.</param>
         void SetInputColumns(InputColumnNames columnNames);
 
+        /// <summary>
+        /// Filters the records to only those that have not had all their codes added.
+        /// </summary>
+        /// <returns>The records without codes</returns>
         DataView UncodedRecords();
 
         #endregion Methods

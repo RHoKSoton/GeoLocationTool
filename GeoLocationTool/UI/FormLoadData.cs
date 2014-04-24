@@ -144,7 +144,7 @@ namespace GeoLocationTool.UI
                 dataGridView1.DataSource = null;
 
                 Cursor = Cursors.WaitCursor;
-                geoCoder.CodeAll();
+                geoCoder.AddAllLocationCodes();
                 btnManualMatch.Enabled = true;
                 DisplayData();
                 SaveOutputFile();               
@@ -176,14 +176,14 @@ namespace GeoLocationTool.UI
         private void DisplayColumnNameLists()
         {
             InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
-            cboLevel1.DataSource = geoCoder.AllInputColumnNames();
+            cboLevel1.DataSource = geoCoder.InputColumnNameList();
 
             //level 2 and 3 columns are optional so display a blank row at the top
-            IList<string> columnNames2 = geoCoder.AllInputColumnNames();
+            IList<string> columnNames2 = geoCoder.InputColumnNameList();
             columnNames2.Insert(0, string.Empty);
             cboLevel2.DataSource = columnNames2;
 
-            IList<string> columnNames3 = geoCoder.AllInputColumnNames();
+            IList<string> columnNames3 = geoCoder.InputColumnNameList();
             columnNames3.Insert(0, string.Empty);
             cboLevel3.DataSource = columnNames3;
 
