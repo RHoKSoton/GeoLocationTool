@@ -121,7 +121,7 @@ namespace MultiLevelGeoCoder
         /// Provides suggested name matches using fuzzy matching
         /// </summary>
         /// <returns>Fuzzy Matcher</returns>
-        public FuzzyMatch FuzzyMatch()
+        public IFuzzyMatch FuzzyMatch()
         {
             return new FuzzyMatch(locationNames);
         }

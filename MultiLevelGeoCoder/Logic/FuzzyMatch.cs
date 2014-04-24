@@ -9,7 +9,7 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Provides suggested matches using fuzzy matching
     /// </summary>
-    public class FuzzyMatch
+    public class FuzzyMatch : IFuzzyMatch
     {
         #region Fields
 

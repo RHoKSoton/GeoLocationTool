@@ -18,7 +18,7 @@ namespace GeoLocationTool.UI
 
         private const string LeaveBlankText = "No Match - Leave blank";
 
-        private readonly FuzzyMatch fuzzyMatch;
+        private readonly IFuzzyMatch fuzzyMatch;
         private readonly IGeoCoder geoCoder;
         private readonly DataGridView parentGrid;
 

@@ -48,7 +48,7 @@ namespace MultiLevelGeoCoder
         /// Provides suggested name matches using fuzzy matching
         /// </summary>
         /// <returns>Fuzzy Match</returns>
-        FuzzyMatch FuzzyMatch();
+        IFuzzyMatch FuzzyMatch();
 
         /// <summary>
         /// Provides a list of all the column header names present in the gazetteer data sheet
