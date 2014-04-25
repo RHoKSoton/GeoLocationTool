@@ -357,15 +357,17 @@ namespace GeoLocationTool.UI
                 IEnumerable<MatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
                     Level1Original());
 
-                // add any saved match to the top of the list
-                var list = ConcatWithDistinct(
-                    savedMatch,
-                    fuzzyMatch.Level1Suggestions(Level1Original()))
-                    .ToList();
+                //get suggestions
+                var suggestions = fuzzyMatch.Level1Suggestions(Level1Original());
 
-                cboLevel1Suggestion.DataSource = list;
-                cboLevel1Suggestion.DisplayMember = "DisplayText";
-                cboLevel1Suggestion.ValueMember = "Location";
+                // format
+                const bool addBlank = false;
+                List<KeyValuePair<string, string>> suggestionList =
+                    FormatSuggestionList(savedMatch, suggestions, addBlank);
+
+                cboLevel1Suggestion.DataSource = suggestionList;
+                cboLevel1Suggestion.DisplayMember = "Value";
+                cboLevel1Suggestion.ValueMember = "Key";
             }
         }
 
@@ -422,18 +424,19 @@ namespace GeoLocationTool.UI
                     IEnumerable<MatchResult> savedMatch =
                         geoCoder.GetSavedMatchLevel2(level2, level1);
 
-                    // Add the saved match to the top of the suggestions list
-                    var list = ConcatWithDistinct(
-                        savedMatch,
-                        fuzzyMatch.Level2Suggestions(level1, level2)).ToList();
+                    // get suggestions
+                    List<MatchResult> suggestions = fuzzyMatch.Level2Suggestions(
+                        level1,
+                        level2);
 
-                    // add a leave blank option to the bottom of the list
-                    MatchResult blank = new MatchResult(LeaveBlankText, 0);
-                    list.Add(blank);
+                    // format
+                    const bool addBlank = true;
+                    List<KeyValuePair<string, string>> suggestionList =
+                        FormatSuggestionList(savedMatch, suggestions, addBlank);
 
-                    cboLevel2Suggestion.DataSource = list;
-                    cboLevel2Suggestion.DisplayMember = "DisplayText";
-                    cboLevel2Suggestion.ValueMember = "Location";
+                    cboLevel2Suggestion.DataSource = suggestionList;
+                    cboLevel2Suggestion.DisplayMember = "Value";
+                    cboLevel2Suggestion.ValueMember = "Key";
                 }
             }
         }
@@ -490,19 +493,20 @@ namespace GeoLocationTool.UI
                     IEnumerable<MatchResult> savedMatch =
                         geoCoder.GetSavedMatchLevel3(level3, level1, level2);
 
-                    // Add any saved match to the top of the suggestions list
-                    var list = ConcatWithDistinct(
-                        savedMatch,
-                        fuzzyMatch.Level3Suggestions(level1, level2, level3))
-                        .ToList();
+                    // get suggestions
+                    List<MatchResult> suggestions = fuzzyMatch.Level3Suggestions(
+                        level1,
+                        level2,
+                        level3);
 
-                    // add a leave blank option to the bottom of the list
-                    MatchResult blank = new MatchResult(LeaveBlankText, 0);
-                    list.Add(blank);
+                    // format
+                    const bool addBlank = true;
+                    List<KeyValuePair<string, string>> suggestionList =
+                        FormatSuggestionList(savedMatch, suggestions, addBlank);
 
-                    cboLevel3Suggestion.DataSource = list;
-                    cboLevel3Suggestion.DisplayMember = "DisplayText";
-                    cboLevel3Suggestion.ValueMember = "Location";
+                    cboLevel3Suggestion.DataSource = suggestionList;
+                    cboLevel3Suggestion.DisplayMember = "Value";
+                    cboLevel3Suggestion.ValueMember = "Key";
                 }
             }
         }
@@ -553,6 +557,34 @@ namespace GeoLocationTool.UI
         {
             dataGridView1.DataSource = geoCoder.UncodedRecords();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        private List<KeyValuePair<string, string>> FormatSuggestionList(
+            IEnumerable<MatchResult> savedMatch,
+            IEnumerable<MatchResult> suggestions,
+            bool addBlank)
+        {
+            // Add the saved match to the top of the suggestions list
+            var list = ConcatWithDistinct(
+                savedMatch,
+                suggestions).ToList();
+
+            // format the list
+            List<KeyValuePair<string, string>> formattedList =
+                list.Select(
+                    x =>
+                        new KeyValuePair<string, string>
+                            (
+                            x.Location,
+                            string.Format("{0}:   {1:P2}", x.Location, x.Coefficient)
+                            )).ToList();
+
+            if (addBlank)
+            {
+                // add a leave blank option to the bottom of the list
+                formattedList.Add(new KeyValuePair<string, string>(null, LeaveBlankText));
+            }
+            return formattedList;
         }
 
         private void FormManualMatch_Load(object sender, EventArgs e)

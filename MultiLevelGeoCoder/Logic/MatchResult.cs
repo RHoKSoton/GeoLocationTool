@@ -21,12 +21,6 @@ namespace MultiLevelGeoCoder.Logic
 
         public double Coefficient { get; private set; }
 
-        public string DisplayText
-        {
-            // todo remove after testing
-            get { return string.Format("{0}: {1:N3}", Location, Coefficient); }
-        }
-
         public string Location { get; private set; }
 
         #endregion Properties
