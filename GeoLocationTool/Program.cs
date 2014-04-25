@@ -25,7 +25,7 @@ namespace GeoLocationTool
             Connection.InitializeDB();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLoadLocationData(args));
+            Application.Run(new FormLoadGazetteer(args));
             Connection.Close();
         }
     }

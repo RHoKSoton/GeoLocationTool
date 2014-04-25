@@ -11,7 +11,7 @@ namespace GeoLocationTool.UI
     /// <summary>
     /// Main form: displays options and loads the input data into a grid.
     /// </summary>
-    public partial class FormLoadData : Form
+    public partial class FormLoadInput : Form
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace GeoLocationTool.UI
 
         #region Constructors
 
-        public FormLoadData(IGeoCoder geoCoder)
+        public FormLoadInput(IGeoCoder geoCoder)
         {
             if (geoCoder == null) throw new ArgumentNullException("geoCoder");
             InitializeComponent();

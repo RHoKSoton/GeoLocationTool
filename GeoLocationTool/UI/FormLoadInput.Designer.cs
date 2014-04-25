@@ -1,6 +1,6 @@
 ﻿namespace GeoLocationTool.UI
 {
-    partial class FormLoadData
+    partial class FormLoadInput
     {
         /// <summary>
         /// Required designer variable.
@@ -385,7 +385,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FormLoadData";
+            this.Name = "FormLoadInput";
             this.Text = "Multi Level Geo-Coder Tool   Input Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLoadData_FormClosing);

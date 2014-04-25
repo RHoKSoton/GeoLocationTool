@@ -12,24 +12,24 @@ namespace GeoLocationTool.UI
     /// Form to display the  gazetter location data and enable the user to 
     /// select the relevant columns
     /// </summary>
-    public partial class FormLoadLocationData : Form
+    public partial class FormLoadGazetteer : Form
     {
         #region Fields
 
         private readonly IGeoCoder geoCoder = new GeoCoder(Program.Connection);
 
-        private FormLoadData formLoadData;
+        private FormLoadInput formLoadData;
 
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FormLoadLocationData"/> class.
+        /// Initializes a new instance of the <see cref="FormLoadGazetteer"/> class.
         /// Reads the gazetteer file path from the args, used in testing. 
         /// </summary>
         /// <param name="args">The arguments containing the gazetteer filepath.</param>
-        public FormLoadLocationData(string[] args = null)
+        public FormLoadGazetteer(string[] args = null)
         {
             InitializeComponent();
             try
@@ -188,7 +188,7 @@ namespace GeoLocationTool.UI
         {
             if (formLoadData == null)
             {
-                formLoadData = new FormLoadData(geoCoder);
+                formLoadData = new FormLoadInput(geoCoder);
                 formLoadData.Closed += formLoadData_Closed;
             }
 

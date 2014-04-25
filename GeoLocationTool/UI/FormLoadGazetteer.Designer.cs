@@ -1,6 +1,6 @@
 ﻿namespace GeoLocationTool.UI
 {
-    partial class FormLoadLocationData
+    partial class FormLoadGazetteer
     {
         /// <summary>
         /// Required designer variable.
@@ -382,7 +382,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 723);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "FormLoadLocationData";
+            this.Name = "FormLoadGazetteer";
             this.Text = "Multi Level Geo-Coder Tool   Gazetteer Data";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLoadLocationData_Load);
