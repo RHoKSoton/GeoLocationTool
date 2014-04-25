@@ -25,9 +25,6 @@ namespace GeoLocationTool.UI
             openFileDialog1.InitialDirectory =
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog1.Filter = filter;
-
-            // todo check the filter index values
-            openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)

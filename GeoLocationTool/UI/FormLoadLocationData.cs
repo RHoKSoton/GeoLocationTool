@@ -143,6 +143,19 @@ namespace GeoLocationTool.UI
             SetDefaultNames();
         }
 
+        private void FormatGrid()
+        {
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.AllCells;
+            DataGridViewColumnCollection columnCollection = dataGridView1.Columns;
+            DataGridViewColumn lastVisibleColumn =
+                columnCollection.GetLastColumn(
+                    DataGridViewElementStates.Visible,
+                    DataGridViewElementStates.None);
+            if (lastVisibleColumn != null)
+                lastVisibleColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
         private void formLoadData_Closed(object sender, EventArgs e)
         {
             // quit the application if the input form has closed
@@ -156,11 +169,19 @@ namespace GeoLocationTool.UI
 
         private void LoadFile(string path)
         {
-            geoCoder.LoadGazetteerFile(path);
-            dataGridView1.DataSource = geoCoder.GazetteerData;
-            dataGridView1.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.AllCells;
-            txtFileName.Text = path;
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                txtFileName.Clear();
+                geoCoder.LoadGazetteerFile(path);
+                dataGridView1.DataSource = geoCoder.GazetteerData;
+                FormatGrid();
+                txtFileName.Text = path;
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private void LoadNextScreen()
@@ -177,10 +198,8 @@ namespace GeoLocationTool.UI
 
         private string SelectFile()
         {
-            const string filter = "csv files (*.csv)|*.csv";
-            txtFileName.Clear();
+            const string filter = "CSV files (*.csv)|*.csv|Text Files| *.txt";
             var path = UiHelper.GetFileName(filter).Trim();
-            txtFileName.Text = path;
             return path;
         }
 
