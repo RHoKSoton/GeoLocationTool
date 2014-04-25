@@ -4,6 +4,7 @@ namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Windows.Forms;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
@@ -65,6 +66,7 @@ namespace GeoLocationTool.UI
                 {
                     LoadFile(path, isTab);
                     DisplayColumnNameLists();
+                    txtOutputFileName.Clear();
                 }
             }
             catch (Exception ex)
@@ -93,18 +95,6 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-                if (string.IsNullOrEmpty(geoCoder.OutputFileName))
-                {
-                    SelectOutputFileName();
-                }
-
-                if (string.IsNullOrEmpty(geoCoder.OutputFileName))
-                {
-                    MessageBox.Show(
-                        "Output file missing, please select the output file.",
-                        "Missing");
-                    return;
-                }
                 SetColumnNames();
                 FormManualMatch formManualMatch = new FormManualMatch(
                     geoCoder,
@@ -257,14 +247,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (string.IsNullOrEmpty(geoCoder.OutputFileName))
+                if (string.IsNullOrEmpty(txtOutputFileName.Text))
                 {
                     SelectOutputFileName();
                 }
 
-                if (!string.IsNullOrEmpty(geoCoder.OutputFileName))
+                if (!string.IsNullOrEmpty(txtOutputFileName.Text))
                 {
-                    geoCoder.SaveOutputFile();
+                    geoCoder.SaveOutputFile(txtOutputFileName.Text);
                     MessageBox.Show("Output file saved");
                 }
                 else
@@ -293,10 +283,15 @@ namespace GeoLocationTool.UI
                 dialog.AddExtension = true;
                 dialog.DefaultExt = "csv";
                 dialog.Filter = "CSV(*.csv)|*.*";
+
+                // set default output filename
+                string inputFileName =
+                    Path.GetFileNameWithoutExtension(txtFileName.Text.Trim());
+                dialog.FileName = string.Concat(inputFileName, "_matched");
+
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    geoCoder.OutputFileName = dialog.FileName;
-                    txtOutputFileName.Text = geoCoder.OutputFileName;
+                    txtOutputFileName.Text = dialog.FileName;
                 }
             }
         }

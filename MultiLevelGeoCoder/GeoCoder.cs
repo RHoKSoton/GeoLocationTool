@@ -54,8 +54,6 @@ namespace MultiLevelGeoCoder
             get { return inputData != null ? inputData.Data : null; }
         }
 
-        public string OutputFileName { get; set; }
-
         #endregion Properties
 
         #region Methods
@@ -317,15 +315,16 @@ namespace MultiLevelGeoCoder
         /// <summary>
         /// Saves the output file.
         /// </summary>
+        /// <param name="outputFilePath">Path of the output file.</param>
         /// <exception cref="System.InvalidOperationException">Output file not saved, file name required.</exception>
-        public void SaveOutputFile()
+        public void SaveOutputFile(string outputFilePath)
         {
-            if (string.IsNullOrEmpty(OutputFileName))
+            if (string.IsNullOrEmpty(outputFilePath.Trim()))
             {
                 throw new InvalidOperationException(
                     "Output file not saved, file name required.");
             }
-            FileExport.SaveToCsvFile(OutputFileName, InputData);
+            FileExport.SaveToCsvFile(outputFilePath.Trim(), InputData);
             inputData.Data.AcceptChanges();
         }
 

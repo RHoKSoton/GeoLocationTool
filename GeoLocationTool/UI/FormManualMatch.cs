@@ -656,11 +656,6 @@ namespace GeoLocationTool.UI
             return txtLevel3Original.Text.Trim();
         }
 
-        private void SaveOutputFile()
-        {
-            geoCoder.SaveOutputFile();
-        }
-
         private void SaveSelectedMatch(string level1, string level2, string level3)
         {
             Location inputLocation = new Location(
@@ -718,7 +713,6 @@ namespace GeoLocationTool.UI
             ClearExistingCodes();
             AddCodes(codedLocation);
             DisplayRecords();
-            SaveOutputFile();
         }
 
         #endregion Methods

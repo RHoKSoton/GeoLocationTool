@@ -14,8 +14,6 @@ namespace MultiLevelGeoCoder
 
         DataTable InputData { get; }
 
-        string OutputFileName { get; set; }
-
         #endregion Properties
 
         #region Methods
@@ -159,7 +157,8 @@ namespace MultiLevelGeoCoder
         /// <summary>
         /// Saves the output file.
         /// </summary>
-        void SaveOutputFile();
+        /// <param name="outputFilePath">Path of the output file.</param>
+        void SaveOutputFile(string outputFilePath);
 
         /// <summary>
         /// Sets the gazetteer columns that hold the data to provide the codes
