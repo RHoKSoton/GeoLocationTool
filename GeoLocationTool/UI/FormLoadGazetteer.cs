@@ -1,4 +1,4 @@
-﻿// FormLoadLocationData.cs
+﻿// FormLoadGazetteer.cs
 
 namespace GeoLocationTool.UI
 {

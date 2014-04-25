@@ -1,4 +1,4 @@
-﻿// FormLoadData.cs
+﻿// FormLoadInput.cs
 
 namespace GeoLocationTool.UI
 {
@@ -106,7 +106,9 @@ namespace GeoLocationTool.UI
                     return;
                 }
                 SetColumnNames();
-                FormManualMatch formManualMatch = new FormManualMatch(geoCoder, dataGridView1);
+                FormManualMatch formManualMatch = new FormManualMatch(
+                    geoCoder,
+                    dataGridView1);
                 formManualMatch.ShowDialog();
             }
             catch (Exception ex)
@@ -147,7 +149,7 @@ namespace GeoLocationTool.UI
                 geoCoder.AddAllLocationCodes();
                 btnManualMatch.Enabled = true;
                 DisplayData();
-                SaveOutputFile();               
+                SaveOutputFile();
             }
             catch (Exception ex)
             {
@@ -196,8 +198,20 @@ namespace GeoLocationTool.UI
         private void DisplayData()
         {
             dataGridView1.DataSource = geoCoder.InputData;
+            FormatGrid();
+        }
+
+        private void FormatGrid()
+        {
             dataGridView1.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.AllCells;
+            DataGridViewColumnCollection columnCollection = dataGridView1.Columns;
+            DataGridViewColumn lastVisibleColumn =
+                columnCollection.GetLastColumn(
+                    DataGridViewElementStates.Visible,
+                    DataGridViewElementStates.None);
+            if (lastVisibleColumn != null)
+                lastVisibleColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void FormLoadData_FormClosing(object sender, FormClosingEventArgs e)

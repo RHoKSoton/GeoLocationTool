@@ -126,8 +126,7 @@ namespace GeoLocationTool.UI
                 // reconect the data grids
                 DisplayRecords();
                 parentGrid.DataSource = geoCoder.InputData;
-                parentGrid.AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.AllCells;
+                FormatGrid(parentGrid);
             }
             catch (Exception ex)
             {
@@ -329,7 +328,7 @@ namespace GeoLocationTool.UI
         private void DisplayAllRecords()
         {
             dataGridView1.DataSource = geoCoder.InputData;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            FormatGrid(dataGridView1);
         }
 
         private void DisplayLevel1List()
@@ -556,7 +555,7 @@ namespace GeoLocationTool.UI
         private void DisplayUnmatchedRecords()
         {
             dataGridView1.DataSource = geoCoder.UncodedRecords();
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            FormatGrid(dataGridView1);
         }
 
         private List<KeyValuePair<string, string>> FormatSuggestionList(
@@ -585,6 +584,19 @@ namespace GeoLocationTool.UI
                 formattedList.Add(new KeyValuePair<string, string>(null, LeaveBlankText));
             }
             return formattedList;
+        }
+
+        private void FormatGrid(DataGridView grid)
+        {
+            grid.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.AllCells;
+            DataGridViewColumnCollection columnCollection = grid.Columns;
+            DataGridViewColumn lastVisibleColumn =
+                columnCollection.GetLastColumn(
+                    DataGridViewElementStates.Visible,
+                    DataGridViewElementStates.None);
+            if (lastVisibleColumn != null)
+                lastVisibleColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void FormManualMatch_Load(object sender, EventArgs e)
