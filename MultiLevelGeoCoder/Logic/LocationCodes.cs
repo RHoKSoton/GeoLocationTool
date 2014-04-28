@@ -20,16 +20,10 @@ namespace MultiLevelGeoCoder.Logic
 
         public static bool useDictionaries = true; // for performance testing
 
-        //todo remove after testing
-        public static bool UseGazetteerFirst = true; // for testing
-
         private readonly IEnumerable<GazetteerRecord> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
         private readonly GazetteerDataDictionaries dictionary;
-
-        //todo remove  stopwatch after testing
-        private readonly Stopwatch watch = new Stopwatch();
 
         #endregion Fields
 
@@ -59,9 +53,7 @@ namespace MultiLevelGeoCoder.Logic
             Location location,
             bool useMatchedNamesCache = false)
         {
-            watch.Start();
             CodedLocation codedLocation = new CodedLocation(location);
-            var time = watch.Elapsed;
             GetLevel1Code(codedLocation, useMatchedNamesCache);
 
             if (codedLocation.GeoCode1 != null)
@@ -73,8 +65,6 @@ namespace MultiLevelGeoCoder.Logic
                 }
             }
 
-            Debug.WriteLine(
-                "Time to get codes: " + watch.Elapsed.Subtract(time) + Environment.NewLine);
             return codedLocation;
         }
 
@@ -85,47 +75,33 @@ namespace MultiLevelGeoCoder.Logic
 
         private void GetLevel1Code(CodedLocation location, bool useCache)
         {
-            if (UseGazetteerFirst)
+            Level1UsingGazetteer(location);
+
+            if (location.GeoCode1 == null)
             {
-                Level1UsingGazetteer(location);
-
-                if (location.GeoCode1 == null)
-                {
-                    Level1UsingMatchedName(location, useCache);
-                }
+                Level1UsingMatchedName(location, useCache);
             }
-
-            //Level1UsingMatchedName(location, useCache) ??
-            //       Level1UsingGazetteer(location);
         }
 
         private void GetLevel2Code(CodedLocation location, bool useCache)
         {
-            if (UseGazetteerFirst)
-            {
                 Level2UsingGazetteer(location);
-                if (location.GeoCode2 == null)
-                {
-                    Level2UsingMatchedName(location, useCache);
-                }
+            if (location.GeoCode2 == null)
+            {
+                Level2UsingMatchedName(location, useCache);
             }
 
-            //return Level2UsingMatchedName(location, useCache) ??
-            //       Level2UsingGazetteer(location);
         }
 
         private void GetLevel3Code(CodedLocation location, bool useCache)
         {
-            if (UseGazetteerFirst)
-            {
+           
                 Level3UsingGazetteer(location);
                 if (location.GeoCode3 == null)
                 {
                     Level3UsingMatchedName(location, useCache);
                 }
-            }
-            //return Level3UsingMatchedName(location, useCache) ??
-            //       Level3UsingGazetteer(location);
+          
         }
 
         private void Level1UsingGazetteer(CodedLocation location)
@@ -143,12 +119,12 @@ namespace MultiLevelGeoCoder.Logic
 
             // just match level 1
             var matchRecords = from record in gazzetteerData
-                where
-                    (String.Equals(
-                        record.Name1,
-                        location.Name1,
-                        StringComparison.OrdinalIgnoreCase))
-                select record;
+                               where
+                                   (String.Equals(
+                                       record.Name1,
+                                       location.Name1,
+                                       StringComparison.OrdinalIgnoreCase))
+                               select record;
 
             GazetteerRecord firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
@@ -203,16 +179,16 @@ namespace MultiLevelGeoCoder.Logic
 
             // must match level 1 and 2
             var matchRecords = from record in gazzetteerData
-                where
-                    (String.Equals(
-                        record.Name1,
-                        location.Name1.Trim(),
-                        StringComparison.OrdinalIgnoreCase)) &&
-                    (String.Equals(
-                        record.Name2,
-                        location.Name2.Trim(),
-                        StringComparison.OrdinalIgnoreCase))
-                select record;
+                               where
+                                   (String.Equals(
+                                       record.Name1,
+                                       location.Name1.Trim(),
+                                       StringComparison.OrdinalIgnoreCase)) &&
+                                   (String.Equals(
+                                       record.Name2,
+                                       location.Name2.Trim(),
+                                       StringComparison.OrdinalIgnoreCase))
+                               select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
@@ -269,20 +245,20 @@ namespace MultiLevelGeoCoder.Logic
             }
             // must match all three levels
             var matchRecords = from record in gazzetteerData
-                where
-                    (String.Equals(
-                        record.Name1,
-                        location.Name1.Trim(),
-                        StringComparison.OrdinalIgnoreCase)) &&
-                    (String.Equals(
-                        record.Name2,
-                        location.Name2.Trim(),
-                        StringComparison.OrdinalIgnoreCase)) &&
-                    (String.Equals(
-                        record.Name3,
-                        location.Name3.Trim(),
-                        StringComparison.OrdinalIgnoreCase))
-                select record;
+                               where
+                                   (String.Equals(
+                                       record.Name1,
+                                       location.Name1.Trim(),
+                                       StringComparison.OrdinalIgnoreCase)) &&
+                                   (String.Equals(
+                                       record.Name2,
+                                       location.Name2.Trim(),
+                                       StringComparison.OrdinalIgnoreCase)) &&
+                                   (String.Equals(
+                                       record.Name3,
+                                       location.Name3.Trim(),
+                                       StringComparison.OrdinalIgnoreCase))
+                               select record;
 
             var firstOrDefault = matchRecords.FirstOrDefault();
             if (firstOrDefault != null)
