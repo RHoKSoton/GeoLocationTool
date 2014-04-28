@@ -1,0 +1,9 @@
+PID,ID_0,ISO,NAME_0,ID_1,NAME_1,VARNAME_1,ID_2,NAME_2,VARNAME_2,ID_3,NAME_3,NL_NAME_3,VARNAME_3,TYPE_3,ENGTYPE_3
+1,177,PHL,Philippines,1,P1,P1A,10,T1,T1A,100,V1,,V1A,Barangay,Village
+2,177,PHL,Philippines,1,P1,,10,T1,,101,V2,,,Barangay,Village
+3,177,PHL,Philippines,2,P2,P2A,20,T2,T2A,200,V1,,V1A,,
+4,177,PHL,Philippines,2,P2,,20,T2,,300,V2,,,,
+5,177,PHL,Philippines,2,P2,,20,T2,,400,V3,,,,
+6,177,PHL,Philippines,1,P1,P1A,11,T2,T2A,110,V1,,V1A,,
+6,177,PHL,Philippines,1,P1, ,11,T2, ,114,V4,, ,,
+6,177,PHL,Philippines,2,P2,,30,T1,,500,V2,,,,

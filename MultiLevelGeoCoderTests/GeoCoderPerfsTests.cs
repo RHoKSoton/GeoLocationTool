@@ -1,17 +1,18 @@
 ﻿// GeoCoderPerfsTests.cs
+
 namespace MultiLevelGeoCoderTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Common;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.DataAccess;
     using MultiLevelGeoCoder.Logic;
-    using System.Diagnostics;
-    using System.Data.Common;
-    using System.Data;
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Perfs tests
@@ -22,8 +23,8 @@ namespace MultiLevelGeoCoderTests
         #region Fields
 
         private DbConnection connection;
-        private string dbLocation = @"GeoLocationToolTest.sdf";
-        private string inputFileLocation = Path.GetTempFileName();
+        private const string dbLocation = @"GeoLocationToolTest.sdf";
+        private readonly string inputFileLocation = Path.GetTempFileName();
 
         #endregion Fields
 
@@ -40,8 +41,11 @@ namespace MultiLevelGeoCoderTests
         {
             var lines = new List<string>();
             lines.Add("Admin1,Admin2,Admin3,Admin4,Population2010");
-            File.WriteAllLines(inputFileLocation, lines.Concat(Enumerable.Range(1, linesCount)
-                                                                         .Select(x => "REG04B,MARINDUQUE ,BOAC,Agot,502")));
+            File.WriteAllLines(
+                inputFileLocation,
+                lines.Concat(
+                    Enumerable.Range(1, linesCount)
+                        .Select(x => "REG04B,MARINDUQUE ,BOAC,Agot,502")));
             return inputFileLocation;
         }
 
@@ -69,90 +73,157 @@ namespace MultiLevelGeoCoderTests
         // 2000 input lines: 0.0992199 vs 2.6536493
         // 100000 input lines: 1.0631592 vs 120.1221388
 
+        /// <summary>
+        /// Test using dictionaries to retrieve the gazetteer data
+        /// </summary>
         [TestMethod]
         [Ignore]
-        public void GeoCoder_PerfsTests()
+        public void GeoCoder_PerfsTestsUsingDictionaries()
         {
-            // This test creates an empty GeoLocationToolTest.sdf file from which to load the cache
-            // To use a file containing entries, manually create and copy the file
             connection = DBHelper.GetDbConnection(dbLocation);
             connection.InitializeDB();
             GeoCoder geoCoder = new GeoCoder(connection);
-            geoCoder.LoadGazetteerFile(@"PHL_adm3.csv");//You need to copy this file manually
+            geoCoder.LoadGazetteerFile(@"PHL_adm3.csv");
+                //You need to copy this file manually
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            geoCoder.SetGazetteerColumns(new GazetteerColumnNames
-            {
-                Level1Code = "ID_1",
-                Level2Code = "ID_2",
-                Level3Code = "ID_3",
-                Level1Name = "NAME_1",
-                Level2Name = "NAME_2",
-                Level3Name = "NAME_3"
-            }, false);
+            geoCoder.SetGazetteerColumns(
+                new GazetteerColumnNames
+                {
+                    Level1Code = "ID_1",
+                    Level2Code = "ID_2",
+                    Level3Code = "ID_3",
+                    Level1Name = "NAME_1",
+                    Level2Name = "NAME_2",
+                    Level3Name = "NAME_3"
+                },
+                false);
 
             Debug.WriteLine("Time to create dictionaries: " + watch.Elapsed.TotalSeconds);
 
-            foreach (int linesCount in new[] { 500, 1000, 2000 })
+            foreach (int linesCount in new[] {500, 1000, 2000})
             {
                 geoCoder.LoadInputFileCsv(GenerateInputFile(linesCount));
                 geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
                 watch.Restart();
                 geoCoder.AddAllLocationCodes();
                 var elapsed = watch.Elapsed.TotalSeconds;
-                LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
-                InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
+                //LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
+                geoCoder.LoadInputFileCsv(GenerateInputFile(linesCount));
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
                 watch.Restart();
                 geoCoder.AddAllLocationCodes();
-                Debug.WriteLine(linesCount + " input lines: " + elapsed + " vs " + watch.Elapsed.TotalSeconds);
-                LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
-                InputData.UseMatchedNamesCache = !InputData.UseMatchedNamesCache;
+                Debug.WriteLine(
+                    linesCount + " input lines: " + elapsed + " vs " +
+                    watch.Elapsed.TotalSeconds);
+                // LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
 
                 foreach (var row in geoCoder.InputData.AsEnumerable())
                 {
                     var elems = row.ItemArray;
-                    Assert.IsFalse(elems[5] is System.DBNull);
-                    Assert.IsFalse(elems[6] is System.DBNull);
-                    Assert.IsFalse(elems[7] is System.DBNull);
+                    Assert.IsFalse(elems[5] is DBNull);
+                    Assert.IsFalse(elems[6] is DBNull);
+                    Assert.IsFalse(elems[7] is DBNull);
                 }
             }
         }
 
+
         /// <summary>
-        /// Given pre created gazetteer and input csv files and an exising database
-        /// When GeoCoder code all is run
-        /// The time taken and the number of input lines is obtained
+        /// Test using cache to retrieve the matched names data v not using cache
         /// </summary>
         [TestMethod]
         [Ignore]
-        public void GeoCoderCodeAll_UseActualData_PerfsTests()
+        public void GeoCoder_PerfsTestsUsingMatchedNamesCache()
         {
-            // Manually create and copy the GeoLocationTool.sdf file 
-            // Manually create and copy the input and gazetteer files
-            const string dbLocation1 = @"GeoLocationTool.sdf";
+            const string dbLocation1 = @"TestGeoLocationTool.sdf";
             connection = DBHelper.GetDbConnection(dbLocation1);
-            // connection.InitializeDB();
             GeoCoder geoCoder = new GeoCoder(connection);
-            geoCoder.LoadGazetteerFile(@"TestGaz1.csv");// You need to copy this file manually
-            Stopwatch watch = new Stopwatch();
-            geoCoder.SetGazetteerColumns(new GazetteerColumnNames
-            {
-                Level1Code = "ID_1",
-                Level2Code = "ID_2",
-                Level3Code = "ID_3",
-                Level1Name = "NAME_1",
-                Level2Name = "NAME_2",
-                Level3Name = "NAME_3",
-                Level1AltName = "VARNAME_1",
-                Level2AltName = "VARNAME_2",
-                Level3AltName = "VARNAME_3"
-            }, false);
 
-            geoCoder.LoadInputFileCsv("TestInput1.csv"); // You need to copy this file manually
+            geoCoder.LoadGazetteerFile(@"TestGaz1.csv");
+            Stopwatch watch = new Stopwatch();
+            geoCoder.SetGazetteerColumns(
+                new GazetteerColumnNames
+                {
+                    Level1Code = "ID_1",
+                    Level2Code = "ID_2",
+                    Level3Code = "ID_3",
+                    Level1Name = "NAME_1",
+                    Level2Name = "NAME_2",
+                    Level3Name = "NAME_3"
+                },
+                false);
+
+
+            foreach (
+                string inputFile in
+                    new[]
+                    {@"TestInput1000.csv", @"TestInput10000.csv", @"TestInput50000.csv"})
+            {
+                geoCoder.LoadInputFileCsv(inputFile);
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+
+                // use cache           
+                watch.Restart();
+                InputData.UseMatchedNamesCache = true;
+                geoCoder.AddAllLocationCodes();
+                var elapsed = watch.Elapsed.TotalSeconds;
+
+                // don't use cache          
+                geoCoder.LoadInputFileCsv(inputFile);
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+                watch.Restart();
+                InputData.UseMatchedNamesCache = false;
+                geoCoder.AddAllLocationCodes();
+                Debug.WriteLine(
+                    "input file: " + inputFile + " cached: " + elapsed +
+                    " vs " + "non cached: " + watch.Elapsed.TotalSeconds);
+            }
+
+            // Example results
+            // input file: TestInput1000.csv cached: 0.0089728 vs non cached: 0.3835499
+            // input file: TestInput10000.csv cached: 0.073879 vs non cached: 2.8980328
+            // input file: TestInput50000.csv cached: 0.3852506 vs non cached: 14.464649
+        }
+
+
+        /// <summary>
+        /// Given pre created gazetteer and input csv files and an exising database
+        /// When GeoCoder code all is run
+        /// Then time taken and the number of input lines is obtained
+        /// </summary>
+        [TestMethod]
+        [Ignore]
+        public void GeoCoderCodeAll_PerfsTests_TimeToCodeAll()
+        {
+            const string dbLocation1 = @"TestGeoLocationTool.sdf";
+            connection = DBHelper.GetDbConnection(dbLocation1);
+
+            GeoCoder geoCoder = new GeoCoder(connection);
+            geoCoder.LoadGazetteerFile(@"TestGaz1.csv");
+            Stopwatch watch = new Stopwatch();
+            geoCoder.SetGazetteerColumns(
+                new GazetteerColumnNames
+                {
+                    Level1Code = "ID_1",
+                    Level2Code = "ID_2",
+                    Level3Code = "ID_3",
+                    Level1Name = "NAME_1",
+                    Level2Name = "NAME_2",
+                    Level3Name = "NAME_3",
+                    Level1AltName = "VARNAME_1",
+                    Level2AltName = "VARNAME_2",
+                    Level3AltName = "VARNAME_3"
+                },
+                false);
+
+            geoCoder.LoadInputFileCsv("TestInput1.csv");
             geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
             watch.Start();
             geoCoder.AddAllLocationCodes();
-            Debug.WriteLine(geoCoder.InputData.Rows.Count + " input lines: " + watch.Elapsed.TotalSeconds);
+            Debug.WriteLine(
+                geoCoder.InputData.Rows.Count + " input lines: " +
+                watch.Elapsed.TotalSeconds);
 
             // Example results
             // 25 input lines: 0.072016

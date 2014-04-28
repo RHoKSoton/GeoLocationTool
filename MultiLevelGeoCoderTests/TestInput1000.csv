@@ -1,0 +1,1202 @@
+Row,Admin1,Admin2,Admin3,Admin4,Comments
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+1,REG04B,P1,T1,V1,Correct
+2,REG04B,P2,T2,V1,Correct with duplicate Level 3 name 
+3,REG04B,P1x,T1,V1,Level 1 miss spelt
+4,REG04B,P1,T1x,V1,Level 2 miss spelt
+5,REG04B,P1,T1,V1x,Level 3 miss spelt
+6,REG04B,P1,T1x,V1x,Level  2 and 3 miss spelt
+7,REG04B,P1x,T1x,V1x,"Level 1, 2 and 3 miss spelt"
+8,REG04B,P1y,T1y,V1y,"Level 1, 2 and 3 miss spelt with different miss spelling"
+9,REG04B,P1A,T1A,V1A,"Level 1, 2 and 3 gazetteer alt names"
+10,REG04B,P1A,T1,V1,Level 1 gazetteer alt name
+11,REG04B,P1,T1A,V1,Level 2 gazetteer alt name
+12,REG04B,P1,T1,V1A,Level 3 gazetteer alt name
+13,REG04B,P1A,T1A,V1,Level 1 and 2 gazetteer alt name
+14,REG04B,P1,T1A,V1A,Level 2 and 3 gazetteer alt name
+15,REG04B,P1x,T1A,V1A,"Level1 miss spelt, Level 2 and 3 gazetteer alt name"
+16,REG04B,P1A,T1x,V1A,"Level 1 and 3 gazetteer alt name, Level2 miss spelt"
+17,REG04B,P1A,T1A,V1x,"Level 1 and 2 gazetteer alt name, level 3 miss-spelt"
+18,REG04B,p1a,t1a,v1a,"Level 1, 2 and 3 gazetteer alt names, different casing"
+19,REG04B,p1,t1,v1,Correct but with different casing
+20,REG04B,p1x,t1x,v1x,"Level 1, 2 and 3 miss-spelt, different casing to row 7"
+
