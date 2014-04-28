@@ -165,18 +165,6 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void btnSelectOutputFile_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SelectOutputFileName();
-            }
-            catch (Exception ex)
-            {
-                ErrorHandler.Process("Error setting output file name.", ex);
-            }
-        }
-
         private void DisplayColumnNameLists()
         {
             InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
@@ -207,7 +195,6 @@ namespace GeoLocationTool.UI
         {
             btnMatchData.Enabled = enabled;
             btnManualMatch.Enabled = enabled;
-            btnSelectOutputFile.Enabled = enabled;
             btnSaveOutput.Enabled = enabled;
         }
 

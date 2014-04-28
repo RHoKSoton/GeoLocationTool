@@ -45,15 +45,14 @@
             this.cboLevel1 = new System.Windows.Forms.ComboBox();
             this.cboLevel2 = new System.Windows.Forms.ComboBox();
             this.cboLevel3 = new System.Windows.Forms.ComboBox();
-            this.btnSelectOutputFile = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtOutputFileName = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSaveOutput = new System.Windows.Forms.Button();
+            this.txtOutputFileName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -113,11 +112,11 @@
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtFileName, 3);
-            this.txtFileName.Location = new System.Drawing.Point(718, 19);
+            this.txtFileName.Location = new System.Drawing.Point(707, 19);
             this.txtFileName.Margin = new System.Windows.Forms.Padding(4);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(522, 22);
+            this.txtFileName.Size = new System.Drawing.Size(533, 22);
             this.txtFileName.TabIndex = 8;
             this.txtFileName.TabStop = false;
             // 
@@ -125,7 +124,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(641, 22);
+            this.label2.Location = new System.Drawing.Point(630, 22);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
@@ -136,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(190, 61);
+            this.label4.Location = new System.Drawing.Point(170, 61);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 17);
@@ -146,7 +145,7 @@
             // lblMunicipality
             // 
             this.lblMunicipality.AutoSize = true;
-            this.lblMunicipality.Location = new System.Drawing.Point(366, 61);
+            this.lblMunicipality.Location = new System.Drawing.Point(349, 61);
             this.lblMunicipality.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMunicipality.Name = "lblMunicipality";
             this.lblMunicipality.Size = new System.Drawing.Size(63, 17);
@@ -156,7 +155,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(542, 61);
+            this.label6.Location = new System.Drawing.Point(528, 61);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 17);
@@ -165,7 +164,7 @@
             // 
             // btnManualMatch
             // 
-            this.btnManualMatch.Location = new System.Drawing.Point(190, 124);
+            this.btnManualMatch.Location = new System.Drawing.Point(170, 124);
             this.btnManualMatch.Margin = new System.Windows.Forms.Padding(4);
             this.btnManualMatch.Name = "btnManualMatch";
             this.btnManualMatch.Size = new System.Drawing.Size(148, 33);
@@ -177,14 +176,14 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 8;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.Controls.Add(this.btnLoadInputFile, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 3);
@@ -199,13 +198,12 @@
             this.tableLayoutPanel1.Controls.Add(this.cboLevel3, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.comboBox1, 5, 4);
             this.tableLayoutPanel1.Controls.Add(this.label3, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 8);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnSelectOutputFile, 3, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnMatchData, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnSaveOutput, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 8);
             this.tableLayoutPanel1.Controls.Add(this.txtOutputFileName, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.label1, 4, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -224,8 +222,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1244, 724);
             this.tableLayoutPanel1.TabIndex = 20;
             // 
@@ -233,10 +229,10 @@
             // 
             this.rdoImportCsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportCsv.AutoSize = true;
-            this.rdoImportCsv.Location = new System.Drawing.Point(190, 20);
+            this.rdoImportCsv.Location = new System.Drawing.Point(170, 20);
             this.rdoImportCsv.Margin = new System.Windows.Forms.Padding(4);
             this.rdoImportCsv.Name = "rdoImportCsv";
-            this.rdoImportCsv.Size = new System.Drawing.Size(168, 21);
+            this.rdoImportCsv.Size = new System.Drawing.Size(171, 21);
             this.rdoImportCsv.TabIndex = 2;
             this.rdoImportCsv.TabStop = true;
             this.rdoImportCsv.Text = "Csv";
@@ -246,10 +242,10 @@
             // 
             this.rdoImportTabDelim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoImportTabDelim.AutoSize = true;
-            this.rdoImportTabDelim.Location = new System.Drawing.Point(366, 20);
+            this.rdoImportTabDelim.Location = new System.Drawing.Point(349, 20);
             this.rdoImportTabDelim.Margin = new System.Windows.Forms.Padding(4);
             this.rdoImportTabDelim.Name = "rdoImportTabDelim";
-            this.rdoImportTabDelim.Size = new System.Drawing.Size(168, 21);
+            this.rdoImportTabDelim.Size = new System.Drawing.Size(171, 21);
             this.rdoImportTabDelim.TabIndex = 3;
             this.rdoImportTabDelim.TabStop = true;
             this.rdoImportTabDelim.Text = "Tab Delimited";
@@ -259,7 +255,7 @@
             // 
             this.cboLevel1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel1.FormattingEnabled = true;
-            this.cboLevel1.Location = new System.Drawing.Point(190, 82);
+            this.cboLevel1.Location = new System.Drawing.Point(170, 82);
             this.cboLevel1.Margin = new System.Windows.Forms.Padding(4);
             this.cboLevel1.MaxDropDownItems = 20;
             this.cboLevel1.Name = "cboLevel1";
@@ -270,7 +266,7 @@
             // 
             this.cboLevel2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel2.FormattingEnabled = true;
-            this.cboLevel2.Location = new System.Drawing.Point(366, 82);
+            this.cboLevel2.Location = new System.Drawing.Point(349, 82);
             this.cboLevel2.Margin = new System.Windows.Forms.Padding(4);
             this.cboLevel2.MaxDropDownItems = 20;
             this.cboLevel2.Name = "cboLevel2";
@@ -281,53 +277,19 @@
             // 
             this.cboLevel3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLevel3.FormattingEnabled = true;
-            this.cboLevel3.Location = new System.Drawing.Point(542, 82);
+            this.cboLevel3.Location = new System.Drawing.Point(528, 82);
             this.cboLevel3.Margin = new System.Windows.Forms.Padding(4);
             this.cboLevel3.MaxDropDownItems = 20;
             this.cboLevel3.Name = "cboLevel3";
             this.cboLevel3.Size = new System.Drawing.Size(168, 24);
             this.cboLevel3.TabIndex = 6;
             // 
-            // btnSelectOutputFile
-            // 
-            this.btnSelectOutputFile.Location = new System.Drawing.Point(366, 124);
-            this.btnSelectOutputFile.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSelectOutputFile.Name = "btnSelectOutputFile";
-            this.btnSelectOutputFile.Size = new System.Drawing.Size(148, 33);
-            this.btnSelectOutputFile.TabIndex = 8;
-            this.btnSelectOutputFile.Text = "Select Output File";
-            this.btnSelectOutputFile.UseVisualStyleBackColor = true;
-            this.btnSelectOutputFile.Click += new System.EventHandler(this.btnSelectOutputFile_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(629, 132);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 17);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Output File:";
-            // 
-            // txtOutputFileName
-            // 
-            this.txtOutputFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.txtOutputFileName, 3);
-            this.txtOutputFileName.Location = new System.Drawing.Point(718, 129);
-            this.txtOutputFileName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtOutputFileName.Name = "txtOutputFileName";
-            this.txtOutputFileName.ReadOnly = true;
-            this.txtOutputFileName.Size = new System.Drawing.Size(522, 22);
-            this.txtOutputFileName.TabIndex = 31;
-            this.txtOutputFileName.TabStop = false;
-            // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(718, 82);
+            this.comboBox1.Location = new System.Drawing.Point(707, 82);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.MaxDropDownItems = 20;
             this.comboBox1.Name = "comboBox1";
@@ -337,7 +299,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(718, 61);
+            this.label3.Location = new System.Drawing.Point(707, 61);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 17);
@@ -379,7 +341,7 @@
             this.label7.Text = "( * = optional )";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnSave
+            // btnSaveOutput
             // 
             this.btnSaveOutput.Location = new System.Drawing.Point(3, 174);
             this.btnSaveOutput.Name = "btnSaveOutput";
@@ -388,6 +350,29 @@
             this.btnSaveOutput.Text = "Save Output";
             this.btnSaveOutput.UseVisualStyleBackColor = true;
             this.btnSaveOutput.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtOutputFileName
+            // 
+            this.txtOutputFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.txtOutputFileName, 3);
+            this.txtOutputFileName.Location = new System.Drawing.Point(707, 129);
+            this.txtOutputFileName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOutputFileName.Name = "txtOutputFileName";
+            this.txtOutputFileName.ReadOnly = true;
+            this.txtOutputFileName.Size = new System.Drawing.Size(533, 22);
+            this.txtOutputFileName.TabIndex = 31;
+            this.txtOutputFileName.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(618, 132);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 17);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Output File:";
             // 
             // FormLoadInput
             // 
@@ -426,7 +411,6 @@
         private System.Windows.Forms.RadioButton rdoImportTabDelim;
         private System.Windows.Forms.TextBox txtOutputFileName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnSelectOutputFile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboLevel1;
         private System.Windows.Forms.ComboBox cboLevel2;
