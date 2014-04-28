@@ -4,7 +4,6 @@ namespace MultiLevelGeoCoder.Logic
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using DataAccess;
     using Model;
@@ -17,8 +16,6 @@ namespace MultiLevelGeoCoder.Logic
     internal class LocationCodes
     {
         #region Fields
-
-        public static bool useDictionaries = true; // for performance testing
 
         private readonly IEnumerable<GazetteerRecord> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
@@ -85,23 +82,20 @@ namespace MultiLevelGeoCoder.Logic
 
         private void GetLevel2Code(CodedLocation location, bool useCache)
         {
-                Level2UsingGazetteer(location);
+            Level2UsingGazetteer(location);
             if (location.GeoCode2 == null)
             {
                 Level2UsingMatchedName(location, useCache);
             }
-
         }
 
         private void GetLevel3Code(CodedLocation location, bool useCache)
         {
-           
-                Level3UsingGazetteer(location);
-                if (location.GeoCode3 == null)
-                {
-                    Level3UsingMatchedName(location, useCache);
-                }
-          
+            Level3UsingGazetteer(location);
+            if (location.GeoCode3 == null)
+            {
+                Level3UsingMatchedName(location, useCache);
+            }
         }
 
         private void Level1UsingGazetteer(CodedLocation location)
@@ -111,26 +105,12 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-            if (useDictionaries)
-            {
-                location.GeoCode1 = dictionary.GetLevel1Code(
-                    location.Name1);
-            }
 
-            // just match level 1
-            var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1,
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+            location.GeoCode1 = dictionary.GetLevel1Code(
+                location.Name1);
 
-            GazetteerRecord firstOrDefault = matchRecords.FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                location.GeoCode1 = new GeoCode(firstOrDefault.Id1, firstOrDefault.Name1);
-            }
+
+
         }
 
         private void Level1UsingMatchedName(CodedLocation location, bool useCache)
@@ -170,31 +150,13 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-            if (useDictionaries)
-            {
-                location.GeoCode2 = dictionary.GetLevel2Code(
-                    location.GeoCode1.Name,
-                    location.Name2);
-            }
 
-            // must match level 1 and 2
-            var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name2,
-                                       location.Name2.Trim(),
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+            location.GeoCode2 = dictionary.GetLevel2Code(
+                location.GeoCode1.Name,
+                location.Name2);
 
-            var firstOrDefault = matchRecords.FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                location.GeoCode2 = new GeoCode(firstOrDefault.Id2, firstOrDefault.Name2);
-            }
+
+
         }
 
         private void Level2UsingMatchedName(CodedLocation location, bool useCache)
@@ -236,35 +198,11 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-            if (useDictionaries)
-            {
-                location.GeoCode3 = dictionary.GetLevel3Code(
-                    location.GeoCode1.Name,
-                    location.GeoCode2.Name,
-                    location.Name3);
-            }
-            // must match all three levels
-            var matchRecords = from record in gazzetteerData
-                               where
-                                   (String.Equals(
-                                       record.Name1,
-                                       location.Name1.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name2,
-                                       location.Name2.Trim(),
-                                       StringComparison.OrdinalIgnoreCase)) &&
-                                   (String.Equals(
-                                       record.Name3,
-                                       location.Name3.Trim(),
-                                       StringComparison.OrdinalIgnoreCase))
-                               select record;
+            location.GeoCode3 = dictionary.GetLevel3Code(
+                location.GeoCode1.Name,
+                location.GeoCode2.Name,
+                location.Name3);
 
-            var firstOrDefault = matchRecords.FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                location.GeoCode3 = new GeoCode(firstOrDefault.Id3, firstOrDefault.Name3);
-            }
         }
 
         private void Level3UsingMatchedName(CodedLocation location, bool useCache)

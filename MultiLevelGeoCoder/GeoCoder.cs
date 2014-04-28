@@ -63,10 +63,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         public void AddAllLocationCodes()
         {
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
             inputData.CodeAll(locationCodes);
-            Debug.WriteLine("CodeAll: " + watch.Elapsed.TotalSeconds);
         }
 
         /// <summary>
