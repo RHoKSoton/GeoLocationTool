@@ -67,6 +67,7 @@ namespace GeoLocationTool.UI
                     LoadFile(path, isTab);
                     DisplayColumnNameLists();
                     txtOutputFileName.Clear();
+                    EnableButtons(true);
                 }
             }
             catch (Exception ex)
@@ -139,7 +140,6 @@ namespace GeoLocationTool.UI
                 geoCoder.AddAllLocationCodes();
                 btnManualMatch.Enabled = true;
                 DisplayData();
-                SaveOutputFile();
             }
             catch (Exception ex)
             {
@@ -150,6 +150,18 @@ namespace GeoLocationTool.UI
             finally
             {
                 Cursor = Cursors.Default;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveOutputFile();
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.Process("A problem occurred with the output save.", ex);
             }
         }
 
@@ -189,6 +201,14 @@ namespace GeoLocationTool.UI
         {
             dataGridView1.DataSource = geoCoder.InputData;
             FormatGrid();
+        }
+
+        private void EnableButtons(bool enabled)
+        {
+            btnMatchData.Enabled = enabled;
+            btnManualMatch.Enabled = enabled;
+            btnSelectOutputFile.Enabled = enabled;
+            btnSaveOutput.Enabled = enabled;
         }
 
         private void FormatGrid()
@@ -247,6 +267,14 @@ namespace GeoLocationTool.UI
         {
             try
             {
+                if (geoCoder.InputData == null)
+                {
+                    MessageBox.Show(
+                        "Input data missing, please read in an input file.",
+                        "Missing");
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(txtOutputFileName.Text))
                 {
                     SelectOutputFileName();
@@ -313,7 +341,7 @@ namespace GeoLocationTool.UI
             dataGridView1.AllowUserToOrderColumns = false;
             dataGridView1.ReadOnly = true;
             rdoImportCsv.Checked = true;
-            btnManualMatch.Enabled = false;
+            EnableButtons(false);
         }
 
         #endregion Methods

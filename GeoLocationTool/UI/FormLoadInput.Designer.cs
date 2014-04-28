@@ -53,6 +53,7 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnSaveOutput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -79,16 +80,16 @@
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 277);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 226);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1236, 443);
+            this.dataGridView1.Size = new System.Drawing.Size(1236, 494);
             this.dataGridView1.TabIndex = 27;
             // 
             // btnMatchData
             // 
-            this.btnMatchData.Location = new System.Drawing.Point(4, 175);
+            this.btnMatchData.Location = new System.Drawing.Point(4, 124);
             this.btnMatchData.Margin = new System.Windows.Forms.Padding(4);
             this.btnMatchData.Name = "btnMatchData";
             this.btnMatchData.Size = new System.Drawing.Size(148, 33);
@@ -164,7 +165,7 @@
             // 
             // btnManualMatch
             // 
-            this.btnManualMatch.Location = new System.Drawing.Point(4, 226);
+            this.btnManualMatch.Location = new System.Drawing.Point(190, 124);
             this.btnManualMatch.Margin = new System.Windows.Forms.Padding(4);
             this.btnManualMatch.Name = "btnManualMatch";
             this.btnManualMatch.Size = new System.Drawing.Size(148, 33);
@@ -185,11 +186,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel1.Controls.Add(this.btnLoadInputFile, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblMunicipality, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.label6, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnMatchData, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.rdoImportCsv, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.rdoImportTabDelim, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 1);
@@ -197,26 +197,26 @@
             this.tableLayoutPanel1.Controls.Add(this.cboLevel1, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel2, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.cboLevel3, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.btnSelectOutputFile, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtOutputFileName, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.comboBox1, 5, 4);
             this.tableLayoutPanel1.Controls.Add(this.label3, 5, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 8);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnSelectOutputFile, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnMatchData, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnManualMatch, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnSaveOutput, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.txtOutputFileName, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 13;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -224,6 +224,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1244, 724);
             this.tableLayoutPanel1.TabIndex = 20;
             // 
@@ -288,7 +290,7 @@
             // 
             // btnSelectOutputFile
             // 
-            this.btnSelectOutputFile.Location = new System.Drawing.Point(4, 124);
+            this.btnSelectOutputFile.Location = new System.Drawing.Point(366, 124);
             this.btnSelectOutputFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectOutputFile.Name = "btnSelectOutputFile";
             this.btnSelectOutputFile.Size = new System.Drawing.Size(148, 33);
@@ -377,7 +379,17 @@
             this.label7.Text = "( * = optional )";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FormLoadData
+            // btnSave
+            // 
+            this.btnSaveOutput.Location = new System.Drawing.Point(3, 174);
+            this.btnSaveOutput.Name = "btnSaveOutput";
+            this.btnSaveOutput.Size = new System.Drawing.Size(148, 33);
+            this.btnSaveOutput.TabIndex = 37;
+            this.btnSaveOutput.Text = "Save Output";
+            this.btnSaveOutput.UseVisualStyleBackColor = true;
+            this.btnSaveOutput.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // FormLoadInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -422,6 +434,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnSaveOutput;
     }
 }
 
