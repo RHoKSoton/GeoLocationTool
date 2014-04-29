@@ -2,7 +2,6 @@
 
 namespace GeoLocationTool.UI
 {
-    using System;
     using System.IO;
     using System.Windows.Forms;
 
@@ -21,24 +20,24 @@ namespace GeoLocationTool.UI
         public static string GetFileName(string filter)
         {
             string fileName = string.Empty;
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory =
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog1.Filter = filter;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                fileName = openFileDialog1.FileName;
-                if (!File.Exists(fileName))
+                dialog.Filter = filter;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show(
-                        "File does not exist:\r\n" + fileName,
-                        "No File",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Stop);
+                    fileName = dialog.FileName;
+                    if (!File.Exists(fileName))
+                    {
+                        MessageBox.Show(
+                            "File does not exist:\r\n" + fileName,
+                            "No File",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Stop);
+                    }
                 }
             }
+
             return fileName;
         }
 
