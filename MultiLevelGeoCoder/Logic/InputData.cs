@@ -146,23 +146,21 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>A view only containing records where one or more codes is missing.</returns>
         public DataView GetUnCodedRecords()
         {
-            // only show those records where at least one code is null
-            EnumerableRowCollection<DataRow> query;
-
-            if (!string.IsNullOrEmpty(ColumnNames.Level3))
-            {
-                query = UncodedAtLevel1And2And3();
-            }
-            else if (!string.IsNullOrEmpty(ColumnNames.Level2))
-            {
-                // level 2 in use
-                query = UncodedAtLevel1And2();
-            }
-            else
-            {
-                // only level 1 in use
-                query = UncodedAtLevel1();
-            }
+            // only show those records where there is a name but no code
+            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
+                where
+                    // level 1 has name but no code
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level1)) &&
+                     (string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)))) ||
+                    // level 2 is in use and has name but no code
+                    (!string.IsNullOrEmpty(ColumnNames.Level2)) &&
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level2)) &&
+                     (string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)))) ||
+                    // level 3 is in use and has name but no code
+                    (!string.IsNullOrEmpty(ColumnNames.Level3)) &&
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level3)) &&
+                     (string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))))
+                select record;
 
             DataView unmatched = query.AsDataView();
             return unmatched;
@@ -324,36 +322,6 @@ namespace MultiLevelGeoCoder.Logic
                     col.ReadOnly = true;
                 }
             }
-        }
-
-        private EnumerableRowCollection<DataRow> UncodedAtLevel1()
-        {
-            // only level 1 in use
-            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
-                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName))
-                select record;
-            return query;
-        }
-
-        private EnumerableRowCollection<DataRow> UncodedAtLevel1And2()
-        {
-            // level 1 and 2 in use
-            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
-                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName))
-                select record;
-            return query;
-        }
-
-        private EnumerableRowCollection<DataRow> UncodedAtLevel1And2And3()
-        {
-            // level 1, 2 and 3 in use
-            EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
-                where string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)) ||
-                      string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))
-                select record;
-            return query;
         }
 
         #endregion Methods
