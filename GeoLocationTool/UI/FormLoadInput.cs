@@ -67,7 +67,12 @@ namespace GeoLocationTool.UI
                     LoadFile(path, isTab);
                     DisplayColumnNameLists();
                     txtOutputFileName.Clear();
+
+                    // enable match all and save 
                     EnableButtons(true);
+
+                    // disable Manual Match form untill Match All has been run
+                    btnManualMatch.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -194,7 +199,6 @@ namespace GeoLocationTool.UI
         private void EnableButtons(bool enabled)
         {
             btnMatchData.Enabled = enabled;
-            btnManualMatch.Enabled = enabled;
             btnSaveOutput.Enabled = enabled;
         }
 
@@ -336,6 +340,7 @@ namespace GeoLocationTool.UI
             dataGridView1.ReadOnly = true;
             rdoImportCsv.Checked = true;
             EnableButtons(false);
+            btnManualMatch.Enabled = false;
         }
 
         #endregion Methods
