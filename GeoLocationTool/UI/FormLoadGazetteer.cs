@@ -1,10 +1,10 @@
 ﻿// FormLoadGazetteer.cs
-
 namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
+
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
 
@@ -16,7 +16,7 @@ namespace GeoLocationTool.UI
     {
         #region Fields
 
-        private readonly IGeoCoder geoCoder = new GeoCoder(Program.Connection);
+        private readonly IGeoCoder geoCoder = new GeoCoder();
 
         private FormLoadInput formLoadData;
 
@@ -54,6 +54,24 @@ namespace GeoLocationTool.UI
         #endregion Constructors
 
         #region Methods
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (geoCoder != null))
+            {
+                geoCoder.Dispose();
+            }
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+
+            }
+            base.Dispose(disposing);
+        }
 
         private bool AreColumnNamesSelected()
         {

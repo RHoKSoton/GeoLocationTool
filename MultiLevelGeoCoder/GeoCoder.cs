@@ -1,5 +1,4 @@
 ﻿// GeoCoder.cs
-
 namespace MultiLevelGeoCoder
 {
     using System;
@@ -7,8 +6,11 @@ namespace MultiLevelGeoCoder
     using System.Data;
     using System.Data.Common;
     using System.Diagnostics;
+
     using DataAccess;
+
     using Logic;
+
     using Model;
 
     /// <summary>
@@ -19,6 +21,7 @@ namespace MultiLevelGeoCoder
         #region Fields
 
         private readonly IColumnsMappingProvider columnsMappingProvider;
+        private readonly DbConnection dbConnection;
         private readonly MatchedNames matchedNames;
 
         private GazetteerData gazetteerData;
@@ -32,9 +35,25 @@ namespace MultiLevelGeoCoder
 
         #region Constructors
 
-        public GeoCoder(DbConnection dbConnection)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoCoder"/> class.
+        /// </summary>
+        public GeoCoder()
         {
-            //todo make a seperate class responsible for the connection and its closing, not the geoCoder?
+            dbConnection = InitialiseDbConnection();
+            matchProvider = new MatchProvider(dbConnection);
+            columnsMappingProvider = new ColumnsMappingProvider(dbConnection);
+            matchedNames = new MatchedNames(matchProvider);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoCoder"/> class.
+        /// Use this constructor for unit testing.
+        /// </summary>
+        /// <param name="dbConnection">The database connection.</param>
+        internal GeoCoder(DbConnection dbConnection)
+        {
+            this.dbConnection = dbConnection;
             matchProvider = new MatchProvider(dbConnection);
             columnsMappingProvider = new ColumnsMappingProvider(dbConnection);
             matchedNames = new MatchedNames(matchProvider);
@@ -110,6 +129,18 @@ namespace MultiLevelGeoCoder
         public InputColumnNames DefaultInputColumnNames()
         {
             return inputData.DefaultColumnNames;
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, 
+        /// or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            if (dbConnection != null)
+            {
+                dbConnection.Close();
+            }
         }
 
         /// <summary>
@@ -377,6 +408,14 @@ namespace MultiLevelGeoCoder
         internal void SetMatchProvider(IMatchProvider provider)
         {
             matchProvider = provider;
+        }
+
+        private static DbConnection InitialiseDbConnection()
+        {
+            const string DB_LOCATION = @"GeoLocationTool.sdf";
+            DbConnection dbConnection = DBHelper.GetDbConnection(DB_LOCATION);
+            dbConnection.InitializeDB();
+            return dbConnection;
         }
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)

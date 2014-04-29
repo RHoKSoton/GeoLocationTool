@@ -2,11 +2,12 @@
 
 namespace MultiLevelGeoCoder
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using Logic;
 
-    public interface IGeoCoder
+    public interface IGeoCoder : IDisposable
     {
         #region Properties
 
