@@ -238,16 +238,26 @@ namespace GeoLocationTool.UI
 
         private void LoadFile(string path, bool isTab)
         {
-            if (isTab)
+            try
             {
-                geoCoder.LoadInputFileTabDelim(path);
-            }
-            else
-            {
-                geoCoder.LoadInputFileCsv(path);
-            }
+                Cursor = Cursors.WaitCursor;
+                txtFileName.Clear();
+                if (isTab)
+                {
+                    geoCoder.LoadInputFileTabDelim(path);
+                }
+                else
+                {
+                    geoCoder.LoadInputFileCsv(path);
+                }
 
-            DisplayData();
+                txtFileName.Text = path;
+                DisplayData();
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private void SaveOutputFile()
@@ -283,12 +293,9 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private string SelectFile(string filter)
+        private static string SelectFile(string filter)
         {
-            txtFileName.Clear();
-            var path = UiHelper.GetFileName(filter).Trim();
-            txtFileName.Text = path;
-            return path;
+            return UiHelper.GetFileName(filter).Trim();
         }
 
         private void SelectOutputFileName()
