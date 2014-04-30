@@ -1,16 +1,13 @@
 ﻿// GeoCoder.cs
+
 namespace MultiLevelGeoCoder
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
-    using System.Diagnostics;
-
     using DataAccess;
-
     using Logic;
-
     using Model;
 
     /// <summary>
@@ -73,6 +70,15 @@ namespace MultiLevelGeoCoder
             get { return inputData != null ? inputData.Data : null; }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether a name match has been saved 
+        /// since AddAllLocationCodes was last run.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if a name match has been saved otherwise, <c>false</c>.
+        /// </value>
+        public bool MatchSaved { get; private set; }
+
         #endregion Properties
 
         #region Methods
@@ -83,6 +89,7 @@ namespace MultiLevelGeoCoder
         public void AddAllLocationCodes()
         {
             inputData.CodeAll(locationCodes);
+            MatchSaved = false;
         }
 
         /// <summary>
@@ -338,6 +345,7 @@ namespace MultiLevelGeoCoder
         public void SaveMatch(Location inputLocation, Location gazetteerLocation)
         {
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            MatchSaved = true;
         }
 
         /// <summary>
@@ -347,9 +355,15 @@ namespace MultiLevelGeoCoder
         /// <exception cref="System.InvalidOperationException">Output file not saved, file name required.</exception>
         public void SaveOutputFile(string outputFilePath)
         {
-            if (string.IsNullOrEmpty(outputFilePath.Trim()))
+            if (MatchSaved)
             {
                 throw new InvalidOperationException(
+                    "Call AddAllLocationCodes before saving");
+            }
+
+            if (string.IsNullOrEmpty(outputFilePath.Trim()))
+            {
+                throw new ArgumentException(
                     "Output file not saved, file name required.");
             }
             FileExport.SaveToCsvFile(outputFilePath.Trim(), InputData);

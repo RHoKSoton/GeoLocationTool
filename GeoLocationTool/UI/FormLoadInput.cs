@@ -162,7 +162,16 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                SaveOutputFile();
+                if (geoCoder.MatchSaved)
+                {
+                    MessageBox.Show(
+                        "Please 'Match All' before saving.",
+                        "Inconsistent Data");
+                }
+                else
+                {
+                    SaveOutputFile();
+                }
             }
             catch (Exception ex)
             {

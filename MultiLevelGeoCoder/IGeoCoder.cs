@@ -15,6 +15,15 @@ namespace MultiLevelGeoCoder
 
         DataTable InputData { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether a name match has been saved 
+        /// since AddAllLocationCodes was last run.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if a name match has been saved otherwise, <c>false</c>.
+        /// </value>
+        bool MatchSaved { get; }
+
         #endregion Properties
 
         #region Methods
