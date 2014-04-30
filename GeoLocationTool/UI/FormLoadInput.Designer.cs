@@ -47,12 +47,13 @@
             this.cboLevel3 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSaveOutput = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.txtOutputFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSelectOutputFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -205,7 +206,8 @@
             this.tableLayoutPanel1.Controls.Add(this.btnSaveOutput, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnBack, 7, 8);
             this.tableLayoutPanel1.Controls.Add(this.txtOutputFileName, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.btnSelectOutputFile, 4, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -306,18 +308,6 @@
             this.label3.TabIndex = 35;
             this.label3.Text = "Level 4 *";
             // 
-            // btnBack
-            // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1092, 175);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(148, 33);
-            this.btnBack.TabIndex = 12;
-            this.btnBack.Text = "Gazetteer Data";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -351,6 +341,18 @@
             this.btnSaveOutput.UseVisualStyleBackColor = true;
             this.btnSaveOutput.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Location = new System.Drawing.Point(1092, 175);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(148, 33);
+            this.btnBack.TabIndex = 12;
+            this.btnBack.Text = "Gazetteer Data";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // txtOutputFileName
             // 
             this.txtOutputFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -367,12 +369,24 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(618, 132);
+            this.label1.Location = new System.Drawing.Point(797, 183);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 17);
             this.label1.TabIndex = 32;
             this.label1.Text = "Output File:";
+            // 
+            // btnSelectOutputFile
+            // 
+            this.btnSelectOutputFile.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSelectOutputFile.AutoSize = true;
+            this.btnSelectOutputFile.Location = new System.Drawing.Point(570, 127);
+            this.btnSelectOutputFile.Name = "btnSelectOutputFile";
+            this.btnSelectOutputFile.Size = new System.Drawing.Size(130, 27);
+            this.btnSelectOutputFile.TabIndex = 38;
+            this.btnSelectOutputFile.Text = "Select Output File";
+            this.btnSelectOutputFile.UseVisualStyleBackColor = true;
+            this.btnSelectOutputFile.Click += new System.EventHandler(this.btnSelectOutputFile_Click);
             // 
             // FormLoadInput
             // 
@@ -419,6 +433,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnSaveOutput;
+        private System.Windows.Forms.Button btnSelectOutputFile;
     }
 }
 

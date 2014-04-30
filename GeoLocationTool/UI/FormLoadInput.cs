@@ -1,11 +1,11 @@
 ﻿// FormLoadInput.cs
-
 namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
+
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
 
@@ -32,6 +32,11 @@ namespace GeoLocationTool.UI
         #endregion Constructors
 
         #region Methods
+
+        private static string SelectFile(string filter)
+        {
+            return UiHelper.GetFileName(filter).Trim();
+        }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -68,7 +73,6 @@ namespace GeoLocationTool.UI
                     DisplayColumnNameLists();
                     txtOutputFileName.Clear();
 
-                    // enable match all and save 
                     EnableButtons(true);
 
                     // disable Manual Match form untill Match All has been run
@@ -135,7 +139,6 @@ namespace GeoLocationTool.UI
                     return;
                 }
 
-
                 SetColumnNames();
 
                 // disconnect the data grid untill the coding is complete
@@ -179,6 +182,18 @@ namespace GeoLocationTool.UI
             }
         }
 
+        private void btnSelectOutputFile_Click(object sender, EventArgs e)
+        {
+            try
+               {
+             SelectOutputFileName();
+              }
+              catch (Exception ex)
+               {
+              ErrorHandler.Process("Error selecting output file name.", ex);
+               }
+        }
+
         private void DisplayColumnNameLists()
         {
             InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
@@ -209,6 +224,7 @@ namespace GeoLocationTool.UI
         {
             btnMatchData.Enabled = enabled;
             btnSaveOutput.Enabled = enabled;
+            btnSelectOutputFile.Enabled = enabled;
         }
 
         private void FormatGrid()
@@ -306,11 +322,6 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private static string SelectFile(string filter)
-        {
-            return UiHelper.GetFileName(filter).Trim();
-        }
-
         private void SelectOutputFileName()
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
@@ -318,6 +329,7 @@ namespace GeoLocationTool.UI
                 dialog.AddExtension = true;
                 dialog.DefaultExt = "csv";
                 dialog.Filter = "CSV(*.csv)|*.*";
+                dialog.Title = "Select File";
 
                 // set default output filename
                 string inputFileName =
