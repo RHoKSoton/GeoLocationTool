@@ -254,7 +254,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level1LocationNames()
         {
-            return locationNames.Level1MainLocationNames();
+            return locationNames.Level1AllLocationNames();
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level2LocationNames(string level1)
         {
-            return locationNames.Level2MainLocationNames(level1);
+            return locationNames.Level2AllLocationNames(level1);
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level3LocationNames(string level1, string level2)
         {
-            return locationNames.Level3MainLocationNames(level1, level2);
+            return locationNames.Level3AllLocationNames(level1, level2);
         }
 
         /// <summary>

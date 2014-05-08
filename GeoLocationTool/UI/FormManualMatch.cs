@@ -1,11 +1,11 @@
 ﻿// FormManualMatch.cs
+
 namespace GeoLocationTool.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
-
     using MultiLevelGeoCoder;
     using MultiLevelGeoCoder.Logic;
 
@@ -22,6 +22,7 @@ namespace GeoLocationTool.UI
         private readonly IGeoCoder geoCoder;
         private readonly DataGridView parentGrid;
 
+        private bool pageLoadInProgress;
         private bool matchInProgress;
         private int selectedRowIndex;
 
@@ -312,7 +313,8 @@ namespace GeoLocationTool.UI
         {
             try
             {
-                if (!matchInProgress && dataGridView1.SelectedRows.Count > 0)
+                if (!matchInProgress && dataGridView1.SelectedRows.Count > 0 &&
+                    !pageLoadInProgress)
                 {
                     selectedRowIndex = dataGridView1.SelectedRows[0].Index;
                     txtSelectedIndex.Text = selectedRowIndex.ToString();
@@ -615,15 +617,19 @@ namespace GeoLocationTool.UI
         {
             try
             {
+                pageLoadInProgress = true;
                 SetDefaults();
                 DisplayUnmatchedRecords();
-                DisplayLevel1List();
             }
             catch (Exception ex)
             {
                 ErrorHandler.Process(
                     "An error occurred during Manual Match screen load.",
                     ex);
+            }
+            finally
+            {
+                pageLoadInProgress = false;
             }
         }
 
@@ -638,6 +644,7 @@ namespace GeoLocationTool.UI
                     // select the first row and display the suggestions for it
                     dataGridView1.Rows[0].Selected = true;
                     DisplaySelectedRecord();
+                    DisplayLevel1List();
                     DisplayLevel1Suggestions();
                 }
             }
@@ -655,7 +662,7 @@ namespace GeoLocationTool.UI
 
         private void HighlightCurrentRow(int index)
         {
-            if (dataGridView1.RowCount >0)
+            if (dataGridView1.RowCount > 0)
             {
                 if (index > dataGridView1.RowCount - 1)
                 {

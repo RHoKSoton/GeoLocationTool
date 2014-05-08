@@ -35,7 +35,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<MatchResult> Level1Suggestions(string level1)
         {
-            IList<string> locationList = locationNames.Level1MainLocationNames();
+            IList<string> locationList = locationNames.Level1AllLocationNames();
             return Suggestions(level1, locationList);
         }
 
@@ -47,7 +47,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<MatchResult> Level2Suggestions(string level1, string level2)
         {
-            IList<string> locationList = locationNames.Level2MainLocationNames(level1);
+            IList<string> locationList = locationNames.Level2AllLocationNames(level1);
             return Suggestions(level2, locationList);
         }
 
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder.Logic
             string level2,
             string level3)
         {
-            IList<string> locationList = locationNames.Level3MainLocationNames(
+            IList<string> locationList = locationNames.Level3AllLocationNames(
                 level1,
                 level2);
             return Suggestions(level3, locationList);
