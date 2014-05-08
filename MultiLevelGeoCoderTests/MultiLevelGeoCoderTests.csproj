@@ -80,6 +80,7 @@
     <Compile Include="GeoCoderCodeAllTests.cs" />
     <Compile Include="LocationCodesTestsWithGazetteerAltNames.cs" />
     <Compile Include="MatchedNamesSaveTests.cs" />
+    <Compile Include="LocationNameTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MultiLevelGeoCoder\MultiLevelGeoCoder.csproj">
