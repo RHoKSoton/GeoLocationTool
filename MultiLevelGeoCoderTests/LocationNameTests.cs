@@ -15,15 +15,14 @@ namespace MultiLevelGeoCoderTests
     {
         #region Fields
 
-        // test Data
+        // Test Gazetteer Data
         private readonly string[] altNames1 = {"P1A", "T1A", "V1A"};
         private readonly string[] altNames3 = {"P2A", "T2A", "V1A"};
         private readonly string[] altNames4 = {"P1A", "T2A", "V1A"};
 
         // we dont care about the codes for these tests
         private readonly string[] codes0 = {"1", "10", "100"};
-
-        // Test Gazetteer Data
+  
         private readonly string[] names1 = {"P1", "T1", "V1"};
         private readonly string[] names2 = {"P1", "T1", "V2"};
         private readonly string[] names3 = {"P2", "T2", "V1"};
@@ -78,6 +77,27 @@ namespace MultiLevelGeoCoderTests
         }
 
         /// <summary>
+        /// When the search names are same except for the casing 
+        /// Then the returned level 2 name list should be the same
+        /// </summary>
+        [TestMethod]
+        public void Level2AllLocationNames_SearchNamesCaseDiffToGaz_ListIsSame()
+        {
+            // arrange
+            LocationNames locationNames = new LocationNames(TestGazData1());
+
+            // act
+            IList<string> result1 = locationNames.Level2AllLocationNames("P1A");
+            IList<string> result2 = locationNames.Level2AllLocationNames("p1a");
+
+            // assert
+            // expected that the results are the same
+            Assert.AreEqual(result1.Count, result2.Count);
+            IEnumerable<string> dif = result1.Except(result2);
+            Assert.AreEqual(0, dif.Count());
+        }
+
+        /// <summary>
         /// Given an alt level 1 name (P2A) and an alt level 2 name (T2A)
         /// When gazetteer contains records with main and alternate (P1 and P1A) at level1 and 
         /// main and alternate (T2 and T2A) at level2
@@ -120,6 +140,27 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(4, result.Count);
             List<string> expected = new List<string> {"V1", "V2", "V3", "V1A"};
             IEnumerable<string> dif = result.Except(expected);
+            Assert.AreEqual(0, dif.Count());
+        }
+
+        /// <summary>
+        /// When the search names are same except for the casing 
+        /// Then the returned level 3 name list should be the same
+        /// </summary>
+        [TestMethod]
+        public void Level3AllLocationNames_SearchNamesCaseDiffToGaz_ListIsSame()
+        {
+            // arrange
+            LocationNames locationNames = new LocationNames(TestGazData1());
+
+            // act
+            IList<string> result1 = locationNames.Level3AllLocationNames("P2A", "T2A");
+            IList<string> result2 = locationNames.Level3AllLocationNames("p2a", "t2a");
+
+            // assert
+            // expected that the results are the same
+            Assert.AreEqual(result1.Count, result2.Count);
+            IEnumerable<string> dif = result1.Except(result2);
             Assert.AreEqual(0, dif.Count());
         }
 
