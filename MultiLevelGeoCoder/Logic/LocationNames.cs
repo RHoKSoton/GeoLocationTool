@@ -102,23 +102,28 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of location names.</returns>
         public IList<string> Level2AllLocationNames(string level1Name)
         {
-            List<string> locationNames = Level2MainLocationNames(level1Name);
-            locationNames.AddRange(Level2AltLocationNames(level1Name));
+            List<string> locationNames = new List<string>();
+            // use the level 1 main name in the search
+            string name = IsLevel1MainName(level1Name)
+                ? level1Name
+                : Level1MainName(level1Name);
+            if (!string.IsNullOrEmpty(name))
+            {
+                locationNames = Level2MainLocationNames(name);
+                locationNames.AddRange(Level2AltLocationNames(name));
+            }
+
             return locationNames.Distinct().OrderBy(i => i).ToList();
         }
 
         public List<string> Level2MainLocationNames(string level1Name)
         {
-            // all level 2 names where the given name is in level 1 name or level 1 alt name column
+            // all level 2 names where the given name is in level 1 names
             var levelList = gazzetteerData
                 .Where(
                     n =>
                         String.Equals(
                             n.Name1,
-                            level1Name,
-                            StringComparison.OrdinalIgnoreCase) ||
-                        String.Equals(
-                            n.AltName1,
                             level1Name,
                             StringComparison.OrdinalIgnoreCase))
                 .Select(l => l.Name2);
@@ -135,35 +140,65 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of location names.</returns>
         public IList<string> Level3AllLocationNames(string level1Name, string level2Name)
         {
-            var locationNames = Level3MainLocationNames(level1Name, level2Name);
-            locationNames.AddRange(Level3AltLocationNames(level1Name, level2Name));
+            //use the main names in the search, not the alt names
+            string level1 = IsLevel1MainName(level1Name)
+                ? level1Name
+                : Level1MainName(level1Name);
+            string level2 = IsLevel2MainName(level1, level2Name)
+                ? level2Name
+                : Level2MainName(level1, level2Name);
+
+            List<string> locationNames = Level3MainLocationNames(level1, level2);
+            locationNames.AddRange(Level3AltLocationNames(level1, level2));
             return locationNames.Distinct().OrderBy(i => i).ToList();
         }
 
         public List<string> Level3MainLocationNames(string level1Name, string level2Name)
         {
-            // all level 3 names where the given level 1 name is in level 1 name or level 1 alt name column and 
-            // the given level 2 name is in level 2 name or level 2 alt name column
+            // all level 3 names where the given level 1 name is in level 1 name and
+            // the given level 2 name is in level 2 name
             var levelList = gazzetteerData
                 .Where(
                     n =>
                         (String.Equals(
                             n.Name1,
                             level1Name,
-                            StringComparison.OrdinalIgnoreCase) || String.Equals(
-                                n.AltName1,
-                                level1Name,
-                                StringComparison.OrdinalIgnoreCase)) &&
+                            StringComparison.OrdinalIgnoreCase)) &&
                         (String.Equals(
                             n.Name2,
                             level2Name,
-                            StringComparison.OrdinalIgnoreCase) || String.Equals(
-                                n.AltName2,
-                                level2Name,
-                                StringComparison.OrdinalIgnoreCase)))
+                            StringComparison.OrdinalIgnoreCase)))
                 .Select(l => l.Name3);
             var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
             return locationNames;
+        }
+
+        private bool IsLevel1MainName(string level1Name)
+        {
+            if (String.IsNullOrEmpty(level1Name))
+            {
+                return false;
+            }
+
+            // check gazetteer names list
+            return Level1MainLocationNames()
+                .Contains(
+                    level1Name,
+                    StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private bool IsLevel2MainName(string level1Name, string level2Name)
+        {
+            if (String.IsNullOrEmpty(level2Name))
+            {
+                return false;
+            }
+
+            // check gazetteer names list
+            return Level2MainLocationNames(level1Name)
+                .Contains(
+                    level2Name,
+                    StringComparer.InvariantCultureIgnoreCase);
         }
 
         private IEnumerable<string> Level1AltLocationNames()
@@ -173,47 +208,54 @@ namespace MultiLevelGeoCoder.Logic
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
+        private string Level1MainName(string level1AltName)
+        {
+            // the main name that corresponds to the given alt name
+            return gazzetteerData.Where(x => level1AltName == x.AltName1)
+                .Select(l => l.Name1).FirstOrDefault();
+        }
+
         private IEnumerable<string> Level2AltLocationNames(string level1Name)
         {
-            // all  alt level 2 names where the given name is in level 1 name or level 1 alt name column
+            // all alt level 2 names where the given name is in level 1 name
             var levelList = gazzetteerData
                 .Where(
                     n =>
                         String.Equals(
                             n.Name1,
                             level1Name,
-                            StringComparison.OrdinalIgnoreCase) || String.Equals(
-                                n.AltName1,
-                                level1Name,
-                                StringComparison.OrdinalIgnoreCase))
+                            StringComparison.OrdinalIgnoreCase))
                 .Where(x => x.AltName2 != null).Select(l => l.AltName2);
 
             return levelList.Distinct().OrderBy(i => i).ToList();
+        }
+
+        private string Level2MainName(string level1Name, string level2AltName)
+        {
+            // the main name that corresponds to the given alt name
+            return
+                gazzetteerData.Where(
+                    x => (level1Name == x.Name1) && (level2AltName == x.AltName2))
+                    .Select(l => l.Name2).FirstOrDefault();
         }
 
         private IEnumerable<string> Level3AltLocationNames(
             string level1Name,
             string level2Name)
         {
-            // all level 3 names where the given level 1 name is in level 1 name or level 1 alt name column and 
-            // the given level 2 name is in level 2 name or level 2 alt name column
+            // all level alt 3 names where the given level 1 name is in level 1 name column and
+            // the given level 2 name is in level 2 name column
             var levelList = gazzetteerData
                 .Where(
                     n =>
                         (String.Equals(
                             n.Name1,
                             level1Name,
-                            StringComparison.OrdinalIgnoreCase) || String.Equals(
-                                n.AltName1,
-                                level1Name,
-                                StringComparison.OrdinalIgnoreCase)) &&
+                            StringComparison.OrdinalIgnoreCase)) &&
                         (String.Equals(
                             n.Name2,
                             level2Name,
-                            StringComparison.OrdinalIgnoreCase) || String.Equals(
-                                n.AltName2,
-                                level2Name,
-                                StringComparison.OrdinalIgnoreCase)))
+                            StringComparison.OrdinalIgnoreCase)))
                 .Where(x => x.AltName3 != null).Select(l => l.AltName3);
             var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
             return locationNames;
