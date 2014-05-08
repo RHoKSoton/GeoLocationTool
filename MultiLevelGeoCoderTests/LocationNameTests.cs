@@ -1,46 +1,71 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// LocationNameTests.cs
 
 namespace MultiLevelGeoCoderTests
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MultiLevelGeoCoder.Logic;
-    using Rhino.Mocks.Constraints;
 
+    /// <summary>
+    /// Excercises the location names class
+    /// </summary>
     [TestClass]
     public class LocationNameTests
     {
+        #region Fields
 
-        // Test Gazetteer Data
-        private readonly string[] names1 = { "P1", "T1", "V1" };
-        private readonly string[] names2 = { "P1", "T1", "V2" };
-        private readonly string[] names3 = { "P2", "T2", "V1" };
-        private readonly string[] names4 = { "P2", "T2", "V2" };
-       
-        private readonly string[] names5 = { "P2", "T2", "V3" };
-        private readonly string[] names6 = { "P1", "T2", "V1" };
-        private readonly string[] names7 = { "P1", "T2", "V4" };
-        private readonly string[] names8 = { "P2", "T1", "V2" };
+        // test Data
+        private readonly string[] altNames1 = {"P1A", "T1A", "V1A"};
+        private readonly string[] altNames3 = {"P2A", "T2A", "V1A"};
+        private readonly string[] altNames4 = {"P1A", "T2A", "V1A"};
 
         // we dont care about the codes for these tests
-        private readonly string[] codes0 = { "1", "10", "100" };
-       
-        private readonly string[] altNames1 = { "P1A", "T1A", "V1A" };
-        private readonly string[] altNames3 = { "P2A", "T2A", "V1A" };
-        private readonly string[] altNames4 = { "P1A", "T2A", "V1A" };
+        private readonly string[] codes0 = {"1", "10", "100"};
 
+        // Test Gazetteer Data
+        private readonly string[] names1 = {"P1", "T1", "V1"};
+        private readonly string[] names2 = {"P1", "T1", "V2"};
+        private readonly string[] names3 = {"P2", "T2", "V1"};
+        private readonly string[] names4 = {"P2", "T2", "V2"};
+        private readonly string[] names5 = {"P2", "T2", "V3"};
+        private readonly string[] names6 = {"P1", "T2", "V1"};
+        private readonly string[] names7 = {"P1", "T2", "V4"};
+        private readonly string[] names8 = {"P2", "T1", "V2"};
+
+        #endregion Fields
+
+        #region Methods
 
         /// <summary>
-        /// given P1
-        /// when gaz contains four records with P1 at level1, containing two unique level2 names, 
-        /// two records having alt level 2 names, both unique
-        /// then should return the two main level 2 names plus the two alt level 2 names
+        /// Given an alternate level 1 name (P1A)
+        /// When gazetteer contains records with main and alternate (P1 and P1A) at level1, 
+        /// Then should return the main level 2 names plus the alt level 2 names
         /// </summary>
         [TestMethod]
-        public void Level2AllLocationNames_GazContainsMainAndAltNames_MainAndAltReturned()
-        {          
-            // arrange 
+        public void Level2AllLocationNames_AltLevel1Name_MainAndAltNamesReturned()
+        {
+            // arrange
+            LocationNames locationNames = new LocationNames(TestGazData1());
+            // act
+            IList<string> result = locationNames.Level2AllLocationNames("P1A");
+            // assert
+            // expected T1,T2, T1A, T2A
+            Assert.AreEqual(4, result.Count);
+            List<string> expected = new List<string> {"T1", "T2", "T1A", "T2A"};
+            IEnumerable<string> dif = result.Except(expected);
+            Assert.AreEqual(0, dif.Count());
+        }
+
+        /// <summary>
+        /// Given an main level 1 name (P1)
+        /// When gazetteer contains records with main and alternate (P1 and P1A) at level1, 
+        /// Then should return the main level 2 names plus the alt level 2 names
+        /// </summary>
+        [TestMethod]
+        public void Level2AllLocationNames_MainLevel1Name_MainAndAltNamesReturned()
+        {
+            // arrange
             LocationNames locationNames = new LocationNames(TestGazData1());
             // act
             IList<string> result = locationNames.Level2AllLocationNames("P1");
@@ -53,70 +78,47 @@ namespace MultiLevelGeoCoderTests
         }
 
         /// <summary>
-        /// given P1A
-        /// when gaz contains four records with P1 or P1A at level1, containing two unique level2 names, 
-        /// two records having alt level 2 names, both unique
-        /// then should return the two main level 2 names plus the two alt level 2 names
+        /// Given an alt level 1 name (P2A) and an alt level 2 name (T2A)
+        /// When gazetteer contains records with main and alternate (P1 and P1A) at level1 and 
+        /// main and alternate (T2 and T2A) at level2
+        /// Then should return the main level 3 names plus the alt level 3 names
         /// </summary>
         [TestMethod]
-        public void Level2AllLocationNames_Level1AltGiven_MainAndAltReturned()
+        public void Level3AllLocationNames_AltLevel1And2Names_MainAndAltNamesReturned()
         {
-            // arrange 
+            // arrange
             LocationNames locationNames = new LocationNames(TestGazData1());
+
             // act
-            IList<string> result = locationNames.Level2AllLocationNames("P1A");
+            IList<string> result = locationNames.Level3AllLocationNames("P2A", "T2A");
+
             // assert
-            // expected T1,T2, T1A, T2A
+            // expected V1,V2, V3, V1A
             Assert.AreEqual(4, result.Count);
-            List<string> expected = new List<string> { "T1", "T2", "T1A", "T2A" };
+            List<string> expected = new List<string> {"V1", "V2", "V3", "V1A"};
             IEnumerable<string> dif = result.Except(expected);
             Assert.AreEqual(0, dif.Count());
         }
 
         /// <summary>
-        /// given P2 and T2
-        /// when gaz contains two records with P2 at level1 and T2 at level2, 
-        /// containing three unique level3 names, 
-        /// one record having an alt level 3 name
-        /// then should return the three main level 3 names plus the alt level 3 name
+        /// Given an main level 1 name (P2) and a main level 2 name (T2)
+        /// When gazetteer contains records with main and alternate (P1 and P1A) at level1 and 
+        /// main and alternate (T2 and T2A) at level2
+        /// Then should return the main level 3 names plus the alt level 3 names
         /// </summary>
         [TestMethod]
-        public void Level3AllLocationNames_GazContainsMainAndAltNames_MainAndAltReturned()
+        public void Level3AllLocationNames_MainLevel1And2Names_MainAndAltNamesReturned()
         {
-            // arrange 
+            // arrange
             LocationNames locationNames = new LocationNames(TestGazData1());
 
             // act
-            IList<string> result = locationNames.Level3AllLocationNames("P2","T2");
+            IList<string> result = locationNames.Level3AllLocationNames("P2", "T2");
 
             // assert
             // expected V1,V2, V3, V1A
             Assert.AreEqual(4, result.Count);
-            List<string> expected = new List<string> { "V1", "V2", "V3", "V1A" };
-            IEnumerable<string> dif = result.Except(expected);
-            Assert.AreEqual(0, dif.Count());
-        }
-
-        /// <summary>
-        /// given P2A and T2A
-        /// when gaz contains two records with P2 at level1 and T2 at level2, 
-        /// containing three unique level3 names, 
-        /// one record having an alt level 3 name
-        /// then should return the three main level 3 names plus the alt level 3 name
-        /// </summary>
-        [TestMethod]
-        public void Level3AllLocationNames_Level1And2AltGiven_MainAndAltReturned()
-        {
-            // arrange 
-            LocationNames locationNames = new LocationNames(TestGazData1());
-
-            // act
-            IList<string> result = locationNames.Level3AllLocationNames("P2A", "T2");
-
-            // assert
-            // expected V1,V2, V3, V1A
-            Assert.AreEqual(4, result.Count);
-            List<string> expected = new List<string> { "V1", "V2", "V3", "V1A" };
+            List<string> expected = new List<string> {"V1", "V2", "V3", "V1A"};
             IEnumerable<string> dif = result.Except(expected);
             Assert.AreEqual(0, dif.Count());
         }
@@ -143,5 +145,7 @@ namespace MultiLevelGeoCoderTests
 
             return gazetteerTestData.GadmList();
         }
+
+        #endregion Methods
     }
 }
