@@ -189,7 +189,7 @@ namespace MultiLevelGeoCoder.Logic
 
         private bool IsLevel2MainName(string level1Name, string level2Name)
         {
-            if (String.IsNullOrEmpty(level2Name))
+            if (String.IsNullOrEmpty(level1Name) ||String.IsNullOrEmpty(level2Name))
             {
                 return false;
             }
@@ -211,7 +211,8 @@ namespace MultiLevelGeoCoder.Logic
         private string Level1MainName(string level1AltName)
         {
             // the main name that corresponds to the given alt name
-            return gazzetteerData.Where(x => level1AltName == x.AltName1)
+            return gazzetteerData.Where( x => String.Compare(
+                level1AltName, x.AltName1,StringComparison.OrdinalIgnoreCase)==0)
                 .Select(l => l.Name1).FirstOrDefault();
         }
 
@@ -235,7 +236,8 @@ namespace MultiLevelGeoCoder.Logic
             // the main name that corresponds to the given alt name
             return
                 gazzetteerData.Where(
-                    x => (level1Name == x.Name1) && (level2AltName == x.AltName2))
+                    x => (String.Compare(level1Name, x.Name1, StringComparison.OrdinalIgnoreCase) == 0) && 
+                    (String.Compare(level2AltName,x.AltName2, StringComparison.OrdinalIgnoreCase) == 0))
                     .Select(l => l.Name2).FirstOrDefault();
         }
 
