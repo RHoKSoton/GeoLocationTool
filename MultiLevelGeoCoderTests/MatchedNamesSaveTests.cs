@@ -8,7 +8,7 @@ namespace MultiLevelGeoCoderTests
     using Rhino.Mocks;
 
     /// <summary>
-    /// Excercises the MatchedNames class SaveMatch method which does the
+    /// Exercises the MatchedNames class SaveMatch method which does the
     /// saving of a match between an input location and a gazetteer 
     /// location
     /// </summary>
@@ -18,175 +18,105 @@ namespace MultiLevelGeoCoderTests
         #region Methods
 
         // Given a matched input to save
-        // When input level 1 name aleady exists as an alternate name in the gazzeteer
-        // Then an exception is thrown
-        [TestMethod]
-        [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_AltLevel1Exists_ExceptionThrown()
-        {
-            // Arrange
-            const string name = "P1";
-            const string altName = "P1A";
-
-            // gazetteer data
-            string[] names1 = {name, "T1", "V1"};
-            string[] codes1 = {"1", "10", "100"};
-            string[] altNames1 = {altName, "", ""};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1, altNames1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
-            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
-
-            // input containing level 1 value that is in the gazetteer
-            Location inputLocation = new Location(altName, "T1x", "V1x");
-
-            // match from gazetteer- can have any complete values for this test
-            Location gazetteerLocation = new Location("X", "Y", "Z");
-
-            // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
-
-            // Assert
-            // exception thrown
-        }
-
-        // Given a matched input to save
-        // When level 1 has been sucessfully matched but
-        // input level 2 name aleady exists as an alternate name in the gazzeteer
-        // Then an exception is thrown
-        [TestMethod]
-        [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_AltLevel2Exists_ExceptionThrown()
-        {
-            // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
-            const string altName2 = "T1A";
-
-            // gazetteer data
-            string[] names1 = {name1, name2, "V1"};
-            string[] codes1 = {"1", "10", "100"};
-            string[] altNames1 = {"", altName2, ""};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1, altNames1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
-            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
-
-            // input containing level 2 value that is in the gazetteer
-            Location inputLocation = new Location("P1x", altName2, "V1x");
-
-            // match from gazetteer- must have correct matched level 1
-            Location gazetteerLocation = new Location(name1, "Y", "Z");
-
-            // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
-
-            // Assert
-            // exception thrown
-        }
-
-        // Given a matched input to save
-        // When level 1 and 2 has been sucessfully matched but
-        // input level 3 name aleady exists in the gazzeteer.
-        // Then an exception is thrown
-        [TestMethod]
-        [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_AltLevel3Exists_ExceptionThrown()
-        {
-            // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
-            const string name3 = "V1";
-            const string altName3 = "V1A";
-
-            // gazetteer data
-            string[] names1 = {name1, name2, name3};
-            string[] codes1 = {"1", "10", "100"};
-            string[] altNames1 = {"", "", altName3};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1, altNames1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
-            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
-
-            // input containing level 3 value that is in the gazetteer
-            Location inputLocation = new Location("P1x", "T1x", altName3);
-
-            // match from gazetteer- must have correct matched level 1 and 2
-            Location gazetteerLocation = new Location(name1, name2, "Z");
-
-            // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
-
-            // Assert
-            // exception thrown
-        }
-
-        // Given a matched input to save
-        // When input values are the same as the matched gazzeteer values
-        // Then save is not called (no exception thrown)
-        [TestMethod]
-        public void SaveMatch_InputAndMatchAreSame_NotSaved()
-        {
-            // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
-            const string name3 = "V1";
-
-            // gazetteer data
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
-
-            //match provider
-            var mock = MockRepository.GenerateMock<IMatchProvider>();
-            MatchedNames matchedNames = new MatchedNames(mock);
-
-            // input and match containing the same values
-            Location inputLocation = new Location(name1, name2, name3);
-            Location gazetteerLocation = new Location(name1, name2, name3);
-
-            // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
-
-            // Assert
-            mock.AssertWasNotCalled(
-                x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
-        }
-
-        // Given a matched input to save
-        // When input values are the same as the matched gazzeteer values
-        // Then save is not called (no exception thrown)
+        // When input values are the same as the matched gazetteer values except case differs
+        // Then save is not called (no exception thrown) (Rule4)
         [TestMethod]
         public void SaveMatch_InputAndMatchAreSameButDifferentCase_NotSaved()
         {
             // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
-            const string name3 = "V1";
+            const string inputName1 = "P1";
+            const string inputName2 = "T1";
+            const string inputName3 = "V1";
+            const string gazName1 = "p1"; // same as input, case different
+            const string gazName2 = "t1"; // same as input, case different
+            const string gazName3 = "v1"; // same as input, case different
 
-            // gazetteer data
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
+            // Arrange
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
 
             //match provider
             var mock = MockRepository.GenerateMock<IMatchProvider>();
             MatchedNames matchedNames = new MatchedNames(mock);
 
-            // input and match containing the same values
-            Location inputLocation = new Location(
-                name1.ToUpper(),
-                name2.ToUpper(),
-                name3.ToUpper());
-            Location gazetteerLocation = new Location(
-                name1.ToLower(),
-                name2.ToLower(),
-                name3.ToLower());
+            // input
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
 
             // Assert
+            // no saves called
             mock.AssertWasNotCalled(
                 x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel2(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel3(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
+        }
+
+        // Given a matched input to save
+        // When input values are the same as the matched gazzeteer values
+        // Then save is not called (no exception thrown) (Rule4)
+        [TestMethod]
+        public void SaveMatch_InputAndMatchAreSame_NotSaved()
+        {
+            // Arrange
+            const string inputName1 = "P1";
+            const string inputName2 = "T1";
+            const string inputName3 = "V1";
+            const string gazName1 = "P1"; // same as input
+            const string gazName2 = "T1"; // same as input
+            const string gazName3 = "V1"; // same as input
+
+            // Arrange
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
+
+            //match provider
+            var mock = MockRepository.GenerateMock<IMatchProvider>();
+            MatchedNames matchedNames = new MatchedNames(mock);
+
+            // input
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            // no saves called
+            mock.AssertWasNotCalled(
+                x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel2(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel3(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
         }
 
         // Given a matched input to save
@@ -195,6 +125,7 @@ namespace MultiLevelGeoCoderTests
         [TestMethod]
         public void SaveMatch_InputAndMatchAreValid_MatchSaved()
         {
+            // todo review this test
             // Arrange
             const string name1 = "P1";
             const string name2 = "T1";
@@ -227,61 +158,59 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save
-        // When input level 1 name aleady exists in the gazzeteer
-        // Then an exception is thrown
+        // When input level 1 name aleady exists as an alternate name in the gazzeteer
+        // Then a NameInGazetteerException is thrown (Rule 8)
         [TestMethod]
         [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_Level1Exists_ExceptionThrown()
+        public void SaveMatch_InputLevel1ExistsInGazAsAlt_ExceptionThrown()
         {
             // Arrange
-            const string name = "P1";
+            const string inputName1 = "P1A"; // in gaz
+            const string inputName2 = "T1A";
+            const string inputName3 = "V1A";
+            const string gazName1 = "P2"; // not allowed
+            const string gazName2 = "T1";
+            const string gazName3 = "V1";
 
-            // gazetteer data
-            string[] names1 = {name, "T1", "V1"};
-            string[] codes1 = {"1", "10", "100"};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
-            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
-
-            // input containing level 1 value that is in the gazetteer
-            Location inputLocation = new Location(name, "T1x", "V1x");
-
-            // match from gazetteer- can have any complete values for this test
-            Location gazetteerLocation = new Location("X", "Y", "Z");
-
-            // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            SaveMatchWithGazetteerTestData1(
+                inputName1,
+                inputName2,
+                inputName3,
+                gazName1,
+                gazName2,
+                gazName3);
 
             // Assert
             // exception thrown
         }
 
         // Given a matched input to save
-        // When level 1 has been sucessfully matched but
-        // input level 2 name aleady exists in the gazzeteer
-        // Then an exception is thrown
+        // When input level 1 name aleady exists in the gazeteer as a main entry
+        // Then a NameInGazetteerException is thrown (Rule 8)
         [TestMethod]
         [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_Level2Exists_ExceptionThrown()
+        public void SaveMatch_InputLevel1ExistsInGazAsMain_ExceptionThrown()
         {
             // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
+            const string inputName1 = "P1"; // in gaz
+            const string inputName2 = "T1x";
+            const string inputName3 = "V1x";
+            const string gazName1 = "P2"; // not allowed
+            const string gazName2 = "T1";
+            const string gazName3 = "V1";
 
-            // gazetteer data
-            string[] names1 = {name1, name2, "V1"};
-            string[] codes1 = {"1", "10", "100"};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
+
+            // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
 
             // input containing level 2 value that is in the gazetteer
-            Location inputLocation = new Location("P1x", name2, "V1x");
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
 
             // match from gazetteer- must have correct matched level 1
-            Location gazetteerLocation = new Location(name1, "Y", "Z");
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
@@ -291,37 +220,153 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save
-        // When level 1 and 2 has been sucessfully matched but
-        // input level 3 name aleady exists in the gazzeteer.
-        // Then an exception is thrown
+        // When level 2 name aleady exists as an alternate name in the gazzeteer
+        // Then a NameInGazetteerException is thrown (Rule 8)
         [TestMethod]
         [ExpectedException(typeof (NameInGazetteerException))]
-        public void SaveMatch_Level3Exists_ExceptionThrown()
+        public void SaveMatch_InputLevel2ExistsInGazAsAlt_ExceptionThrown()
         {
             // Arrange
-            const string name1 = "P1";
-            const string name2 = "T1";
-            const string name3 = "V1";
+            const string inputName1 = "P1A";
+            const string inputName2 = "T1A"; // in gaz
+            const string inputName3 = "V1A";
+            const string gazName1 = "P1";
+            const string gazName2 = "T2"; // not allowed
+            const string gazName3 = "V1";
 
-            // gazetteer data
-            string[] names1 = {name1, name2, name3};
-            string[] codes1 = {"1", "10", "100"};
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
+            SaveMatchWithGazetteerTestData1(
+                inputName1,
+                inputName2,
+                inputName3,
+                gazName1,
+                gazName2,
+                gazName3);
+
+            // Assert
+            // exception thrown
+        }
+
+        // Given a matched input to save
+        // When input level 2 name aleady exists in the gazeteer as a main entry
+        // Then a NameInGazetteerException is thrown (Rule 8)
+        [TestMethod]
+        [ExpectedException(typeof (NameInGazetteerException))]
+        public void SaveMatch_InputLevel2ExistsInGazAsMain_ExceptionThrown()
+        {
+            // Arrange
+            const string inputName1 = "P1x";
+            const string inputName2 = "T1"; // in gaz
+            const string inputName3 = "V1x";
+            const string gazName1 = "P1";
+            const string gazName2 = "T2"; // not allowed
+            const string gazName3 = "V1";
+
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
+
+            // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
 
-            // input containing level 3 value that is in the gazetteer
-            Location inputLocation = new Location("P1x", "T1x", name3);
+            // input containing level 2 value that is in the gazetteer
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
 
-            // match from gazetteer- must have correct matched level 1 and 2
-            Location gazetteerLocation = new Location(name1, name2, "Z");
+            // match from gazetteer- must have correct matched level 1
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
 
             // Assert
             // exception thrown
+        }
+
+        // Given a matched input to save
+        // When input level 3 name aleady exists in the gazeteer as an alt.
+        // Then a NameInGazetteerException is thrown (Rule 8)
+        [TestMethod]
+        [ExpectedException(typeof (NameInGazetteerException))]
+        public void SaveMatch_InputLevel3ExistsInGazAsAlt_ExceptionThrown()
+        {
+            // Arrange
+            const string inputName1 = "P1A";
+            const string inputName2 = "T1A";
+            const string inputName3 = "V1A"; // in gaz
+            const string gazName1 = "P1";
+            const string gazName2 = "T1";
+            const string gazName3 = "V2"; // not allowed
+
+            SaveMatchWithGazetteerTestData1(
+                inputName1,
+                inputName2,
+                inputName3,
+                gazName1,
+                gazName2,
+                gazName3);
+
+            // Assert
+            // exception thrown
+        }
+
+        // Given a matched input to save
+        // When input level 3 name aleady exists in the gazeteer as a main entry
+        // Then a NameInGazetteerException is thrown (Rule 8)
+        [TestMethod]
+        [ExpectedException(typeof (NameInGazetteerException))]
+        public void SaveMatch_InputLevel3ExistsInGazAsMain_ExceptionThrown()
+        {
+            // Arrange
+            const string inputName1 = "P1x";
+            const string inputName2 = "T1x";
+            const string inputName3 = "V1"; // in gaz
+            const string gazName1 = "P1";
+            const string gazName2 = "T1";
+            const string gazName3 = "V2"; // not allowed
+
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
+
+            // no existing saved matches
+            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
+
+            // input containing level 3 value that is in the gazetteer
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer- must have correct matched level 1 and 2
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            // exception thrown
+        }
+
+        private static void SaveMatchWithGazetteerTestData1(
+            string inputName1,
+            string inputName2,
+            string inputName3,
+            string gazName1,
+            string gazName2,
+            string gazName3)
+        {
+            // Arrange
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData2.TestData1());
+
+            // no existing saved matches
+            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
+
+            // input
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
         }
 
         #endregion Methods
@@ -330,6 +375,7 @@ namespace MultiLevelGeoCoderTests
 
         // todo - MatchedNames.SaveMatch tests to show that input with less that three levels is saved
         // todo - MatchedNames.SaveMatch tests to show that Incomplete Location exception is thrown when  args invalid
+        // todo tests for cases 1,2,3,5,6,7, rest of 8,and 9
 
         #endregion Other
     }
