@@ -34,7 +34,7 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             //match provider
             var mock = MockRepository.GenerateMock<IMatchProvider>();
@@ -85,7 +85,7 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             //match provider
             var mock = MockRepository.GenerateMock<IMatchProvider>();
@@ -134,9 +134,9 @@ namespace MultiLevelGeoCoderTests
             string[] codes1 = {"1", "10", "100"};
 
             // gazetteer data
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1);
-            LocationNames locationNames = new LocationNames(gazetteerTestData.GadmList());
+            GazetteerRecords gazetteerRecords = new GazetteerRecords();
+            gazetteerRecords.AddLine(names1, codes1);
+            LocationNames locationNames = new LocationNames(gazetteerRecords.GadmList());
 
             //match provider
             var mock = MockRepository.GenerateMock<IMatchProvider>();
@@ -201,7 +201,7 @@ namespace MultiLevelGeoCoderTests
 
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
@@ -263,7 +263,7 @@ namespace MultiLevelGeoCoderTests
 
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
@@ -325,7 +325,7 @@ namespace MultiLevelGeoCoderTests
 
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
@@ -354,7 +354,7 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // no existing saved matches
             MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());

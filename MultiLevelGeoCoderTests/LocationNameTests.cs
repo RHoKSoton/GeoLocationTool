@@ -24,7 +24,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
             // act
             IList<string> result = locationNames.Level1AllLocationNames();
             // assert
@@ -43,7 +43,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
             // act
             IList<string> result = locationNames.Level2AllLocationNames("P1A");
             // assert
@@ -64,7 +64,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
             // act
             IList<string> result = locationNames.Level2AllLocationNames("P1");
             // assert
@@ -85,7 +85,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
             // act
             IList<string> result = locationNames.Level2AllLocationNames("P1A");
             // assert
@@ -103,7 +103,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // act
             IList<string> result1 = locationNames.Level2AllLocationNames("P1A");
@@ -127,7 +127,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // act
             IList<string> result = locationNames.Level3AllLocationNames("P2A", "T2A");
@@ -151,7 +151,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // act
             IList<string> result = locationNames.Level3AllLocationNames("P2", "T2");
@@ -174,7 +174,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // act
             IList<string> result = locationNames.Level3AllLocationNames("P1A", "T1A");
@@ -194,7 +194,7 @@ namespace MultiLevelGeoCoderTests
         {
             // arrange
             LocationNames locationNames = new LocationNames(
-                GazetteerTestData2.TestData1());
+                GazetteerTestData.TestData1());
 
             // act
             IList<string> result1 = locationNames.Level3AllLocationNames("P2A", "T2A");
