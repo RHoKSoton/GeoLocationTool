@@ -60,6 +60,7 @@
     <Compile Include="DataAccess\IMatchProvider.cs" />
     <Compile Include="DataAccess\FileImport.cs" />
     <Compile Include="Logic\IFuzzyMatch.cs" />
+    <Compile Include="Logic\MatchedName.cs" />
     <Compile Include="Logic\NameInGazetteerException.cs" />
     <Compile Include="Logic\GazetteerDataDictionaries.cs" />
     <Compile Include="Logic\IncompleteLocationException.cs" />

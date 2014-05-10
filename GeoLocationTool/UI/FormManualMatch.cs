@@ -22,8 +22,8 @@ namespace GeoLocationTool.UI
         private readonly IGeoCoder geoCoder;
         private readonly DataGridView parentGrid;
 
-        private bool pageLoadInProgress;
         private bool matchInProgress;
+        private bool pageLoadInProgress;
         private int selectedRowIndex;
 
         #endregion Fields
@@ -348,7 +348,12 @@ namespace GeoLocationTool.UI
             }
             else
             {
-                cboLevel1Manual.DataSource = geoCoder.Level1LocationNames();
+                var list = geoCoder.Level1LocationNames();
+
+                // format - add a leave blank option to the bottom of the list
+                list.Add(LeaveBlankText);
+
+                cboLevel1Manual.DataSource = list;
             }
         }
 
@@ -400,7 +405,7 @@ namespace GeoLocationTool.UI
                     var list = geoCoder.Level2LocationNames(
                         SelectedValue(cboLevel1Manual));
 
-                    // add a leave blank option to the bottom of the list
+                    // format - add a leave blank option to the bottom of the list
                     list.Add(LeaveBlankText);
 
                     cboLevel2Manual.DataSource = list;
@@ -469,9 +474,14 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    cboLevel3Manual.DataSource = geoCoder.Level3LocationNames(
+                    var list = geoCoder.Level3LocationNames(
                         level1,
                         level2);
+
+                    // format - add a leave blank option to the bottom of the list
+                    list.Add(LeaveBlankText);
+
+                    cboLevel3Manual.DataSource = list;
                 }
             }
         }

@@ -63,14 +63,14 @@ namespace MultiLevelGeoCoder.Logic
             // a location must have a level 1
             if (string.IsNullOrEmpty(Name1))
             {
-                message.Append("Level 1 missing");
+                message.Append("Missing level 1");
 
                 // name if present must have value at all higher levels
                 if (!string.IsNullOrEmpty(Name3))
                 {
                     if (string.IsNullOrEmpty(Name2))
                     {
-                        message.Append("Level 2 missing");
+                        message.Append("Missing level 2");
                     }
                 }
             }

@@ -38,9 +38,9 @@ namespace MultiLevelGeoCoderTests
             // gazetteer data - contains codes for names1 and names2 and
             // an alternate name for name 1 and 2
             string[] altNames = {"P1A", "T1A", null};
-            GazetteerTestData gazetteerTestData = GazetteerTestData(altNames);
+            GazetteerRecords gazetteerRecords = GazetteerTestData(altNames);
             //
-            gazetteerTestData.AddLine(names2, codes2);
+            gazetteerRecords.AddLine(names2, codes2);
 
             // input data - Level 1 and 2 contains alt spelling, the rest are spelt correctly
             string[] inputNames = {"P1A", "T1A", "V1"};
@@ -53,7 +53,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerTestData.GadmList(),
+                gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -82,9 +82,9 @@ namespace MultiLevelGeoCoderTests
             // gazetteer data - contains codes for names1 and names2 and
             // an alternate name for name1
             string[] altNames = {"P1A", null, null};
-            GazetteerTestData gazetteerTestData = GazetteerTestData(altNames);
+            GazetteerRecords gazetteerRecords = GazetteerTestData(altNames);
             //
-            gazetteerTestData.AddLine(names2, codes2);
+            gazetteerRecords.AddLine(names2, codes2);
 
             // input data - Level1 contains alt spelling, the rest are spelt correctly
             string[] inputNames = {"P1A", "T1", "V1"};
@@ -97,7 +97,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerTestData.GadmList(),
+                gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -126,8 +126,8 @@ namespace MultiLevelGeoCoderTests
             // gazetteer data - contains codes for names1 and names2 and
             // alternate names for name 1 and 2
             string[] altNames = {null, "T1A", "V1A"};
-            GazetteerTestData gazetteerTestData = GazetteerTestData(altNames);
-            gazetteerTestData.AddLine(names2, codes2);
+            GazetteerRecords gazetteerRecords = GazetteerTestData(altNames);
+            gazetteerRecords.AddLine(names2, codes2);
 
             // input data - Level 2 and 3 contains alt spelling, the rest are spelt correctly
             string[] inputNames = {"P1", "T1A", "V1A"};
@@ -140,7 +140,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerTestData.GadmList(),
+                gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -169,9 +169,9 @@ namespace MultiLevelGeoCoderTests
             // gazetteer data - contains codes for names1 and names2 and
             // an alternate name for name 2
             string[] altNames = {null, "T1A", null};
-            GazetteerTestData gazetteerTestData = GazetteerTestData(altNames);
+            GazetteerRecords gazetteerRecords = GazetteerTestData(altNames);
             //
-            gazetteerTestData.AddLine(names2, codes2);
+            gazetteerRecords.AddLine(names2, codes2);
 
             // input data - Level 2 contains alt spelling, the rest are spelt correctly
             string[] inputNames = {"P1", "T1A", "V1"};
@@ -184,7 +184,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerTestData.GadmList(),
+                gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -213,9 +213,9 @@ namespace MultiLevelGeoCoderTests
             // gazetteer data - contains codes for names1 and names2 and
             // an alternate name for name 3
             string[] altNames = {null, null, "V1A"};
-            GazetteerTestData gazetteerTestData = GazetteerTestData(altNames);
+            GazetteerRecords gazetteerRecords = GazetteerTestData(altNames);
             //
-            gazetteerTestData.AddLine(names2, codes2);
+            gazetteerRecords.AddLine(names2, codes2);
 
             // input data - Level3 contains alt spelling, the rest are spelt correctly
             string[] inputNames = {"P1", "T1", "V1A"};
@@ -228,7 +228,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerTestData.GadmList(),
+                gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -244,12 +244,12 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(names1[2], codedLocation.GeoCode3.Name);
         }
 
-        private GazetteerTestData GazetteerTestData(string[] altNames)
+        private GazetteerRecords GazetteerTestData(string[] altNames)
         {
-            GazetteerTestData gazetteerTestData = new GazetteerTestData();
-            gazetteerTestData.AddLine(names1, codes1, altNames);
-            gazetteerTestData.AddLine(names2, codes2, altNames);
-            return gazetteerTestData;
+            GazetteerRecords gazetteerRecords = new GazetteerRecords();
+            gazetteerRecords.AddLine(names1, codes1, altNames);
+            gazetteerRecords.AddLine(names2, codes2, altNames);
+            return gazetteerRecords;
         }
 
         private MatchProviderStub MatchProviderStubEmpty(string[] inputNames)

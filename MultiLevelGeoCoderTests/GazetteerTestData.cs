@@ -2,75 +2,60 @@
 
 namespace MultiLevelGeoCoderTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data;
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
-    /// Provides gazetteer test data
+    /// Gazetteer test data set including main and alternate names
     /// </summary>
     internal class GazetteerTestData
     {
         #region Fields
 
-        private readonly List<Tuple<string[], string[], string[]>> lines =
-            new List<Tuple<string[], string[], string[]>>();
+        // Test Gazetteer Data
+        private static readonly string[] AltNames1 = {"P1A", "T1A", "V1A"};
+        private static readonly string[] AltNames3 = {"P2A", "T2A", "V1A"};
+        private static readonly string[] AltNames4 = {"P1A", "T2A", "V1A"};
+        private static readonly string[] AltNamesEmpty = {"", "", ""};
+
+        // we dont care about the codes for these tests
+        private static readonly string[] Codes0 = {"0", "0", "0"};
+
+        // todo add the codes in here and use for all the tests?
+        private static readonly string[] Names1 = {"P1", "T1", "V1"};
+        private static readonly string[] Names2 = {"P1", "T1", "V2"};
+        private static readonly string[] Names3 = {"P2", "T2", "V1"};
+        private static readonly string[] Names4 = {"P2", "T2", "V2"};
+        private static readonly string[] Names5 = {"P2", "T2", "V3"};
+        private static readonly string[] Names6 = {"P1", "T2", "V1"};
+        private static readonly string[] Names7 = {"P1", "T2", "V4"};
+        private static readonly string[] Names8 = {"P2", "T1", "V2"};
 
         #endregion Fields
 
         #region Methods
 
-        public void AddLine(string[] names, string[] codes, string[] altNames= null)
+        public static List<GazetteerRecord> TestData1()
         {
-            lines.Add(new Tuple<string[], string[], string[]>(names, codes, altNames));
-        }
+            GazetteerRecords gazetteerRecords = new GazetteerRecords();
+            // P1, T1, V1, P1A, T1A, V1A
+            gazetteerRecords.AddLine(Names1, Codes0, AltNames1);
+            // P1, T1, V2, "","",""
+            gazetteerRecords.AddLine(Names2, Codes0, AltNamesEmpty);
+            // P2, T2, V1, P2A, T2A, V1A
+            gazetteerRecords.AddLine(Names3, Codes0, AltNames3);
+            // P2, T2, V2,
+            gazetteerRecords.AddLine(Names4, Codes0);
+            // P2, T2, V3,
+            gazetteerRecords.AddLine(Names5, Codes0);
+            // P1, T2, V1, P1A, T2A, V1A,
+            gazetteerRecords.AddLine(Names6, Codes0, AltNames4);
+            // P1, T2, V4
+            gazetteerRecords.AddLine(Names7, Codes0);
+            // P2, T1, V2
+            gazetteerRecords.AddLine(Names8, Codes0);
 
-        public DataTable Data(GazetteerColumnNames gazetteerColumnNames)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add(gazetteerColumnNames.Level1Name);
-            dt.Columns.Add(gazetteerColumnNames.Level2Name);
-            dt.Columns.Add(gazetteerColumnNames.Level3Name);
-            dt.Columns.Add(gazetteerColumnNames.Level1Code);
-            dt.Columns.Add(gazetteerColumnNames.Level2Code);
-            dt.Columns.Add(gazetteerColumnNames.Level3Code);
-     
-            foreach (var line in lines)
-            {
-                object[] values =
-                {
-                    line.Item1[0], line.Item1[1], line.Item1[2],
-                    line.Item2[0], line.Item2[1], line.Item2[2]
-                };
-                dt.LoadDataRow(values, true);
-            }
-            return dt;
-        }
-
-        public List<GazetteerRecord> GadmList()
-        {
-            List<GazetteerRecord> gadmList = new List<GazetteerRecord>();
-            foreach (var line in lines)
-            {
-                GazetteerRecord record = new GazetteerRecord();
-                record.Name1 = line.Item1[0];
-                record.Name2 = line.Item1[1];
-                record.Name3 = line.Item1[2];
-                record.Id1 = line.Item2[0];
-                record.Id2 = line.Item2[1];
-                record.Id3 = line.Item2[2];
-                if (line.Item3 != null)
-                {
-                    record.AltName1 = line.Item3[0];
-                    record.AltName2 = line.Item3[1];
-                    record.AltName3 = line.Item3[2];
-                }
-               
-                gadmList.Add(record);
-            }
-
-            return gadmList;
+            return gazetteerRecords.GadmList();
         }
 
         #endregion Methods

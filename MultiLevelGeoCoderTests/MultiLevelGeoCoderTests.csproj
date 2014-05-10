@@ -66,12 +66,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GazetteerTestData.cs" />
     <Compile Include="MatchProviderStub.cs" />
     <Compile Include="GeoCoderPerfsTests.cs" />
     <Compile Include="CsvTests.cs" />
     <Compile Include="DbIntegrationTests.cs" />
     <Compile Include="FuzzyStringTests.cs" />
-    <Compile Include="GazetteerTestData.cs" />
+    <Compile Include="GazetteerRecords.cs" />
     <Compile Include="InputTestData.cs" />
     <Compile Include="LocationCodesTestsWithSavedMatchedNames.cs" />
     <Compile Include="MatchProviderTestData.cs" />
