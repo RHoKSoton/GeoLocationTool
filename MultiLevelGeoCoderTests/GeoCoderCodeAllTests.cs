@@ -51,10 +51,10 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetInputColumns(inputColumnNames);
 
             // create gazetteer data
-            GazetteerRecords gazetteerRecords = new GazetteerRecords();
-            gazetteerRecords.AddLine(names1, codes1);
-            gazetteerRecords.AddLine(names2, codes2);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            gazetteerTestData.AddLine(names2, codes2);
+            geoCoder.SetGazetteerData(gazetteerTestData.Data(gazetteerColumnNames));
 
             // add records matching input line 3 names to gazetteer names 1
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
@@ -122,9 +122,9 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetInputColumns(inputColumnNames);
 
             // create gazetteer data
-            GazetteerRecords gazetteerRecords = new GazetteerRecords();
-            gazetteerRecords.AddLine(names1, codes1);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            geoCoder.SetGazetteerData(gazetteerTestData.Data(gazetteerColumnNames));
 
             // add records matched names records
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
@@ -194,9 +194,9 @@ namespace MultiLevelGeoCoderTests
             geoCoder.SetInputColumns(inputColumnNames);
 
             // create gazetteer data
-            GazetteerRecords gazetteerRecords = new GazetteerRecords();
-            gazetteerRecords.AddLine(names1, codes1);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            geoCoder.SetGazetteerData(gazetteerTestData.Data(gazetteerColumnNames));
 
             // add records matched names records
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();

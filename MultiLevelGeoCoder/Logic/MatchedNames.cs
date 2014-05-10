@@ -79,13 +79,6 @@ namespace MultiLevelGeoCoder.Logic
             Location gazetteerLocation,
             LocationNames locationNames)
         {
-            // todo refactor this Save method
-            // throw ex if input is invalid
-            inputLocation.Validate();
-
-            MatchedName match = new MatchedName(inputLocation, gazetteerLocation);
-
-            // todo move to matchedName
             bool hasLevel1 = (!string.IsNullOrEmpty(inputLocation.Name1)) &&
                              !string.IsNullOrEmpty(gazetteerLocation.Name1);
             bool hasLevel2 = (!string.IsNullOrEmpty(inputLocation.Name2)) &&
@@ -93,7 +86,9 @@ namespace MultiLevelGeoCoder.Logic
             bool hasLevel3 = (!string.IsNullOrEmpty(inputLocation.Name3)) &&
                              !string.IsNullOrEmpty(gazetteerLocation.Name3);
 
-            // todo move to matched name
+            // throw ex if locations are not complete
+            CheckLocationsAreComplete(inputLocation, gazetteerLocation);
+
             // if input and gazetteer are the same don't save, just exit
             if (inputLocation.Equals(gazetteerLocation))
             {
@@ -103,172 +98,43 @@ namespace MultiLevelGeoCoder.Logic
             // level1
             if (hasLevel1)
             {
-                // Get the main values for both the input and the gaz selection in
-                // in case it is an alt and use that instead,
-                // as we don't save alts to the db
-                string mainGaz1 =
-                    locationNames.GetMainLevel1(match.GazetteerLocation.Name1);
-                if (mainGaz1 == null)
+                // if input and gazetteer value is the same, don't save
+                if (AreNotTheSame(inputLocation.Name1, gazetteerLocation.Name1))
                 {
-                    throw new ArgumentException(
-                        "All matches must be selected from data in the gazetteer",
-                        "gazetteerLocation");
-                }
-                match.GazetteerLocation.Name1 = mainGaz1;
-
-                string mainInput1 = locationNames.GetMainLevel1(match.InputLocation.Name1);
-
-                if (mainInput1 == null)
-                {
-                    // the input value is not in the gazetteer,
-                    // however if input and gazetteer value is the same, don't save
-                    if (AreNotTheSame(
-                        match.InputLocation.Name1,
-                        match.GazetteerLocation.Name1))
-                    {
-                        SaveMatchLevel1(
-                            match.InputLocation.Name1,
-                            match.GazetteerLocation.Name1);
-                        // todo review this as should not change the input?
-                        match.InputLocation.Name1 = match.GazetteerLocation.Name1;
-                    }
-                }
-                else
-                {
-                    // The input value is in the gazetteer,
-                    if (AreNotTheSame(
-                        match.InputLocation.Name1,
-                        match.GazetteerLocation.Name1))
-                    {
-                        // We do not allow saved matches for existing names as this
-                        // would result in conflicting information so throw ex if the input
-                        // is not the same as the selection.
-                        string message = string.Format(
-                            "Input name is already in the gazetteer, cannot save match: {0} ",
-                            match.InputLocation.Name1);
-                        throw new NameInGazetteerException(message);
-                    }
-
-                    // use the main input value for the lower levels
-                    match.InputLocation.Name1 = mainInput1;
+                    // we do not allow saved matches for existing names
+                    CheckLevel1NotInGazetteer(inputLocation, locationNames);
+                    SaveMatchLevel1(inputLocation.Name1, gazetteerLocation.Name1);
                 }
 
                 // level 2
                 if (hasLevel2)
                 {
-                    // Get the main values for both the input and the gaz selection in
-                    // case it is an alt and use that instead,
-                    // we don't save alts to the db
-                    string mainGaz2 = locationNames.GetMainLevel2(
-                        match.GazetteerLocation.Name1,
-                        match.GazetteerLocation.Name2);
-                    if (mainGaz2 == null)
+                    if (AreNotTheSame(inputLocation.Name2, gazetteerLocation.Name2))
                     {
-                        throw new ArgumentException(
-                            "All matches must be selected from data in the gazetteer",
-                            "gazetteerLocation");
+                        CheckLevel2NotInGazetteer(
+                            inputLocation,
+                            gazetteerLocation,
+                            locationNames);
+                        SaveMatchLevel2(
+                            inputLocation.Name2,
+                            gazetteerLocation.Name1,
+                            gazetteerLocation.Name2);
                     }
-                    match.GazetteerLocation.Name2 = mainGaz2;
-
-                    string mainInput2 =
-                        locationNames.GetMainLevel2(
-                            match.InputLocation.Name1,
-                            match.InputLocation.Name2);
-
-                    if (mainInput2 == null)
-                    {
-                        // the input value is not in the gazetteer,
-                        // however if input and gazetteer value is the same, don't save
-                        if (AreNotTheSame(
-                            match.InputLocation.Name2,
-                            match.GazetteerLocation.Name2))
-                        {
-                            SaveMatchLevel2(
-                                match.InputLocation.Name2,
-                                match.GazetteerLocation.Name1,
-                                match.GazetteerLocation.Name2);
-                            // todo review this as should not change the input?
-                            match.InputLocation.Name2 = match.GazetteerLocation.Name2;
-                        }
-                    }
-                    else
-                    {
-                        // The input value is in the gazetteer,
-                        if (AreNotTheSame(
-                            match.InputLocation.Name2,
-                            match.GazetteerLocation.Name2))
-                        {
-                            // We do not allow saved matches for existing names as this
-                            // would result in conflicting information so throw ex if the input
-                            // is not the same as the selection.
-                            string message = string.Format(
-                                "Input name is already in the gazetteer, cannot save match: {0} ",
-                                match.InputLocation.Name2);
-                            throw new NameInGazetteerException(message);
-                        }
-
-                        // use the main input value for the lower levels
-                        match.InputLocation.Name2 = mainInput2;
-                    }
-
 
                     // level 3
                     if (hasLevel3)
                     {
-                        // Get the main values for both the input and the gaz selection in
-                        // case it is an alt and use that instead,
-                        // we don't save alts to the db
-                        string mainGaz3 = locationNames.GetMainLevel3(
-                            match.GazetteerLocation.Name1,
-                            match.GazetteerLocation.Name2,
-                            match.GazetteerLocation.Name3);
-                        if (mainGaz3 == null)
+                        if (AreNotTheSame(inputLocation.Name3, gazetteerLocation.Name3))
                         {
-                            throw new ArgumentException(
-                                "All matches must be selected from data in the gazetteer",
-                                "gazetteerLocation");
-                        }
-                        match.GazetteerLocation.Name3 = mainGaz3;
-
-                        string mainInput3 =
-                            locationNames.GetMainLevel3(
-                                match.InputLocation.Name1,
-                                match.InputLocation.Name2,
-                                match.InputLocation.Name3);
-
-                        if (mainInput3 == null)
-                        {
-                            // the input value is not in the gazetteer,
-                            // however if input and gazetteer value is the same, don't save
-                            if (AreNotTheSame(
-                                match.InputLocation.Name3,
-                                match.GazetteerLocation.Name3))
-                            {
-                                SaveMatchLevel3(
-                                    inputLocation.Name3,
-                                    gazetteerLocation.Name1,
-                                    gazetteerLocation.Name2,
-                                    gazetteerLocation.Name3);
-                            }
-                        }
-                        else
-                        {
-                            // The input value is in the gazetteer,
-                            if (AreNotTheSame(
-                                match.InputLocation.Name3,
-                                match.GazetteerLocation.Name3))
-                            {
-                                // We do not allow saved matches for existing names as this
-                                // would result in conflicting information so throw ex if the input
-                                // is not the same as the selection.
-                                string message = string.Format(
-                                    "Input name is already in the gazetteer, cannot save match: {0} ",
-                                    match.InputLocation.Name3);
-                                throw new NameInGazetteerException(message);
-                            }
-
-                            // use the main input value for the lower levels
-                            match.InputLocation.Name3 = mainInput3;
+                            CheckLevel3NotInGazetteer(
+                                inputLocation,
+                                gazetteerLocation,
+                                locationNames);
+                            SaveMatchLevel3(
+                                inputLocation.Name3,
+                                gazetteerLocation.Name1,
+                                gazetteerLocation.Name2,
+                                gazetteerLocation.Name3);
                         }
                     }
                 }
@@ -284,8 +150,55 @@ namespace MultiLevelGeoCoder.Logic
                     StringComparison.InvariantCultureIgnoreCase);
         }
 
+        private static void CheckLevel1NotInGazetteer(
+            Location inputLocation,
+            LocationNames locationNames)
+        {
+            // if the suggestion/input combination exists in the gazetteer throw ex
+            if (LocationNames.IsInLevel1Names(inputLocation.Name1, locationNames))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name1);
+                throw new NameInGazetteerException(message);
+            }
+        }
 
-        //todo review wether this is needed
+        private static void CheckLevel2NotInGazetteer(
+            Location inputLocation,
+            Location gazetteerLocation,
+            LocationNames locationNames)
+        {
+            if (LocationNames.IsInLevel2Names(
+                inputLocation.Name2,
+                gazetteerLocation.Name1,
+                locationNames))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name2);
+                throw new NameInGazetteerException(message);
+            }
+        }
+
+        private static void CheckLevel3NotInGazetteer(
+            Location inputLocation,
+            Location gazetteerLocation,
+            LocationNames locationNames)
+        {
+            if (LocationNames.IsInLevel3Names(
+                inputLocation.Name3,
+                gazetteerLocation.Name1,
+                gazetteerLocation.Name2,
+                locationNames))
+            {
+                string message = string.Format(
+                    "Name already in the gazetteer: {0} ",
+                    inputLocation.Name3);
+                throw new NameInGazetteerException(message);
+            }
+        }
+
         private static void CheckLocationsAreComplete(
             Location inputLocation,
             Location gazetteerLocation)

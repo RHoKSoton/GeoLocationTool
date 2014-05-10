@@ -42,33 +42,10 @@ namespace MultiLevelGeoCoder.Logic
                     StringComparer.InvariantCultureIgnoreCase);
         }
 
-        public string GetMainLevel1(string level1)
-        {
-            string name = IsLevel1MainName(level1)
-                ? level1
-                : Level1MainName(level1);
-            return name;
-        }
-
-        public string GetMainLevel2(string level1, string level2)
-        {
-            string name = IsLevel2MainName(level1, level2)
-                ? level2
-                : Level2MainName(level1, level2);
-            return name;
-        }
-
-        public string GetMainLevel3(string level1, string level2, string level3)
-        {
-            string name = IsLevel3MainName(level1, level2, level3)
-                ? level3
-                : Level3MainName(level1, level2, level3);
-            return name;
-        }
-
-        public bool IsInLevel2Names(
+        public static bool IsInLevel2Names(
             string inputName2,
-            string gazetteerName1)
+            string gazetteerName1,
+            LocationNames locationNames)
         {
             if (String.IsNullOrEmpty(inputName2))
             {
@@ -76,16 +53,17 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             // check gazetteer names list
-            return Level2AllLocationNames(gazetteerName1)
+            return locationNames.Level2AllLocationNames(gazetteerName1)
                 .Contains(
                     inputName2,
                     StringComparer.InvariantCultureIgnoreCase);
         }
 
-        public bool IsInLevel3Names(
+        public static bool IsInLevel3Names(
             string inputName3,
             string gazetteerName1,
-            string gazetteerName2)
+            string gazetteerName2,
+            LocationNames locationNames)
         {
             if (String.IsNullOrEmpty(inputName3))
             {
@@ -93,7 +71,7 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             // check  gazetteer names list
-            return Level3AllLocationNames(gazetteerName1, gazetteerName2)
+            return locationNames.Level3AllLocationNames(gazetteerName1, gazetteerName2)
                 .Contains(
                     inputName3,
                     StringComparer.InvariantCultureIgnoreCase);
@@ -211,7 +189,7 @@ namespace MultiLevelGeoCoder.Logic
 
         private bool IsLevel2MainName(string level1Name, string level2Name)
         {
-            if (String.IsNullOrEmpty(level1Name) || String.IsNullOrEmpty(level2Name))
+            if (String.IsNullOrEmpty(level1Name) ||String.IsNullOrEmpty(level2Name))
             {
                 return false;
             }
@@ -223,41 +201,18 @@ namespace MultiLevelGeoCoder.Logic
                     StringComparer.InvariantCultureIgnoreCase);
         }
 
-        private bool IsLevel3MainName(
-            string level1Name,
-            string level2Name,
-            string level3Name)
-        {
-            if (String.IsNullOrEmpty(level1Name) ||
-                String.IsNullOrEmpty(level2Name) ||
-                String.IsNullOrEmpty(level3Name))
-            {
-                return false;
-            }
-
-            // check gazetteer names list
-            return Level3MainLocationNames(level1Name, level2Name)
-                .Contains(
-                    level3Name,
-                    StringComparer.InvariantCultureIgnoreCase);
-        }
-
         private IEnumerable<string> Level1AltLocationNames()
         {
             var levelList =
-                gazzetteerData.Where(x => !String.IsNullOrEmpty(x.AltName1))
-                    .Select(l => l.AltName1);
+                gazzetteerData.Where(x => x.AltName1 != null).Select(l => l.AltName1);
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
 
         private string Level1MainName(string level1AltName)
         {
             // the main name that corresponds to the given alt name
-            return gazzetteerData.Where(
-                x => String.Compare(
-                    level1AltName,
-                    x.AltName1,
-                    StringComparison.OrdinalIgnoreCase) == 0)
+            return gazzetteerData.Where( x => String.Compare(
+                level1AltName, x.AltName1,StringComparison.OrdinalIgnoreCase)==0)
                 .Select(l => l.Name1).FirstOrDefault();
         }
 
@@ -271,7 +226,7 @@ namespace MultiLevelGeoCoder.Logic
                             n.Name1,
                             level1Name,
                             StringComparison.OrdinalIgnoreCase))
-                .Where(x => !string.IsNullOrEmpty(x.AltName2)).Select(l => l.AltName2);
+                .Where(x => x.AltName2 != null).Select(l => l.AltName2);
 
             return levelList.Distinct().OrderBy(i => i).ToList();
         }
@@ -281,15 +236,8 @@ namespace MultiLevelGeoCoder.Logic
             // the main name that corresponds to the given alt name
             return
                 gazzetteerData.Where(
-                    x =>
-                        (String.Compare(
-                            level1Name,
-                            x.Name1,
-                            StringComparison.OrdinalIgnoreCase) == 0) &&
-                        (String.Compare(
-                            level2AltName,
-                            x.AltName2,
-                            StringComparison.OrdinalIgnoreCase) == 0))
+                    x => (String.Compare(level1Name, x.Name1, StringComparison.OrdinalIgnoreCase) == 0) && 
+                    (String.Compare(level2AltName,x.AltName2, StringComparison.OrdinalIgnoreCase) == 0))
                     .Select(l => l.Name2).FirstOrDefault();
         }
 
@@ -310,33 +258,9 @@ namespace MultiLevelGeoCoder.Logic
                             n.Name2,
                             level2Name,
                             StringComparison.OrdinalIgnoreCase)))
-                .Where(x => !string.IsNullOrEmpty(x.AltName3)).Select(l => l.AltName3);
+                .Where(x => x.AltName3 != null).Select(l => l.AltName3);
             var locationNames = levelList.Distinct().OrderBy(i => i).ToList();
             return locationNames;
-        }
-
-        private string Level3MainName(
-            string level1Name,
-            string level2Name,
-            string level3AltName)
-        {
-            // the main name that corresponds to the given alt name
-            return
-                gazzetteerData.Where(
-                    x =>
-                        (String.Compare(
-                            level1Name,
-                            x.Name1,
-                            StringComparison.OrdinalIgnoreCase) == 0) &&
-                        (String.Compare(
-                            level2Name,
-                            x.Name2,
-                            StringComparison.OrdinalIgnoreCase) == 0) &&
-                        (String.Compare(
-                            level3AltName,
-                            x.AltName2,
-                            StringComparison.OrdinalIgnoreCase) == 0))
-                    .Select(l => l.Name2).FirstOrDefault();
         }
 
         #endregion Methods

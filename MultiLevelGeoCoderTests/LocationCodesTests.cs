@@ -36,7 +36,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - level 3 miss-spelt
             string[] inputNames = {"P1", "T1", "V1x"};
@@ -49,7 +49,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -77,7 +77,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - level 2 miss-spelt
             string[] inputNames = {"P1", "T1x", "V1"};
@@ -90,7 +90,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -114,7 +114,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - all spelt correctly
             string[] inputNames = {"P1", "T1", "V1"};
@@ -127,7 +127,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -153,7 +153,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - no level 3 supplied
             string[] inputNames = {"P1", "T1", null};
@@ -165,7 +165,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -190,7 +190,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - no level 3 supplied
             string[] inputNames = {"P1", null, null};
@@ -201,7 +201,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -226,7 +226,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - contains codes for names1 and names2
-            GazetteerRecords gazetteerRecords = GazetteerTestData();
+            GazetteerTestData gazetteerTestData = GazetteerTestData();
 
             // input data - level 2 miss-spelt
             string[] inputNames = {"P1x", "T1", "V1"};
@@ -239,7 +239,7 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
             LocationCodes locationCodes = new LocationCodes(
-                gazetteerRecords.GadmList(),
+                gazetteerTestData.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
@@ -252,12 +252,12 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
 
-        private GazetteerRecords GazetteerTestData()
+        private GazetteerTestData GazetteerTestData()
         {
-            GazetteerRecords gazetteerRecords = new GazetteerRecords();
-            gazetteerRecords.AddLine(names1, codes1);
-            gazetteerRecords.AddLine(names2, codes2);
-            return gazetteerRecords;
+            GazetteerTestData gazetteerTestData = new GazetteerTestData();
+            gazetteerTestData.AddLine(names1, codes1);
+            gazetteerTestData.AddLine(names2, codes2);
+            return gazetteerTestData;
         }
 
         private MatchProviderStub MatchProviderStubEmpty(string[] inputNames)
