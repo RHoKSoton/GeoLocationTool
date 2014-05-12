@@ -334,9 +334,9 @@ namespace MultiLevelGeoCoder.Logic
                             StringComparison.OrdinalIgnoreCase) == 0) &&
                         (String.Compare(
                             level3AltName,
-                            x.AltName2,
+                            x.AltName3,
                             StringComparison.OrdinalIgnoreCase) == 0))
-                    .Select(l => l.Name2).FirstOrDefault();
+                    .Select(l => l.Name3).FirstOrDefault();
         }
 
         #endregion Methods

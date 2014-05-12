@@ -343,6 +343,47 @@ namespace MultiLevelGeoCoderTests
             // exception thrown
         }
 
+        // Given a matched input to save (Rule 10)
+        // When the matched gazzeteer values are in gazetteer as alt names
+        // Then save is called using the main value as the match and not the alt value.
+        [TestMethod]
+        public void SaveMatch_MatchIsAltValue_MatchSavedUsingMainValue()
+        {
+            // Arrange
+            const string inputName1 = "P1x";
+            const string inputName2 = "T1x";
+            const string inputName3 = "V1x";
+            const string gazName1 = "P1A"; // in gaz as alt value
+            const string gazName2 = "T1A"; // in gaz as alt value
+            const string gazName3 = "V1A"; // in gaz as alt value
+            const string mainName1 = "P1"; // main value in gaz
+            const string mainName2 = "T1"; // main value in gaz
+            const string mainName3 = "V1"; // main value in gaz
+
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData.TestData1());
+
+            //match provider
+            var mock = MockRepository.GenerateMock<IMatchProvider>();
+            MatchedNames matchedNames = new MatchedNames(mock);
+
+            // input containing level 3 value that is in the gazetteer
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer- must have correct matched level 1 and 2
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            mock.AssertWasCalled(x => x.SaveMatchLevel1("P1x", mainName1));
+            mock.AssertWasCalled(x => x.SaveMatchLevel2("T1x", mainName1, mainName2));
+            mock.AssertWasCalled(
+                x => x.SaveMatchLevel3("V1x", mainName1, mainName2, mainName3));
+        }
+
         private static void SaveMatchWithGazetteerTestData1(
             string inputName1,
             string inputName2,
