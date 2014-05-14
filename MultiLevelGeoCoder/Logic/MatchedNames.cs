@@ -135,6 +135,9 @@ namespace MultiLevelGeoCoder.Logic
                 }
                 else
                 {
+                    // use the main input value for the lower levels
+                    match.InputLocation.Name1 = mainInput1;
+
                     // The input value is in the gazetteer,
                     if (AreNotTheSame(
                         match.InputLocation.Name1,
@@ -148,9 +151,6 @@ namespace MultiLevelGeoCoder.Logic
                             match.InputLocation.Name1);
                         throw new NameInGazetteerException(message);
                     }
-
-                    // use the main input value for the lower levels
-                    match.InputLocation.Name1 = mainInput1;
                 }
 
                 // level 2
@@ -193,6 +193,9 @@ namespace MultiLevelGeoCoder.Logic
                     }
                     else
                     {
+                        // use the main input value for the lower levels
+                        match.InputLocation.Name2 = mainInput2;
+
                         // The input value is in the gazetteer,
                         if (AreNotTheSame(
                             match.InputLocation.Name2,
@@ -206,9 +209,6 @@ namespace MultiLevelGeoCoder.Logic
                                 match.InputLocation.Name2);
                             throw new NameInGazetteerException(message);
                         }
-
-                        // use the main input value for the lower levels
-                        match.InputLocation.Name2 = mainInput2;
                     }
 
 
@@ -253,6 +253,8 @@ namespace MultiLevelGeoCoder.Logic
                         }
                         else
                         {
+                            // use the main input value for the lower levels
+                            match.InputLocation.Name3 = mainInput3;
                             // The input value is in the gazetteer,
                             if (AreNotTheSame(
                                 match.InputLocation.Name3,
@@ -266,9 +268,6 @@ namespace MultiLevelGeoCoder.Logic
                                     match.InputLocation.Name3);
                                 throw new NameInGazetteerException(message);
                             }
-
-                            // use the main input value for the lower levels
-                            match.InputLocation.Name3 = mainInput3;
                         }
                     }
                 }
