@@ -303,11 +303,11 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             const string inputName1 = "P1A"; // in gaz
-            const string inputName2 = "T1A";
-            const string inputName3 = "V1A";
+            const string inputName2 = "T1x";
+            const string inputName3 = "V2x";
             const string gazName1 = "P2"; // not allowed
             const string gazName2 = "T1";
-            const string gazName3 = "V1";
+            const string gazName3 = "V2";
 
             SaveMatchWithGazetteerTestData1(
                 inputName1,
@@ -329,10 +329,10 @@ namespace MultiLevelGeoCoderTests
         public void SaveMatch_InputLevel1ExistsInGazAsMain_ExceptionThrown()
         {
             // Arrange
-            const string inputName1 = "P1"; // in gaz
+            const string inputName1 = "P2"; // in gaz
             const string inputName2 = "T1x";
             const string inputName3 = "V1x";
-            const string gazName1 = "P2"; // not allowed
+            const string gazName1 = "P1"; // not allowed
             const string gazName2 = "T1";
             const string gazName3 = "V1";
 
@@ -471,7 +471,7 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save (Rule 11)
-        // When input level 2 name aleady exists as an alternate name in the gazzeteer
+        // When input level 2 name aleady exists as an alternate name in the gazeteer
         // Then a NameInGazetteerException is thrown
         [TestMethod]
         [ExpectedException(typeof (NameInGazetteerException))]
@@ -481,7 +481,7 @@ namespace MultiLevelGeoCoderTests
             const string inputName1 = "P1A";
             const string inputName2 = "T1A"; // in gaz
             const string inputName3 = "V1A";
-            const string gazName1 = "P1"; // equivalent
+            const string gazName1 = "P1";
             const string gazName2 = "T2"; // not allowed
             const string gazName3 = "V1";
 
@@ -498,18 +498,18 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save (Rule 10)
-        // When input level 2 name aleady exists in the gazeteer as a main entry
+        // When input level 2 name aleady exists in the gazetteer as a main entry
         // Then a NameInGazetteerException is thrown
         [TestMethod]
         [ExpectedException(typeof (NameInGazetteerException))]
         public void SaveMatch_InputLevel2ExistsInGazAsMain_ExceptionThrown()
         {
             // Arrange
-            const string inputName1 = "P1x";
-            const string inputName2 = "T1"; // in gaz
+            const string inputName1 = "P1";
+            const string inputName2 = "T2"; // in gaz
             const string inputName3 = "V1x";
             const string gazName1 = "P1";
-            const string gazName2 = "T2"; // not allowed
+            const string gazName2 = "T1"; // not allowed
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
@@ -539,11 +539,11 @@ namespace MultiLevelGeoCoderTests
         public void SaveMatch_InputLevel2ExistsInGazAsMain_NotSaved()
         {
             // Arrange
-            const string inputName1 = "P1x";
-            const string inputName2 = "T1"; // in gaz
+            const string inputName1 = "P1";
+            const string inputName2 = "T2"; // in gaz
             const string inputName3 = "V1x";
             const string gazName1 = "P1";
-            const string gazName2 = "T2"; // not allowed
+            const string gazName2 = "T1"; // not allowed
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
@@ -575,7 +575,7 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save (Rule 3)
-        // When input level 2 value is blank
+        // When input level 2 and 3 value is blank
         // Then save is only called for level1
         [TestMethod]
         public void SaveMatch_InputLevel2IsBlank_OnlyLevel1Saved()
@@ -583,7 +583,7 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             const string inputName1 = "P1x";
             const string inputName2 = "";
-            const string inputName3 = "V1x";
+            const string inputName3 = "";
             const string gazName1 = "P1";
             const string gazName2 = "T1";
             const string gazName3 = "V1";
@@ -659,8 +659,8 @@ namespace MultiLevelGeoCoderTests
         public void SaveMatch_InputLevel3ExistsInGazAsAlt_NotSaved()
         {
             // Arrange
-            const string inputName1 = "P1x";
-            const string inputName2 = "T1x";
+            const string inputName1 = "P1A";
+            const string inputName2 = "T1A";
             const string inputName3 = "V1A"; // in gaz
             const string gazName1 = "P1";
             const string gazName2 = "T1";
@@ -702,12 +702,12 @@ namespace MultiLevelGeoCoderTests
         public void SaveMatch_InputLevel3ExistsInGazAsMain_ExceptionThrown()
         {
             // Arrange
-            const string inputName1 = "P1x";
-            const string inputName2 = "T1x";
-            const string inputName3 = "V1"; // in gaz
+            const string inputName1 = "P1";
+            const string inputName2 = "T1";
+            const string inputName3 = "V2"; // in gaz
             const string gazName1 = "P1";
             const string gazName2 = "T1";
-            const string gazName3 = "V2"; // not allowed
+            const string gazName3 = "V1"; // not allowed
 
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
@@ -736,12 +736,12 @@ namespace MultiLevelGeoCoderTests
         public void SaveMatch_InputLevel3ExistsInGazAsMain_NotSaved()
         {
             // Arrange
-            const string inputName1 = "P1x";
-            const string inputName2 = "T1x";
-            const string inputName3 = "V1"; // in gaz
+            const string inputName1 = "P1";
+            const string inputName2 = "T1";
+            const string inputName3 = "V2"; // in gaz
             const string gazName1 = "P1";
             const string gazName2 = "T1";
-            const string gazName3 = "V2"; // not allowed
+            const string gazName3 = "V1"; // not allowed
 
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(

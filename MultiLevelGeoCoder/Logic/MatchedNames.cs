@@ -5,6 +5,7 @@ namespace MultiLevelGeoCoder.Logic
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using DataAccess;
     using Model;
 
@@ -75,6 +76,45 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         public void SaveMatch(
+            Location inputLocation,
+            Location gazetteerLocation,
+            LocationNames locationNames)
+        {
+            Validate(inputLocation);
+            //Validate(gazetteerLocation);
+            MatchedName match = new MatchedName(inputLocation, gazetteerLocation);
+
+            // Don't save alts to the db
+            SubstituteMainForAltNames(match, locationNames);
+
+            // Throw ex if the input already exists in the gazetteer
+            ValidateMatch(match, locationNames);
+
+            // Don't save if the values are the same
+            if (match.Level1NotSame())
+            {
+                SaveMatchLevel1(
+                    match.InputLocation.Name1,
+                    match.GazetteerLocation.Name1);
+            }
+            if (match.Level2NotSame())
+            {
+                SaveMatchLevel2(
+                    match.InputLocation.Name2,
+                    match.GazetteerLocation.Name1,
+                    match.GazetteerLocation.Name2);
+            }
+            if (match.Level3NotSame())
+            {
+                SaveMatchLevel3(
+                    inputLocation.Name3,
+                    gazetteerLocation.Name1,
+                    gazetteerLocation.Name2,
+                    gazetteerLocation.Name3);
+            }
+        }
+
+        public void SaveMatch2(
             Location inputLocation,
             Location gazetteerLocation,
             LocationNames locationNames)
@@ -211,7 +251,6 @@ namespace MultiLevelGeoCoder.Logic
                         }
                     }
 
-
                     // level 3
                     if (hasLevel3)
                     {
@@ -283,14 +322,144 @@ namespace MultiLevelGeoCoder.Logic
                     StringComparison.InvariantCultureIgnoreCase);
         }
 
-
-        //todo review wether this is needed
-        private static void CheckLocationsAreComplete(
-            Location inputLocation,
-            Location gazetteerLocation)
+        private static void SubstituteAltGazetteerName(
+            Location location,
+            LocationNames locationNames)
         {
-            inputLocation.Validate();
-            gazetteerLocation.Validate();
+            if (!string.IsNullOrEmpty(location.Name1))
+            {
+                string main = locationNames.GetMainLevel1(location.Name1);
+                if (main == null)
+                {
+                    throw new ArgumentException(
+                        string.Format(
+                            "Location match not in in the gazetteer[{0}",
+                            location.Name1),
+                        "location");
+                }
+                location.Name1 = main;
+            }
+
+            if (!string.IsNullOrEmpty(location.Name2))
+            {
+                string main =
+                    locationNames.GetMainLevel2(location.Name1, location.Name2);
+                if (main == null)
+                {
+                    throw new ArgumentException(
+                        string.Format(
+                            "Location match not in in the gazetteer[{0}",
+                            location.Name2),
+                        "location");
+                }
+                location.Name2 = main;
+            }
+
+            if (!string.IsNullOrEmpty(location.Name3))
+            {
+                string main =
+                    locationNames.GetMainLevel3(
+                        location.Name1,
+                        location.Name2,
+                        location.Name3);
+                if (main == null)
+                {
+                    throw new ArgumentException(
+                        string.Format(
+                            "Location match not in in the gazetteer[{0}",
+                            location.Name3),
+                        "location");
+                }
+                location.Name3 = main;
+            }
+        }
+
+        private static void SubstituteAltInputName(
+            Location location,
+            LocationNames locationNames)
+        {
+            if (!string.IsNullOrEmpty(location.Name1))
+            {
+                string main = locationNames.GetMainLevel1(location.Name1);
+                if (!string.IsNullOrEmpty(main))
+                {
+                    location.Name1 = main;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(location.Name2))
+            {
+                string main = locationNames.GetMainLevel2(location.Name1, location.Name2);
+                if (!string.IsNullOrEmpty(main))
+                {
+                    location.Name2 = main;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(location.Name3))
+            {
+                string main = locationNames.GetMainLevel3(
+                    location.Name1,
+                    location.Name2,
+                    location.Name3);
+                if (!string.IsNullOrEmpty(main))
+                {
+                    location.Name3 = main;
+                }
+            }
+        }
+
+        private static void Validate(Location location)
+        {
+            // throw ex if location is invalid
+            location.Validate();
+        }
+
+        private static void ValidateMatch(MatchedName match, LocationNames locationNames)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            // We do not allow saved matches for input names that already exist in the gazetteer
+            // as this would result in conflicting information so throw ex if the input
+            // is not in the gazetteer and is not the same as the selection.
+            if (locationNames.IsInLevel1Names(match.InputLocation.Name1))
+            {
+                // The input value is in the gazetteer,
+                if (match.Level1NotSame())
+                {
+                    stringBuilder.Append(match.OriginalInput.Name1);
+                }
+            }
+
+            if (locationNames.IsInLevel2Names(
+                match.InputLocation.Name2,
+                match.InputLocation.Name1))
+            {
+                // The input value is in the gazetteer,
+                if (match.Level2NotSame())
+                {
+                    stringBuilder.Append(match.OriginalInput.Name2);
+                }
+            }
+
+            if (locationNames.IsInLevel3Names(
+                match.InputLocation.Name3,
+                match.InputLocation.Name1,
+                match.InputLocation.Name2))
+            {
+                // The input value is in the gazetteer,
+                if (match.Level3NotSame())
+                {
+                    stringBuilder.Append(match.OriginalInput.Name3);
+                }
+            }
+            if (stringBuilder.Length > 0)
+            {
+                string message = string.Format(
+                    "Input name is already in the gazetteer, cannot save match: {0} ",
+                    stringBuilder);
+                throw new NameInGazetteerException(message);
+            }
         }
 
         private void SaveMatchLevel1(string alternateLevel1, string gazetteerLevel1)
@@ -320,6 +489,14 @@ namespace MultiLevelGeoCoder.Logic
                 gazetteerLevel1,
                 gazetteerLevel2,
                 gazetteerLevel3);
+        }
+
+        private void SubstituteMainForAltNames(
+            MatchedName match,
+            LocationNames locationNames)
+        {
+            SubstituteAltGazetteerName(match.GazetteerLocation, locationNames);
+            SubstituteAltInputName(match.InputLocation, locationNames);
         }
 
         #endregion Methods

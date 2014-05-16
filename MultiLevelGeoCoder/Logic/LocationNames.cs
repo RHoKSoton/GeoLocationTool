@@ -28,20 +28,6 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Methods
 
-        public static bool IsInLevel1Names(string inputName1, LocationNames locationNames)
-        {
-            if (String.IsNullOrEmpty(inputName1))
-            {
-                return false;
-            }
-
-            // check gazetteer names list
-            return locationNames.Level1AllLocationNames()
-                .Contains(
-                    inputName1,
-                    StringComparer.InvariantCultureIgnoreCase);
-        }
-
         public string GetMainLevel1(string level1)
         {
             string name = IsLevel1MainName(level1)
@@ -64,6 +50,20 @@ namespace MultiLevelGeoCoder.Logic
                 ? level3
                 : Level3MainName(level1, level2, level3);
             return name;
+        }
+
+        public bool IsInLevel1Names(string inputName1)
+        {
+            if (String.IsNullOrEmpty(inputName1))
+            {
+                return false;
+            }
+
+            // check gazetteer names list
+            return Level1AllLocationNames()
+                .Contains(
+                    inputName1,
+                    StringComparer.InvariantCultureIgnoreCase);
         }
 
         public bool IsInLevel2Names(
