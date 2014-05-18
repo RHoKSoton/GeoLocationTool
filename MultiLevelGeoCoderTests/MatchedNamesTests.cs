@@ -436,7 +436,7 @@ namespace MultiLevelGeoCoderTests
         }
 
         // Given a matched input to save (Rule 2)
-        // When input level 1 is blank
+        // When input contains blank level 2 but contains a value for a lower level
         // Then an IncompleteLocationException is thrown
         [TestMethod]
         [ExpectedException(typeof (IncompleteLocationException))]
@@ -445,6 +445,42 @@ namespace MultiLevelGeoCoderTests
             // Arrange
             const string inputName1 = ""; // invalid
             const string inputName2 = "T1x";
+            const string inputName3 = "V1x";
+            const string gazName1 = "P1";
+            const string gazName2 = "T1";
+            const string gazName3 = "V1";
+
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData.TestData1());
+
+            // no existing saved matches
+            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
+
+            // input
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer-
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            // exception thrown
+        }
+
+
+        // Given a matched input to save (Rule 2)
+        // When input contains blank level 1 but contains a value for a lower level
+        // Then an IncompleteLocationException is thrown
+        [TestMethod]
+        [ExpectedException(typeof(IncompleteLocationException))]
+        public void SaveMatch_InputLevel2IsBlank_ExceptionThrown()
+        {
+            // Arrange
+            const string inputName1 = "P1";
+            const string inputName2 = "";  // invalid
             const string inputName3 = "V1x";
             const string gazName1 = "P1";
             const string gazName2 = "T1";

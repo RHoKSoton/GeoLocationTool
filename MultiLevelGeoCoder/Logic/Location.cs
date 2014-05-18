@@ -3,6 +3,8 @@
 namespace MultiLevelGeoCoder.Logic
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     /// <summary>
@@ -58,25 +60,35 @@ namespace MultiLevelGeoCoder.Logic
 
         public void Validate()
         {
-            StringBuilder message = new StringBuilder();
+            // name if present must have value at all higher levels
+            List<int> missing = new List<int>();
 
-            // a location must have a level 1
-            if (string.IsNullOrEmpty(Name1))
+            if (!string.IsNullOrEmpty(Name3))
             {
-                message.Append("Missing level 1");
-
-                // name if present must have value at all higher levels
-                if (!string.IsNullOrEmpty(Name3))
+                if (string.IsNullOrEmpty(Name2))
                 {
-                    if (string.IsNullOrEmpty(Name2))
-                    {
-                        message.Append("Missing level 2");
-                    }
+                    missing.Add(2);
+                }
+                if (string.IsNullOrEmpty(Name1))
+                {
+                    missing.Add(1);
                 }
             }
-            if (message.Length > 0)
+
+            if (!string.IsNullOrEmpty(Name2))
             {
-                throw new IncompleteLocationException(message.ToString());
+                if (string.IsNullOrEmpty(Name1))
+                {
+                    missing.Add(1);
+                }
+            }
+       
+            if (missing.Count > 0)
+            {
+                missing.Sort();
+                string message = "Incomplete location. Missing level(s): " +
+                                  string.Join(", ", missing.Distinct());
+                throw new IncompleteLocationException(message);
             }
         }
 
