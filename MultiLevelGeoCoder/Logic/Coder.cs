@@ -1,19 +1,18 @@
-﻿// LocationCodes.cs
+﻿// Coder.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DataAccess;
     using Model;
 
     /// <summary>
-    /// Provides the location codes where there are matches in the gazetteer data
+    /// Finds the location codes where from the names in the gazetteer data
     /// using either the given names or the previously matched names in the database
     /// Contains the main search algorithm.
     /// </summary>
-    internal class LocationCodes
+    internal class Coder
     {
         #region Fields
 
@@ -26,7 +25,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Constructors
 
-        public LocationCodes(
+        public Coder(
             IEnumerable<GazetteerRecord> gazzetteerData,
             IMatchProvider matchProvider)
         {

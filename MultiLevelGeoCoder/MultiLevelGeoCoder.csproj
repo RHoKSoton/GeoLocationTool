@@ -79,7 +79,7 @@
     <Compile Include="Logic\InputColumnNames.cs" />
     <Compile Include="Logic\InputData.cs" />
     <Compile Include="Logic\GazetteerData.cs" />
-    <Compile Include="Logic\LocationCodes.cs" />
+    <Compile Include="Logic\Coder.cs" />
     <Compile Include="GeoCoder.cs" />
     <Compile Include="Logic\GazetteerRecord.cs" />
     <Compile Include="Logic\Location.cs" />

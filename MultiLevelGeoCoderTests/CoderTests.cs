@@ -1,4 +1,4 @@
-﻿// LocationCodesTests.cs
+﻿// CoderTests.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -6,11 +6,11 @@ namespace MultiLevelGeoCoderTests
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
-    /// Exercises the LocationCodes class, in particular it tests that the 
+    /// Exercises the Coder class, in particular it tests that the 
     /// correct codes are generated for a given location using only the gazetteer data
     /// </summary>
     [TestClass]
-    public class LocationCodesTests
+    public class CoderTests
     {
         #region Fields
 
@@ -48,12 +48,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1 and 2 only are added, no level 3 code added
@@ -89,12 +89,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             //  level 1 codes added only
@@ -126,12 +126,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
@@ -164,12 +164,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // level 1 and 2 codes added, no level 3
@@ -200,12 +200,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // level 1 code only added
@@ -238,12 +238,12 @@ namespace MultiLevelGeoCoderTests
             // no saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // no codes added

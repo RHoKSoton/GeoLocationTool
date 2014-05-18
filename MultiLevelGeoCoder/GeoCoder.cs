@@ -24,7 +24,7 @@ namespace MultiLevelGeoCoder
         private GazetteerData gazetteerData;
         private string gazetteerFileName;
         private InputData inputData;
-        private LocationCodes locationCodes;
+        private Coder coder;
         private LocationNames locationNames;
         private IMatchProvider matchProvider;
 
@@ -88,7 +88,7 @@ namespace MultiLevelGeoCoder
         /// </summary>
         public void AddAllLocationCodes()
         {
-            inputData.CodeAll(locationCodes);
+            inputData.CodeAll(coder);
             MatchSaved = false;
         }
 
@@ -99,7 +99,7 @@ namespace MultiLevelGeoCoder
         /// <returns>Location with codes added where found.</returns>
         public CodedLocation AddLocationCodes(Location location)
         {
-            return locationCodes.GetCodes(location);
+            return coder.GetCodes(location);
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace MultiLevelGeoCoder
             bool saveSelection = true)
         {
             gazetteerData.ColumnNames = columnNames;
-            locationCodes = new LocationCodes(gazetteerData.LocationList, matchProvider);
+            coder = new Coder(gazetteerData.LocationList, matchProvider);
             locationNames = new LocationNames(gazetteerData.LocationList);
 
             if (saveSelection)

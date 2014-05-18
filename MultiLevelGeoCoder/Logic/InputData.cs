@@ -110,14 +110,14 @@ namespace MultiLevelGeoCoder.Logic
         /// <summary>
         /// Adds the codes and the names used to find those codes, to the input data.
         /// </summary>
-        /// <param name="locationCodes">The location codes.</param>
-        public void CodeAll(LocationCodes locationCodes)
+        /// <param name="coder">The location codes.</param>
+        public void CodeAll(Coder coder)
         {
-            locationCodes.RefreshMatchedNamesCache();
+            coder.RefreshMatchedNamesCache();
             foreach (DataRow dataRow in Data.Rows)
             {
                 CodedLocation codedLocation = FindCodes(
-                    locationCodes,
+                    coder,
                     dataRow,
                     UseMatchedNamesCache);
                 ClearExistingCodes(dataRow);
@@ -283,7 +283,7 @@ namespace MultiLevelGeoCoder.Logic
         }
 
         private CodedLocation FindCodes(
-            LocationCodes locationCodes,
+            Coder coder,
             DataRow dataRow,
             bool useCache)
         {
@@ -307,7 +307,7 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             // get codes
-            CodedLocation codedLocation = locationCodes.GetCodes(location, useCache);
+            CodedLocation codedLocation = coder.GetCodes(location, useCache);
             return codedLocation;
         }
 

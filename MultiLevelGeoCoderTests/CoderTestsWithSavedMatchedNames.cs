@@ -1,4 +1,4 @@
-﻿// LocationCodesTestsWithSavedMatchedNames.cs
+﻿// CoderTestsWithSavedMatchedNames.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -6,12 +6,12 @@ namespace MultiLevelGeoCoderTests
     using MultiLevelGeoCoder.Logic;
 
     /// <summary>
-    /// Exercises the LocationCodes class, in particular it tests that the 
+    /// Exercises the Coder class, in particular it tests that the 
     /// correct codes are applied to a given location using the gazetteer data
     /// and existing matched names
     /// </summary>
     [TestClass]
-    public class LocationCodesTestsWithSavedMatchedNames
+    public class CoderTestsWithSavedMatchedNames
     {
         #region Fields
 
@@ -49,12 +49,12 @@ namespace MultiLevelGeoCoderTests
             // saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel3(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
@@ -90,12 +90,12 @@ namespace MultiLevelGeoCoderTests
             //saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel2(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
@@ -131,12 +131,12 @@ namespace MultiLevelGeoCoderTests
             // saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel1(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
@@ -171,12 +171,12 @@ namespace MultiLevelGeoCoderTests
             // saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel2(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added
@@ -211,12 +211,12 @@ namespace MultiLevelGeoCoderTests
             // saved matches
             MatchProviderStub matchProviderStub = MatchProviderStubLevel3(inputNames);
 
-            LocationCodes locationCodes = new LocationCodes(
+            Coder coder = new Coder(
                 gazetteerRecords.GadmList(),
                 matchProviderStub.MatchProvider());
 
             // Act
-            CodedLocation codedLocation = locationCodes.GetCodes(location);
+            CodedLocation codedLocation = coder.GetCodes(location);
 
             // Assert
             // code 1, 2 and 3 codes added

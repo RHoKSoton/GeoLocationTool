@@ -1,4 +1,4 @@
-﻿// MatchedNamesSaveTests.cs
+﻿// MatchedNamesTests.cs
 
 namespace MultiLevelGeoCoderTests
 {
@@ -14,7 +14,7 @@ namespace MultiLevelGeoCoderTests
     /// location
     /// </summary>
     [TestClass]
-    public class MatchedNamesSaveTests
+    public class MatchedNamesTests
     {
         #region Methods
 
