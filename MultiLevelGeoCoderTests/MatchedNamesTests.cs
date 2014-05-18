@@ -470,40 +470,54 @@ namespace MultiLevelGeoCoderTests
             // exception thrown
         }
 
-
-        // Given a matched input to save (Rule 2)
-        // When input contains blank level 1 but contains a value for a lower level
-        // Then an IncompleteLocationException is thrown
+        // Given a matched input to save (Rule 3)
+        // When input level 2 and 3 value is blank
+        // Then save is only called for level1
         [TestMethod]
-        [ExpectedException(typeof(IncompleteLocationException))]
-        public void SaveMatch_InputLevel2IsBlank_ExceptionThrown()
+        public void SaveMatch_InputLevel1IsBlank_NotSaved()
         {
             // Arrange
-            const string inputName1 = "P1";
-            const string inputName2 = "";  // invalid
-            const string inputName3 = "V1x";
+            const string inputName1 = "";
+            const string inputName2 = "";
+            const string inputName3 = "";
             const string gazName1 = "P1";
             const string gazName2 = "T1";
             const string gazName3 = "V1";
 
+            // Arrange
             // gazetteer data - use test data 1
             LocationNames locationNames = new LocationNames(
                 GazetteerTestData.TestData1());
 
-            // no existing saved matches
-            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
+            //match provider
+            var mock = MockRepository.GenerateMock<IMatchProvider>();
+            MatchedNames matchedNames = new MatchedNames(mock);
 
             // input
             Location inputLocation = new Location(inputName1, inputName2, inputName3);
 
-            // match from gazetteer-
+            // match from gazetteer
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
             matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
 
             // Assert
-            // exception thrown
+            mock.AssertWasNotCalled(
+                x => x.SaveMatchLevel1(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel2(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
+            mock.AssertWasNotCalled(
+                x =>
+                    x.SaveMatchLevel3(
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything,
+                        Arg<string>.Is.Anything));
         }
 
         // Given a matched input to save (Rule 11)
@@ -608,6 +622,41 @@ namespace MultiLevelGeoCoderTests
 
             // Assert
             AssertNoSavesCalled(mock);
+        }
+
+        // Given a matched input to save (Rule 2)
+        // When input contains blank level 1 but contains a value for a lower level
+        // Then an IncompleteLocationException is thrown
+        [TestMethod]
+        [ExpectedException(typeof (IncompleteLocationException))]
+        public void SaveMatch_InputLevel2IsBlank_ExceptionThrown()
+        {
+            // Arrange
+            const string inputName1 = "P1";
+            const string inputName2 = ""; // invalid
+            const string inputName3 = "V1x";
+            const string gazName1 = "P1";
+            const string gazName2 = "T1";
+            const string gazName3 = "V1";
+
+            // gazetteer data - use test data 1
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData.TestData1());
+
+            // no existing saved matches
+            MatchedNames matchedNames = new MatchedNames(MatchProviderStub.EmptyStub());
+
+            // input
+            Location inputLocation = new Location(inputName1, inputName2, inputName3);
+
+            // match from gazetteer-
+            Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
+
+            // Act
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+
+            // Assert
+            // exception thrown
         }
 
         // Given a matched input to save (Rule 3)

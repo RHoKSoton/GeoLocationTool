@@ -5,7 +5,6 @@ namespace MultiLevelGeoCoder.Logic
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// Simple structure holding location names
@@ -82,12 +81,12 @@ namespace MultiLevelGeoCoder.Logic
                     missing.Add(1);
                 }
             }
-       
+
             if (missing.Count > 0)
             {
                 missing.Sort();
                 string message = "Incomplete location. Missing level(s): " +
-                                  string.Join(", ", missing.Distinct());
+                                 string.Join(", ", missing.Distinct());
                 throw new IncompleteLocationException(message);
             }
         }
