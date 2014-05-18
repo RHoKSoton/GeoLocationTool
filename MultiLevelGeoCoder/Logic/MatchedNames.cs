@@ -81,7 +81,7 @@ namespace MultiLevelGeoCoder.Logic
             LocationNames locationNames)
         {
             Validate(inputLocation);
-            //Validate(gazetteerLocation);
+            Validate(gazetteerLocation);
             MatchedName match = new MatchedName(inputLocation, gazetteerLocation);
 
             // Don't save alts to the db
