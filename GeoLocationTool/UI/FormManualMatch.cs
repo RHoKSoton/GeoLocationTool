@@ -378,9 +378,9 @@ namespace GeoLocationTool.UI
                 List<KeyValuePair<string, string>> suggestionList =
                     FormatSuggestionList(savedMatch, suggestions, addBlank);
 
-                cboLevel1Suggestion.DataSource = suggestionList;
                 cboLevel1Suggestion.DisplayMember = "Value";
                 cboLevel1Suggestion.ValueMember = "Key";
+                cboLevel1Suggestion.DataSource = suggestionList;             
             }
         }
 
@@ -447,9 +447,9 @@ namespace GeoLocationTool.UI
                     List<KeyValuePair<string, string>> suggestionList =
                         FormatSuggestionList(savedMatch, suggestions, addBlank);
 
-                    cboLevel2Suggestion.DataSource = suggestionList;
                     cboLevel2Suggestion.DisplayMember = "Value";
                     cboLevel2Suggestion.ValueMember = "Key";
+                    cboLevel2Suggestion.DataSource = suggestionList;                   
                 }
             }
         }
@@ -522,9 +522,9 @@ namespace GeoLocationTool.UI
                     List<KeyValuePair<string, string>> suggestionList =
                         FormatSuggestionList(savedMatch, suggestions, addBlank);
 
-                    cboLevel3Suggestion.DataSource = suggestionList;
                     cboLevel3Suggestion.DisplayMember = "Value";
                     cboLevel3Suggestion.ValueMember = "Key";
+                    cboLevel3Suggestion.DataSource = suggestionList;                 
                 }
             }
         }
