@@ -36,9 +36,6 @@ namespace MultiLevelGeoCoder.Logic
 
         public Level1Match Level1Match(string match)
         {
-            //  note there should only ever be one actual name for the given match name
-            // todo we need to ensure that there is only one name possibility in the database
-
             return
                 level1Matches.FirstOrDefault(
                     x =>

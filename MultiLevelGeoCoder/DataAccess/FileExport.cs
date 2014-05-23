@@ -37,7 +37,6 @@ namespace MultiLevelGeoCoder.DataAccess
 
         private static string[] EscapeQuotes(IList<object> itemArray)
         {
-            // todo only quote the fields that need it
             string[] escaped = new string[itemArray.Count];
 
             for (int i = 0; i < itemArray.Count; i++)

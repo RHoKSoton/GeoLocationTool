@@ -127,7 +127,6 @@ namespace GeoLocationTool.UI
 
                 geoCoder.AddAllLocationCodes();
 
-                // todo refactor the disconnection and reconnection of the grids to make more robust
                 // reconect the data grids
                 DisplayRecords();
                 parentGrid.DataSource = geoCoder.InputData;
