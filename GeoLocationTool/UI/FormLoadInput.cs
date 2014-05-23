@@ -41,9 +41,9 @@ namespace GeoLocationTool.UI
         private void btnBack_Click(object sender, EventArgs e)
         {
             try
-            {
-                Owner.Show();
+            {                  
                 Hide();
+                Owner.Show();       
             }
             catch (Exception ex)
             {
