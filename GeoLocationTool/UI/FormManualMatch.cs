@@ -380,7 +380,7 @@ namespace GeoLocationTool.UI
 
                 cboLevel1Suggestion.DisplayMember = "Value";
                 cboLevel1Suggestion.ValueMember = "Key";
-                cboLevel1Suggestion.DataSource = suggestionList;             
+                cboLevel1Suggestion.DataSource = suggestionList;
             }
         }
 
@@ -449,7 +449,7 @@ namespace GeoLocationTool.UI
 
                     cboLevel2Suggestion.DisplayMember = "Value";
                     cboLevel2Suggestion.ValueMember = "Key";
-                    cboLevel2Suggestion.DataSource = suggestionList;                   
+                    cboLevel2Suggestion.DataSource = suggestionList;
                 }
             }
         }
@@ -524,7 +524,7 @@ namespace GeoLocationTool.UI
 
                     cboLevel3Suggestion.DisplayMember = "Value";
                     cboLevel3Suggestion.ValueMember = "Key";
-                    cboLevel3Suggestion.DataSource = suggestionList;                 
+                    cboLevel3Suggestion.DataSource = suggestionList;
                 }
             }
         }
@@ -739,10 +739,18 @@ namespace GeoLocationTool.UI
 
         private void SelectNextRow()
         {
-            // move to next row if all rows are displayed, if only unmatched are
-            // showing then the current row is removed so we dont need to explicitly move to the next
+            // move to next row if all rows are displayed, 
+            // if only unmatched are showing then the current row is removed 
+            // so we don't need to explicitly move to the next
             if (!chkUnmatchedOnly.Checked)
             {
+                if (dataGridView1.Rows.Count == selectedRowIndex + 1)
+                {
+                    // we are at the end
+                    return;
+                }
+
+                //move  to next row
                 dataGridView1.Rows[selectedRowIndex + 1].Selected = true;
             }
         }
