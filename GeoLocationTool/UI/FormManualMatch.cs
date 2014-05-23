@@ -280,16 +280,18 @@ namespace GeoLocationTool.UI
         }
 
         private IEnumerable<MatchResult> ConcatWithDistinct(
-            IEnumerable<MatchResult> a,
+            MatchResult matchResult,
             IEnumerable<MatchResult> b)
         {
+            List<MatchResult> a = new List<MatchResult>();
+            a.Add(matchResult);
             var set = new HashSet<string>(a.Select(x => x.Location.ToLower()));
             var list = a.ToList();
-            foreach (var fuzzyMatch in b)
+            foreach (var match in b)
             {
-                if (!set.Contains(fuzzyMatch.Location.ToLower()))
+                if (!set.Contains(match.Location.ToLower()))
                 {
-                    list.Add(fuzzyMatch);
+                    list.Add(match);
                 }
             }
             return list;
@@ -367,7 +369,7 @@ namespace GeoLocationTool.UI
             else
             {
                 // get any saved matched name
-                IEnumerable<MatchResult> savedMatch = geoCoder.GetSavedMatchLevel1(
+                MatchResult savedMatch = geoCoder.GetSavedMatchLevel1(
                     Level1Original());
 
                 //get suggestions
@@ -434,7 +436,7 @@ namespace GeoLocationTool.UI
                 else
                 {
                     // get any saved matched name
-                    IEnumerable<MatchResult> savedMatch =
+                    MatchResult savedMatch =
                         geoCoder.GetSavedMatchLevel2(level2, level1);
 
                     // get suggestions
@@ -508,7 +510,7 @@ namespace GeoLocationTool.UI
                 else
                 {
                     // get any saved matched name
-                    IEnumerable<MatchResult> savedMatch =
+                    MatchResult savedMatch =
                         geoCoder.GetSavedMatchLevel3(level3, level1, level2);
 
                     // get suggestions
@@ -596,14 +598,22 @@ namespace GeoLocationTool.UI
         }
 
         private List<KeyValuePair<string, string>> FormatSuggestionList(
-            IEnumerable<MatchResult> savedMatch,
+            MatchResult savedMatch,
             IEnumerable<MatchResult> suggestions,
             bool addBlank)
         {
-            // Add the saved match to the top of the suggestions list
-            var list = ConcatWithDistinct(
-                savedMatch,
-                suggestions).ToList();
+            IEnumerable<MatchResult> list;
+            if (savedMatch != null)
+            {
+                // Add the saved match to the top of the suggestions list
+                list = ConcatWithDistinct(
+                    savedMatch,
+                    suggestions).ToList();
+            }
+            else
+            {
+                list = suggestions;
+            }
 
             // format the list
             List<KeyValuePair<string, string>> formattedList =

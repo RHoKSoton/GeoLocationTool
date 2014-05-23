@@ -177,7 +177,7 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<MatchResult> GetSavedMatchLevel1(string level1)
+        public MatchResult GetSavedMatchLevel1(string level1)
         {
             return matchedNames.GetSavedMatchLevel1(level1);
         }
@@ -190,7 +190,7 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<MatchResult> GetSavedMatchLevel2(
+        public MatchResult GetSavedMatchLevel2(
             string level2,
             string level1)
         {
@@ -206,7 +206,7 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The saved match
         /// </returns>
-        public IEnumerable<MatchResult> GetSavedMatchLevel3(
+        public MatchResult GetSavedMatchLevel3(
             string level3,
             string level1,
             string level2)

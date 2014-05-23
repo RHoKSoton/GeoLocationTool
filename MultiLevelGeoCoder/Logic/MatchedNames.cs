@@ -32,47 +32,67 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Methods
 
-        public IEnumerable<MatchResult> GetSavedMatchLevel1(string level1)
+        public MatchResult GetSavedMatchLevel1(string level1)
         {
-            //todo change return type to single result
+            IEnumerable<Level1Match> matches = matchProvider.GetMatches(level1).ToList();
+            int count = matches.Count();
 
-            List<MatchResult> result = new List<MatchResult>();
-            Level1Match match = matchProvider.GetMatches(level1).FirstOrDefault();
-            if (match != null)
+            if (count > 1)
             {
-                result.Add(new MatchResult(match.Level1, match.Weight));
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}]",
+                    count,
+                    level1);
+                throw new InvalidOperationException(msg);
             }
-            return result;
+
+            Level1Match match = matches.FirstOrDefault();
+            return match != null ? new MatchResult(match.Level1, match.Weight) : null;
         }
 
-        public IEnumerable<MatchResult> GetSavedMatchLevel2(string level2, string level1)
+        public MatchResult GetSavedMatchLevel2(string level2, string level1)
         {
-            // todo change return type to single result
-
-            List<MatchResult> result = new List<MatchResult>();
-            Level2Match match = matchProvider.GetMatches(level2, level1).FirstOrDefault();
-            if (match != null)
+            IEnumerable<Level2Match> matches =
+                matchProvider.GetMatches(level2, level1).ToList();
+            int count = matches.Count();
+            if (count > 1)
             {
-                result.Add(new MatchResult(match.Level2, match.Weight));
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}] [{2}",
+                    count,
+                    level1,
+                    level2);
+                throw new InvalidOperationException(msg);
             }
-            return result;
+            Level2Match match = matches.FirstOrDefault();
+            return match != null ? new MatchResult(match.Level2, match.Weight) : null;
         }
 
-        public IEnumerable<MatchResult> GetSavedMatchLevel3(
+        public MatchResult GetSavedMatchLevel3(
             string level3,
             string level1,
             string level2)
         {
-            // todo change return type to single result
+            IEnumerable<Level3Match> matches =
+                matchProvider.GetMatches(level3, level1, level2).ToList();
+            int count = matches.Count();
 
-            List<MatchResult> result = new List<MatchResult>();
-            Level3Match match =
-                matchProvider.GetMatches(level3, level1, level2).FirstOrDefault();
-            if (match != null)
+            if (count > 1)
             {
-                result.Add(new MatchResult(match.Level3, match.Weight));
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}] [{2}],[{3}]",
+                    count,
+                    level1,
+                    level2,
+                    level3);
+                throw new InvalidOperationException(msg);
             }
-            return result;
+
+            Level3Match match = matches.FirstOrDefault();
+            return match != null ? new MatchResult(match.Level3, match.Weight) : null;
         }
 
         public void SaveMatch(
