@@ -3,18 +3,14 @@
 namespace MultiLevelGeoCoder.DataAccess
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Data.OleDb;
-    using System.Globalization;
     using System.IO;
-    using System.Linq;
     using CsvHelper;
 
     /// <summary>
     /// Helper class to read data from file.
     /// </summary>
-    public class FileImport
+    internal class FileImport
     {
         #region Methods
 
