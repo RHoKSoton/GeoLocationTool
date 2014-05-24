@@ -21,7 +21,6 @@ namespace MultiLevelGeoCoderTests
         // we dont care about the codes for these tests
         private static readonly string[] Codes0 = {"0", "0", "0"};
 
-        // todo add the codes in here and use for all the tests?
         private static readonly string[] Names1 = {"P1", "T1", "V1"};
         private static readonly string[] Names2 = {"P1", "T1", "V2"};
         private static readonly string[] Names3 = {"P2", "T2", "V1"};

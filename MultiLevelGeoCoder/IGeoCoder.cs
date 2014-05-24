@@ -174,11 +174,11 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
+        /// <param name="saveSelection">If true, the selected column names are saved to the database</param>
         void SetGazetteerColumns(
             GazetteerColumnNames columnNames,
             bool saveSelection = true);
 
-        //todo remove the  version with the save selection parameter from the public api as this is only for the tests
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
         /// </summary>

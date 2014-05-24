@@ -288,8 +288,8 @@ namespace MultiLevelGeoCoder
         /// <param name="path">The path.</param>
         public void LoadGazetteerFile(string path)
         {
+            // first row must always be header
             const bool isFirstRowHeader = true;
-            // todo remove as first row is always header
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
             gazetteerData = new GazetteerData(dt);
             gazetteerFileName = path;
@@ -301,6 +301,7 @@ namespace MultiLevelGeoCoder
         /// <param name="path">The path.</param>
         public void LoadInputFileCsv(string path)
         {
+            // first row must always be header
             const bool isFirstRowHeader = true;
             DataTable dt = FileImport.ReadCsvFile(path, isFirstRowHeader);
             inputData = new InputData(dt);
@@ -374,6 +375,7 @@ namespace MultiLevelGeoCoder
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
         /// <param name="columnNames">The column names.</param>
+        /// <param name="saveSelection">If true, the selected column names are saved to the database</param>
         public void SetGazetteerColumns(
             GazetteerColumnNames columnNames,
             bool saveSelection = true)
@@ -434,7 +436,7 @@ namespace MultiLevelGeoCoder
 
         private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)
         {
-            // todo review the code duplication between GazetteerColumnNames and GazetteerColumnsMapping2 classes
+            // todo review the code duplication between GazetteerColumnNames and GazetteerColumnsMapping classes
             columnsMappingProvider.SaveGazetteerColumnsMapping(
                 new GazetteerColumnsMapping
                 {
