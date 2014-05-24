@@ -2,6 +2,7 @@
 
 namespace MultiLevelGeoCoder.Logic
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using DataAccess;
@@ -16,10 +17,10 @@ namespace MultiLevelGeoCoder.Logic
     {
         #region Fields
 
+        private readonly GazetteerDataDictionaries dictionary;
         private readonly IEnumerable<GazetteerRecord> gazzetteerData;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
-        private readonly GazetteerDataDictionaries dictionary;
 
         #endregion Fields
 
@@ -104,12 +105,8 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-
             location.GeoCode1 = dictionary.GetLevel1Code(
                 location.Name1);
-
-
-
         }
 
         private void Level1UsingMatchedName(CodedLocation location, bool useCache)
@@ -127,11 +124,7 @@ namespace MultiLevelGeoCoder.Logic
             }
             else
             {
-                IEnumerable<Level1Match> matches =
-                    matchProvider.GetMatches(location.Name1);
-                //  note there should only ever be one actual name for the given alt name
-                // todo we need to ensure that there is only one name possibility in the database
-                match = matches.FirstOrDefault();
+                match = SavedLevel1Match(location);
             }
 
             if (match != null)
@@ -149,13 +142,9 @@ namespace MultiLevelGeoCoder.Logic
                 return;
             }
 
-
             location.GeoCode2 = dictionary.GetLevel2Code(
                 location.GeoCode1.Name,
                 location.Name2);
-
-
-
         }
 
         private void Level2UsingMatchedName(CodedLocation location, bool useCache)
@@ -175,11 +164,7 @@ namespace MultiLevelGeoCoder.Logic
             }
             else
             {
-                IEnumerable<Level2Match> nearMatches =
-                    matchProvider.GetMatches(location.Name2, location.GeoCode1.Name);
-                //  note there should only ever be one actual name for the given alt name
-                // todo we need to ensure that there is only one name posibility in the database
-                match = nearMatches.FirstOrDefault();
+                match = SavedLevel2Match(location);
             }
 
             if (match != null)
@@ -201,7 +186,6 @@ namespace MultiLevelGeoCoder.Logic
                 location.GeoCode1.Name,
                 location.GeoCode2.Name,
                 location.Name3);
-
         }
 
         private void Level3UsingMatchedName(CodedLocation location, bool useCache)
@@ -222,14 +206,7 @@ namespace MultiLevelGeoCoder.Logic
             }
             else
             {
-                IEnumerable<Level3Match> nearMatches =
-                    matchProvider.GetMatches(
-                        location.Name3,
-                        location.GeoCode1.Name,
-                        location.GeoCode2.Name);
-                //  note there should only ever be one actual name for the given alt name
-                // todo we need to ensure that there is only one name posibility in the database
-                match = nearMatches.FirstOrDefault();
+                match = SavedLevel3Match(location);
             }
 
             if (match != null)
@@ -238,6 +215,67 @@ namespace MultiLevelGeoCoder.Logic
                 location.Name3 = match.Level3;
                 Level3UsingGazetteer(location);
             }
+        }
+
+        private Level1Match SavedLevel1Match(CodedLocation location)
+        {
+            IEnumerable<Level1Match> matches =
+                matchProvider.GetMatches(location.Name1).ToList();
+            int count = matches.Count();
+            if (count > 1)
+            {
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}]",
+                    count,
+                    location.Name1);
+                throw new InvalidOperationException(msg);
+            }
+            Level1Match match = matches.FirstOrDefault();
+            return match;
+        }
+
+        private Level2Match SavedLevel2Match(CodedLocation location)
+        {
+            IEnumerable<Level2Match> matches =
+                matchProvider.GetMatches(location.Name2, location.GeoCode1.Name).ToList();
+            int count = matches.Count();
+            if (count > 1)
+            {
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}] [{2}",
+                    count,
+                    location.GeoCode1.Name,
+                    location.Name2);
+                throw new InvalidOperationException(msg);
+            }
+            Level2Match match = matches.FirstOrDefault();
+            return match;
+        }
+
+        private Level3Match SavedLevel3Match(CodedLocation location)
+        {
+            IEnumerable<Level3Match> matches =
+                matchProvider.GetMatches(
+                    location.Name3,
+                    location.GeoCode1.Name,
+                    location.GeoCode2.Name).ToList();
+            int count = matches.Count();
+
+            if (count > 1)
+            {
+                // there must only be a max of one saved match for any given input.
+                var msg = string.Format(
+                    "[{0}] matched names found for the input [{1}] [{2}],[{3}]",
+                    count,
+                    location.GeoCode1.Name,
+                    location.GeoCode2.Name,
+                    location.Name3);
+                throw new InvalidOperationException(msg);
+            }
+            Level3Match match = matches.FirstOrDefault();
+            return match;
         }
 
         #endregion Methods
