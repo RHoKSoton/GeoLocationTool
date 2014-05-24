@@ -19,6 +19,9 @@ namespace MultiLevelGeoCoder.Logic
 
         private readonly IMatchProvider matchProvider;
 
+        private const int DefaultProbability = 2;
+            // this is to indicate to the users that a match that has come from the db 
+
         #endregion Fields
 
         #region Constructors
@@ -48,7 +51,9 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             Level1Match match = matches.FirstOrDefault();
-            return match != null ? new MatchResult(match.Level1, match.Weight) : null;
+            return match != null
+                ? new MatchResult(match.Level1, DefaultProbability)
+                : null;
         }
 
         public MatchResult GetSavedMatchLevel2(string level2, string level1)
@@ -67,7 +72,9 @@ namespace MultiLevelGeoCoder.Logic
                 throw new InvalidOperationException(msg);
             }
             Level2Match match = matches.FirstOrDefault();
-            return match != null ? new MatchResult(match.Level2, match.Weight) : null;
+            return match != null
+                ? new MatchResult(match.Level2, DefaultProbability)
+                : null;
         }
 
         public MatchResult GetSavedMatchLevel3(
@@ -92,7 +99,9 @@ namespace MultiLevelGeoCoder.Logic
             }
 
             Level3Match match = matches.FirstOrDefault();
-            return match != null ? new MatchResult(match.Level3, match.Weight) : null;
+            return match != null
+                ? new MatchResult(match.Level3, DefaultProbability)
+                : null;
         }
 
         public void SaveMatch(

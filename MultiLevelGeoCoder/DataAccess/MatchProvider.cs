@@ -58,7 +58,7 @@ namespace MultiLevelGeoCoder.DataAccess
         {
             return sqlConnection.Query<Level1Match>(
                 @"SELECT * FROM Level1Matches
-                    WHERE AltLevel1=@alternateName ORDER BY Weight DESC",
+                    WHERE AltLevel1=@alternateName",
                 new {alternateName}
                 );
         }
@@ -69,7 +69,7 @@ namespace MultiLevelGeoCoder.DataAccess
         {
             return sqlConnection.Query<Level2Match>(
                 @"SELECT * FROM Level2Matches
-                    WHERE AltLevel2=@alternateName AND Level1=@level1 ORDER BY Weight DESC",
+                    WHERE AltLevel2=@alternateName AND Level1=@level1",
                 new {alternateName, level1}
                 );
         }
@@ -81,7 +81,7 @@ namespace MultiLevelGeoCoder.DataAccess
         {
             return sqlConnection.Query<Level3Match>(
                 @"SELECT * FROM Level3Matches
-                    WHERE AltLevel3=@alternateName AND Level1=@level1 AND Level2=@level2 ORDER BY Weight DESC",
+                    WHERE AltLevel3=@alternateName AND Level1=@level1 AND Level2=@level2",
                 new {alternateName, level1, level2}
                 );
         }
@@ -96,8 +96,8 @@ namespace MultiLevelGeoCoder.DataAccess
             if (guid == Guid.Empty)
             {
                 sqlConnection.Execute(
-                    @"INSERT INTO Level1Matches (Id, Level1, AltLevel1, Weight)
-                                    VALUES (newid(), @level1, @alternateName, 2)",
+                    @"INSERT INTO Level1Matches (Id, Level1, AltLevel1)
+                                    VALUES (newid(), @level1, @alternateName)",
                     new {level1, alternateName});
             }
             else
@@ -119,8 +119,8 @@ namespace MultiLevelGeoCoder.DataAccess
             if (guid == Guid.Empty)
             {
                 sqlConnection.Execute(
-                    @"INSERT INTO Level2Matches (Id, Level1, Level2, AltLevel2, Weight)
-                                    VALUES (newid(), @level1, @level2, @alternateName, 2)",
+                    @"INSERT INTO Level2Matches (Id, Level1, Level2, AltLevel2)
+                                    VALUES (newid(), @level1, @level2, @alternateName)",
                     new {alternateName, level1, level2});
             }
             else
@@ -147,8 +147,8 @@ namespace MultiLevelGeoCoder.DataAccess
             if (guid == Guid.Empty)
             {
                 sqlConnection.Execute(
-                    @"INSERT INTO Level3Matches (Id, Level1, Level2, Level3, AltLevel3, Weight)
-                                    VALUES (newid(), @level1, @level2, @level3, @alternateName, 2)",
+                    @"INSERT INTO Level3Matches (Id, Level1, Level2, Level3, AltLevel3)
+                                    VALUES (newid(), @level1, @level2, @level3, @alternateName)",
                     new {alternateName, level1, level2, level3});
             }
             else

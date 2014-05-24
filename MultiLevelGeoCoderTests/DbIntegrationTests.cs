@@ -106,7 +106,6 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(1, matches.Count());
             var match = matches.Single();
             Assert.AreEqual("level3", match.Level3);
-            Assert.AreEqual(2, match.Weight);
         }
 
         [TestMethod]
