@@ -16,7 +16,7 @@ namespace GeoLocationTool.UI
     {
         #region Fields
 
-        private readonly IGeoCoder geoCoder = new GeoCoder();
+        private readonly IGeoCoder geoCoder;
 
         private FormLoadInput formLoadData;
 
@@ -34,6 +34,7 @@ namespace GeoLocationTool.UI
             InitializeComponent();
             try
             {
+                geoCoder = new GeoCoder();
                 if (args != null && args.Length >= 1)
                 {
                     string path = args[0];
