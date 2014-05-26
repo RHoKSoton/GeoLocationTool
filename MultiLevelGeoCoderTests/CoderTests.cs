@@ -17,12 +17,92 @@ namespace MultiLevelGeoCoderTests
         //correct data
         private readonly string[] codes1 = {"1", "10", "100"};
         private readonly string[] codes2 = {"2", "20", "200"};
+        private readonly string[] codes3 = {"3", "30", "300"};
+        private readonly string[] codes4 = {"1", "40", "400"};
         private readonly string[] names1 = {"P1", "T1", "V1"};
         private readonly string[] names2 = {"P2", "T2", "V2"};
+        private readonly string[] names3 = {"P1T", "1", "V1"};
+        private readonly string[] names4 = {"P1", "T1V", "1"};
 
         #endregion Fields
 
         #region Methods
+
+        /// <summary>
+        /// Given a valid location
+        /// When the the gazetteer contains records where the combination of level 1 
+        /// and level 2 name is duplicated i.e."P1T", "1" and "P1", "T1"
+        /// then the correct codes are added
+        /// </summary>
+        [TestMethod]
+        public void
+            GetLocationCodes_GazContainsDuplicateCombinedLevel1And2_CorrectCodesAdded()
+        {
+            // Arrange
+            // gazetteer data
+            GazetteerRecords gazetteerRecords = GazetteerTestData();
+
+            // input data -
+            string[] inputNames = {"P1T", "1", "V1"}; // names 3
+            Location location = new Location(
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
+
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
+
+            Coder coder = new Coder(
+                gazetteerRecords.GadmList(),
+                matchProviderStub.MatchProvider());
+
+            // Act
+            CodedLocation codedLocation = coder.GetCodes(location);
+
+            // Assert
+            // correct codes added (codes 3)
+            Assert.AreEqual(codes3[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(codes3[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(codes3[2], codedLocation.GeoCode3.Code);
+        }
+
+        /// <summary>
+        /// Given a valid location
+        /// When the the gazetteer contains records where the combination of level 2 
+        /// and level 3 name is duplicated i.e."P1", "T1V", "1" and "P1", "T1", "V1"
+        /// then the correct codes are added
+        /// </summary>
+        [TestMethod]
+        public void
+            GetLocationCodes_GazContainsDuplicateCombinedLevel2And3_CorrectCodesAdded()
+        {
+            // Arrange
+            // gazetteer data
+            GazetteerRecords gazetteerRecords = GazetteerTestData();
+
+            // input data -
+            string[] inputNames = {"P1", "T1V", "1"}; // names 4
+            Location location = new Location(
+                inputNames[0],
+                inputNames[1],
+                inputNames[2]);
+
+            // no saved matches
+            MatchProviderStub matchProviderStub = MatchProviderStubEmpty(inputNames);
+
+            Coder coder = new Coder(
+                gazetteerRecords.GadmList(),
+                matchProviderStub.MatchProvider());
+
+            // Act
+            CodedLocation codedLocation = coder.GetCodes(location);
+
+            // Assert
+            // correct codes added (codes 4)
+            Assert.AreEqual(codes4[0], codedLocation.GeoCode1.Code);
+            Assert.AreEqual(codes4[1], codedLocation.GeoCode2.Code);
+            Assert.AreEqual(codes4[2], codedLocation.GeoCode3.Code);
+        }
 
         /// <summary>
         /// Given a location with level 1, 2 and 3 names present 
@@ -63,7 +143,6 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(names1[1], codedLocation.GeoCode2.Name);
             Assert.AreEqual(null, codedLocation.GeoCode3);
         }
-
 
         /// <summary>
         /// Given a location with level 1, 2 and 3 names present
@@ -257,6 +336,8 @@ namespace MultiLevelGeoCoderTests
             GazetteerRecords gazetteerRecords = new GazetteerRecords();
             gazetteerRecords.AddLine(names1, codes1);
             gazetteerRecords.AddLine(names2, codes2);
+            gazetteerRecords.AddLine(names3, codes3);
+            gazetteerRecords.AddLine(names4, codes4);
             return gazetteerRecords;
         }
 
