@@ -134,6 +134,7 @@ namespace GeoLocationTool.UI
 
                 // highlight the remembered row
                 HighlightCurrentRow(selectedIndex);
+                DisplaySelectedRecord();
             }
             catch (Exception ex)
             {
