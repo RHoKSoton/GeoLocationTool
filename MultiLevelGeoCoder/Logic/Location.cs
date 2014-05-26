@@ -11,6 +11,10 @@ namespace MultiLevelGeoCoder.Logic
     /// </summary>
     public class Location
     {
+        private string name1;
+        private string name2;
+        private string name3;
+
         #region Constructors
 
         public Location(string name1, string name2 = "", string name3 = "")
@@ -28,11 +32,23 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Properties
 
-        public string Name1 { get; set; }
+        public string Name1
+        {
+            get { return name1; }
+            set { name1 = value.Trim(); }
+        }
 
-        public string Name2 { get; set; }
+        public string Name2
+        {
+            get { return name2; }
+            set { name2 = value.Trim(); }
+        }
 
-        public string Name3 { get; set; }
+        public string Name3
+        {
+            get { return name3; }
+            set { name3 = value.Trim(); }
+        }
 
         #endregion Properties
 

@@ -16,6 +16,24 @@ namespace MultiLevelGeoCoderTests
         #region Methods
 
         /// <summary>
+        /// When gazetteer contains records with entries containing leading or trailing spaces
+        /// Then list should exclude the leading and trailing spaces
+        /// </summary>
+        [TestMethod]
+        public void Level1AllLocationNames_LeadingAndTrailingSpacesRemoved()
+        {
+            // arrange
+            LocationNames locationNames = new LocationNames(
+                GazetteerTestData.TestData1());
+            // act
+            IList<string> result = locationNames.Level1AllLocationNames();
+            // assert
+            // no leading or trailing spaces
+            Assert.IsFalse(result.Any(x => x.StartsWith(" ")));
+            Assert.IsFalse(result.Any(x => x.EndsWith(" ")));
+        }
+
+        /// <summary>
         /// When gazetteer contains records with empty string alternate entries
         /// Then list should exclude the empty strings
         /// </summary>

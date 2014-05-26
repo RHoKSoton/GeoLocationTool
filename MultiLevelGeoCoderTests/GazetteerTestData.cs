@@ -29,6 +29,7 @@ namespace MultiLevelGeoCoderTests
         private static readonly string[] Names6 = {"P1", "T2", "V1"};
         private static readonly string[] Names7 = {"P1", "T2", "V4"};
         private static readonly string[] Names8 = {"P2", "T1", "V2"};
+        private static readonly string[] Names9 = { " P3 ", " T3 ", " V3 " };
 
         #endregion Fields
 
@@ -53,6 +54,8 @@ namespace MultiLevelGeoCoderTests
             gazetteerRecords.AddLine(Names7, Codes0);
             // P2, T1, V2
             gazetteerRecords.AddLine(Names8, Codes0);
+            // ' P3 ', ' T3 ', ' V3 '
+            gazetteerRecords.AddLine(Names9, Codes0);
 
             return gazetteerRecords.GadmList();
         }
