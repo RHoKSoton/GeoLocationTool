@@ -71,7 +71,7 @@
     <Compile Include="DataAccess\MatchProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Logic\GazetteerColumnNames.cs" />
-    <Compile Include="Logic\LocationNames.cs" />
+    <Compile Include="Logic\GazetteerLocationNames.cs" />
     <Compile Include="Logic\GeoCode.cs" />
     <Compile Include="Logic\CodedLocation.cs" />
     <Compile Include="Logic\FuzzyMatch.cs" />

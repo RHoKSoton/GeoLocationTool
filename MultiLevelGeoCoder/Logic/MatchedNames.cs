@@ -107,17 +107,17 @@ namespace MultiLevelGeoCoder.Logic
         public void SaveMatch(
             Location inputLocation,
             Location gazetteerLocation,
-            LocationNames locationNames)
+            GazetteerLocationNames gazetteerLocationNames)
         {
             Validate(inputLocation);
             Validate(gazetteerLocation);
             MatchedName match = new MatchedName(inputLocation, gazetteerLocation);
 
             // Don't save alts to the db
-            SubstituteMainForAltNames(match, locationNames);
+            SubstituteMainForAltNames(match, gazetteerLocationNames);
 
             // Throw ex if the input already exists in the gazetteer
-            ValidateMatch(match, locationNames);
+            ValidateMatch(match, gazetteerLocationNames);
 
             SaveMatchLevel1(match);
             SaveMatchLevel2(match);
@@ -126,11 +126,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private static void SubstituteAltGazetteerName(
             Location location,
-            LocationNames locationNames)
+            GazetteerLocationNames gazetteerLocationNames)
         {
             if (!string.IsNullOrEmpty(location.Name1))
             {
-                string main = locationNames.GetMainLevel1(location.Name1);
+                string main = gazetteerLocationNames.GetMainLevel1(location.Name1);
                 if (main == null)
                 {
                     throw new ArgumentException(
@@ -145,7 +145,7 @@ namespace MultiLevelGeoCoder.Logic
             if (!string.IsNullOrEmpty(location.Name2))
             {
                 string main =
-                    locationNames.GetMainLevel2(location.Name1, location.Name2);
+                    gazetteerLocationNames.GetMainLevel2(location.Name1, location.Name2);
                 if (main == null)
                 {
                     throw new ArgumentException(
@@ -160,7 +160,7 @@ namespace MultiLevelGeoCoder.Logic
             if (!string.IsNullOrEmpty(location.Name3))
             {
                 string main =
-                    locationNames.GetMainLevel3(
+                    gazetteerLocationNames.GetMainLevel3(
                         location.Name1,
                         location.Name2,
                         location.Name3);
@@ -178,11 +178,11 @@ namespace MultiLevelGeoCoder.Logic
 
         private static void SubstituteAltInputName(
             Location location,
-            LocationNames locationNames)
+            GazetteerLocationNames gazetteerLocationNames)
         {
             if (!string.IsNullOrEmpty(location.Name1))
             {
-                string main = locationNames.GetMainLevel1(location.Name1);
+                string main = gazetteerLocationNames.GetMainLevel1(location.Name1);
                 if (!string.IsNullOrEmpty(main))
                 {
                     location.Name1 = main;
@@ -191,7 +191,7 @@ namespace MultiLevelGeoCoder.Logic
 
             if (!string.IsNullOrEmpty(location.Name2))
             {
-                string main = locationNames.GetMainLevel2(location.Name1, location.Name2);
+                string main = gazetteerLocationNames.GetMainLevel2(location.Name1, location.Name2);
                 if (!string.IsNullOrEmpty(main))
                 {
                     location.Name2 = main;
@@ -200,7 +200,7 @@ namespace MultiLevelGeoCoder.Logic
 
             if (!string.IsNullOrEmpty(location.Name3))
             {
-                string main = locationNames.GetMainLevel3(
+                string main = gazetteerLocationNames.GetMainLevel3(
                     location.Name1,
                     location.Name2,
                     location.Name3);
@@ -219,10 +219,10 @@ namespace MultiLevelGeoCoder.Logic
 
         private static void ValidateLevel1Match(
             MatchedName match,
-            LocationNames locationNames,
+            GazetteerLocationNames gazetteerLocationNames,
             StringBuilder stringBuilder)
         {
-            if (locationNames.IsInLevel1Names(match.InputLocation.Name1))
+            if (gazetteerLocationNames.IsInLevel1Names(match.InputLocation.Name1))
             {
                 if (match.Level1NotSame())
                 {
@@ -234,10 +234,10 @@ namespace MultiLevelGeoCoder.Logic
 
         private static void ValidateLevel2Match(
             MatchedName match,
-            LocationNames locationNames,
+            GazetteerLocationNames gazetteerLocationNames,
             StringBuilder errorMessage)
         {
-            if (locationNames.IsInLevel2Names(
+            if (gazetteerLocationNames.IsInLevel2Names(
                 match.InputLocation.Name2,
                 match.InputLocation.Name1))
             {
@@ -251,10 +251,10 @@ namespace MultiLevelGeoCoder.Logic
 
         private static void ValidateLevel3Match(
             MatchedName match,
-            LocationNames locationNames,
+            GazetteerLocationNames gazetteerLocationNames,
             StringBuilder errorMessage)
         {
-            if (locationNames.IsInLevel3Names(
+            if (gazetteerLocationNames.IsInLevel3Names(
                 match.InputLocation.Name3,
                 match.InputLocation.Name1,
                 match.InputLocation.Name2))
@@ -267,16 +267,16 @@ namespace MultiLevelGeoCoder.Logic
             }
         }
 
-        private static void ValidateMatch(MatchedName match, LocationNames locationNames)
+        private static void ValidateMatch(MatchedName match, GazetteerLocationNames gazetteerLocationNames)
         {
             StringBuilder errorMessage = new StringBuilder();
 
             // We do not allow saved matches for input names that already exist in the gazetteer
             // as this would result in conflicting information so throw ex if the input
             // is in the gazetteer and is not the same as the selection.
-            ValidateLevel1Match(match, locationNames, errorMessage);
-            ValidateLevel2Match(match, locationNames, errorMessage);
-            ValidateLevel3Match(match, locationNames, errorMessage);
+            ValidateLevel1Match(match, gazetteerLocationNames, errorMessage);
+            ValidateLevel2Match(match, gazetteerLocationNames, errorMessage);
+            ValidateLevel3Match(match, gazetteerLocationNames, errorMessage);
 
             if (errorMessage.Length > 0)
             {
@@ -325,10 +325,10 @@ namespace MultiLevelGeoCoder.Logic
 
         private void SubstituteMainForAltNames(
             MatchedName match,
-            LocationNames locationNames)
+            GazetteerLocationNames gazetteerLocationNames)
         {
-            SubstituteAltGazetteerName(match.GazetteerLocation, locationNames);
-            SubstituteAltInputName(match.InputLocation, locationNames);
+            SubstituteAltGazetteerName(match.GazetteerLocation, gazetteerLocationNames);
+            SubstituteAltInputName(match.InputLocation, gazetteerLocationNames);
         }
 
         #endregion Methods

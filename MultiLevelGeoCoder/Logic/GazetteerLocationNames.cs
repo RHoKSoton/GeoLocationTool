@@ -1,4 +1,4 @@
-﻿// LocationNames.cs
+﻿// GazetteerLocationNames.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
@@ -9,7 +9,7 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Provides lists of gazetteer location names for each level 
     /// </summary>
-    internal class LocationNames
+    internal class GazetteerLocationNames
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Constructors
 
-        public LocationNames(List<GazetteerRecord> locationList)
+        public GazetteerLocationNames(List<GazetteerRecord> locationList)
         {
             gazzetteerData = locationList;
         }

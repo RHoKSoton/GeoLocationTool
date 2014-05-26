@@ -25,7 +25,7 @@ namespace MultiLevelGeoCoder
         private string gazetteerFileName;
         private InputData inputData;
         private Coder coder;
-        private LocationNames locationNames;
+        private GazetteerLocationNames gazetteerLocationNames;
         private IMatchProvider matchProvider;
 
         #endregion Fields
@@ -156,7 +156,7 @@ namespace MultiLevelGeoCoder
         /// <returns>Fuzzy Matcher</returns>
         public IFuzzyMatch FuzzyMatch()
         {
-            return new FuzzyMatch(locationNames);
+            return new FuzzyMatch(gazetteerLocationNames);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level1LocationNames()
         {
-            return locationNames.Level1AllLocationNames();
+            return gazetteerLocationNames.Level1AllLocationNames();
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level2LocationNames(string level1)
         {
-            return locationNames.Level2AllLocationNames(level1);
+            return gazetteerLocationNames.Level2AllLocationNames(level1);
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace MultiLevelGeoCoder
         /// </returns>
         public IList<string> Level3LocationNames(string level1, string level2)
         {
-            return locationNames.Level3AllLocationNames(level1, level2);
+            return gazetteerLocationNames.Level3AllLocationNames(level1, level2);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace MultiLevelGeoCoder
         /// <param name="gazetteerLocation">The gazetteer location.</param>
         public void SaveMatch(Location inputLocation, Location gazetteerLocation)
         {
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
             MatchSaved = true;
         }
 
@@ -382,7 +382,7 @@ namespace MultiLevelGeoCoder
         {
             gazetteerData.ColumnNames = columnNames;
             coder = new Coder(gazetteerData.LocationList, matchProvider);
-            locationNames = new LocationNames(gazetteerData.LocationList);
+            gazetteerLocationNames = new GazetteerLocationNames(gazetteerData.LocationList);
 
             if (saveSelection)
                 SaveUserSelection(columnNames, gazetteerFileName);

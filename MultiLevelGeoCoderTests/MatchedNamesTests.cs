@@ -34,7 +34,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -48,7 +48,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             AssertNoSavesCalled(mock);
@@ -70,7 +70,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -84,7 +84,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             AssertNoSavesCalled(mock);
@@ -105,7 +105,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -119,7 +119,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasCalled(x => x.SaveMatchLevel1(inputName1, gazName1));
@@ -140,7 +140,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName1 = "P1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -154,7 +154,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasCalled(x => x.SaveMatchLevel1(inputName1, gazName1));
@@ -185,7 +185,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName2 = "T1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -199,7 +199,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasCalled(x => x.SaveMatchLevel1(inputName1, gazName1));
@@ -227,7 +227,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // valid
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -241,7 +241,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -270,7 +270,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // valid
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -284,7 +284,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -337,7 +337,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -350,7 +350,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // exception thrown
@@ -372,7 +372,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // valid match
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -386,7 +386,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -411,7 +411,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // valid match
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -425,7 +425,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -451,7 +451,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -464,7 +464,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // exception thrown
@@ -486,7 +486,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -500,7 +500,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -563,7 +563,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -576,7 +576,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // exception thrown
@@ -597,7 +597,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -613,7 +613,7 @@ namespace MultiLevelGeoCoderTests
             // Act
             try
             {
-                matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+                matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
             }
             catch (Exception)
             {
@@ -640,7 +640,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1";
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -653,7 +653,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // exception thrown
@@ -675,7 +675,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -689,7 +689,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // only level 1 save called
@@ -752,7 +752,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V2"; // not allowed
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -768,7 +768,7 @@ namespace MultiLevelGeoCoderTests
             // Act
             try
             {
-                matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+                matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
             }
             catch (Exception)
             {
@@ -795,7 +795,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // not allowed
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -808,7 +808,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // exception thrown
@@ -829,7 +829,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1"; // not allowed
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -845,7 +845,7 @@ namespace MultiLevelGeoCoderTests
             // Act
             try
             {
-                matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+                matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
             }
             catch (Exception)
             {
@@ -872,7 +872,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -886,7 +886,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // level 1 and 2 save called
@@ -949,7 +949,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1A"; // ignore as is equivalent
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -963,7 +963,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             AssertNoSavesCalled(mock);
@@ -984,7 +984,7 @@ namespace MultiLevelGeoCoderTests
             const string gazName3 = "V1A"; // ignore as is equivalent
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -998,7 +998,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             AssertNoSavesCalled(mock);
@@ -1022,7 +1022,7 @@ namespace MultiLevelGeoCoderTests
             const string mainName3 = "V1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -1036,7 +1036,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasCalled(x => x.SaveMatchLevel1(inputName1, mainName1));
@@ -1061,7 +1061,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -1075,7 +1075,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             AssertNoSavesCalled(mock);
@@ -1100,7 +1100,7 @@ namespace MultiLevelGeoCoderTests
             const string mainName3 = "V1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -1114,7 +1114,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -1142,7 +1142,7 @@ namespace MultiLevelGeoCoderTests
             const string mainName3 = "V1"; // main value in gaz
 
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -1156,7 +1156,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             mock.AssertWasNotCalled(
@@ -1182,7 +1182,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -1196,7 +1196,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // only level 1 save called
@@ -1233,7 +1233,7 @@ namespace MultiLevelGeoCoderTests
 
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             //match provider
@@ -1247,7 +1247,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
 
             // Assert
             // only level 1 and 2 save called
@@ -1297,7 +1297,7 @@ namespace MultiLevelGeoCoderTests
         {
             // Arrange
             // gazetteer data - use test data 1
-            LocationNames locationNames = new LocationNames(
+            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
                 GazetteerTestData.TestData1());
 
             // no existing saved matches
@@ -1310,7 +1310,7 @@ namespace MultiLevelGeoCoderTests
             Location gazetteerLocation = new Location(gazName1, gazName2, gazName3);
 
             // Act
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, locationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
         }
 
         #endregion Methods
