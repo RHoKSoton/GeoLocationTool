@@ -82,7 +82,6 @@ namespace GeoLocationTool.UI
 
             // add the names used to generate those codes as information for the user.
             AddUsedMatchNames(codedLocation);
-            SelectNextRow();
         }
 
         private void AddUsedMatchNames(CodedLocation codedLocation)
@@ -133,7 +132,7 @@ namespace GeoLocationTool.UI
                 FormatGrid(parentGrid);
 
                 // highlight the remembered row
-                HighlightCurrentRow(selectedIndex);
+                SelectRow(selectedIndex);
                 DisplaySelectedRecord();
             }
             catch (Exception ex)
@@ -339,7 +338,7 @@ namespace GeoLocationTool.UI
             FormatGrid(dataGridView1);
 
             // highlight the remembered row
-            HighlightCurrentRow(selectedIndex);
+            SelectRow(selectedIndex);
         }
 
         private void DisplayLevel1List()
@@ -581,7 +580,7 @@ namespace GeoLocationTool.UI
             FormatGrid(dataGridView1);
 
             // highlight the remembered row
-            HighlightCurrentRow(selectedIndex);
+            SelectRow(selectedIndex);
         }
 
         private void FormatGrid(DataGridView grid)
@@ -680,26 +679,6 @@ namespace GeoLocationTool.UI
             }
         }
 
-        private void HighlightCurrentRow(int index)
-        {
-            if (dataGridView1.RowCount > 0)
-            {
-                if (index > dataGridView1.RowCount - 1)
-                {
-                    // highlight last
-                    index = dataGridView1.RowCount - 1;
-                }
-
-                if (index < 0)
-                {
-                    // highlight first
-                    index = 0;
-                }
-                dataGridView1.CurrentCell = dataGridView1.Rows[index].Cells[0];
-                dataGridView1.Rows[index].Selected = true;
-            }
-        }
-
         private string Level1Original()
         {
             return txtLevel1Original.Text.Trim();
@@ -749,19 +728,34 @@ namespace GeoLocationTool.UI
 
         private void SelectNextRow()
         {
-            // move to next row if all rows are displayed, 
-            // if only unmatched are showing then the current row is removed 
-            // so we don't need to explicitly move to the next
-            if (!chkUnmatchedOnly.Checked)
+            if (dataGridView1.Rows.Count == selectedRowIndex + 1)
             {
-                if (dataGridView1.Rows.Count == selectedRowIndex + 1)
+                // we are at the end so do nothing
+                return;
+            }
+
+            //move  to next row
+            dataGridView1.Rows[selectedRowIndex + 1].Selected = true;
+        }
+
+        private void SelectRow(int index)
+        {
+            if (dataGridView1.RowCount > 0)
+            {
+                if (index > dataGridView1.RowCount - 1)
                 {
-                    // we are at the end
-                    return;
+                    // highlight last
+                    index = dataGridView1.RowCount - 1;
                 }
 
-                //move  to next row
-                dataGridView1.Rows[selectedRowIndex + 1].Selected = true;
+                if (index < 0)
+                {
+                    // highlight first
+                    index = 0;
+                }
+                dataGridView1.CurrentCell = dataGridView1.Rows[index].Cells[0];
+                dataGridView1.Rows[index].Selected = true;
+                selectedRowIndex = dataGridView1.SelectedRows[0].Index;
             }
         }
 
@@ -789,7 +783,12 @@ namespace GeoLocationTool.UI
             CodedLocation codedLocation = geoCoder.AddLocationCodes(location2);
             ClearExistingCodes();
             AddCodes(codedLocation);
+            int rowCount = dataGridView1.RowCount;
             DisplayRecords();
+            if (dataGridView1.RowCount == rowCount)
+            {
+                SelectNextRow();
+            }
         }
 
         #endregion Methods
