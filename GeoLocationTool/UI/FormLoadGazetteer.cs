@@ -138,24 +138,24 @@ namespace GeoLocationTool.UI
 
         private void DisplayColumnNameLists()
         {
-            cboLevel1Codes.DataSource = geoCoder.GazetteerColumnNameList();
-            cboLevel2Codes.DataSource = geoCoder.GazetteerColumnNameList();
-            cboLevel3Codes.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel1Codes.DataSource = geoCoder.GazetteerColumnHeaders();
+            cboLevel2Codes.DataSource = geoCoder.GazetteerColumnHeaders();
+            cboLevel3Codes.DataSource = geoCoder.GazetteerColumnHeaders();
 
-            cboLevel1Names.DataSource = geoCoder.GazetteerColumnNameList();
-            cboLevel2Names.DataSource = geoCoder.GazetteerColumnNameList();
-            cboLevel3Names.DataSource = geoCoder.GazetteerColumnNameList();
+            cboLevel1Names.DataSource = geoCoder.GazetteerColumnHeaders();
+            cboLevel2Names.DataSource = geoCoder.GazetteerColumnHeaders();
+            cboLevel3Names.DataSource = geoCoder.GazetteerColumnHeaders();
 
             //optional columns so display a blank row at the top
-            IList<string> columnNames1 = geoCoder.GazetteerColumnNameList();
+            IList<string> columnNames1 = geoCoder.GazetteerColumnHeaders();
             columnNames1.Insert(0, string.Empty);
             cboLevel1AltNames.DataSource = columnNames1;
 
-            IList<string> columnNames2 = geoCoder.GazetteerColumnNameList();
+            IList<string> columnNames2 = geoCoder.GazetteerColumnHeaders();
             columnNames2.Insert(0, string.Empty);
             cboLevel2AltNames.DataSource = columnNames2;
 
-            IList<string> columnNames3 = geoCoder.GazetteerColumnNameList();
+            IList<string> columnNames3 = geoCoder.GazetteerColumnHeaders();
             columnNames3.Insert(0, string.Empty);
             cboLevel3AltNames.DataSource = columnNames3;
 
@@ -224,46 +224,46 @@ namespace GeoLocationTool.UI
 
         private void SetColumnNames()
         {
-            GazetteerColumnNames columnNames = new GazetteerColumnNames();
-            columnNames.Level1Code = cboLevel1Codes.SelectedValue as string;
-            columnNames.Level1Name = cboLevel1Names.SelectedValue as string;
-            columnNames.Level1AltName = cboLevel1AltNames.SelectedValue as string;
+            GazetteerColumnHeaders columnHeaders = new GazetteerColumnHeaders();
+            columnHeaders.Level1Code = cboLevel1Codes.SelectedValue as string;
+            columnHeaders.Level1Name = cboLevel1Names.SelectedValue as string;
+            columnHeaders.Level1AltName = cboLevel1AltNames.SelectedValue as string;
 
-            columnNames.Level2Code = cboLevel2Codes.SelectedValue as string;
-            columnNames.Level2Name = cboLevel2Names.SelectedValue as string;
-            columnNames.Level2AltName = cboLevel2AltNames.SelectedValue as string;
+            columnHeaders.Level2Code = cboLevel2Codes.SelectedValue as string;
+            columnHeaders.Level2Name = cboLevel2Names.SelectedValue as string;
+            columnHeaders.Level2AltName = cboLevel2AltNames.SelectedValue as string;
 
-            columnNames.Level3Code = cboLevel3Codes.SelectedValue as string;
-            columnNames.Level3Name = cboLevel3Names.SelectedValue as string;
-            columnNames.Level3AltName = cboLevel3AltNames.SelectedValue as string;
-            geoCoder.SetGazetteerColumns(columnNames);
+            columnHeaders.Level3Code = cboLevel3Codes.SelectedValue as string;
+            columnHeaders.Level3Name = cboLevel3Names.SelectedValue as string;
+            columnHeaders.Level3AltName = cboLevel3AltNames.SelectedValue as string;
+            geoCoder.SetGazetteerColumns(columnHeaders);
         }
 
         private void SetDefaultNames()
         {
             // set default column names if they exist in the spread sheet
-            GazetteerColumnNames defaultColumnNames =
-                geoCoder.DefaultGazetteerColumnNames();
+            GazetteerColumnHeaders defaultColumnHeaders =
+                geoCoder.DefaultGazetteerColumnHeaders();
             cboLevel1Codes.SelectedIndex =
-                cboLevel1Codes.FindStringExact(defaultColumnNames.Level1Code);
+                cboLevel1Codes.FindStringExact(defaultColumnHeaders.Level1Code);
             cboLevel2Codes.SelectedIndex =
-                cboLevel2Codes.FindStringExact(defaultColumnNames.Level2Code);
+                cboLevel2Codes.FindStringExact(defaultColumnHeaders.Level2Code);
             cboLevel3Codes.SelectedIndex =
-                cboLevel3Codes.FindStringExact(defaultColumnNames.Level3Code);
+                cboLevel3Codes.FindStringExact(defaultColumnHeaders.Level3Code);
 
             cboLevel1Names.SelectedIndex =
-                cboLevel1Names.FindStringExact(defaultColumnNames.Level1Name);
+                cboLevel1Names.FindStringExact(defaultColumnHeaders.Level1Name);
             cboLevel2Names.SelectedIndex =
-                cboLevel2Names.FindStringExact(defaultColumnNames.Level2Name);
+                cboLevel2Names.FindStringExact(defaultColumnHeaders.Level2Name);
             cboLevel3Names.SelectedIndex =
-                cboLevel3Names.FindStringExact(defaultColumnNames.Level3Name);
+                cboLevel3Names.FindStringExact(defaultColumnHeaders.Level3Name);
 
             cboLevel1AltNames.SelectedIndex =
-                cboLevel1AltNames.FindStringExact(defaultColumnNames.Level1AltName);
+                cboLevel1AltNames.FindStringExact(defaultColumnHeaders.Level1AltName);
             cboLevel2AltNames.SelectedIndex =
-                cboLevel2AltNames.FindStringExact(defaultColumnNames.Level2AltName);
+                cboLevel2AltNames.FindStringExact(defaultColumnHeaders.Level2AltName);
             cboLevel3AltNames.SelectedIndex =
-                cboLevel3AltNames.FindStringExact(defaultColumnNames.Level3AltName);
+                cboLevel3AltNames.FindStringExact(defaultColumnHeaders.Level3AltName);
         }
 
         private void SetGridDefaults()

@@ -5,7 +5,7 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Simple class containing the selected column names of the gazetteer data.
     /// </summary>
-    public class GazetteerColumnNames
+    public class GazetteerColumnHeaders
     {
         #region Properties
 

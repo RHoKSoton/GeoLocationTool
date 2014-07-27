@@ -88,7 +88,7 @@ namespace MultiLevelGeoCoderTests
             Stopwatch watch = new Stopwatch();
             watch.Start();
             geoCoder.SetGazetteerColumns(
-                new GazetteerColumnNames
+                new GazetteerColumnHeaders
                 {
                     Level1Code = "ID_1",
                     Level2Code = "ID_2",
@@ -104,13 +104,13 @@ namespace MultiLevelGeoCoderTests
             foreach (int linesCount in new[] {500, 1000, 2000})
             {
                 geoCoder.LoadInputFileCsv(GenerateInputFile(linesCount));
-                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnHeaders());
                 watch.Restart();
                 geoCoder.AddAllLocationCodes();
                 var elapsed = watch.Elapsed.TotalSeconds;
                 //LocationCodes.useDictionaries = !LocationCodes.useDictionaries;
                 geoCoder.LoadInputFileCsv(GenerateInputFile(linesCount));
-                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnHeaders());
                 watch.Restart();
                 geoCoder.AddAllLocationCodes();
                 Debug.WriteLine(
@@ -143,7 +143,7 @@ namespace MultiLevelGeoCoderTests
             geoCoder.LoadGazetteerFile(@"TestGaz1.csv");
             Stopwatch watch = new Stopwatch();
             geoCoder.SetGazetteerColumns(
-                new GazetteerColumnNames
+                new GazetteerColumnHeaders
                 {
                     Level1Code = "ID_1",
                     Level2Code = "ID_2",
@@ -161,7 +161,7 @@ namespace MultiLevelGeoCoderTests
                     {@"TestInput1000.csv", @"TestInput10000.csv", @"TestInput50000.csv"})
             {
                 geoCoder.LoadInputFileCsv(inputFile);
-                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnHeaders());
 
                 // use cache           
                 watch.Restart();
@@ -171,7 +171,7 @@ namespace MultiLevelGeoCoderTests
 
                 // don't use cache          
                 geoCoder.LoadInputFileCsv(inputFile);
-                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+                geoCoder.SetInputColumns(geoCoder.DefaultInputColumnHeaders());
                 watch.Restart();
                 InputData.UseMatchedNamesCache = false;
                 geoCoder.AddAllLocationCodes();
@@ -203,7 +203,7 @@ namespace MultiLevelGeoCoderTests
             geoCoder.LoadGazetteerFile(@"TestGaz1.csv");
             Stopwatch watch = new Stopwatch();
             geoCoder.SetGazetteerColumns(
-                new GazetteerColumnNames
+                new GazetteerColumnHeaders
                 {
                     Level1Code = "ID_1",
                     Level2Code = "ID_2",
@@ -218,7 +218,7 @@ namespace MultiLevelGeoCoderTests
                 false);
 
             geoCoder.LoadInputFileCsv("TestInput1.csv");
-            geoCoder.SetInputColumns(geoCoder.DefaultInputColumnNames());
+            geoCoder.SetInputColumns(geoCoder.DefaultInputColumnHeaders());
             watch.Start();
             geoCoder.AddAllLocationCodes();
             Debug.WriteLine(

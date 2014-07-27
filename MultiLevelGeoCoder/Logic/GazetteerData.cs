@@ -25,7 +25,7 @@ namespace MultiLevelGeoCoder.Logic
 
         #region Properties
 
-        public GazetteerColumnNames ColumnNames { get; set; }
+        public GazetteerColumnHeaders ColumnHeaders { get; set; }
 
         public DataTable Data { get; private set; }
 
@@ -87,17 +87,17 @@ namespace MultiLevelGeoCoder.Logic
         {
             GazetteerRecord gazetteerRecord = new GazetteerRecord();
 
-            SetValue(gazetteerRecord, "Name1", row, ColumnNames.Level1Name);
-            SetValue(gazetteerRecord, "Name2", row, ColumnNames.Level2Name);
-            SetValue(gazetteerRecord, "Name3", row, ColumnNames.Level3Name);
+            SetValue(gazetteerRecord, "Name1", row, ColumnHeaders.Level1Name);
+            SetValue(gazetteerRecord, "Name2", row, ColumnHeaders.Level2Name);
+            SetValue(gazetteerRecord, "Name3", row, ColumnHeaders.Level3Name);
 
-            SetValue(gazetteerRecord, "Id1", row, ColumnNames.Level1Code);
-            SetValue(gazetteerRecord, "Id2", row, ColumnNames.Level2Code);
-            SetValue(gazetteerRecord, "Id3", row, ColumnNames.Level3Code);
+            SetValue(gazetteerRecord, "Id1", row, ColumnHeaders.Level1Code);
+            SetValue(gazetteerRecord, "Id2", row, ColumnHeaders.Level2Code);
+            SetValue(gazetteerRecord, "Id3", row, ColumnHeaders.Level3Code);
 
-            SetValue(gazetteerRecord, "AltName1", row, ColumnNames.Level1AltName);
-            SetValue(gazetteerRecord, "AltName2", row, ColumnNames.Level2AltName);
-            SetValue(gazetteerRecord, "AltName3", row, ColumnNames.Level3AltName);
+            SetValue(gazetteerRecord, "AltName1", row, ColumnHeaders.Level1AltName);
+            SetValue(gazetteerRecord, "AltName2", row, ColumnHeaders.Level2AltName);
+            SetValue(gazetteerRecord, "AltName3", row, ColumnHeaders.Level3AltName);
 
             locationCodeList.Add(gazetteerRecord);
         }

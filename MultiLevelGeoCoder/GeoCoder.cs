@@ -25,7 +25,7 @@ namespace MultiLevelGeoCoder
         private string gazetteerFileName;
         private InputData inputData;
         private Coder coder;
-        private GazetteerLocationNames gazetteerLocationNames;
+        private GazetteerNames gazetteerNames;
         private IMatchProvider matchProvider;
 
         #endregion Fields
@@ -108,34 +108,34 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The column names
         /// </returns>
-        public GazetteerColumnNames DefaultGazetteerColumnNames()
+        public GazetteerColumnHeaders DefaultGazetteerColumnHeaders()
         {
-            GazetteerColumnNames columnNames = new GazetteerColumnNames();
+            GazetteerColumnHeaders columnHeaders = new GazetteerColumnHeaders();
             GazetteerColumnsMapping columnsMapping =
                 columnsMappingProvider.GetGazetteerColumnsMapping(gazetteerFileName);
             if (columnsMapping != null)
             {
-                columnNames.Level1Code = columnsMapping.Level1Code;
-                columnNames.Level2Code = columnsMapping.Level2Code;
-                columnNames.Level3Code = columnsMapping.Level3Code;
-                columnNames.Level1Name = columnsMapping.Level1Name;
-                columnNames.Level2Name = columnsMapping.Level2Name;
-                columnNames.Level3Name = columnsMapping.Level3Name;
-                columnNames.Level1AltName = columnsMapping.Level1AltName;
-                columnNames.Level2AltName = columnsMapping.Level2AltName;
-                columnNames.Level3AltName = columnsMapping.Level3AltName;
+                columnHeaders.Level1Code = columnsMapping.Level1Code;
+                columnHeaders.Level2Code = columnsMapping.Level2Code;
+                columnHeaders.Level3Code = columnsMapping.Level3Code;
+                columnHeaders.Level1Name = columnsMapping.Level1Name;
+                columnHeaders.Level2Name = columnsMapping.Level2Name;
+                columnHeaders.Level3Name = columnsMapping.Level3Name;
+                columnHeaders.Level1AltName = columnsMapping.Level1AltName;
+                columnHeaders.Level2AltName = columnsMapping.Level2AltName;
+                columnHeaders.Level3AltName = columnsMapping.Level3AltName;
             }
 
-            return columnNames;
+            return columnHeaders;
         }
 
         /// <summary>
         /// The default names of the columns that contain the input data to be matched.
         /// </summary>
         /// <returns></returns>
-        public InputColumnNames DefaultInputColumnNames()
+        public InputColumnHeaders DefaultInputColumnHeaders()
         {
-            return inputData.DefaultColumnNames;
+            return inputData.DefaultColumnHeaders;
         }
 
         /// <summary>
@@ -154,18 +154,18 @@ namespace MultiLevelGeoCoder
         /// Provides suggested name matches using fuzzy matching
         /// </summary>
         /// <returns>Fuzzy Matcher</returns>
-        public IFuzzyMatch FuzzyMatch()
+        public ISuggestedMatch SuggestedMatch()
         {
-            return new FuzzyMatch(gazetteerLocationNames);
+            return new SuggestedMatch(gazetteerNames);
         }
 
         /// <summary>
-        /// Provides a list of all the column header names present in the gazetteer data sheet
+        /// Provides a list of all the column headers present in the gazetteer data sheet
         /// </summary>
         /// <returns>
-        /// List of column names
+        /// List of column header names
         /// </returns>
-        public IList<string> GazetteerColumnNameList()
+        public IList<string> GazetteerColumnHeaders()
         {
             return gazetteerData.AllColumnNames();
         }
@@ -218,10 +218,10 @@ namespace MultiLevelGeoCoder
         }
 
         /// <summary>
-        /// Provides a list of all the column header names present in the input data sheet
+        /// Provides a list of all the column headers present in the input data sheet
         /// </summary>
         /// <returns>List of column names</returns>
-        public IList<string> InputColumnNameList()
+        public IList<string> InputColumnHeaders()
         {
             return inputData.AllColumnNames();
         }
@@ -230,9 +230,9 @@ namespace MultiLevelGeoCoder
         /// The names of the columns that contain the data to be matched.
         /// </summary>
         /// <returns></returns>
-        public InputColumnNames InputLocationColumnNames()
+        public InputColumnHeaders LocationNameColumnHeaders()
         {
-            return inputData.ColumnNames;
+            return inputData.ColumnHeaders;
         }
 
         /// <summary>
@@ -252,9 +252,9 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// List of location names
         /// </returns>
-        public IList<string> Level1LocationNames()
+        public IList<string> Level1GazetteerNames()
         {
-            return gazetteerLocationNames.Level1AllLocationNames();
+            return gazetteerNames.Level1AllLocationNames();
         }
 
         /// <summary>
@@ -264,9 +264,9 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// List of location names
         /// </returns>
-        public IList<string> Level2LocationNames(string level1)
+        public IList<string> Level2GazetteerNames(string level1)
         {
-            return gazetteerLocationNames.Level2AllLocationNames(level1);
+            return gazetteerNames.Level2AllLocationNames(level1);
         }
 
         /// <summary>
@@ -277,9 +277,9 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// List of location names
         /// </returns>
-        public IList<string> Level3LocationNames(string level1, string level2)
+        public IList<string> Level3GazetteerNames(string level1, string level2)
         {
-            return gazetteerLocationNames.Level3AllLocationNames(level1, level2);
+            return gazetteerNames.Level3AllLocationNames(level1, level2);
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace MultiLevelGeoCoder
         /// <returns>
         /// The column names
         /// </returns>
-        public InputColumnNames LocationCodeColumnNames()
+        public InputColumnHeaders LocationCodeColumnHeaders()
         {
             return inputData.CodeColumnNames();
         }
@@ -333,7 +333,7 @@ namespace MultiLevelGeoCoder
         /// The names of the columns that contain the matched names used to find the codes.
         /// </summary>
         /// <returns></returns>
-        public InputColumnNames MatchColumnNames()
+        public InputColumnHeaders MatchedNameColumnHeaders()
         {
             return inputData.MatchColumnNames();
         }
@@ -345,7 +345,7 @@ namespace MultiLevelGeoCoder
         /// <param name="gazetteerLocation">The gazetteer location.</param>
         public void SaveMatch(Location inputLocation, Location gazetteerLocation)
         {
-            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerLocationNames);
+            matchedNames.SaveMatch(inputLocation, gazetteerLocation, gazetteerNames);
             MatchSaved = true;
         }
 
@@ -374,27 +374,27 @@ namespace MultiLevelGeoCoder
         /// <summary>
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
-        /// <param name="columnNames">The column names.</param>
+        /// <param name="columnHeaders">The column names.</param>
         /// <param name="saveSelection">If true, the selected column names are saved to the database</param>
         public void SetGazetteerColumns(
-            GazetteerColumnNames columnNames,
+            GazetteerColumnHeaders columnHeaders,
             bool saveSelection = true)
         {
-            gazetteerData.ColumnNames = columnNames;
+            gazetteerData.ColumnHeaders = columnHeaders;
             coder = new Coder(gazetteerData.LocationList, matchProvider);
-            gazetteerLocationNames = new GazetteerLocationNames(gazetteerData.LocationList);
+            gazetteerNames = new GazetteerNames(gazetteerData.LocationList);
 
             if (saveSelection)
-                SaveUserSelection(columnNames, gazetteerFileName);
+                SaveUserSelection(columnHeaders, gazetteerFileName);
         }
 
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
         /// </summary>
-        /// <param name="columnNames">The column names.</param>
-        public void SetInputColumns(InputColumnNames columnNames)
+        /// <param name="columnHeaders">The column names.</param>
+        public void SetInputColumns(InputColumnHeaders columnHeaders)
         {
-            inputData.SetColumnNames(columnNames);
+            inputData.SetColumnNames(columnHeaders);
         }
 
         /// <summary>
@@ -434,22 +434,22 @@ namespace MultiLevelGeoCoder
             return dbConnection;
         }
 
-        private void SaveUserSelection(GazetteerColumnNames columnNames, string filename)
+        private void SaveUserSelection(GazetteerColumnHeaders columnHeaders, string filename)
         {
             // todo review the code duplication between GazetteerColumnNames and GazetteerColumnsMapping classes
             columnsMappingProvider.SaveGazetteerColumnsMapping(
                 new GazetteerColumnsMapping
                 {
                     FileName = filename,
-                    Level1Code = columnNames.Level1Code,
-                    Level1Name = columnNames.Level1Name,
-                    Level1AltName = columnNames.Level1AltName,
-                    Level2Code = columnNames.Level2Code,
-                    Level2Name = columnNames.Level2Name,
-                    Level2AltName = columnNames.Level2AltName,
-                    Level3Code = columnNames.Level3Code,
-                    Level3Name = columnNames.Level3Name,
-                    Level3AltName = columnNames.Level3AltName,
+                    Level1Code = columnHeaders.Level1Code,
+                    Level1Name = columnHeaders.Level1Name,
+                    Level1AltName = columnHeaders.Level1AltName,
+                    Level2Code = columnHeaders.Level2Code,
+                    Level2Name = columnHeaders.Level2Name,
+                    Level2AltName = columnHeaders.Level2AltName,
+                    Level3Code = columnHeaders.Level3Code,
+                    Level3Name = columnHeaders.Level3Name,
+                    Level3AltName = columnHeaders.Level3AltName,
                 }
                 );
         }

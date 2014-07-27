@@ -44,25 +44,25 @@ namespace MultiLevelGeoCoder
         /// The default names of the columns that contain the gazetteer data to be matched.
         /// </summary>
         /// <returns>The column names</returns>
-        GazetteerColumnNames DefaultGazetteerColumnNames();
+        GazetteerColumnHeaders DefaultGazetteerColumnHeaders();
 
         /// <summary>
         /// The default names of the columns that contain the input data to be matched.
         /// </summary>
         /// <returns>The column names</returns>
-        InputColumnNames DefaultInputColumnNames();
+        InputColumnHeaders DefaultInputColumnHeaders();
 
         /// <summary>
-        /// Provides suggested name matches using fuzzy matching
+        /// Suggested name matches using fuzzy matching
         /// </summary>
-        /// <returns>Fuzzy Match</returns>
-        IFuzzyMatch FuzzyMatch();
+        /// <returns>Suggested Match</returns>
+        ISuggestedMatch SuggestedMatch();
 
         /// <summary>
         /// Provides a list of all the column header names present in the gazetteer data sheet
         /// </summary>
         /// <returns>List of column names</returns>
-        IList<string> GazetteerColumnNameList();
+        IList<string> GazetteerColumnHeaders();
 
         /// <summary>
         /// The saved match for the given level 1 name, if any
@@ -95,13 +95,13 @@ namespace MultiLevelGeoCoder
         /// Provides a list of all the column header names present in the input data sheet
         /// </summary>
         /// <returns>List of column names</returns>
-        IList<string> InputColumnNameList();
+        IList<string> InputColumnHeaders();
 
         /// <summary>
-        /// The names of the columns that contain the input location names to be matched
+        /// The input data columns that contain the location names
         /// </summary>
         /// <returns></returns>
-        InputColumnNames InputLocationColumnNames();
+        InputColumnHeaders LocationNameColumnHeaders();
 
         /// <summary>
         /// Determines whether the gazetteer is initialised.
@@ -110,22 +110,22 @@ namespace MultiLevelGeoCoder
         bool IsGazetteerInitialised();
 
         /// <summary>
-        /// List of available Level 1 location names from the gazetteer.
+        /// List of Level 1 location names from the gazetteer.
         /// </summary>
         /// <returns>List of location names</returns>
-        IList<string> Level1LocationNames();
+        IList<string> Level1GazetteerNames();
 
         /// <summary>
-        /// List of available Level 2 location names from the gazetteer for the given level 1.
+        /// List of Level 2 location names from the gazetteer for the given level 1 name.
         /// </summary>
         /// <returns>List of location names</returns>
-        IList<string> Level2LocationNames(string level1);
+        IList<string> Level2GazetteerNames(string level1);
 
         /// <summary>
-        /// List of available Level 3 location names from the gazetteer for the given level 1 and 2.
+        /// List of Level 3 location names from the gazetteer for the given level 1 and 2 names.
         /// </summary>
         /// <returns>List of location names</returns>
-        IList<string> Level3LocationNames(string level1, string level2);
+        IList<string> Level3GazetteerNames(string level1, string level2);
 
         /// <summary>
         /// Loads the gazetteer file.
@@ -149,13 +149,13 @@ namespace MultiLevelGeoCoder
         /// The names of the columns that contain the location codes.
         /// </summary>
         /// <returns>The column names</returns>
-        InputColumnNames LocationCodeColumnNames();
+        InputColumnHeaders LocationCodeColumnHeaders();
 
         /// <summary>
         /// The names of the columns that contain the matched names used to find the codes.
         /// </summary>
         /// <returns></returns>
-        InputColumnNames MatchColumnNames();
+        InputColumnHeaders MatchedNameColumnHeaders();
 
         /// <summary>
         /// Saves the match.
@@ -173,17 +173,17 @@ namespace MultiLevelGeoCoder
         /// <summary>
         /// Sets the gazetteer columns that hold the data to provide the codes
         /// </summary>
-        /// <param name="columnNames">The column names.</param>
+        /// <param name="columnHeaders">The column names.</param>
         /// <param name="saveSelection">If true, the selected column names are saved to the database</param>
         void SetGazetteerColumns(
-            GazetteerColumnNames columnNames,
+            GazetteerColumnHeaders columnHeaders,
             bool saveSelection = true);
 
         /// <summary>
         /// Sets the column names that hold the input data to be coded.
         /// </summary>
-        /// <param name="columnNames">The column names.</param>
-        void SetInputColumns(InputColumnNames columnNames);
+        /// <param name="columnHeaders">The column names.</param>
+        void SetInputColumns(InputColumnHeaders columnHeaders);
 
         /// <summary>
         /// Filters the records to only those that have not had all their codes added.

@@ -1,4 +1,4 @@
-// FuzzyMatch.cs
+// SuggestedMatch.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
@@ -9,19 +9,19 @@ namespace MultiLevelGeoCoder.Logic
     /// <summary>
     /// Provides suggested matches using fuzzy matching
     /// </summary>
-    public class FuzzyMatch : IFuzzyMatch
+    public class SuggestedMatch : ISuggestedMatch
     {
         #region Fields
 
-        private readonly GazetteerLocationNames gazetteerLocationNames;
+        private readonly GazetteerNames gazetteerNames;
 
         #endregion Fields
 
         #region Constructors
 
-        internal FuzzyMatch(GazetteerLocationNames gazetteerLocationNames)
+        internal SuggestedMatch(GazetteerNames gazetteerNames)
         {
-            this.gazetteerLocationNames = gazetteerLocationNames;
+            this.gazetteerNames = gazetteerNames;
         }
 
         #endregion Constructors
@@ -35,7 +35,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<MatchResult> Level1Suggestions(string level1)
         {
-            IList<string> locationList = gazetteerLocationNames.Level1AllLocationNames();
+            IList<string> locationList = gazetteerNames.Level1AllLocationNames();
             return Suggestions(level1, locationList);
         }
 
@@ -47,7 +47,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <returns>List of suggested locations and their coeficient.</returns>
         public List<MatchResult> Level2Suggestions(string level1, string level2)
         {
-            IList<string> locationList = gazetteerLocationNames.Level2AllLocationNames(level1);
+            IList<string> locationList = gazetteerNames.Level2AllLocationNames(level1);
             return Suggestions(level2, locationList);
         }
 
@@ -63,7 +63,7 @@ namespace MultiLevelGeoCoder.Logic
             string level2,
             string level3)
         {
-            IList<string> locationList = gazetteerLocationNames.Level3AllLocationNames(
+            IList<string> locationList = gazetteerNames.Level3AllLocationNames(
                 level1,
                 level2);
             return Suggestions(level3, locationList);

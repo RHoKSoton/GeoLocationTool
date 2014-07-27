@@ -23,10 +23,10 @@ namespace MultiLevelGeoCoderTests
         public void Level1AllLocationNames_LeadingAndTrailingSpacesRemoved()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
             // act
-            IList<string> result = gazetteerLocationNames.Level1AllLocationNames();
+            IList<string> result = gazetteerNames.Level1AllLocationNames();
             // assert
             // no leading or trailing spaces
             Assert.IsFalse(result.Any(x => x.StartsWith(" ")));
@@ -41,10 +41,10 @@ namespace MultiLevelGeoCoderTests
         public void Level1AllLocationNames_NoBlankOrNullReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
             // act
-            IList<string> result = gazetteerLocationNames.Level1AllLocationNames();
+            IList<string> result = gazetteerNames.Level1AllLocationNames();
             // assert
             // no null or empty strings
             Assert.IsFalse(result.Contains(""));
@@ -60,10 +60,10 @@ namespace MultiLevelGeoCoderTests
         public void Level2AllLocationNames_AltLevel1Name_MainAndAltNamesReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
             // act
-            IList<string> result = gazetteerLocationNames.Level2AllLocationNames("P1A");
+            IList<string> result = gazetteerNames.Level2AllLocationNames("P1A");
             // assert
             // expected T1,T2, T1A, T2A
             Assert.AreEqual(4, result.Count);
@@ -81,10 +81,10 @@ namespace MultiLevelGeoCoderTests
         public void Level2AllLocationNames_MainLevel1Name_MainAndAltNamesReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
             // act
-            IList<string> result = gazetteerLocationNames.Level2AllLocationNames("P1");
+            IList<string> result = gazetteerNames.Level2AllLocationNames("P1");
             // assert
             // expected T1,T2, T1A, T2A
             Assert.AreEqual(4, result.Count);
@@ -102,10 +102,10 @@ namespace MultiLevelGeoCoderTests
         public void Level2AllLocationNames_NoBlankOrNullReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
             // act
-            IList<string> result = gazetteerLocationNames.Level2AllLocationNames("P1A");
+            IList<string> result = gazetteerNames.Level2AllLocationNames("P1A");
             // assert
             // no null or empty strings
             Assert.IsFalse(result.Contains(""));
@@ -120,12 +120,12 @@ namespace MultiLevelGeoCoderTests
         public void Level2AllLocationNames_SearchNamesCaseDiffToGaz_ListIsSame()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
 
             // act
-            IList<string> result1 = gazetteerLocationNames.Level2AllLocationNames("P1A");
-            IList<string> result2 = gazetteerLocationNames.Level2AllLocationNames("p1a");
+            IList<string> result1 = gazetteerNames.Level2AllLocationNames("P1A");
+            IList<string> result2 = gazetteerNames.Level2AllLocationNames("p1a");
 
             // assert
             // expected that the results are the same
@@ -144,11 +144,11 @@ namespace MultiLevelGeoCoderTests
         public void Level3AllLocationNames_AltLevel1And2Names_MainAndAltNamesReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
 
             // act
-            IList<string> result = gazetteerLocationNames.Level3AllLocationNames("P2A", "T2A");
+            IList<string> result = gazetteerNames.Level3AllLocationNames("P2A", "T2A");
 
             // assert
             // expected V1,V2, V3, V1A
@@ -168,11 +168,11 @@ namespace MultiLevelGeoCoderTests
         public void Level3AllLocationNames_MainLevel1And2Names_MainAndAltNamesReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
 
             // act
-            IList<string> result = gazetteerLocationNames.Level3AllLocationNames("P2", "T2");
+            IList<string> result = gazetteerNames.Level3AllLocationNames("P2", "T2");
 
             // assert
             // expected V1,V2, V3, V1A
@@ -191,11 +191,11 @@ namespace MultiLevelGeoCoderTests
         public void Level3AllLocationNames_NoBlankOrNullReturned()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
 
             // act
-            IList<string> result = gazetteerLocationNames.Level3AllLocationNames("P1A", "T1A");
+            IList<string> result = gazetteerNames.Level3AllLocationNames("P1A", "T1A");
 
             // assert
             // no null or empty strings
@@ -211,12 +211,12 @@ namespace MultiLevelGeoCoderTests
         public void Level3AllLocationNames_SearchNamesCaseDiffToGaz_ListIsSame()
         {
             // arrange
-            GazetteerLocationNames gazetteerLocationNames = new GazetteerLocationNames(
+            GazetteerNames gazetteerNames = new GazetteerNames(
                 GazetteerTestData.TestData1());
 
             // act
-            IList<string> result1 = gazetteerLocationNames.Level3AllLocationNames("P2A", "T2A");
-            IList<string> result2 = gazetteerLocationNames.Level3AllLocationNames("p2a", "t2a");
+            IList<string> result1 = gazetteerNames.Level3AllLocationNames("P2A", "T2A");
+            IList<string> result2 = gazetteerNames.Level3AllLocationNames("p2a", "t2a");
 
             // assert
             // expected that the results are the same

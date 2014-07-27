@@ -1,10 +1,10 @@
-// IFuzzyMatch.cs
+// ISuggestedMatch.cs
 
 namespace MultiLevelGeoCoder.Logic
 {
     using System.Collections.Generic;
 
-    public interface IFuzzyMatch
+    public interface ISuggestedMatch
     {
         /// <summary>
         /// The level 1 suggestions for the given location name.

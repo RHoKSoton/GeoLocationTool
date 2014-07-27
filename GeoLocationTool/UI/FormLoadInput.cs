@@ -196,22 +196,22 @@ namespace GeoLocationTool.UI
 
         private void DisplayColumnNameLists()
         {
-            InputColumnNames defaultColumnNames = geoCoder.DefaultInputColumnNames();
-            cboLevel1.DataSource = geoCoder.InputColumnNameList();
+            InputColumnHeaders defaultColumnHeaders = geoCoder.DefaultInputColumnHeaders();
+            cboLevel1.DataSource = geoCoder.InputColumnHeaders();
 
             //level 2 and 3 columns are optional so display a blank row at the top
-            IList<string> columnNames2 = geoCoder.InputColumnNameList();
+            IList<string> columnNames2 = geoCoder.InputColumnHeaders();
             columnNames2.Insert(0, string.Empty);
             cboLevel2.DataSource = columnNames2;
 
-            IList<string> columnNames3 = geoCoder.InputColumnNameList();
+            IList<string> columnNames3 = geoCoder.InputColumnHeaders();
             columnNames3.Insert(0, string.Empty);
             cboLevel3.DataSource = columnNames3;
 
             // set defaults if they exist in the input sheet
-            cboLevel1.SelectedIndex = cboLevel1.FindStringExact(defaultColumnNames.Level1);
-            cboLevel2.SelectedIndex = cboLevel2.FindStringExact(defaultColumnNames.Level2);
-            cboLevel3.SelectedIndex = cboLevel3.FindStringExact(defaultColumnNames.Level3);
+            cboLevel1.SelectedIndex = cboLevel1.FindStringExact(defaultColumnHeaders.Level1);
+            cboLevel2.SelectedIndex = cboLevel2.FindStringExact(defaultColumnHeaders.Level2);
+            cboLevel3.SelectedIndex = cboLevel3.FindStringExact(defaultColumnHeaders.Level3);
         }
 
         private void DisplayData()
@@ -345,12 +345,12 @@ namespace GeoLocationTool.UI
 
         private void SetColumnNames()
         {
-            InputColumnNames inputColumnNames = new InputColumnNames();
-            inputColumnNames.Level1 = cboLevel1.SelectedValue as string;
-            inputColumnNames.Level2 = cboLevel2.SelectedValue as string;
-            inputColumnNames.Level3 = cboLevel3.SelectedValue as string;
+            InputColumnHeaders inputColumnHeaders = new InputColumnHeaders();
+            inputColumnHeaders.Level1 = cboLevel1.SelectedValue as string;
+            inputColumnHeaders.Level2 = cboLevel2.SelectedValue as string;
+            inputColumnHeaders.Level3 = cboLevel3.SelectedValue as string;
 
-            geoCoder.SetInputColumns(inputColumnNames);
+            geoCoder.SetInputColumns(inputColumnHeaders);
         }
 
         private void SetDefaults()

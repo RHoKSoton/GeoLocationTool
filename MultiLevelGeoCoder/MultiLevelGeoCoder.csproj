@@ -59,7 +59,7 @@
     </Compile>
     <Compile Include="DataAccess\IMatchProvider.cs" />
     <Compile Include="DataAccess\FileImport.cs" />
-    <Compile Include="Logic\IFuzzyMatch.cs" />
+    <Compile Include="Logic\ISuggestedMatch.cs" />
     <Compile Include="Logic\MatchedName.cs" />
     <Compile Include="Logic\NameInGazetteerException.cs" />
     <Compile Include="Logic\GazetteerDataDictionaries.cs" />
@@ -70,13 +70,13 @@
     <Compile Include="Model\GazetteerColumnsMapping.cs" />
     <Compile Include="DataAccess\MatchProvider.cs" />
     <Compile Include="IGeoCoder.cs" />
-    <Compile Include="Logic\GazetteerColumnNames.cs" />
-    <Compile Include="Logic\GazetteerLocationNames.cs" />
+    <Compile Include="Logic\GazetteerColumnHeaders.cs" />
+    <Compile Include="Logic\GazetteerNames.cs" />
     <Compile Include="Logic\GeoCode.cs" />
     <Compile Include="Logic\CodedLocation.cs" />
-    <Compile Include="Logic\FuzzyMatch.cs" />
+    <Compile Include="Logic\SuggestedMatch.cs" />
     <Compile Include="Logic\MatchResult.cs" />
-    <Compile Include="Logic\InputColumnNames.cs" />
+    <Compile Include="Logic\InputColumnHeaders.cs" />
     <Compile Include="Logic\InputData.cs" />
     <Compile Include="Logic\GazetteerData.cs" />
     <Compile Include="Logic\Coder.cs" />

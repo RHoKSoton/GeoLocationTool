@@ -3,9 +3,9 @@
 namespace MultiLevelGeoCoder.Logic
 {
     /// <summary>
-    /// Holds the selected input column names to be coded.
+    /// Holds the selected input column headers.
     /// </summary>
-    public class InputColumnNames
+    public class InputColumnHeaders
     {
         #region Properties
 

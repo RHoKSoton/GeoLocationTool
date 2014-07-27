@@ -26,15 +26,15 @@ namespace MultiLevelGeoCoderTests
             lines.Add(new Tuple<string[], string[], string[]>(names, codes, altNames));
         }
 
-        public DataTable Data(GazetteerColumnNames gazetteerColumnNames)
+        public DataTable Data(GazetteerColumnHeaders gazetteerColumnHeaders)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add(gazetteerColumnNames.Level1Name);
-            dt.Columns.Add(gazetteerColumnNames.Level2Name);
-            dt.Columns.Add(gazetteerColumnNames.Level3Name);
-            dt.Columns.Add(gazetteerColumnNames.Level1Code);
-            dt.Columns.Add(gazetteerColumnNames.Level2Code);
-            dt.Columns.Add(gazetteerColumnNames.Level3Code);
+            dt.Columns.Add(gazetteerColumnHeaders.Level1Name);
+            dt.Columns.Add(gazetteerColumnHeaders.Level2Name);
+            dt.Columns.Add(gazetteerColumnHeaders.Level3Name);
+            dt.Columns.Add(gazetteerColumnHeaders.Level1Code);
+            dt.Columns.Add(gazetteerColumnHeaders.Level2Code);
+            dt.Columns.Add(gazetteerColumnHeaders.Level3Code);
      
             foreach (var line in lines)
             {

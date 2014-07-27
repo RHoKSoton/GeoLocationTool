@@ -18,7 +18,7 @@ namespace GeoLocationTool.UI
 
         private const string LeaveBlankText = "No Match - Leave blank";
 
-        private readonly IFuzzyMatch fuzzyMatch;
+        private readonly ISuggestedMatch suggestedMatch;
         private readonly IGeoCoder geoCoder;
         private readonly DataGridView parentGrid;
 
@@ -35,7 +35,7 @@ namespace GeoLocationTool.UI
             InitializeComponent();
             this.geoCoder = geoCoder;
             this.parentGrid = parentGrid;
-            fuzzyMatch = geoCoder.FuzzyMatch();
+            suggestedMatch = geoCoder.SuggestedMatch();
         }
 
         #endregion Constructors
@@ -58,24 +58,24 @@ namespace GeoLocationTool.UI
         private void AddCodes(CodedLocation codedLocation)
         {
             // add the codes to the input data
-            InputColumnNames columnNames = geoCoder.LocationCodeColumnNames();
+            InputColumnHeaders columnHeaders = geoCoder.LocationCodeColumnHeaders();
             if (codedLocation.GeoCode1 != null)
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level1]
                     .Value =
                     codedLocation.GeoCode1.Code;
             }
 
             if (codedLocation.GeoCode2 != null)
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level2]
                     .Value =
                     codedLocation.GeoCode2.Code;
             }
 
             if (codedLocation.GeoCode3 != null)
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level3]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level3]
                     .Value =
                     codedLocation.GeoCode3.Code;
             }
@@ -86,25 +86,25 @@ namespace GeoLocationTool.UI
 
         private void AddUsedMatchNames(CodedLocation codedLocation)
         {
-            InputColumnNames columnNames = geoCoder.MatchColumnNames();
+            InputColumnHeaders columnHeaders = geoCoder.MatchedNameColumnHeaders();
             // add the actual name used to get the code if different to that on the input
             if (codedLocation.IsName1Different())
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level1]
                     .Value
                     = codedLocation.GeoCode1.Name;
             }
 
             if (codedLocation.IsName2Different())
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level2]
                     .Value
                     = codedLocation.GeoCode2.Name;
             }
 
             if (codedLocation.IsName3Different())
             {
-                dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level3]
+                dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level3]
                     .Value
                     = codedLocation.GeoCode3.Name;
             }
@@ -252,12 +252,12 @@ namespace GeoLocationTool.UI
 
         private void ClearCodes()
         {
-            InputColumnNames columnNames = geoCoder.LocationCodeColumnNames();
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1]
+            InputColumnHeaders columnHeaders = geoCoder.LocationCodeColumnHeaders();
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level1]
                 .Value = null;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2]
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level2]
                 .Value = null;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level3]
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level3]
                 .Value = null;
         }
 
@@ -269,12 +269,12 @@ namespace GeoLocationTool.UI
 
         private void ClearUsedNames()
         {
-            InputColumnNames columnNames = geoCoder.MatchColumnNames();
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level1].Value =
+            InputColumnHeaders columnHeaders = geoCoder.MatchedNameColumnHeaders();
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level1].Value =
                 null;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level2].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level2].Value =
                 null;
-            dataGridView1.Rows[selectedRowIndex].Cells[columnNames.Level3].Value =
+            dataGridView1.Rows[selectedRowIndex].Cells[columnHeaders.Level3].Value =
                 null;
         }
 
@@ -349,7 +349,7 @@ namespace GeoLocationTool.UI
             }
             else
             {
-                var list = geoCoder.Level1LocationNames();
+                var list = geoCoder.Level1GazetteerNames();
 
                 // format - add a leave blank option to the bottom of the list
                 list.Add(LeaveBlankText);
@@ -372,7 +372,7 @@ namespace GeoLocationTool.UI
                     Level1Original());
 
                 //get suggestions
-                var suggestions = fuzzyMatch.Level1Suggestions(Level1Original());
+                var suggestions = suggestedMatch.Level1Suggestions(Level1Original());
 
                 // format
                 const bool addBlank = false;
@@ -403,7 +403,7 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    var list = geoCoder.Level2LocationNames(
+                    var list = geoCoder.Level2GazetteerNames(
                         SelectedValue(cboLevel1Manual));
 
                     // format - add a leave blank option to the bottom of the list
@@ -439,7 +439,7 @@ namespace GeoLocationTool.UI
                         geoCoder.GetSavedMatchLevel2(level2, level1);
 
                     // get suggestions
-                    List<MatchResult> suggestions = fuzzyMatch.Level2Suggestions(
+                    List<MatchResult> suggestions = suggestedMatch.Level2Suggestions(
                         level1,
                         level2);
 
@@ -475,7 +475,7 @@ namespace GeoLocationTool.UI
                 }
                 else
                 {
-                    var list = geoCoder.Level3LocationNames(
+                    var list = geoCoder.Level3GazetteerNames(
                         level1,
                         level2);
 
@@ -513,7 +513,7 @@ namespace GeoLocationTool.UI
                         geoCoder.GetSavedMatchLevel3(level3, level1, level2);
 
                     // get suggestions
-                    List<MatchResult> suggestions = fuzzyMatch.Level3Suggestions(
+                    List<MatchResult> suggestions = suggestedMatch.Level3Suggestions(
                         level1,
                         level2,
                         level3);
@@ -544,29 +544,29 @@ namespace GeoLocationTool.UI
 
         private void DisplaySelectedRecord()
         {
-            InputColumnNames columnNames = geoCoder.InputLocationColumnNames();
+            InputColumnHeaders columnHeaders = geoCoder.LocationNameColumnHeaders();
             txtLevel1Original.Text =
                 dataGridView1.Rows[selectedRowIndex].Cells[
-                    columnNames.Level1]
+                    columnHeaders.Level1]
                     .Value as
                     string;
 
             // level 2 is optional
-            if (!string.IsNullOrEmpty(columnNames.Level2))
+            if (!string.IsNullOrEmpty(columnHeaders.Level2))
             {
                 txtLevel2Original.Text =
                     dataGridView1.Rows[selectedRowIndex].Cells[
-                        columnNames.Level2]
+                        columnHeaders.Level2]
                         .Value as
                         string;
             }
 
             // level 3 is optional
-            if (!string.IsNullOrEmpty(columnNames.Level3))
+            if (!string.IsNullOrEmpty(columnHeaders.Level3))
             {
                 txtLevel3Original.Text =
                     dataGridView1.Rows[selectedRowIndex].Cells[
-                        columnNames.Level3]
+                        columnHeaders.Level3]
                         .Value as
                         string;
             }

@@ -15,7 +15,7 @@ namespace MultiLevelGeoCoder.Logic
         #region Fields
 
         // Use the cache when coding all the rows
-        public static bool UseMatchedNamesCache = true; // for performance testing
+        public static bool UseMatchedNamesCache = true; 
 
         // default column names
         private const string DefaultLevel1ColumnName = "Admin2";
@@ -56,7 +56,7 @@ namespace MultiLevelGeoCoder.Logic
         /// <value>
         /// The column names.
         /// </value>
-        public InputColumnNames ColumnNames { get; private set; }
+        public InputColumnHeaders ColumnHeaders { get; private set; }
 
         /// <summary>
         /// Gets or sets the input data.
@@ -72,11 +72,11 @@ namespace MultiLevelGeoCoder.Logic
         /// <value>
         /// The default column names.
         /// </value>
-        public InputColumnNames DefaultColumnNames
+        public InputColumnHeaders DefaultColumnHeaders
         {
             get
             {
-                InputColumnNames defaults = new InputColumnNames
+                InputColumnHeaders defaults = new InputColumnHeaders
                 {
                     Level1 = DefaultLevel1ColumnName,
                     Level2 = DefaultLevel2ColumnName,
@@ -129,15 +129,15 @@ namespace MultiLevelGeoCoder.Logic
         /// Codes the column names.
         /// </summary>
         /// <returns></returns>
-        public InputColumnNames CodeColumnNames()
+        public InputColumnHeaders CodeColumnNames()
         {
-            InputColumnNames columnNames = new InputColumnNames
+            InputColumnHeaders columnHeaders = new InputColumnHeaders
             {
                 Level1 = Level1CodeColumnName,
                 Level2 = Level2CodeColumnName,
                 Level3 = Level3CodeColumnName
             };
-            return columnNames;
+            return columnHeaders;
         }
 
         /// <summary>
@@ -150,15 +150,15 @@ namespace MultiLevelGeoCoder.Logic
             EnumerableRowCollection<DataRow> query = from record in Data.AsEnumerable()
                 where
                     // level 1 has name but no code
-                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level1)) &&
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnHeaders.Level1)) &&
                      (string.IsNullOrEmpty(record.Field<string>(Level1CodeColumnName)))) ||
                     // level 2 is in use and has name but no code
-                    (!string.IsNullOrEmpty(ColumnNames.Level2)) &&
-                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level2)) &&
+                    (!string.IsNullOrEmpty(ColumnHeaders.Level2)) &&
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnHeaders.Level2)) &&
                      (string.IsNullOrEmpty(record.Field<string>(Level2CodeColumnName)))) ||
                     // level 3 is in use and has name but no code
-                    (!string.IsNullOrEmpty(ColumnNames.Level3)) &&
-                    (!string.IsNullOrEmpty(record.Field<string>(ColumnNames.Level3)) &&
+                    (!string.IsNullOrEmpty(ColumnHeaders.Level3)) &&
+                    (!string.IsNullOrEmpty(record.Field<string>(ColumnHeaders.Level3)) &&
                      (string.IsNullOrEmpty(record.Field<string>(Level3CodeColumnName))))
                 select record;
 
@@ -170,21 +170,21 @@ namespace MultiLevelGeoCoder.Logic
         /// The names of the columns that contain the matched names used to find the codes.
         /// </summary>
         /// <returns>The Column Names</returns>
-        public InputColumnNames MatchColumnNames()
+        public InputColumnHeaders MatchColumnNames()
         {
-            InputColumnNames columnNames = new InputColumnNames
+            InputColumnHeaders columnHeaders = new InputColumnHeaders
             {
                 Level1 = Level1MatchedColumnName,
                 Level2 = Level2MatchedColumnName,
                 Level3 = Level3MatchedColumnName
             };
-            return columnNames;
+            return columnHeaders;
         }
 
-        public void SetColumnNames(InputColumnNames columnNames)
+        public void SetColumnNames(InputColumnHeaders columnHeaders)
         {
-            columnNames.Validitate();
-            ColumnNames = columnNames;
+            columnHeaders.Validitate();
+            ColumnHeaders = columnHeaders;
         }
 
         private static void AddCodes(CodedLocation codedLocation, DataRow dataRow)
@@ -290,20 +290,20 @@ namespace MultiLevelGeoCoder.Logic
             //create location, use the original name
             Location location = new Location();
             location.Name1 =
-                dataRow[ColumnNames.Level1].ToString();
+                dataRow[ColumnHeaders.Level1].ToString();
 
             // level 2 is optional
-            if (!string.IsNullOrEmpty(ColumnNames.Level2))
+            if (!string.IsNullOrEmpty(ColumnHeaders.Level2))
             {
                 location.Name2 =
-                    dataRow[ColumnNames.Level2].ToString();
+                    dataRow[ColumnHeaders.Level2].ToString();
             }
 
             // level 3 is optional
-            if (!string.IsNullOrEmpty(ColumnNames.Level3))
+            if (!string.IsNullOrEmpty(ColumnHeaders.Level3))
             {
                 location.Name3 =
-                    dataRow[ColumnNames.Level3].ToString();
+                    dataRow[ColumnHeaders.Level3].ToString();
             }
 
             // get codes

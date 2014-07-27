@@ -26,13 +26,13 @@ namespace MultiLevelGeoCoderTests
             lines2.Add(new KeyValuePair<int, string[]>(lineNumber, line));
         }
 
-        public DataTable Data(InputColumnNames inputColumnNames)
+        public DataTable Data(InputColumnHeaders inputColumnHeaders)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Row");
-            dt.Columns.Add(inputColumnNames.Level1);
-            dt.Columns.Add(inputColumnNames.Level2);
-            dt.Columns.Add(inputColumnNames.Level3);
+            dt.Columns.Add(inputColumnHeaders.Level1);
+            dt.Columns.Add(inputColumnHeaders.Level2);
+            dt.Columns.Add(inputColumnHeaders.Level3);
 
             foreach (KeyValuePair<int, string[]> line in lines2)
             {

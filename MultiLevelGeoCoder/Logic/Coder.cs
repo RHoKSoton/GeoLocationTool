@@ -18,7 +18,7 @@ namespace MultiLevelGeoCoder.Logic
         #region Fields
 
         private readonly GazetteerDataDictionaries dictionary;
-        private readonly IEnumerable<GazetteerRecord> gazzetteerData;
+        private readonly IEnumerable<GazetteerRecord> gazzetteerRecords;
         private readonly MatchedNamesCache matchedNamesCache;
         private readonly IMatchProvider matchProvider;
 
@@ -27,13 +27,13 @@ namespace MultiLevelGeoCoder.Logic
         #region Constructors
 
         public Coder(
-            IEnumerable<GazetteerRecord> gazzetteerData,
+            IEnumerable<GazetteerRecord> gazzetteerRecords,
             IMatchProvider matchProvider)
         {
-            this.gazzetteerData = gazzetteerData;
+            this.gazzetteerRecords = gazzetteerRecords;
             this.matchProvider = matchProvider;
             matchedNamesCache = new MatchedNamesCache(matchProvider);
-            dictionary = new GazetteerDataDictionaries(this.gazzetteerData);
+            dictionary = new GazetteerDataDictionaries(this.gazzetteerRecords);
         }
 
         #endregion Constructors

@@ -30,8 +30,8 @@ namespace MultiLevelGeoCoderTests
             // arrange
             GeoCoder geoCoder =
                 new GeoCoder(MockRepository.GenerateStub<IDbConnection>() as DbConnection);
-            InputColumnNames inputColumnNames = InputColumnNames();
-            GazetteerColumnNames gazetteerColumnNames = GazetteerColumnNames();
+            InputColumnHeaders inputColumnHeaders = InputColumnNames();
+            GazetteerColumnHeaders gazetteerColumnHeaders = GazetteerColumnNames();
 
             // create input test data with
             // line 1, all names correct
@@ -47,14 +47,14 @@ namespace MultiLevelGeoCoderTests
             inputTestData.AddLine(names1);
             inputTestData.AddLine(names2);
             inputTestData.AddLine(names3);
-            geoCoder.SetInputData(inputTestData.Data(inputColumnNames));
-            geoCoder.SetInputColumns(inputColumnNames);
+            geoCoder.SetInputData(inputTestData.Data(inputColumnHeaders));
+            geoCoder.SetInputColumns(inputColumnHeaders);
 
             // create gazetteer data
             GazetteerRecords gazetteerRecords = new GazetteerRecords();
             gazetteerRecords.AddLine(names1, codes1);
             gazetteerRecords.AddLine(names2, codes2);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnHeaders));
 
             // add records matching input line 3 names to gazetteer names 1
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
@@ -65,13 +65,13 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
             geoCoder.SetMatchProvider(matchProviderStub.MatchProvider()); 
        
-            geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
+            geoCoder.SetGazetteerColumns(gazetteerColumnHeaders, false);
 
             // act
             geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.LocationCodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnHeaders();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];
@@ -104,8 +104,8 @@ namespace MultiLevelGeoCoderTests
             // arrange
             GeoCoder geoCoder =
                 new GeoCoder(MockRepository.GenerateStub<IDbConnection>() as DbConnection);
-            InputColumnNames inputColumnNames = InputColumnNames();
-            GazetteerColumnNames gazetteerColumnNames = GazetteerColumnNames();
+            InputColumnHeaders inputColumnHeaders = InputColumnNames();
+            GazetteerColumnHeaders gazetteerColumnHeaders = GazetteerColumnNames();
 
             // create input test data with
             // line 1, all names miss-spelt
@@ -118,13 +118,13 @@ namespace MultiLevelGeoCoderTests
             InputTestData inputTestData = new InputTestData();
             inputTestData.AddLine(names2);
             inputTestData.AddLine(names3);
-            geoCoder.SetInputData(inputTestData.Data(inputColumnNames));
-            geoCoder.SetInputColumns(inputColumnNames);
+            geoCoder.SetInputData(inputTestData.Data(inputColumnHeaders));
+            geoCoder.SetInputColumns(inputColumnHeaders);
 
             // create gazetteer data
             GazetteerRecords gazetteerRecords = new GazetteerRecords();
             gazetteerRecords.AddLine(names1, codes1);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnHeaders));
 
             // add records matched names records
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
@@ -142,13 +142,13 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
             geoCoder.SetMatchProvider(matchProviderStub.MatchProvider()); 
 
-            geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
+            geoCoder.SetGazetteerColumns(gazetteerColumnHeaders, false);
 
             // act
             geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.LocationCodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnHeaders();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];
@@ -174,8 +174,8 @@ namespace MultiLevelGeoCoderTests
             // arrange
             GeoCoder geoCoder =
                 new GeoCoder(MockRepository.GenerateStub<IDbConnection>() as DbConnection);
-            InputColumnNames inputColumnNames = InputColumnNames();
-            GazetteerColumnNames gazetteerColumnNames = GazetteerColumnNames();
+            InputColumnHeaders inputColumnHeaders = InputColumnNames();
+            GazetteerColumnHeaders gazetteerColumnHeaders = GazetteerColumnNames();
 
             //gazetteer data
             string[] names1 = { "P1", "T1", "V1" };
@@ -190,13 +190,13 @@ namespace MultiLevelGeoCoderTests
 
             InputTestData inputTestData = new InputTestData();
             inputTestData.AddLine(names3);
-            geoCoder.SetInputData(inputTestData.Data(inputColumnNames));
-            geoCoder.SetInputColumns(inputColumnNames);
+            geoCoder.SetInputData(inputTestData.Data(inputColumnHeaders));
+            geoCoder.SetInputColumns(inputColumnHeaders);
 
             // create gazetteer data
             GazetteerRecords gazetteerRecords = new GazetteerRecords();
             gazetteerRecords.AddLine(names1, codes1);
-            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnNames));
+            geoCoder.SetGazetteerData(gazetteerRecords.Data(gazetteerColumnHeaders));
 
             // add records matched names records
             MatchProviderTestData matchProviderTestData = new MatchProviderTestData();
@@ -208,13 +208,13 @@ namespace MultiLevelGeoCoderTests
             MatchProviderStub matchProviderStub = new MatchProviderStub(matchProviderTestData);
             geoCoder.SetMatchProvider(matchProviderStub.MatchProvider());
 
-            geoCoder.SetGazetteerColumns(gazetteerColumnNames, false);
+            geoCoder.SetGazetteerColumns(gazetteerColumnHeaders, false);
 
             // act
             geoCoder.AddAllLocationCodes();
 
             // assert
-            var columns = geoCoder.LocationCodeColumnNames();
+            var columns = geoCoder.LocationCodeColumnHeaders();
 
             //line 1 - should contain codes 1
             DataRow line1 = geoCoder.InputData.Rows[0];
@@ -223,25 +223,25 @@ namespace MultiLevelGeoCoderTests
             Assert.AreEqual(codes1[2], line1[columns.Level3]);
         }
 
-        private static GazetteerColumnNames GazetteerColumnNames()
+        private static GazetteerColumnHeaders GazetteerColumnNames()
         {
-            GazetteerColumnNames gazetteerColumnNames = new GazetteerColumnNames();
-            gazetteerColumnNames.Level1Code = "ID1";
-            gazetteerColumnNames.Level2Code = "ID2";
-            gazetteerColumnNames.Level3Code = "ID3";
-            gazetteerColumnNames.Level1Name = "Name1";
-            gazetteerColumnNames.Level2Name = "Name2";
-            gazetteerColumnNames.Level3Name = "Name3";
-            return gazetteerColumnNames;
+            GazetteerColumnHeaders gazetteerColumnHeaders = new GazetteerColumnHeaders();
+            gazetteerColumnHeaders.Level1Code = "ID1";
+            gazetteerColumnHeaders.Level2Code = "ID2";
+            gazetteerColumnHeaders.Level3Code = "ID3";
+            gazetteerColumnHeaders.Level1Name = "Name1";
+            gazetteerColumnHeaders.Level2Name = "Name2";
+            gazetteerColumnHeaders.Level3Name = "Name3";
+            return gazetteerColumnHeaders;
         }
 
-        private static InputColumnNames InputColumnNames()
+        private static InputColumnHeaders InputColumnNames()
         {
-            InputColumnNames inputColumnNames = new InputColumnNames();
-            inputColumnNames.Level1 = "admin1";
-            inputColumnNames.Level2 = "admin2";
-            inputColumnNames.Level3 = "admin3";
-            return inputColumnNames;
+            InputColumnHeaders inputColumnHeaders = new InputColumnHeaders();
+            inputColumnHeaders.Level1 = "admin1";
+            inputColumnHeaders.Level2 = "admin2";
+            inputColumnHeaders.Level3 = "admin3";
+            return inputColumnHeaders;
         }
 
         #endregion Methods
