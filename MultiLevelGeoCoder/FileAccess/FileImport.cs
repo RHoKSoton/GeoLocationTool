@@ -1,6 +1,6 @@
 ﻿// FileImport.cs
 
-namespace MultiLevelGeoCoder.DataAccess
+namespace MultiLevelGeoCoder.FileAccess
 {
     using System;
     using System.Data;

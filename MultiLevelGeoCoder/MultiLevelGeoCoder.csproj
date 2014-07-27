@@ -53,12 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DBHelper.cs" />
-    <Compile Include="DataAccess\FileExport.cs" />
+    <Compile Include="FileAccess\FileExport.cs" />
     <Compile Include="DataAccess\IColumnsMappingProvider.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataAccess\IMatchProvider.cs" />
-    <Compile Include="DataAccess\FileImport.cs" />
+    <Compile Include="FileAccess\FileImport.cs" />
     <Compile Include="Logic\ISuggestedMatch.cs" />
     <Compile Include="Logic\MatchedName.cs" />
     <Compile Include="Logic\NameInGazetteerException.cs" />

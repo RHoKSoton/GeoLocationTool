@@ -7,8 +7,8 @@ namespace MultiLevelGeoCoderTests
     using System.Linq;
     using CsvHelper;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MultiLevelGeoCoder.FileAccess;
     using MultiLevelGeoCoder.Logic;
-    using MultiLevelGeoCoder.DataAccess;
 
     [TestClass]
     public class CsvTests

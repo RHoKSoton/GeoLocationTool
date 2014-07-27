@@ -7,6 +7,7 @@ namespace MultiLevelGeoCoder
     using System.Data;
     using System.Data.Common;
     using DataAccess;
+    using FileAccess;
     using Logic;
     using Model;
 

@@ -1,6 +1,6 @@
 ﻿// FileExport.cs
 
-namespace MultiLevelGeoCoder.DataAccess
+namespace MultiLevelGeoCoder.FileAccess
 {
     using System;
     using System.Collections.Generic;
